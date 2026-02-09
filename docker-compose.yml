@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  vertu-sales-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${REPO:-docker.vertu.com}/${APP_NAME:-vertu-sales-agent}:${VERSION:-1.0.0}
+    container_name: vertu-sales-agent
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/vertu/src
+      - /vertu/src/.venv
+    restart: unless-stopped
