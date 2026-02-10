@@ -25,23 +25,16 @@ class ReactAgentSettings(BaseSettings):
     faq_url: str = Field(
         default="http://192.168.151.84:8888/query", description="FAQ 查询 URL"
     )
+    faq_top_n: int = Field(default=5, description="FAQ 查询返回结果数量")
 
     graph_url: str = Field(
         default="http://192.168.151.84:10001/nl2graph_qa", description="图谱查询 URL"
     )
 
-    wechat_push_url: str = Field(
-        default="", description="微信群通知 URL"
-    )
-    wechat_push_token: str = Field(
-        default="", description="微信群通知 Token"
-    )
-    wechat_push_api_key: str = Field(
-        default="", description="微信群通知 API Key"
-    )
-    wechat_push_group_name: str = Field(
-        default="", description="微信群通知群名称"
-    )
+    wechat_push_url: str = Field(default="", description="微信群通知 URL")
+    wechat_push_token: str = Field(default="", description="微信群通知 Token")
+    wechat_push_api_key: str = Field(default="", description="微信群通知 API Key")
+    wechat_push_group_name: str = Field(default="", description="微信群通知群名称")
 
 
 react_agent_settings = ReactAgentSettings()
