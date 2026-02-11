@@ -1,4 +1,4 @@
-from typing import Self
+from typing import Self, Generator, AsyncGenerator
 from datetime import datetime
 
 from langgraph.graph import StateGraph, START, END, MessagesState
@@ -39,6 +39,20 @@ class ReActAgent:
             config={"configurable": {"thread_id": thread_id}},
         )
         return response["messages"][-1].content
+    
+    def stream(self, message: str, thread_id: str, stream_mode: str = "updates") -> Generator[str, None, None]:
+        return self._graph.stream(
+            {"messages": HumanMessage(content=message)},
+            config={"configurable": {"thread_id": thread_id}},
+            stream_mode=stream_mode,
+        )
+    
+    def astream(self, message: str, thread_id: str, stream_mode: str = "updates") -> AsyncGenerator[str, None]:
+        return self._graph.astream(
+            {"messages": HumanMessage(content=message)},
+            config={"configurable": {"thread_id": thread_id}},
+            stream_mode=stream_mode,
+        )
 
     async def arun(self, message: str, thread_id: str) -> str:
         response = await self._graph.ainvoke(
