@@ -21,6 +21,7 @@ class ReactAgentSettings(BaseSettings):
     openai_base_url: str = Field(
         default="https://api.moonshot.cn/v1", description="OpenAI API 基础 URL"
     )
+    temperature: float = Field(default=0.01, description="温度")
 
     faq_url: str = Field(
         default="http://192.168.151.84:8888/query", description="FAQ 查询 URL"
