@@ -1,0 +1,12 @@
+{
+  "session_id": "e6c1f0a4-745d-4125-994e-2cadf8a60aae",
+  "prompt": "模拟专业人士用户测试VERTU手机的售后服务和支持能力",
+  "finish_reason": "error_Server error '503 Service Unavailable' for url 'http://localhost:8000/api/v1/react/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-02-27T11:10:13.530203",
+    "end_time": "2026-02-27T11:10:13.530208",
+    "total_turns": 1
+  },
+  "conversation": []
+}
