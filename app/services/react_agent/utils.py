@@ -25,19 +25,22 @@ class LanguageDetector:
 
     _LABEL_PREFIX = "__label__"
 
-    def __init__(self, model_path: str | Path, exclude: list[str] | None = None, min_length: int = 5, max_length: int = 500) -> None:
+    def __init__(self, model_path: str | Path, threshold: float = 0.9, exclude: list[str] | None = None, min_length: int = 5, max_length: int = 500) -> None:
         """
         Args:
             model_path: 预训练 lid 模型路径（.bin 或 .ftz）。
+            threshold: 语言检测阈值，低于该阈值的文本返回 unknown。
             exclude: 预处理时从文本中去除的词/短语列表，如品牌名、干扰语等。
             min_length: 最小文本长度，低于该长度的文本返回 unknown。
             max_length: 最大文本长度，超过该长度的文本截断。
         """
         self._model_path = Path(model_path)
+        self._threshold = threshold
         self._model: fasttext.FastText._FastText | None = None
         self._exclude = exclude or []
         self._min_length = min_length
         self._max_length = max_length
+        self._chinese_variants = ["zh", "wuu", "yue", "hak", "nan", "lzh"]
     
     @property
     def model(self) -> fasttext.FastText._FastText:
@@ -51,18 +54,20 @@ class LanguageDetector:
             self._model = fasttext.load_model(str(self._model_path))
         return self._model
 
-    def detect(self, text: str) -> str:
+    def detect(self, text: str, normalize: bool = True) -> str:
         """
         检测文本语言，返回 ISO 639-1 语言代码。
 
         Args:
             text: 待检测文本（UTF-8）。
-
+            normalize: 是否归一化语言代码。
         Returns:
             语言代码，如 'en', 'zh'；空或过短文本返回 'unknown'。
         """
         result = self.detect_with_confidence(text)
-        return result.lang
+        if result.score < self._threshold:
+            return "unknown"
+        return self._normalize_language(result.lang) if normalize else result.lang
 
     def detect_with_confidence(self, text: str, k: int = 5) -> LanguageResult:
         """
@@ -75,9 +80,6 @@ class LanguageDetector:
         Returns:
             LanguageResult(lang, score, candidates)。空或过短文本返回 unknown 且 candidates 为空。
         """
-        if not text:
-            return LanguageResult("unknown", 0.0, [])
-        
         text = self._preprocess(text)
 
         if len(text) < self._min_length:
@@ -100,6 +102,14 @@ class LanguageDetector:
         except Exception as e:
             print(f"Language detection error: {e}")
             return LanguageResult("unknown", 0.0, [])
+    
+    def _normalize_language(self, lang: str) -> str:
+        """
+        归一化语言代码。
+        """
+        if lang in self._chinese_variants:
+            return "zh"
+        return lang
     
     def _preprocess(self, text: str) -> str | None:
         text = text.replace("\n", " ").replace("\r", " ").replace("\x00", "").strip().lower()

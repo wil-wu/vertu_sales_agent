@@ -37,6 +37,7 @@ class ReactAgentSettings(BaseSettings):
     wechat_push_group_name: str = Field(default="", description="微信群通知群名称")
 
     language_detector_model_path: str = Field(default=".huggingface/lid.176.bin", description="语言检测模型路径")
+    language_detector_threshold: float = Field(default=0.8, description="语言检测阈值")
     language_detector_min_length: int = Field(default=5, description="语言检测最小文本长度")
     language_detector_max_length: int = Field(default=500, description="语言检测最大文本长度")
     language_detector_exclude: list[str] = Field(default=[
