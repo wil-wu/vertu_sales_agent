@@ -1,26 +1,21 @@
-import re
-
 from fastapi import APIRouter, Depends
 from langchain_core.messages import AIMessage, ToolMessage
 
 from .deps import get_react_agent
 from .agent import ReActAgent
 from .schemas import ReactAgentRequest, ReactAgentResponse
+from .utils import LanguageDetector, LanguageTranslator, MarkdownHelper
+from .config import react_agent_settings
+from .shared import chat_model
+from .prompts import TRANSLATE_SYSTEM_PROMPT
 
 router = APIRouter(
     prefix="/api/v1/react",
     tags=["React Agent"],
 )
 
-
-def _remove_markdown_links(text: str) -> str:
-    """去除 markdown 链接 [text](url)，保留链接文字"""
-    return re.sub(r"\[([^\]]*)\]\([^\)]*\)", r"\1", text)
-
-
-def _extract_markdown_links(text: str) -> list[str]:
-    """从文本中提取 markdown 链接（含 [text](url) 和 ![alt](url)）"""
-    return re.findall(r"!?\[[^\]]*\]\([^\)]*\)", text)
+language_detector = LanguageDetector(react_agent_settings.language_detector_model_path)
+language_translator = LanguageTranslator(chat_model, TRANSLATE_SYSTEM_PROMPT)
 
 
 @router.post("/chat", response_model=ReactAgentResponse)
@@ -44,7 +39,7 @@ async def chat(
                         if isinstance(last_msg.content, str)
                         else str(last_msg.content)
                     )
-                    agent_content = _remove_markdown_links(content)
+                    agent_content = MarkdownHelper.remove_markdown_links(content)
 
         if "tools" in event:
             msgs = event["tools"].get("messages", [])
@@ -55,13 +50,19 @@ async def chat(
                         content = "\n".join(str(item) for item in content)
                     else:
                         content = content if isinstance(content, str) else str(content)
-                    graph_query_links.extend(_extract_markdown_links(content))
+                    graph_query_links.extend(MarkdownHelper.extract_markdown_links(content))
 
     if graph_query_links:
         message = f"{agent_content}\n\n" + "\n".join(graph_query_links)
     else:
         message = agent_content
+    
+    user_lang = language_detector.detect(request.message)
+    answer_lang = language_detector.detect(message)
 
+    if user_lang != "unknown" and answer_lang != user_lang:
+        message = language_translator.translate(message, user_lang)
+    
     return {
         "message": message,
         "thread_id": request.thread_id,

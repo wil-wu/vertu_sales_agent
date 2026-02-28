@@ -36,5 +36,7 @@ class ReactAgentSettings(BaseSettings):
     wechat_push_api_key: str = Field(default="", description="微信群通知 API Key")
     wechat_push_group_name: str = Field(default="", description="微信群通知群名称")
 
+    language_detector_model_path: str = Field(default=".huggingface/lid.176.ftz", description="语言检测模型路径")
+
 
 react_agent_settings = ReactAgentSettings()
