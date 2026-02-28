@@ -36,7 +36,26 @@ class ReactAgentSettings(BaseSettings):
     wechat_push_api_key: str = Field(default="", description="微信群通知 API Key")
     wechat_push_group_name: str = Field(default="", description="微信群通知群名称")
 
-    language_detector_model_path: str = Field(default=".huggingface/lid.176.ftz", description="语言检测模型路径")
-
+    language_detector_model_path: str = Field(default=".huggingface/lid.176.bin", description="语言检测模型路径")
+    language_detector_min_length: int = Field(default=5, description="语言检测最小文本长度")
+    language_detector_max_length: int = Field(default=500, description="语言检测最大文本长度")
+    language_detector_exclude: list[str] = Field(default=[
+        "IVERTU",
+        "VERTU",
+        "METAVERTU 2",
+        "METAVERTU2",
+        "METAVERTU",
+        "SIGNATURE 4G",
+        "SIGNATURE4G",
+        "SIGNATURE S",
+        "SIGNATURES",
+        "SIGNATURE",
+        "AGENT Q",
+        "AGENTQ",
+        "AGENT IRONFLIP",
+        "AGENTIRONFLIP",
+        "QUANTUM",
+        "AGENT",
+    ], description="语言检测排除词/短语列表")
 
 react_agent_settings = ReactAgentSettings()

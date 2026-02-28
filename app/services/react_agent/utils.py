@@ -25,14 +25,20 @@ class LanguageDetector:
 
     _LABEL_PREFIX = "__label__"
 
-    def __init__(self, model_path: str | Path) -> None:
+    def __init__(self, model_path: str | Path, exclude: list[str] | None = None, min_length: int = 5, max_length: int = 500) -> None:
         """
         Args:
             model_path: 预训练 lid 模型路径（.bin 或 .ftz）。
+            exclude: 预处理时从文本中去除的词/短语列表，如品牌名、干扰语等。
+            min_length: 最小文本长度，低于该长度的文本返回 unknown。
+            max_length: 最大文本长度，超过该长度的文本截断。
         """
         self._model_path = Path(model_path)
         self._model: fasttext.FastText._FastText | None = None
-
+        self._exclude = exclude or []
+        self._min_length = min_length
+        self._max_length = max_length
+    
     @property
     def model(self) -> fasttext.FastText._FastText:
         """懒加载模型。"""
@@ -69,9 +75,14 @@ class LanguageDetector:
         Returns:
             LanguageResult(lang, score, candidates)。空或过短文本返回 unknown 且 candidates 为空。
         """
-        text = self._preprocess(text)
         if not text:
             return LanguageResult("unknown", 0.0, [])
+        
+        text = self._preprocess(text)
+
+        if len(text) < self._min_length:
+            return LanguageResult("unknown", 0.0, [])
+
         try:
             labels, scores = self.model.predict(text, k=k)
             if not labels or not scores.size:
@@ -90,9 +101,8 @@ class LanguageDetector:
             print(f"Language detection error: {e}")
             return LanguageResult("unknown", 0.0, [])
     
-    def _preprocess(self, text: str, max_len: int = 500) -> str | None:
-        text = text.strip()
-        text = text.replace("\n", " ").replace("\r", " ").replace("\x00", "")
+    def _preprocess(self, text: str) -> str | None:
+        text = text.replace("\n", " ").replace("\r", " ").replace("\x00", "").strip().lower()
         
         # 去除 URL
         text = re.sub(r"https?://\S+", "", text)
@@ -101,10 +111,13 @@ class LanguageDetector:
         # 去除 emoji
         text = re.sub(r"[^\w\s\u4e00-\u9fff\u3040-\u30ff]", "", text)
         # 合并多余空格
-        text = re.sub(r"\s+", " ", text).strip()
+        text = re.sub(r"\s+", " ", text)
         # 截断
-        text = text[:max_len]
-        
+        text = text[:self._max_length]
+        # 去除 exclude 中的词/短语
+        for word in self._exclude:
+            text = text.replace(word.lower(), "")
+
         return text
 
 

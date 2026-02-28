@@ -14,7 +14,12 @@ router = APIRouter(
     tags=["React Agent"],
 )
 
-language_detector = LanguageDetector(react_agent_settings.language_detector_model_path)
+language_detector = LanguageDetector(
+    react_agent_settings.language_detector_model_path,
+    react_agent_settings.language_detector_exclude,
+    react_agent_settings.language_detector_min_length,
+    react_agent_settings.language_detector_max_length,
+)
 language_translator = LanguageTranslator(chat_model, TRANSLATE_SYSTEM_PROMPT)
 
 
