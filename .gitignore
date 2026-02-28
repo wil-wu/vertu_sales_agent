@@ -217,3 +217,4 @@ __marimo__/
 
 # huggingface
 .huggingface/
+.DS_Store

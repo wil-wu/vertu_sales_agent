@@ -1,0 +1,13 @@
+# From pyproject.toml [project.dependencies]
+fastapi>=0.128.1
+langchain>=1.2.8
+langchain-openai>=1.1.7
+prometheus-fastapi-instrumentator>=7.1.0
+pydantic-settings>=2.12.0
+uvicorn>=0.40.0
+
+# Dev dependencies [dependency-groups.dev]
+pytest>=9.0.2
+ruff>=0.14.13
+aiofiles>=25.1.0
+pandas>=3.0.1
