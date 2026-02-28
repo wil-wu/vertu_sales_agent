@@ -33,7 +33,7 @@ async def graph_query(query: str):
     """
     logger.info(f"--- [TOOL] 查询图谱: {query} ---")
     response = await httpx_client.post(
-        react_agent_settings.graph_url, json={"query": query}
+        react_agent_settings.graph_url, json={"query": query}, timeout=20
     )
     return response.json()["result"]
 
