@@ -1,0 +1,4074 @@
+{
+  "source_file": "jd_tm_qa_filtered.csv",
+  "total_count": 812,
+  "questions": [
+    {
+      "id": 1,
+      "question": "VERTU Agent Q手机系统可以更新5年吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 2,
+      "question": "VERTU agent Q 国际版在国内使用是否方便？",
+      "category": "一般"
+    },
+    {
+      "id": 3,
+      "question": "VERTU Agent Q手机有没有超级岛功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 4,
+      "question": "VERTU AGENT Q 旗舰新品手机的材质和工艺有哪些特点？",
+      "category": "一般"
+    },
+    {
+      "id": 5,
+      "question": "VERTU AGENT Q 旗舰新品是否有多个系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 6,
+      "question": "VERTU AGENT Q旗舰手机耐摔吗？",
+      "category": "一般"
+    },
+    {
+      "id": 7,
+      "question": "VERTU AGENT Q旗舰新品内存多大？",
+      "category": "一般"
+    },
+    {
+      "id": 8,
+      "question": "VERTU AGENT Q 旗舰新品手机防监听吗？",
+      "category": "一般"
+    },
+    {
+      "id": 9,
+      "question": "VERTU AGENT Q 旗舰新品是否包含皮套？",
+      "category": "一般"
+    },
+    {
+      "id": 10,
+      "question": "VERTU AGENT Q 旗舰新品基于安卓系统吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 11,
+      "question": "VERTU Agent Q防水吗?",
+      "category": "一般"
+    },
+    {
+      "id": 12,
+      "question": "VERTU AGENT Q基于华为系统吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 13,
+      "question": "VERTU Agent Q手机有哪些核心配置和功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 14,
+      "question": "VERTU AGENT Q旗舰手机价格贵的特点有哪些？",
+      "category": "价格"
+    },
+    {
+      "id": 15,
+      "question": "VERTU AGENT Q旗舰手机需要使用手机套吗？",
+      "category": "一般"
+    },
+    {
+      "id": 16,
+      "question": "VERTU AGENT Q 橙色鳄鱼皮款手机使用什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 17,
+      "question": "VERTU AGENT Q 旗舰新品包含哪些配件？",
+      "category": "一般"
+    },
+    {
+      "id": 18,
+      "question": "VERTU AGENT Q支持获取root权限吗?",
+      "category": "一般"
+    },
+    {
+      "id": 19,
+      "question": "VERTU AGENT Q 手机贴膜是否包含专用工具？",
+      "category": "一般"
+    },
+    {
+      "id": 20,
+      "question": "VERTU AGENT Q 旗舰新品手机最大的优势是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 21,
+      "question": "VERTU AGENT Q旗舰新品是否具备量子级加密功能？如何保障信息安全？",
+      "category": "技术支持"
+    },
+    {
+      "id": 22,
+      "question": "VERTU AGENT Q 奢品AI智能体手机的配置、价格和AI功能有哪些？",
+      "category": "价格"
+    },
+    {
+      "id": 23,
+      "question": "METAVERTU和VERTU量子折叠手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 24,
+      "question": "VERTU Agent Q手机产地是哪里？",
+      "category": "一般"
+    },
+    {
+      "id": 25,
+      "question": "VERTU Agent Q手机在隐私加密方面具备哪些优势？例如小米手机提供的空白通行证功能。",
+      "category": "技术支持"
+    },
+    {
+      "id": 26,
+      "question": "VERTU agent Q 国际版能否使用国内SIM卡？",
+      "category": "一般"
+    },
+    {
+      "id": 27,
+      "question": "VERTU AGENT Q 旗舰新品是折叠屏手机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 28,
+      "question": "VERTU AGENT Q旗舰新品支持多少个微信账号同时登录？",
+      "category": "一般"
+    },
+    {
+      "id": 29,
+      "question": "VERTU Agent Q的卡巢是防水吗?",
+      "category": "一般"
+    },
+    {
+      "id": 30,
+      "question": "VERTU AGENT Q旗舰新品的AI功能有哪些？",
+      "category": "技术支持"
+    },
+    {
+      "id": 31,
+      "question": "VERTU AGENT Q 朱雀焰碳纤维材质款与棕色小牛皮款后盖有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 32,
+      "question": "VERTU AGENT Q智能钻戒能否无创测血糖？",
+      "category": "一般"
+    },
+    {
+      "id": 33,
+      "question": "VERTU AGENT Q旗舰新品自带钱包吗?",
+      "category": "一般"
+    },
+    {
+      "id": 34,
+      "question": "VERTU AGENT Q旗舰新品采用什么处理器？",
+      "category": "一般"
+    },
+    {
+      "id": 35,
+      "question": "VERTU AGENT Q旗舰手机的火神图腾设计寓意是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 36,
+      "question": "VERTU AGENT Q 旗舰新品是品牌配置最高的一款吗？",
+      "category": "一般"
+    },
+    {
+      "id": 37,
+      "question": "VERTU AGENT Q 旗舰新品与朱雀款在配置和功能上有什么区别？",
+      "category": "技术支持"
+    },
+    {
+      "id": 38,
+      "question": "VERTU AGENT Q 旗舰新品支持国家公职人员使用吗?",
+      "category": "一般"
+    },
+    {
+      "id": 39,
+      "question": "VERTU AGENT Q 旗舰新品是否支持蒙语通话翻译?",
+      "category": "一般"
+    },
+    {
+      "id": 40,
+      "question": "VERTU AGENT Q旗舰新品支持无限充电吗?",
+      "category": "一般"
+    },
+    {
+      "id": 41,
+      "question": "VERTU AGENT Q 全球首发预售款手机在通话时能否确保对方不能录音？",
+      "category": "一般"
+    },
+    {
+      "id": 42,
+      "question": "VERTU AGENT Q旗舰新品支持5G吗？",
+      "category": "一般"
+    },
+    {
+      "id": 43,
+      "question": "VERTU AGENT Q旗舰新品支持下载谷歌软件吗？",
+      "category": "一般"
+    },
+    {
+      "id": 44,
+      "question": "VERTU AGENT Q 旗舰新品16GB+1TB+10t分布式储存内存有多大？",
+      "category": "一般"
+    },
+    {
+      "id": 45,
+      "question": "VERTU AGENT Q 手机是鸿蒙系统吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 46,
+      "question": "VERTU AGENT Q 旗舰新品支持骁龙 8 Elite至尊版 AI 芯片和量子密钥吗？",
+      "category": "一般"
+    },
+    {
+      "id": 47,
+      "question": "VERTU AGENT Q旗舰手机支持AI财运推演系统吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 48,
+      "question": "VERTU AGENT Q旗舰新品外观设计是什么样的？",
+      "category": "一般"
+    },
+    {
+      "id": 49,
+      "question": "VERTU AGENT Q 旗舰新品 16GB+1TB 版本是否有18GB+1TB配置？",
+      "category": "一般"
+    },
+    {
+      "id": 50,
+      "question": "VERTU AGENT Q 旗舰新品是否支持AI顶配智能直面屏功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 51,
+      "question": "VERTU AGENT Q旗舰新品支持哪些核心工艺或结构设计？",
+      "category": "一般"
+    },
+    {
+      "id": 52,
+      "question": "VERTU AGENT Q 旗舰新品支持哪些国家的通话翻译语言?",
+      "category": "一般"
+    },
+    {
+      "id": 53,
+      "question": "VERTU AGENT Q 旗舰新品全球首发预售支持量子折叠屏技术吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 54,
+      "question": "VERTU AGENT Q 旗舰新品是直板还是折叠设计？",
+      "category": "一般"
+    },
+    {
+      "id": 55,
+      "question": "VERTU AGENT Q 旗舰新品是否支持降噪功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 56,
+      "question": "VERTU AGENT Q 旗舰新品与佛戒款、水晶款相比，哪个更窄？",
+      "category": "一般"
+    },
+    {
+      "id": 57,
+      "question": "VERTU AGENT Q 旗舰新品全球首发预售的表盘是否为天然水晶？",
+      "category": "一般"
+    },
+    {
+      "id": 58,
+      "question": "VERTU AGENT Q 旗舰新品盲盒中固定赠送的物品是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 59,
+      "question": "VERTU AGENT Q手机是4G还是5G?",
+      "category": "一般"
+    },
+    {
+      "id": 60,
+      "question": "VERTU AGENT Q 旗舰新品线上能购买吗？",
+      "category": "一般"
+    },
+    {
+      "id": 61,
+      "question": "VERTU AGENT Q旗舰新品玩游戏能带动吗？",
+      "category": "一般"
+    },
+    {
+      "id": 62,
+      "question": "VERTU AGENT Q手机有什么特点？",
+      "category": "一般"
+    },
+    {
+      "id": 63,
+      "question": "VERTU AGENT Q手机的VDAO加密聊天软件有什么功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 64,
+      "question": "VERTU Agent Q手机使用什么系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 65,
+      "question": "VERTU AGENT Q旗舰新品的抗压性能如何？",
+      "category": "一般"
+    },
+    {
+      "id": 66,
+      "question": "VERTU Agent Q系列哪个最好？",
+      "category": "一般"
+    },
+    {
+      "id": 67,
+      "question": "VERTU AGENT Q 旗舰新品手机支持下载微信和携程吗？",
+      "category": "一般"
+    },
+    {
+      "id": 68,
+      "question": "VERTU AGENT Q 旗舰新品手机支持移动和联通网络吗？",
+      "category": "一般"
+    },
+    {
+      "id": 69,
+      "question": "VERTU Agent Q手机的电池容量和快充功率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 70,
+      "question": "VERTU Agent Q手机的影像系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 71,
+      "question": "VERTU AGENT Q 旗舰新品手机的鳄鱼皮材质是否怕水？",
+      "category": "一般"
+    },
+    {
+      "id": 72,
+      "question": "VERTU AGENT Q折叠屏手机在零下三十几度会不会折断？",
+      "category": "一般"
+    },
+    {
+      "id": 73,
+      "question": "VERTU AGENT Q 旗舰新品盲盒包含哪些内容？",
+      "category": "一般"
+    },
+    {
+      "id": 74,
+      "question": "VERTU AGENT Q 旗舰新品盲盒中的手机是随机的吗？",
+      "category": "一般"
+    },
+    {
+      "id": 75,
+      "question": "VERTU AGENT Q 手机是内折还是外折？",
+      "category": "一般"
+    },
+    {
+      "id": 76,
+      "question": "VERTU AGENT Q 旗舰新品盲盒是否只包含女士用品？",
+      "category": "一般"
+    },
+    {
+      "id": 77,
+      "question": "VERTU Agent Q手机的葡萄紫版本是否有产品视频？",
+      "category": "一般"
+    },
+    {
+      "id": 78,
+      "question": "VERTU Agent Q手机的葡萄紫版本是否支持双卫星双向通话？",
+      "category": "一般"
+    },
+    {
+      "id": 79,
+      "question": "VERTU AGENT Q旗舰新品支持卫星通话吗？",
+      "category": "一般"
+    },
+    {
+      "id": 80,
+      "question": "VERTU AGENT Q 旗舰新品手机是智能机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 81,
+      "question": "VERTU AGENT Q旗舰新品后续有没有碳纤维款？",
+      "category": "一般"
+    },
+    {
+      "id": 82,
+      "question": "VERTU Agent Q手机和普通手机的功能一样吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 83,
+      "question": "VERTU Agent Q手机的私密系统有什么作用?",
+      "category": "系统更新"
+    },
+    {
+      "id": 84,
+      "question": "VERTU Agent Q手机的幽灵系统有什么作用?",
+      "category": "系统更新"
+    },
+    {
+      "id": 85,
+      "question": "VERTU AGENT Q 旗舰新品手机的碳纤维后盖抗摔吗？",
+      "category": "一般"
+    },
+    {
+      "id": 86,
+      "question": "VERTU AGENT Q 旗舰新品白色款使用的是什么皮革？",
+      "category": "一般"
+    },
+    {
+      "id": 87,
+      "question": "VERTU Agent Q手机支持多少个AI智能体？",
+      "category": "一般"
+    },
+    {
+      "id": 88,
+      "question": "VERTU Agent Q手机是否配备真人管家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 89,
+      "question": "VERTU AGENT Q旗舰新品能否用来砸核桃？",
+      "category": "一般"
+    },
+    {
+      "id": 90,
+      "question": "VERTU Agent Q手机拍照怎么样？",
+      "category": "一般"
+    },
+    {
+      "id": 91,
+      "question": "VERTU Agent Q是老年机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 92,
+      "question": "VERTU AGENT Q 手机为什么不能用鸿蒙系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 93,
+      "question": "VERTU Agent Q手机的葡萄紫版本是否支持机械变焦和人眼仿生镜头？",
+      "category": "一般"
+    },
+    {
+      "id": 94,
+      "question": "VERTU AGENT Q 手机的电池有卖吗？",
+      "category": "一般"
+    },
+    {
+      "id": 95,
+      "question": "VERTU Agent Q手机是否好用？",
+      "category": "一般"
+    },
+    {
+      "id": 96,
+      "question": "VERTU Agent Q手机支持系统升级吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 97,
+      "question": "VERTU AGENT Q旗舰新品手机买回来不暂时不用的话，平时需要充电吗？",
+      "category": "一般"
+    },
+    {
+      "id": 98,
+      "question": "VERTU AGENT Q 旗舰新品的免费升1TB是什么意思？",
+      "category": "一般"
+    },
+    {
+      "id": 99,
+      "question": "VERTU Agent Q手机充满电能用几天？",
+      "category": "一般"
+    },
+    {
+      "id": 100,
+      "question": "VERTU AGENT Q 旗舰新品手机有手机膜吗？",
+      "category": "一般"
+    },
+    {
+      "id": 101,
+      "question": "VERTU AGENT Q旗舰新品是否有震动提醒功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 102,
+      "question": "VERTU Agent Q手机的哪个模块贵？",
+      "category": "一般"
+    },
+    {
+      "id": 103,
+      "question": "VERTU AGENT Q 旗舰新品 23800元价位有几个颜色？",
+      "category": "一般"
+    },
+    {
+      "id": 104,
+      "question": "VERTU AGENT Q手机16GB+1TB内存有多大？",
+      "category": "一般"
+    },
+    {
+      "id": 105,
+      "question": "VERTU Agent Q 是哪款手机？",
+      "category": "一般"
+    },
+    {
+      "id": 106,
+      "question": "VERTU VERTU Agent Q手机是卫星手机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 107,
+      "question": "VERTU Agent Q处理器是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 108,
+      "question": "VERTU Agent Q支持哪些核心配置？",
+      "category": "一般"
+    },
+    {
+      "id": 109,
+      "question": "VERTU Agent Q的摄像头配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 110,
+      "question": "VERTU AGENT Q 旗舰新品支持无创血糖检测吗？",
+      "category": "一般"
+    },
+    {
+      "id": 111,
+      "question": "VERTU AGENT Q 旗舰新品的光学传感器支持哪些光谱？",
+      "category": "一般"
+    },
+    {
+      "id": 112,
+      "question": "VERTU Agent Q的电池和快充支持情况如何？",
+      "category": "一般"
+    },
+    {
+      "id": 113,
+      "question": "VERTU Agent Q是否具备端到端加密能力？",
+      "category": "一般"
+    },
+    {
+      "id": 114,
+      "question": "VERTU AGENT Q手机电池多少毫安？",
+      "category": "一般"
+    },
+    {
+      "id": 115,
+      "question": "VERTU AGENT Q 旗舰新品盲盒中手机颜色是否可以指定？",
+      "category": "一般"
+    },
+    {
+      "id": 116,
+      "question": "VERTU AGENT Q 旗舰新品盲盒是否包含领带？",
+      "category": "一般"
+    },
+    {
+      "id": 117,
+      "question": "VERTU AGENT Q旗舰新品支持与苹果手机连接使用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 118,
+      "question": "VERTU Agent Q手机能打王者荣耀吗？",
+      "category": "一般"
+    },
+    {
+      "id": 119,
+      "question": "VERTU Agent Q手机卡不卡？",
+      "category": "一般"
+    },
+    {
+      "id": 120,
+      "question": "VERTU AGENT Q 手机的免费升级1TB与直接1TB有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 121,
+      "question": "VERTU Agent Q是什么型号？",
+      "category": "一般"
+    },
+    {
+      "id": 122,
+      "question": "VERTU AGENT Q旗舰新品可以同时绑定2部手机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 123,
+      "question": "VERTU Agent Q手机支持双微信吗？",
+      "category": "一般"
+    },
+    {
+      "id": 124,
+      "question": "VERTU Agent Q有什么特殊功能?",
+      "category": "技术支持"
+    },
+    {
+      "id": 125,
+      "question": "VERTU Agent Q智能机的电池和充电规格是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 126,
+      "question": "VERTU Agent Q智能机是否搭载A5加密芯片和一机三系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 127,
+      "question": "VERTU Agent Q智能机的机身工艺和材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 128,
+      "question": "VERTU AGENT Q 旗舰新品的血糖监测是否需要扎手指？",
+      "category": "一般"
+    },
+    {
+      "id": 129,
+      "question": "VERTU Agent Q的屏幕参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 130,
+      "question": "VERTU Agent Q的存储配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 131,
+      "question": "VERTU Agent Q是全球首款AI Agent手机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 132,
+      "question": "VERTU Agent Q手机打游戏掉帧吗？",
+      "category": "一般"
+    },
+    {
+      "id": 133,
+      "question": "VERTU Agent Q手机支持王者120帧游戏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 134,
+      "question": "VERTU Agent Q手机充电时可以玩游戏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 135,
+      "question": "VERTU AGENT Q智能腕表与其他手机能匹配吗?",
+      "category": "一般"
+    },
+    {
+      "id": 136,
+      "question": "VERTU AGENT Q智能钻戒测血糖准确率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 137,
+      "question": "VERTU AGENT Q智能钻戒的软件系统是否与京东自营的血糖检测设备共用？",
+      "category": "系统更新"
+    },
+    {
+      "id": 138,
+      "question": "VERTU Agent Q手机是中文版吗？",
+      "category": "一般"
+    },
+    {
+      "id": 139,
+      "question": "VERTU Agent Q手机用几年应该没问题吗?",
+      "category": "一般"
+    },
+    {
+      "id": 140,
+      "question": "VERTU AGENT Q 是否支持双卡双待？",
+      "category": "一般"
+    },
+    {
+      "id": 141,
+      "question": "VERTU AGENT Q旗舰新品可以测血糖吗?",
+      "category": "一般"
+    },
+    {
+      "id": 142,
+      "question": "VERTU AGENT Q 旗舰新品是否带手机壳？",
+      "category": "一般"
+    },
+    {
+      "id": 143,
+      "question": "VERTU AGENT Q 旗舰新品没有测尿酸功能吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 144,
+      "question": "VERTU AGENT Q 旗舰新品屏幕是双屏还是单屏？",
+      "category": "一般"
+    },
+    {
+      "id": 145,
+      "question": "VERTU AGENT Q 旗舰新品支持一机三系统和量子级加密吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 146,
+      "question": "VERTU AGENT Q 旗舰新品是否具备金融级防护能力？",
+      "category": "一般"
+    },
+    {
+      "id": 147,
+      "question": "VERTU Agent Q手机支持无线充吗?",
+      "category": "一般"
+    },
+    {
+      "id": 148,
+      "question": "VERTU AGENT Q 智能手机支持蓝牙耳机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 149,
+      "question": "VERTU Agent Q手机重吗?",
+      "category": "一般"
+    },
+    {
+      "id": 150,
+      "question": "VERTU AGENT Q 旗舰新品待机多久？",
+      "category": "一般"
+    },
+    {
+      "id": 151,
+      "question": "VERTU Agent Q旗舰新品的隐私安全防护机制是什么？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 152,
+      "question": "VERTU AGENT Q 旗舰新品支持转到外部2客服账号吗？",
+      "category": "一般"
+    },
+    {
+      "id": 153,
+      "question": "VERTU AGENT Q旗舰新品打游戏怎么样?",
+      "category": "一般"
+    },
+    {
+      "id": 154,
+      "question": "VERTU AGENT Q 旗舰新品的AI功能在哪里提现？",
+      "category": "技术支持"
+    },
+    {
+      "id": 155,
+      "question": "VERTU Agent Q手机使用的是什么屏幕材质？",
+      "category": "一般"
+    },
+    {
+      "id": 156,
+      "question": "VERTU Agent Q手机的机身边框材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 157,
+      "question": "VERTU Agent Q手机的贵款与标准款在材质上有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 158,
+      "question": "VERTU AGENT Q 旗舰新品整体都是天然水晶吗?",
+      "category": "一般"
+    },
+    {
+      "id": 159,
+      "question": "VERTU AGENT Q 旗舰新品能洗澡游泳吗?",
+      "category": "一般"
+    },
+    {
+      "id": 160,
+      "question": "VERTU AGENT Q 旗舰新品洗手可以吗?",
+      "category": "一般"
+    },
+    {
+      "id": 161,
+      "question": "VERTU AGENT Q 旗舰新品用水冲洗没问题吗?",
+      "category": "一般"
+    },
+    {
+      "id": 162,
+      "question": "VERTU AGENT Q 旗舰新品的配套APP是哪一款？",
+      "category": "一般"
+    },
+    {
+      "id": 163,
+      "question": "VERTU AGENT Q 旗舰新品外观是树脂还是水晶？",
+      "category": "一般"
+    },
+    {
+      "id": 164,
+      "question": "VERTU AGENT Q手机是三折叠吗?",
+      "category": "一般"
+    },
+    {
+      "id": 165,
+      "question": "VERTU AGENT Q 二代折叠手机是第几代？",
+      "category": "一般"
+    },
+    {
+      "id": 166,
+      "question": "VERTU AGENT Q 二代折叠手机与一代折叠手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 167,
+      "question": "VERTU AGENT Q 旗舰新品钻石级陶瓷边框是什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 168,
+      "question": "VERTU AGENT Q 旗舰新品的背盖有哪些可选材质？",
+      "category": "一般"
+    },
+    {
+      "id": 169,
+      "question": "VERTU AGENT Q 旗舰新品的屏幕规格是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 170,
+      "question": "VERTU AGENT Q 旗舰新品支持量子指纹切换功能吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 171,
+      "question": "VERTU AGENT Q 旗舰新品在手机遗失或被盗时，如何保障数据安全？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 172,
+      "question": "VERTU Agent Q 智能手机的主摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 173,
+      "question": "VERTU AGENT Q 旗舰新品是否具备伪装系统功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 174,
+      "question": "VERTU AGENT Q手机可以上几个微信？",
+      "category": "一般"
+    },
+    {
+      "id": 175,
+      "question": "VERTU Agent Q手机的1T+10T存储是什么意思？",
+      "category": "一般"
+    },
+    {
+      "id": 176,
+      "question": "使用VERTU Agent Q手机的10TB分布式存储需要ID号吗？",
+      "category": "一般"
+    },
+    {
+      "id": 177,
+      "question": "VERTU Agent Q手机的10TB分布式存储是否支持跨地区使用？",
+      "category": "一般"
+    },
+    {
+      "id": 178,
+      "question": "VERTU Agent Q手机的定制款是否有2TB存储版本？",
+      "category": "一般"
+    },
+    {
+      "id": 179,
+      "question": "VERTU Agent Q手机是否支持为他人使用账号？",
+      "category": "一般"
+    },
+    {
+      "id": 180,
+      "question": "VERTU Agent Q手机的10TB分布式存储是否永久有效？",
+      "category": "一般"
+    },
+    {
+      "id": 181,
+      "question": "VERTU Agent Q手机的彩色鳄鱼皮款推荐颜色有哪些？",
+      "category": "一般"
+    },
+    {
+      "id": 182,
+      "question": "VERTU Agent Q手机是否支持为缅甸地区的用户注册使用？",
+      "category": "一般"
+    },
+    {
+      "id": 183,
+      "question": "VERTU Agent Q智能手机的电池与充电性能如何？",
+      "category": "一般"
+    },
+    {
+      "id": 184,
+      "question": "VERTU Agent Q智能手机是否支持卫星通信？",
+      "category": "一般"
+    },
+    {
+      "id": 185,
+      "question": "VERTU Agent Q智能手机的存储配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 186,
+      "question": "VERTU AGENT Q 旗舰新品是否有隐藏款或定制款？",
+      "category": "一般"
+    },
+    {
+      "id": 187,
+      "question": "VERTU AGENT Q旗舰新品支持中文吗?",
+      "category": "一般"
+    },
+    {
+      "id": 188,
+      "question": "VERTU AGENT Q 旗舰新品金玉满堂紫色款是否为紫水晶材质？",
+      "category": "一般"
+    },
+    {
+      "id": 189,
+      "question": "VERTU Agent Q 智能手机支持65W快充吗？",
+      "category": "一般"
+    },
+    {
+      "id": 190,
+      "question": "VERTU AGENT Q 旗舰新品手机颜色可以选吗？",
+      "category": "一般"
+    },
+    {
+      "id": 191,
+      "question": "VERTU AGENT Q 酒红色手机系统用的是什么?",
+      "category": "系统更新"
+    },
+    {
+      "id": 192,
+      "question": "VERTU Agent Q 智能手机的长焦摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 193,
+      "question": "VERTU Agent Q 智能手机的屏幕尺寸和刷新率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 194,
+      "question": "VERTU Agent Q 智能手机的处理器是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 195,
+      "question": "VERTU AGENT Q 旗舰新品是否支持端到端加密的聊天功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 196,
+      "question": "VERTU AGENT Q旗舰新品手机信号怎么样？",
+      "category": "一般"
+    },
+    {
+      "id": 197,
+      "question": "VERTU AGENT Q手机能拍视频吗?",
+      "category": "一般"
+    },
+    {
+      "id": 198,
+      "question": "VERTU AGENT Q旗舰新品支持哪些存储配置？",
+      "category": "一般"
+    },
+    {
+      "id": 199,
+      "question": "VERTU AGENT Q旗舰新品的WEB3加密系统有哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 200,
+      "question": "VERTU AGENT Q 旗舰新品是否支持USB-A接口？",
+      "category": "一般"
+    },
+    {
+      "id": 201,
+      "question": "VERTU AGENT Q 手机的分身功能是否需要付费？",
+      "category": "技术支持"
+    },
+    {
+      "id": 202,
+      "question": "VERTU AGENT Q 手机如何同时查看多个微信消息？",
+      "category": "一般"
+    },
+    {
+      "id": 203,
+      "question": "VERTU AGENT Q 手机如何在不同系统间快速切换？",
+      "category": "系统更新"
+    },
+    {
+      "id": 204,
+      "question": "VERTU AGENT Q 手机的三个独立系统分别支持什么功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 205,
+      "question": "VERTU Agent Q 智能手机的超广角摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 206,
+      "question": "VERTU AGENT Q 手机支持哪些安全加密功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 207,
+      "question": "VERTU AGENT Q旗舰新品相比Mate2有哪些提升？",
+      "category": "一般"
+    },
+    {
+      "id": 208,
+      "question": "VERTU AGENT Q 搭载骁龙8 Gen 2 领先版处理器，可以打王者荣耀吗？",
+      "category": "一般"
+    },
+    {
+      "id": 209,
+      "question": "VERTU Agent Q 智能手机支持机械变焦吗？",
+      "category": "一般"
+    },
+    {
+      "id": 210,
+      "question": "VERTU AGENT Q 在运行王者荣耀时会卡顿吗？",
+      "category": "一般"
+    },
+    {
+      "id": 211,
+      "question": "VERTU AGENT Q旗舰新品手机屏幕会摔坏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 212,
+      "question": "VERTU AGENT Q旗舰新品买给老人会用吗?",
+      "category": "一般"
+    },
+    {
+      "id": 213,
+      "question": "VERTU Agent Q有卫星通话和定位功能吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 214,
+      "question": "VERTU AGENT Q 旗舰新品支持测血压吗？",
+      "category": "一般"
+    },
+    {
+      "id": 215,
+      "question": "VERTU AGENT Q智能钻戒与三星手机兼容吗？",
+      "category": "一般"
+    },
+    {
+      "id": 216,
+      "question": "VERTU AGENT Q智能钻戒有哪些健康监测功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 217,
+      "question": "VERTU Agent Q手机的芯片是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 218,
+      "question": "VERTU AGENT Q 旗舰新品最大圈口是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 219,
+      "question": "VERTU AGENT Q 旗舰新品是否为原装未激活？",
+      "category": "一般"
+    },
+    {
+      "id": 220,
+      "question": "VERTU AGENT Q 黄金版有多少克？",
+      "category": "一般"
+    },
+    {
+      "id": 221,
+      "question": "VERTU AGENT Q旗舰新品可以国外使用吗?",
+      "category": "一般"
+    },
+    {
+      "id": 222,
+      "question": "VERTU AGENT Q手机需要贴膜吗？",
+      "category": "一般"
+    },
+    {
+      "id": 223,
+      "question": "VERTU Agent Q手机支持双卫星信号吗？在无人区可以通话吗？",
+      "category": "一般"
+    },
+    {
+      "id": 224,
+      "question": "ivertu钢化膜结实吗？",
+      "category": "一般"
+    },
+    {
+      "id": 225,
+      "question": "ivertu有其他款式的保护壳吗？",
+      "category": "一般"
+    },
+    {
+      "id": 226,
+      "question": "VERTU AGENT Q 旗舰新品折叠款有几款？",
+      "category": "一般"
+    },
+    {
+      "id": 227,
+      "question": "VERTU Agent Q直屏手机6.02英寸屏幕尺寸是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 228,
+      "question": "VERTU Agent Q直屏手机的存储配置是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 229,
+      "question": "VERTU AGENT Q 碳纤维后盖带红条款线上和线下的产品一样吗？",
+      "category": "一般"
+    },
+    {
+      "id": 230,
+      "question": "VERTU AGENT Q智能体手机的性能怎么样？",
+      "category": "一般"
+    },
+    {
+      "id": 231,
+      "question": "VERTU Agent Q手机尺寸多少？",
+      "category": "一般"
+    },
+    {
+      "id": 232,
+      "question": "VERTU Agent Q与之前Asterp手机相比大多少？",
+      "category": "一般"
+    },
+    {
+      "id": 233,
+      "question": "VERTU AGENT Q 旗舰新品内置电池容量多大？",
+      "category": "一般"
+    },
+    {
+      "id": 234,
+      "question": "VERTU AGENT Q 旗舰新品一天使用够用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 235,
+      "question": "VERTU AGENT Q 量子折叠屏手机电池续航多小时？",
+      "category": "一般"
+    },
+    {
+      "id": 236,
+      "question": "VERTU AGENT Q手机与12万多元的定制款有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 237,
+      "question": "VERTU Agent Q手机的屏幕是三星屏还是LG屏？",
+      "category": "一般"
+    },
+    {
+      "id": 238,
+      "question": "VERTU AGENT Q 旗舰新品是否为男款？",
+      "category": "一般"
+    },
+    {
+      "id": 239,
+      "question": "VERTU AGENT Q 旗舰新品为什么只卖100,000元？",
+      "category": "一般"
+    },
+    {
+      "id": 240,
+      "question": "VERTU Agent Q新品比这款还重吗？",
+      "category": "一般"
+    },
+    {
+      "id": 241,
+      "question": "VERTU Agent Q手机的10TB分布式存储是否与机身本地存储1TB共存？",
+      "category": "一般"
+    },
+    {
+      "id": 242,
+      "question": "VERTU AGENT Q旗舰新品手机支持哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 243,
+      "question": "VERTU AGENT Q 手机的材料是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 244,
+      "question": "VERTU Agent Q手机的10TB分布式存储是什么意思?",
+      "category": "一般"
+    },
+    {
+      "id": 245,
+      "question": "SIGNATURE S 总裁手机有哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 246,
+      "question": "VERTU AGENT Q手机需要交话费吗？",
+      "category": "一般"
+    },
+    {
+      "id": 247,
+      "question": "VERTU AGENT Q手机长焦支持多少倍变焦？",
+      "category": "一般"
+    },
+    {
+      "id": 248,
+      "question": "VERTU Agent Q旗舰手机突出的性能在哪?",
+      "category": "一般"
+    },
+    {
+      "id": 249,
+      "question": "VERTU Agent Q旗舰手机的一机三系统是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 250,
+      "question": "VERTU Agent Q手机的分布式存储是否安全？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 251,
+      "question": "VERTU Agent Q手机的量子加密技术有哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 252,
+      "question": "VERTU Agent Q手机是否支持AI Agent功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 253,
+      "question": "VERTU AGENT Q 墨玉黑小牛皮款的内存是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 254,
+      "question": "VERTU AGENT Q 墨玉黑小牛皮款的材质和外观特点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 255,
+      "question": "VERTU Agent Q使用了哪些高端材质？",
+      "category": "一般"
+    },
+    {
+      "id": 256,
+      "question": "VERTU Agent Q的硬件配置有哪些？",
+      "category": "一般"
+    },
+    {
+      "id": 257,
+      "question": "VERTU Agent Q手机续航如何?",
+      "category": "一般"
+    },
+    {
+      "id": 258,
+      "question": "VERTU AGENT Q手机是否支持eSIM？",
+      "category": "一般"
+    },
+    {
+      "id": 259,
+      "question": "VERTU AGENT Q 旗舰新品有屏幕吗？",
+      "category": "一般"
+    },
+    {
+      "id": 260,
+      "question": "VERTU Agent Q手机支持微信多设备同时登录吗？",
+      "category": "一般"
+    },
+    {
+      "id": 261,
+      "question": "VERTU Agent Q提供哪些独家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 262,
+      "question": "VERTU AGENT Q旗舰新品是手工制作吗？",
+      "category": "一般"
+    },
+    {
+      "id": 263,
+      "question": "VERTU Agent Q的AI智能体数量是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 264,
+      "question": "VERTU AGENT Q 旗舰新品和奢品Meta手机哪款更适合男士佩戴？",
+      "category": "一般"
+    },
+    {
+      "id": 265,
+      "question": "VERTU AGENT Q 旗舰新品的1899元起售款式与59元的测量工具有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 266,
+      "question": "VERTU AGENT Q旗舰新品有哪些特别功能?",
+      "category": "技术支持"
+    },
+    {
+      "id": 267,
+      "question": "VERTU Agent Q手机屏幕是4K屏幕吗？",
+      "category": "一般"
+    },
+    {
+      "id": 268,
+      "question": "VERTU AGENT Q 旗舰新品的六字是什么字？什么意思？",
+      "category": "一般"
+    },
+    {
+      "id": 269,
+      "question": "VERTU AGENT Q 旗舰新品屏幕是否耐磨抗刮？",
+      "category": "一般"
+    },
+    {
+      "id": 270,
+      "question": "VERTU AGENT Q 旗舰新品屏幕是否为蓝宝石材质？",
+      "category": "一般"
+    },
+    {
+      "id": 271,
+      "question": "VERTU Agent Q手机的双卫星双向通话功能是什么？",
+      "category": "技术支持"
+    },
+    {
+      "id": 272,
+      "question": "VERTU Agent Q智能手机支持几个操作系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 273,
+      "question": "VERTU Agent Q支持多少个AI智能体和是否提供真人管家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 274,
+      "question": "VERTU Agent Q是否支持3nm骁龙8 Elite至尊版处理器？",
+      "category": "一般"
+    },
+    {
+      "id": 275,
+      "question": "VERTU Agent Q手机支持红外功能吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 276,
+      "question": "VERTU Agent Q手机是第几代骁龙处理器?",
+      "category": "一般"
+    },
+    {
+      "id": 277,
+      "question": "VERTU AGENT Q 小牛皮奶昔粉款是否为白陶樱花粉色？",
+      "category": "一般"
+    },
+    {
+      "id": 278,
+      "question": "VERTU AGENT Q手机是2022年上市的吗?",
+      "category": "一般"
+    },
+    {
+      "id": 279,
+      "question": "VERTU AGENT Q 小牛皮奶昔粉款的实机颜色是否与截图一致？",
+      "category": "一般"
+    },
+    {
+      "id": 280,
+      "question": "VERTU AGENT Q 小牛皮奶昔粉款是否支持实拍图发送？",
+      "category": "一般"
+    },
+    {
+      "id": 281,
+      "question": "VERTU AGENT Q 旗舰新品是否有礼品包装？",
+      "category": "一般"
+    },
+    {
+      "id": 282,
+      "question": "VERTU AGENT Q 旗舰新品的包装材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 283,
+      "question": "VERTU AGENT Q 旗舰新品戴哪个手指都可以吗？",
+      "category": "一般"
+    },
+    {
+      "id": 284,
+      "question": "VERTU Agent Q手机的红色款是什么型号？",
+      "category": "一般"
+    },
+    {
+      "id": 285,
+      "question": "VERTU Agent Q手机的阅后即焚功能是否仅清除发送者手机上的信息，而接收方手机仍会保留内容？",
+      "category": "技术支持"
+    },
+    {
+      "id": 286,
+      "question": "VERTU Agent Q的影像系统支持哪些焦段?",
+      "category": "系统更新"
+    },
+    {
+      "id": 287,
+      "question": "VERTU Agent Q的处理器和内存配置是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 288,
+      "question": "VERTU AGENT Q手机与华为X7相比，功能上有哪些优势？",
+      "category": "技术支持"
+    },
+    {
+      "id": 289,
+      "question": "VERTU Agent Q智能机像素配置是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 290,
+      "question": "VERTU Agent Q智能机侧面按键是什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 291,
+      "question": "VERTU Agent Q的安全防护机制有哪些?",
+      "category": "安全隐私"
+    },
+    {
+      "id": 292,
+      "question": "VERTU AGENT Q旗舰新品的双系统中，除了安卓系统，另一个系统是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 293,
+      "question": "VERTU Agent Q是性能最强的手机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 294,
+      "question": "VERTU AGENT Q 小牛皮奶昔粉款与樱花粉款在材质和颜色上有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 295,
+      "question": "VERTU AGENT Q手机在隐私与安全性方面有何保障?",
+      "category": "安全隐私"
+    },
+    {
+      "id": 296,
+      "question": "VERTU AGENT Q直屏手机是男士还是女士使用？",
+      "category": "一般"
+    },
+    {
+      "id": 297,
+      "question": "VERTU AGENT Q手机能上网吗？",
+      "category": "一般"
+    },
+    {
+      "id": 298,
+      "question": "VERTU AGENT Q手机会不会像普通手机一样卡顿？",
+      "category": "一般"
+    },
+    {
+      "id": 299,
+      "question": "VERTU AGENT Q 旗舰新品是否是电子表？",
+      "category": "一般"
+    },
+    {
+      "id": 300,
+      "question": "VERTU AGENT Q 旗舰新品酒红色款有色差吗？",
+      "category": "一般"
+    },
+    {
+      "id": 301,
+      "question": "VERTU AGENT Q 限量发售的手机是否支持5G网络？",
+      "category": "一般"
+    },
+    {
+      "id": 302,
+      "question": "VERTU AGENT Q 旗舰新品10T存储版本怎么买？",
+      "category": "一般"
+    },
+    {
+      "id": 303,
+      "question": "VERTU AGENT Q 智能腕表可以带着洗澡吗?",
+      "category": "一般"
+    },
+    {
+      "id": 304,
+      "question": "VERTU Agent Q手机是否支持全球7×24小时私人管家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 305,
+      "question": "VERTU AGENT Q直屏手机有哪些材质颜色可选？",
+      "category": "一般"
+    },
+    {
+      "id": 306,
+      "question": "VERTU Agent Q酒红色款是否带卫星电话通讯功能，开通后可不可以拨打卫星电话？",
+      "category": "技术支持"
+    },
+    {
+      "id": 307,
+      "question": "VERTU AGENT Q旗舰新品双系统是什么意思？",
+      "category": "系统更新"
+    },
+    {
+      "id": 308,
+      "question": "VERTU AGENT Q旗舰新品的散热性能如何？",
+      "category": "一般"
+    },
+    {
+      "id": 309,
+      "question": "VERTU AGENT Q 手机的量子指纹切换功能如何使用？",
+      "category": "技术支持"
+    },
+    {
+      "id": 310,
+      "question": "VERTU AGENT Q 手机的伪装系统如何保护隐私？",
+      "category": "系统更新"
+    },
+    {
+      "id": 311,
+      "question": "VERTU AGENT Q 量子折叠屏手机是二代吗?",
+      "category": "一般"
+    },
+    {
+      "id": 312,
+      "question": "VERTU AGENT Q 量子折叠屏手机支持哪些AI功能?",
+      "category": "技术支持"
+    },
+    {
+      "id": 313,
+      "question": "VERTU AGENT Q奢品AI智能体手机的材质是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 314,
+      "question": "VERTU AGENT Q旗舰新品是什么类型的产品？",
+      "category": "一般"
+    },
+    {
+      "id": 315,
+      "question": "VERTU AGENT Q 旗舰新品功能好用吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 316,
+      "question": "VERTU AGENT Q 旗舰新品的59是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 317,
+      "question": "VERTU Agent Q手机支持语音功能吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 318,
+      "question": "VERTU AGENT Q折叠触屏会不会不好使？",
+      "category": "一般"
+    },
+    {
+      "id": 319,
+      "question": "VERTU Agent Q的加密与安全配置是什么？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 320,
+      "question": "VERTU Agent Q手机智能软件都可以下载吗？",
+      "category": "一般"
+    },
+    {
+      "id": 321,
+      "question": "VERTU AGENT Q旗舰新品是否支持蓝牙耳机通用连接?",
+      "category": "一般"
+    },
+    {
+      "id": 322,
+      "question": "VERTU AGENT Q 旗舰新品支持1TB存储吗？",
+      "category": "一般"
+    },
+    {
+      "id": 323,
+      "question": "VERTU AGENT Q 旗舰新品有紫色款吗？",
+      "category": "一般"
+    },
+    {
+      "id": 324,
+      "question": "VERTU Agent Q酒红色款是否支持电信运营商以外的网络？",
+      "category": "一般"
+    },
+    {
+      "id": 325,
+      "question": "VERTU AGENT Q智能旗舰手机电池可以用一天吗?",
+      "category": "一般"
+    },
+    {
+      "id": 326,
+      "question": "VERTU Agent Q手机纤纹和绗线后盖材质有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 327,
+      "question": "VERTU Agent Q屏幕是多大的？",
+      "category": "一般"
+    },
+    {
+      "id": 328,
+      "question": "VERTU AGENT Q 旗舰新品的对影材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 329,
+      "question": "VERTU AGENT Q手机是单卡还是双卡的？",
+      "category": "一般"
+    },
+    {
+      "id": 330,
+      "question": "VERTU AGENT Q手机相比华为三折叠手机贵一倍，主要贵在哪些方面？",
+      "category": "一般"
+    },
+    {
+      "id": 331,
+      "question": "VERTU AGENT Q 手机是否支持俄语？",
+      "category": "一般"
+    },
+    {
+      "id": 332,
+      "question": "VERTU Agent Q手机是否支持免费生成短视频？",
+      "category": "一般"
+    },
+    {
+      "id": 333,
+      "question": "VERTU AGENT Q 旗舰新品皮带长度有没有128cm左右的？",
+      "category": "一般"
+    },
+    {
+      "id": 334,
+      "question": "VERTU AGENT Q 旗舰新品正面总是不给人看，啥情况？",
+      "category": "一般"
+    },
+    {
+      "id": 335,
+      "question": "VERTU Agent Q是全球首款AI Agent手机，其摄像头像素是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 336,
+      "question": "VERTU Agent Q AI手机与普通智能手机有哪些不同？",
+      "category": "一般"
+    },
+    {
+      "id": 337,
+      "question": "VERTU AGENT Q手机支持NFC吗？",
+      "category": "一般"
+    },
+    {
+      "id": 338,
+      "question": "VERTU AGENT Q 手机是否支持双系统多用户登录？",
+      "category": "系统更新"
+    },
+    {
+      "id": 339,
+      "question": "VERTU AGENT Q 手机的第二系统是否更私密？",
+      "category": "系统更新"
+    },
+    {
+      "id": 340,
+      "question": "VERTU AGENT Q 手机的摄像头设计有何特点？",
+      "category": "一般"
+    },
+    {
+      "id": 341,
+      "question": "VERTU AGENT Q 手机的曲面屏有何优势？",
+      "category": "一般"
+    },
+    {
+      "id": 342,
+      "question": "VERTU AGENT Q 手机是否支持Web3功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 343,
+      "question": "VERTU AGENT Q 手机的树莓红配色是否显得俗气？",
+      "category": "一般"
+    },
+    {
+      "id": 344,
+      "question": "VERTU AGENT Q手机曙光橙小牛皮款和丹凤橙高定款在材质上有何区别？",
+      "category": "一般"
+    },
+    {
+      "id": 345,
+      "question": "VERTU AGENT Q 量子折叠屏手机支持哪些颜色？",
+      "category": "一般"
+    },
+    {
+      "id": 346,
+      "question": "VERTU AGENT Q 量子折叠屏手机的材质和工艺特点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 347,
+      "question": "VERTU AGENT Q 量子折叠屏手机的私密安全性如何？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 348,
+      "question": "VERTU AGENT Q新品直屏后盖的鹰翼门是卡槽吗？",
+      "category": "一般"
+    },
+    {
+      "id": 349,
+      "question": "VERTU AGENT Q手机透明壳在哪里可以买到？",
+      "category": "一般"
+    },
+    {
+      "id": 350,
+      "question": "VERTU AGENT Q 手机是小牛皮材质吗？",
+      "category": "一般"
+    },
+    {
+      "id": 351,
+      "question": "VERTU Agent Q手机屏幕最结实吗？",
+      "category": "一般"
+    },
+    {
+      "id": 352,
+      "question": "VERTU Agent Q手机为什么是最结实的？",
+      "category": "一般"
+    },
+    {
+      "id": 353,
+      "question": "VERTU Agent Q手机支持哪些防摔防磕碰特性？",
+      "category": "一般"
+    },
+    {
+      "id": 354,
+      "question": "VERTU AGENT Q 旗舰新品的存储空间是否支持10TB？",
+      "category": "一般"
+    },
+    {
+      "id": 355,
+      "question": "VERTU Agent Q手机支持11万的价值吗？",
+      "category": "一般"
+    },
+    {
+      "id": 356,
+      "question": "VERTU Agent Q手机是否防尘防灰？",
+      "category": "一般"
+    },
+    {
+      "id": 357,
+      "question": "VERTU AGENT Q手机是第几代至尊？",
+      "category": "一般"
+    },
+    {
+      "id": 358,
+      "question": "VERTU AGENT Q 旗舰新品中，哪款是后面带钻石的？",
+      "category": "一般"
+    },
+    {
+      "id": 359,
+      "question": "VERTU AGENT Q 旗舰新品中，红色玛瑙材质的款式是哪一个？",
+      "category": "一般"
+    },
+    {
+      "id": 360,
+      "question": "VERTU Agent Q手机双卡使用时，没有型号的卡如何接打电话？",
+      "category": "一般"
+    },
+    {
+      "id": 361,
+      "question": "VERTU Agent Q手机的卫星电话卡是否需要插入手机？",
+      "category": "一般"
+    },
+    {
+      "id": 362,
+      "question": "VERTU Agent Q手机的卫星通话卡如何收费？是否有年费？",
+      "category": "一般"
+    },
+    {
+      "id": 363,
+      "question": "VERTU Agent Q手机支持哪些运营商的卫星电话卡？",
+      "category": "一般"
+    },
+    {
+      "id": 364,
+      "question": "VERTU Agent Q全球首款AI Agent手机的屏幕和影像系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 365,
+      "question": "VERTU Agent Q全球首款AI Agent手机的存储与处理器配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 366,
+      "question": "VERTU Agent Q全球首款AI Agent手机是否支持双卫星双向通话？",
+      "category": "一般"
+    },
+    {
+      "id": 367,
+      "question": "VERTU Agent Q全球首款AI Agent手机的机身材质和工艺特点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 368,
+      "question": "VERTU Agent Q全球首款AI Agent手机是否支持端到端加密？",
+      "category": "一般"
+    },
+    {
+      "id": 369,
+      "question": "VERTU Agent Q手机微信可以正常使用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 370,
+      "question": "VERTU AGENT Q手机的充电器是什么样子的？",
+      "category": "一般"
+    },
+    {
+      "id": 371,
+      "question": "VERTU Agent Q手机的AI智能体有哪些应用场景？",
+      "category": "一般"
+    },
+    {
+      "id": 372,
+      "question": "VERTU Agent Q手机是否支持防止录音录屏的聊天功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 373,
+      "question": "VERTU AGENT Q 旗舰新品会卡顿吗？",
+      "category": "一般"
+    },
+    {
+      "id": 374,
+      "question": "VERTU AGENT Q 旗舰新品支持一键导入数据吗？",
+      "category": "一般"
+    },
+    {
+      "id": 375,
+      "question": "VERTU Agent Q手机的存储容量是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 376,
+      "question": "VERTU AGENT Q手机折叠使用后期会有痕迹吗？",
+      "category": "一般"
+    },
+    {
+      "id": 377,
+      "question": "VERTU Agent Q的宽度是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 378,
+      "question": "VERTU AGENT Q 旗舰新品是否具备一键销毁功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 379,
+      "question": "VERTU AGENT Q 旗舰新品主系统与META SPACE之间消息通知是否可跨系统提醒？",
+      "category": "系统更新"
+    },
+    {
+      "id": 380,
+      "question": "VERTU AGENT Q 手机的量子密钥是什么意思？",
+      "category": "一般"
+    },
+    {
+      "id": 381,
+      "question": "VERTU AGENT Q 安全性能怎么样?",
+      "category": "安全隐私"
+    },
+    {
+      "id": 382,
+      "question": "VERTU AGENT Q手机能否通过不同指纹切换系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 383,
+      "question": "VERTU Agent Q旗舰新品是否有唯一VSN编号？",
+      "category": "一般"
+    },
+    {
+      "id": 384,
+      "question": "VERTU AGENT Q 旗舰新品 29000元款和40000元款有什么区别?",
+      "category": "一般"
+    },
+    {
+      "id": 385,
+      "question": "佩戴VERTU AGENT Q 旗舰新品是否会影响打螺丝工作？",
+      "category": "一般"
+    },
+    {
+      "id": 386,
+      "question": "VERTU Agent Q的影像系统参数是什么?",
+      "category": "系统更新"
+    },
+    {
+      "id": 387,
+      "question": "VERTU Agent Q的机身材质有哪些选择?",
+      "category": "一般"
+    },
+    {
+      "id": 388,
+      "question": "VERTU AGENT Q 旗舰新品的通用包装盒是哪种？",
+      "category": "一般"
+    },
+    {
+      "id": 389,
+      "question": "VERTU Agent Q手机支持玩游戏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 390,
+      "question": "VERTU AGENT Q旗舰新品的价值体现在哪里？",
+      "category": "一般"
+    },
+    {
+      "id": 391,
+      "question": "VERTU AGENT Q 旗舰新品是否支持2K+超感内屏？",
+      "category": "一般"
+    },
+    {
+      "id": 392,
+      "question": "VERTU AGENT Q 旗舰新品续航能力怎么样？电池可拆卸吗？",
+      "category": "一般"
+    },
+    {
+      "id": 393,
+      "question": "VERTU AGENT Q 旗舰新品与别的手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 394,
+      "question": "VERTU AGENT Q 小折叠屏手机的卡槽在哪儿？",
+      "category": "一般"
+    },
+    {
+      "id": 395,
+      "question": "VERTU AGENT Q旗舰新品支持测ECG心电图吗?",
+      "category": "一般"
+    },
+    {
+      "id": 396,
+      "question": "VERTU AGENT Q手机有什么具体优点介绍一下？",
+      "category": "一般"
+    },
+    {
+      "id": 397,
+      "question": "VERTU AGENT Q手机支持哪些AI智能体功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 398,
+      "question": "VERTU AGENT Q手机的电池容量和充电速度是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 399,
+      "question": "VERTU AGENT Q手机的摄像头配置和拍摄能力如何？",
+      "category": "一般"
+    },
+    {
+      "id": 400,
+      "question": "VERTU AGENT Q手机的隐私安全防护措施有哪些？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 401,
+      "question": "VERTU AGENT Q手机的机身工艺和稀缺性如何？",
+      "category": "一般"
+    },
+    {
+      "id": 402,
+      "question": "VERTU AGENT Q手机是否支持卫星通信？",
+      "category": "一般"
+    },
+    {
+      "id": 403,
+      "question": "VERTU AGENT Q 限量发售的旗舰新品支持哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 404,
+      "question": "VERTU AGENT Q曜石黑配色的材质和工艺特点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 405,
+      "question": "VERTU AGENT Q有哪些可选材质？不同材质的特性是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 406,
+      "question": "VERTU AGENT Q直面屏手机支持卫星电话功能吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 407,
+      "question": "VERTU AGENT Q 限量发售的手机是否支持5G网络？",
+      "category": "一般"
+    },
+    {
+      "id": 408,
+      "question": "VERTU AGENT Q 限量发售的手机是否配备独立安全芯片？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 409,
+      "question": "VERTU AGENT Q 限量发售的手机支持多语言语音助手吗？",
+      "category": "一般"
+    },
+    {
+      "id": 410,
+      "question": "VERTU AGENT Q 限量发售的手机是否具备防窥显示功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 411,
+      "question": "VERTU AGENT Q 限量发售的手机支持生物识别解锁吗？",
+      "category": "一般"
+    },
+    {
+      "id": 412,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮全球首发款手机支持AI智能体功能吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 413,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮全球首发款手机的材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 414,
+      "question": "VERTU Agent Q搭载什么处理器？",
+      "category": "一般"
+    },
+    {
+      "id": 415,
+      "question": "VERTU Agent Q是全球首款AI Agent手机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 416,
+      "question": "VERTU Agent Q支持哪些安全防护功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 417,
+      "question": "VERTU Agent Q的AI智能体有哪些应用场景？",
+      "category": "一般"
+    },
+    {
+      "id": 418,
+      "question": "VERTU Agent Q的机身工艺有哪些特点？",
+      "category": "一般"
+    },
+    {
+      "id": 419,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机支持双卫星双向通话吗？",
+      "category": "一般"
+    },
+    {
+      "id": 420,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机搭载什么处理器？",
+      "category": "一般"
+    },
+    {
+      "id": 421,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机的屏幕尺寸和刷新率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 422,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机的存储配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 423,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机的影像系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 424,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机的电池容量和充电功率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 425,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机是否配备A5加密芯片和一机三系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 426,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机的机身材质和特色按键是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 427,
+      "question": "VERTU Agent Q的屏幕规格是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 428,
+      "question": "VERTU Agent Q的影像系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 429,
+      "question": "VERTU Agent Q的电池与充电规格是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 430,
+      "question": "VERTU Agent Q是否支持双卫星双向通话？",
+      "category": "一般"
+    },
+    {
+      "id": 431,
+      "question": "VERTU Agent Q的加密系统有哪些特点？",
+      "category": "系统更新"
+    },
+    {
+      "id": 432,
+      "question": "VERTU Agent Q的存储配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 433,
+      "question": "VERTU Agent Q支持多少个AI智能体？",
+      "category": "一般"
+    },
+    {
+      "id": 434,
+      "question": "VERTU Agent Q的系统架构是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 435,
+      "question": "VERTU Agent Q手机的屏幕参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 436,
+      "question": "VERTU Agent Q手机的加密安全特性有哪些？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 437,
+      "question": "VERTU Agent Q手机是否提供24小时私人管家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 438,
+      "question": "VERTU Agent Q手机的外观设计特点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 439,
+      "question": "VERTU Agent Q手机是否支持端到端加密？",
+      "category": "一般"
+    },
+    {
+      "id": 440,
+      "question": "VERTU Agent Q手机有哪些核心配置和功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 441,
+      "question": "VERTU Agent Q手机像素是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 442,
+      "question": "VERTU AGENT Q 限量版旗舰新品的发售形式是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 443,
+      "question": "VERTU Agent Q手机可以看朋友圈发的实况图吗?",
+      "category": "一般"
+    },
+    {
+      "id": 444,
+      "question": "VERTU Agent Q手机是什么系统?",
+      "category": "系统更新"
+    },
+    {
+      "id": 445,
+      "question": "VERTU Agent Q的内存配置是1TB+16GB吗？",
+      "category": "一般"
+    },
+    {
+      "id": 446,
+      "question": "VERTU AGENT Q 限量发售的旗舰新品是否为限量款？",
+      "category": "一般"
+    },
+    {
+      "id": 447,
+      "question": "VERTU Agent Q手机6.1寸的有没？",
+      "category": "一般"
+    },
+    {
+      "id": 448,
+      "question": "VERTU Agent Q手机有哪些高端配置?",
+      "category": "一般"
+    },
+    {
+      "id": 449,
+      "question": "VERTU Agent Q是全球首款AI Agent手机，这款手机能玩游戏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 450,
+      "question": "VERTU AGENT Q手机支持NFC吗？",
+      "category": "一般"
+    },
+    {
+      "id": 451,
+      "question": "VERTU AGENT Q旗舰新品不同材质版本有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 452,
+      "question": "VERTU AGENT Q手机的屏幕刷新率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 453,
+      "question": "VERTU AGENT Q手机是否支持屏下指纹解锁？",
+      "category": "一般"
+    },
+    {
+      "id": 454,
+      "question": "VERTU AGENT Q手机的屏幕类型是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 455,
+      "question": "VERTU Agent Q手机是否适合自用？",
+      "category": "一般"
+    },
+    {
+      "id": 456,
+      "question": "VERTU AGENT Q手机是直面屏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 457,
+      "question": "VERTU Agent Q这款手机是高定款式吗？",
+      "category": "一般"
+    },
+    {
+      "id": 458,
+      "question": "VERTU AGENT Q手机支持微信、抖音、QQ音乐等常用应用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 459,
+      "question": "VERTU Agent Q手机可以玩游戏吗?",
+      "category": "一般"
+    },
+    {
+      "id": 460,
+      "question": "VERTU AGENT Q奢品直面屏手机与老款手机有何不同？",
+      "category": "一般"
+    },
+    {
+      "id": 461,
+      "question": "VERTU Agent Q手机支持防水和耐用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 462,
+      "question": "VERTU Agent Q手机是否适合工程人员使用？",
+      "category": "一般"
+    },
+    {
+      "id": 463,
+      "question": "VERTU Agent Q手机支持一机三系统吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 464,
+      "question": "VERTU Agent Q手机是否提供真人管家服务?",
+      "category": "一般"
+    },
+    {
+      "id": 465,
+      "question": "VERTU Agent Q手机的私人管家服务涵盖哪些内容?",
+      "category": "一般"
+    },
+    {
+      "id": 466,
+      "question": "VERTU Agent Q手机的处理器和存储配置是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 467,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机在什么地方生产？",
+      "category": "一般"
+    },
+    {
+      "id": 468,
+      "question": "VERTU Agent Q旗舰手机的影像系统配置有哪些？",
+      "category": "系统更新"
+    },
+    {
+      "id": 469,
+      "question": "VERTU Agent Q旗舰手机的存储配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 470,
+      "question": "VERTU AGENT Q手机支持有线充电吗？充电功率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 471,
+      "question": "METAVERTU手机的双系统是指哪两个系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 472,
+      "question": "VERTU Agent Q手机的CPU是什么型号？",
+      "category": "一般"
+    },
+    {
+      "id": 473,
+      "question": "VERTU AGENT Q 限量版旗舰新品是否为奢品Meta手机？",
+      "category": "一般"
+    },
+    {
+      "id": 474,
+      "question": "VERTU AGENT Q手机与华为等国产品牌手机功能是否相似？",
+      "category": "技术支持"
+    },
+    {
+      "id": 475,
+      "question": "VERTU AGENT Q手机的屏幕尺寸是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 476,
+      "question": "VERTU AGENT Q手机会不会摔碎或破屏？",
+      "category": "一般"
+    },
+    {
+      "id": 477,
+      "question": "VERTU Agent Q手机的机身工艺和材质是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 478,
+      "question": "VERTU Agent Q手机的金属边框怕划吗？",
+      "category": "一般"
+    },
+    {
+      "id": 479,
+      "question": "VERTU Meta双曲屏手机和VERTU Agent Q有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 480,
+      "question": "VERTU Agent Q支持刷快手吗？",
+      "category": "一般"
+    },
+    {
+      "id": 481,
+      "question": "VERTU Agent Q的配置参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 482,
+      "question": "VERTU Agent Q手机充电口是哪种？",
+      "category": "一般"
+    },
+    {
+      "id": 483,
+      "question": "VERTU Agent Q手机有语音智能助手吗?",
+      "category": "一般"
+    },
+    {
+      "id": 484,
+      "question": "VERTU AGENT Q 旗舰新品小牛皮款支持哪些材质？",
+      "category": "一般"
+    },
+    {
+      "id": 485,
+      "question": "VERTU Agent Q是全球首款AI Agent手机，它能打视频电话吗？",
+      "category": "一般"
+    },
+    {
+      "id": 486,
+      "question": "VERTU AGENT Q 旗舰新品的屏幕分辨率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 487,
+      "question": "VERTU Agent Q是老年机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 488,
+      "question": "VERTU AGENT Q旗舰手机的材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 489,
+      "question": "VERTU Agent Q旗舰手机支持视频通话吗?",
+      "category": "一般"
+    },
+    {
+      "id": 490,
+      "question": "VERTU AGENT Q 限量发售的旗舰新品支持下载微信吗？",
+      "category": "一般"
+    },
+    {
+      "id": 491,
+      "question": "VERTU AGENT Q 限量发售的旗舰新品手机支持哪些颜色？",
+      "category": "一般"
+    },
+    {
+      "id": 492,
+      "question": "VERTU AGENT Q 限量发售的奢品Meta手机支持苹果设备吗？",
+      "category": "一般"
+    },
+    {
+      "id": 493,
+      "question": "VERTU AGENT Q 限量发售的量子折叠屏手机支持哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 494,
+      "question": "VERTU AGENT Q 限量发售手机是老人机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 495,
+      "question": "VERTU AGENT Q 限量发售手机不是智能机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 496,
+      "question": "VERTU Agent Q手机在几年内会不会卡顿？",
+      "category": "一般"
+    },
+    {
+      "id": 497,
+      "question": "VERTU Agent Q新款手机有喜马拉雅白和紫色的实物视频吗？",
+      "category": "一般"
+    },
+    {
+      "id": 498,
+      "question": "VERTU Agent Q新款手机还有其他新款吗？",
+      "category": "一般"
+    },
+    {
+      "id": 499,
+      "question": "VERTU Agent Q新款手机有折叠屏版本吗？",
+      "category": "一般"
+    },
+    {
+      "id": 500,
+      "question": "VERTU AGENT Q智能腕表是机械表吗?",
+      "category": "一般"
+    },
+    {
+      "id": 501,
+      "question": "VERTU AGENT Q手机的10TB云存储空间是否支持手机数据上传？手机丢失后能否从云端恢复数据？",
+      "category": "一般"
+    },
+    {
+      "id": 502,
+      "question": "VERTU Agent Q手机的电池和充电支持情况如何？",
+      "category": "一般"
+    },
+    {
+      "id": 503,
+      "question": "VERTU AGENT Q 限量发售的直屏手机有哪些材质和颜色可选？",
+      "category": "一般"
+    },
+    {
+      "id": 504,
+      "question": "VERTU Agent Q手机屏膜有吗？",
+      "category": "一般"
+    },
+    {
+      "id": 505,
+      "question": "VERTU AGENT Q 三系统国际版手机能否使用当地SIM卡？",
+      "category": "系统更新"
+    },
+    {
+      "id": 506,
+      "question": "VERTU AGENT Q 智能手机12GB+512GB或18GB+1TB存储容量是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 507,
+      "question": "VERTU Agent Q的绿色款使用什么材质的皮？",
+      "category": "一般"
+    },
+    {
+      "id": 508,
+      "question": "METAVERTU2黄财神版本与苹果手机相比有何优势？",
+      "category": "一般"
+    },
+    {
+      "id": 509,
+      "question": "VERTU Agent Q 旗舰手机的一机三系统具体有哪些区别？",
+      "category": "系统更新"
+    },
+    {
+      "id": 510,
+      "question": "VERTU AGENT Q 搭载骁龙8至尊处理器吗?",
+      "category": "一般"
+    },
+    {
+      "id": 511,
+      "question": "VERTU AGENT Q 所有颜色版本是否都搭载相同的处理器?",
+      "category": "一般"
+    },
+    {
+      "id": 512,
+      "question": "VERTU Agent Q是全球首款AI Agent手机有多少GB存储?",
+      "category": "一般"
+    },
+    {
+      "id": 513,
+      "question": "VERTU Agent Q手机能否砸核桃？",
+      "category": "一般"
+    },
+    {
+      "id": 514,
+      "question": "VERTU AGENT Q 全球限量发售的手机是2025年新款吗？",
+      "category": "一般"
+    },
+    {
+      "id": 515,
+      "question": "VERTU AGENT Q 全球限量发售的手机是双卡吗？",
+      "category": "一般"
+    },
+    {
+      "id": 516,
+      "question": "VERTU AGENT Q 全球限量发售的手机的屏幕尺寸和分辨率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 517,
+      "question": "VERTU Agent Q手机有哪些可选材质和颜色？",
+      "category": "一般"
+    },
+    {
+      "id": 518,
+      "question": "VERTU AGENT Q 全球限量发售的手机的摄像头配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 519,
+      "question": "VERTU AGENT Q 全球限量发售的手机的电池容量和快充功率是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 520,
+      "question": "VERTU AGENT Q 全球限量发售的手机的系统支持哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 521,
+      "question": "VERTU AGENT Q 全球限量发售的手机的产地是哪里？",
+      "category": "一般"
+    },
+    {
+      "id": 522,
+      "question": "VERTU Agent Q手机质量好吗？",
+      "category": "一般"
+    },
+    {
+      "id": 523,
+      "question": "VERTU Agent Q手机的散热系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 524,
+      "question": "VERTU Agent Q 旗舰手机的存储空间有多大？是否永久免费？",
+      "category": "一般"
+    },
+    {
+      "id": 525,
+      "question": "VERTU Agent Q手机内存是多少G？",
+      "category": "一般"
+    },
+    {
+      "id": 526,
+      "question": "VERTU Agent Q 旗舰手机是否支持Web3功能？有哪些具体应用？",
+      "category": "技术支持"
+    },
+    {
+      "id": 527,
+      "question": "VERTU Agent Q配备哪些安全加密技术？",
+      "category": "技术支持"
+    },
+    {
+      "id": 528,
+      "question": "VERTU AGENT Q 旗舰新品的量子密钥如何体现？",
+      "category": "一般"
+    },
+    {
+      "id": 529,
+      "question": "VERTU Agent Q手机能上网吗?",
+      "category": "一般"
+    },
+    {
+      "id": 530,
+      "question": "VERTU AGENT Q旗舰新品支持5G吗?",
+      "category": "一般"
+    },
+    {
+      "id": 531,
+      "question": "MetaVertu显示屏规格是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 532,
+      "question": "MetaVertu后壳可选材质有哪些？",
+      "category": "一般"
+    },
+    {
+      "id": 533,
+      "question": "VERTU Agent Q手机支持多少个AI智能体和是否提供真人管家服务?",
+      "category": "一般"
+    },
+    {
+      "id": 534,
+      "question": "VERTU Agent Q手机有哪些个性化服务？",
+      "category": "一般"
+    },
+    {
+      "id": 535,
+      "question": "VERTU AGENT Q旗舰手机有哪些核心特点?",
+      "category": "一般"
+    },
+    {
+      "id": 536,
+      "question": "VERTU Agent Q手机支持三卡吗？",
+      "category": "一般"
+    },
+    {
+      "id": 537,
+      "question": "VERTU AGENT Q手机是干什么用的？",
+      "category": "一般"
+    },
+    {
+      "id": 538,
+      "question": "VERTU AGENT Q 旗舰新品支持3nm高通骁龙8 Elite至尊版处理器吗？",
+      "category": "一般"
+    },
+    {
+      "id": 539,
+      "question": "VERTU AGENT Q 旗舰新品配备的散热系统是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 540,
+      "question": "VERTU Agent Q手机通话能加密吗?",
+      "category": "一般"
+    },
+    {
+      "id": 541,
+      "question": "VERTU Agent Q的电池容量是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 542,
+      "question": "VERTU Agent Q的屏幕尺寸和刷新率是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 543,
+      "question": "VERTU Agent Q是否配备AI智能体?",
+      "category": "一般"
+    },
+    {
+      "id": 544,
+      "question": "VERTU Agent Q是否支持65W快充?",
+      "category": "一般"
+    },
+    {
+      "id": 545,
+      "question": "VERTU Agent Q手机的好处在哪里?",
+      "category": "一般"
+    },
+    {
+      "id": 546,
+      "question": "VERTU Agent Q手机芯片是骁龙8 Elite至尊版还是8 Elite Gen5?",
+      "category": "一般"
+    },
+    {
+      "id": 547,
+      "question": "VERTU Agent Q手机屏幕是蓝宝石材质吗？",
+      "category": "一般"
+    },
+    {
+      "id": 548,
+      "question": "VERTU Agent Q手机的AI图片编辑和通话翻译功能支持哪些？",
+      "category": "技术支持"
+    },
+    {
+      "id": 549,
+      "question": "VERTU Agent Q能拍照吗?",
+      "category": "一般"
+    },
+    {
+      "id": 550,
+      "question": "VERTU Agent Q手机可以定制苹果系统吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 551,
+      "question": "VERTU Agent Q手机搭载的芯片是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 552,
+      "question": "VERTU Agent Q手机的AI Agent能否与英伟达AI媲美？",
+      "category": "一般"
+    },
+    {
+      "id": 553,
+      "question": "VERTU Agent Q是三系统吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 554,
+      "question": "VERTU Agent Q AI Agent手机和正常苹果手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 555,
+      "question": "VERTU Agent Q AI Agent手机的保密性更高吗？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 556,
+      "question": "VERTU Agent Q手机的红宝石按钮有什么特点？",
+      "category": "一般"
+    },
+    {
+      "id": 557,
+      "question": "VERTU AGENT Q 限量发售的奢品Meta手机是否提供私人管家服务？",
+      "category": "一般"
+    },
+    {
+      "id": 558,
+      "question": "VERTU AGENT Q 限量发售的奢品Meta手机采用哪些材质？",
+      "category": "一般"
+    },
+    {
+      "id": 559,
+      "question": "VERTU AGENT Q 奢品Meta手机背面是否为天然玛瑙？",
+      "category": "一般"
+    },
+    {
+      "id": 560,
+      "question": "VERTU AGENT Q 旗舰新品与华为X7相比有哪些功能差异？",
+      "category": "技术支持"
+    },
+    {
+      "id": 561,
+      "question": "VERTU AGENT Q 旗舰新品的内存配置是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 562,
+      "question": "VERTU AGENT Q 旗舰新品的10TB分布式存储空间有多大？",
+      "category": "一般"
+    },
+    {
+      "id": 563,
+      "question": "VERTU AGENT Q 旗舰新品的屏幕展开后是否为一个整屏？",
+      "category": "一般"
+    },
+    {
+      "id": 564,
+      "question": "VERTU AGENT Q 旗舰新品的量子折叠屏双屏设计具体是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 565,
+      "question": "VERTU AGENT Q 旗舰新品是否支持AI机器服务？",
+      "category": "一般"
+    },
+    {
+      "id": 566,
+      "question": "VERTU AGENT Q 旗舰新品的总裁百宝箱功能有哪些？",
+      "category": "技术支持"
+    },
+    {
+      "id": 567,
+      "question": "VERTU AGENT Q 旗舰新品带缝线的材质容易坏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 568,
+      "question": "VERTU AGENT Q 旗舰新品是否支持多系统独立运行？",
+      "category": "系统更新"
+    },
+    {
+      "id": 569,
+      "question": "VERTU AGENT Q 旗舰新品的侧边按键是否为红宝石材质？",
+      "category": "一般"
+    },
+    {
+      "id": 570,
+      "question": "VERTU AGENT Q 限量发售的手机是否支持全球专属售后服务？",
+      "category": "一般"
+    },
+    {
+      "id": 571,
+      "question": "VERTU AGENT Q 智能腕表是否配备私人管家服务按键？",
+      "category": "一般"
+    },
+    {
+      "id": 572,
+      "question": "VERTU Agent Q手机电池续航怎么样？",
+      "category": "一般"
+    },
+    {
+      "id": 573,
+      "question": "VERTU Agent Q手机充一次电可以用多久？",
+      "category": "一般"
+    },
+    {
+      "id": 574,
+      "question": "VERTU Agent Q手机能用几年？",
+      "category": "一般"
+    },
+    {
+      "id": 575,
+      "question": "VERTU Agent Q手机在哈尔滨低温环境下会不会冻住或自动停机？",
+      "category": "一般"
+    },
+    {
+      "id": 576,
+      "question": "VERTU AGENT Q 限量版旗舰新品是否支持实物展示？",
+      "category": "一般"
+    },
+    {
+      "id": 577,
+      "question": "VERTU Agent Q手机在玩和平精英游戏时能保持多少帧？",
+      "category": "一般"
+    },
+    {
+      "id": 578,
+      "question": "VERTU Agent Q是否配备A5加密芯片和一机三系统?",
+      "category": "系统更新"
+    },
+    {
+      "id": 579,
+      "question": "VERTU Agent Q旗舰手机的白锆石是什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 580,
+      "question": "VERTU Agent Q旗舰手机是否支持安卓和苹果设备连接？",
+      "category": "一般"
+    },
+    {
+      "id": 581,
+      "question": "VERTU Agent Q旗舰手机的处理器型号是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 582,
+      "question": "VERTU Agent Q旗舰手机的AI智能体数量是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 583,
+      "question": "VERTU Agent Q智能手机的相机拍得清楚吗？",
+      "category": "一般"
+    },
+    {
+      "id": 584,
+      "question": "VERTU Agent Q智能体手机内置电池容量是多少毫安？",
+      "category": "一般"
+    },
+    {
+      "id": 585,
+      "question": "VERTU Agent Q智能手机的电池和充电参数是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 586,
+      "question": "VERTU Agent Q智能体手机打王者荣耀流畅吗？",
+      "category": "一般"
+    },
+    {
+      "id": 587,
+      "question": "VERTU AGENT Q 智能手机支持移动联通网络吗?",
+      "category": "一般"
+    },
+    {
+      "id": 588,
+      "question": "VERTU AGENT Q 旗舰新品是否为黄金制作？",
+      "category": "一般"
+    },
+    {
+      "id": 589,
+      "question": "VERTU AGENT Q 牛皮款手机支持无线充电吗?",
+      "category": "一般"
+    },
+    {
+      "id": 590,
+      "question": "VERTU AGENT Q 牛皮款手机包装清单包含什么?",
+      "category": "一般"
+    },
+    {
+      "id": 591,
+      "question": "VERTU Agent Q旗舰手机是否可以做到不被监听？",
+      "category": "一般"
+    },
+    {
+      "id": 592,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机有哪些颜色可选？",
+      "category": "一般"
+    },
+    {
+      "id": 593,
+      "question": "量子折叠屏与VERTU Agent Q两款手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 594,
+      "question": "VERTU AGENT Q手机的长宽高分别是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 595,
+      "question": "VERTU Agent Q手机支持哪些系统？能否实现工作与生活分离？",
+      "category": "系统更新"
+    },
+    {
+      "id": 596,
+      "question": "VERTU Agent Q系列手机的影像系统支持哪些拍摄功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 597,
+      "question": "VERTU Agent Q系列手机是否具备高端工艺与材质？",
+      "category": "一般"
+    },
+    {
+      "id": 598,
+      "question": "VERTU Agent Q手机是否为全球限量发售？",
+      "category": "一般"
+    },
+    {
+      "id": 599,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮全球首发款手机是全新正品未激活未拆封吗？",
+      "category": "一般"
+    },
+    {
+      "id": 600,
+      "question": "VERTU Agent Q智能体手机支持哪些存储配置？",
+      "category": "一般"
+    },
+    {
+      "id": 601,
+      "question": "VERTU Agent Q智能体手机的电池和快充配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 602,
+      "question": "VERTU Agent Q智能体手机的加密与安全配置是什么？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 603,
+      "question": "VERTU Agent Q 碳纤纹小牛皮全球首发款手机好用吗？",
+      "category": "一般"
+    },
+    {
+      "id": 604,
+      "question": "VERTU Agent Q的屏幕和电池配置是什么?",
+      "category": "一般"
+    },
+    {
+      "id": 605,
+      "question": "VERTU Agent Q支持哪些核心功能?",
+      "category": "技术支持"
+    },
+    {
+      "id": 606,
+      "question": "VERTU Agent Q手机流畅不卡顿吗?",
+      "category": "一般"
+    },
+    {
+      "id": 607,
+      "question": "VERTU Agent Q是全球首款AI Agent手机，其信号接受速度如何？",
+      "category": "一般"
+    },
+    {
+      "id": 608,
+      "question": "VERTU Agent Q手机的存储空间有多大？是否支持10TB分布式存储？",
+      "category": "一般"
+    },
+    {
+      "id": 609,
+      "question": "VERTU Agent Q手机支持直播功能吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 610,
+      "question": "VERTU Agent Q有哪些功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 611,
+      "question": "VERTU Agent Q是否支持73国通话翻译？",
+      "category": "一般"
+    },
+    {
+      "id": 612,
+      "question": "VERTU Agent Q是否支持AI图片编辑？",
+      "category": "一般"
+    },
+    {
+      "id": 613,
+      "question": "VERTU Agent Q是否支持AI智能体跨应用无缝协作？",
+      "category": "一般"
+    },
+    {
+      "id": 614,
+      "question": "VERTU Agent Q手机支持刷视频、打游戏和聊天吗？",
+      "category": "一般"
+    },
+    {
+      "id": 615,
+      "question": "VERTU Agent Q手机玩原神最高画质会卡顿吗?",
+      "category": "一般"
+    },
+    {
+      "id": 616,
+      "question": "VERTU Agent Q 碳纤纹小牛皮手机是否具备端到端加密安全机制？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 617,
+      "question": "VERTU Agent Q手机与华为三折叠手机有什么不同？",
+      "category": "一般"
+    },
+    {
+      "id": 618,
+      "question": "VERTU Agent Q手机是否物有所值？",
+      "category": "一般"
+    },
+    {
+      "id": 619,
+      "question": "VERTU Agent Q手机支持四个微信同时在线吗？",
+      "category": "一般"
+    },
+    {
+      "id": 620,
+      "question": "VERTU Agent Q手机需要切换系统才能使用四个微信吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 621,
+      "question": "VERTU Agent Q手机的主摄像头是否支持可变光圈和光学防抖？",
+      "category": "一般"
+    },
+    {
+      "id": 622,
+      "question": "VERTU Agent Q手机的长焦镜头是否支持微距拍摄？",
+      "category": "一般"
+    },
+    {
+      "id": 623,
+      "question": "VERTU Agent Q手机的重量是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 624,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机有哪些主要配置和功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 625,
+      "question": "VERTU Agent Q手机支持微信看视频吗?",
+      "category": "一般"
+    },
+    {
+      "id": 626,
+      "question": "VERTU Agent Q手机与普通智能手机有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 627,
+      "question": "VERTU Agent Q手机主摄像素与苹果手机相比哪个更胜一筹？",
+      "category": "一般"
+    },
+    {
+      "id": 628,
+      "question": "VERTU AGENT Q 旗舰新品机甲款式有没有无线充电功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 629,
+      "question": "VERTU Agent Q在玩游戏时会有问题吗?",
+      "category": "一般"
+    },
+    {
+      "id": 630,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机主摄像素是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 631,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机支持哪些焦段拍摄？",
+      "category": "一般"
+    },
+    {
+      "id": 632,
+      "question": "VERTU AGENT Q 碳纤纹小牛皮手机在暗光环境下的表现如何？",
+      "category": "一般"
+    },
+    {
+      "id": 633,
+      "question": "VERTU Agent Q手机支持5G双卡双待吗？",
+      "category": "一般"
+    },
+    {
+      "id": 634,
+      "question": "VERTU Agent Q手机是否使用骁龙8-3处理器？",
+      "category": "一般"
+    },
+    {
+      "id": 635,
+      "question": "VERTU AGENT Q手机防水防爆防偷吗？",
+      "category": "一般"
+    },
+    {
+      "id": 636,
+      "question": "VERTU Agent Q旗舰新品有哪些核心配置和专属服务？",
+      "category": "一般"
+    },
+    {
+      "id": 637,
+      "question": "VERTU Agent Q手机是否具备普通手机的所有功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 638,
+      "question": "VERTU Agent Q手机采用的皮质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 639,
+      "question": "VERTU Agent Q手机的影像系统支持哪些焦段？",
+      "category": "系统更新"
+    },
+    {
+      "id": 640,
+      "question": "VERTU Agent Q手机有蓝牙功能吗?",
+      "category": "技术支持"
+    },
+    {
+      "id": 641,
+      "question": "VERTU AGENT Q 限量版旗舰手机支持哪些隐私功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 642,
+      "question": "VERTU Agent Q手机打游戏会卡吗?",
+      "category": "一般"
+    },
+    {
+      "id": 643,
+      "question": "VERTU AGENT Q 限量版旗舰手机的蓝色和黑色款实拍图在哪里查看？",
+      "category": "一般"
+    },
+    {
+      "id": 644,
+      "question": "当兵能用VERTU AGENT Q吗？",
+      "category": "一般"
+    },
+    {
+      "id": 645,
+      "question": "Vertu AGENT Q旗舰新品是否支持终身屏幕保护?",
+      "category": "一般"
+    },
+    {
+      "id": 646,
+      "question": "VERTU Agent Q手机的目标用户群体是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 647,
+      "question": "VERTU Agent Q手机属于什么类型？",
+      "category": "一般"
+    },
+    {
+      "id": 648,
+      "question": "VERTU AGENT Q旗舰机的一机三系统支持几个微同时在线？",
+      "category": "系统更新"
+    },
+    {
+      "id": 649,
+      "question": "VERTU AGENT Q旗舰机的三系统如何实现无缝切换？",
+      "category": "系统更新"
+    },
+    {
+      "id": 650,
+      "question": "VERTU AGENT Q旗舰机的三系统与普通品牌手机的访客模式有何区别？",
+      "category": "系统更新"
+    },
+    {
+      "id": 651,
+      "question": "VERTU AGENT Q旗舰机有哪些具体型号支持三系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 652,
+      "question": "VERTU Agent Q手机的分布式存储是云盘吗？",
+      "category": "一般"
+    },
+    {
+      "id": 653,
+      "question": "VERTU Agent Q的加密系统支持安装市面上的所有软件吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 654,
+      "question": "VERTU Agent Q的双系统分别是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 655,
+      "question": "VERTU Agent Q的加密系统是否兼容主流APP？",
+      "category": "系统更新"
+    },
+    {
+      "id": 656,
+      "question": "VERTU Agent Q是什么型号？",
+      "category": "一般"
+    },
+    {
+      "id": 657,
+      "question": "VERTU Agent Q支持哪些系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 658,
+      "question": "VERTU Agent Q的安全保障机制有哪些？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 659,
+      "question": "VERTU AGENT Q手机的黑色和白色边框有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 660,
+      "question": "VERTU Agent Q手机相比华为和苹果有哪些优势？",
+      "category": "一般"
+    },
+    {
+      "id": 661,
+      "question": "VERTU Agent Q的屏幕是否为蓝宝石屏幕?",
+      "category": "一般"
+    },
+    {
+      "id": 662,
+      "question": "VERTU Agent Q手机的加密通话功能，如果对方使用其他品牌手机，还能使用吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 663,
+      "question": "VERTU Agent Q是否兼容苹果系统?",
+      "category": "系统更新"
+    },
+    {
+      "id": 664,
+      "question": "VERTU Agent Q使用微信等应用会不会受影响?",
+      "category": "一般"
+    },
+    {
+      "id": 665,
+      "question": "VERTU AGENT Q 旗舰新品全球首发预售支持哪些系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 666,
+      "question": "VERTU AGENT Q旗舰新品支持骁龙 8 Elite至尊版 AI 芯片和量子密钥吗？",
+      "category": "一般"
+    },
+    {
+      "id": 667,
+      "question": "SIGNATURE S总裁手机有哪些功能?",
+      "category": "技术支持"
+    },
+    {
+      "id": 668,
+      "question": "VERTU AGENT Q奢品直面屏手机的配置信息是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 669,
+      "question": "VERTU AGENT Q奢品直面屏手机支持哪些充电方式？",
+      "category": "一般"
+    },
+    {
+      "id": 670,
+      "question": "VERTU AGENT Q旗舰新品是否有充电线？",
+      "category": "一般"
+    },
+    {
+      "id": 671,
+      "question": "VERTU AGENT Q旗舰新品预售是否支持双曲屏和直面屏选择？",
+      "category": "一般"
+    },
+    {
+      "id": 672,
+      "question": "VERTU Agent Q手机的屏幕抗摔性能如何？",
+      "category": "一般"
+    },
+    {
+      "id": 673,
+      "question": "VERTU Agent Q手机的屏幕硬度是否仅次于钻石？",
+      "category": "一般"
+    },
+    {
+      "id": 674,
+      "question": "VERTU AGENT Q 旗舰新品全球限量发售，高定礼盒包装有几层？",
+      "category": "一般"
+    },
+    {
+      "id": 675,
+      "question": "VERTU AGENT Q 旗舰新品全球限量发售，是否包含皮套？",
+      "category": "一般"
+    },
+    {
+      "id": 676,
+      "question": "VERTU Agent Q手机能值几万？",
+      "category": "一般"
+    },
+    {
+      "id": 677,
+      "question": "VERTU AGENT Q旗舰新品支持专属私人管家服务吗？",
+      "category": "一般"
+    },
+    {
+      "id": 678,
+      "question": "VERTU AGENT Q旗舰新品使用稀有皮质和珠宝吗？",
+      "category": "一般"
+    },
+    {
+      "id": 679,
+      "question": "VERTU AGENT Q 智能腕表卡顿吗？",
+      "category": "一般"
+    },
+    {
+      "id": 680,
+      "question": "VERTU Agent Q 粉色鳄鱼皮版本使用什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 681,
+      "question": "VERTU Agent Q 粉色鳄鱼皮版本是否支持定制？",
+      "category": "一般"
+    },
+    {
+      "id": 682,
+      "question": "VERTU Agent Q手机的卫星通信功能在平台商品详情页中是否明确标注？",
+      "category": "技术支持"
+    },
+    {
+      "id": 683,
+      "question": "VERTU Agent Q旗舰手机的皮质材质在潮湿环境是否耐用？",
+      "category": "一般"
+    },
+    {
+      "id": 684,
+      "question": "VERTU Agent Q旗舰手机是否支持非皮质材质版本？",
+      "category": "一般"
+    },
+    {
+      "id": 685,
+      "question": "VERTU Agent Q手机的铰链打开是干嘛的？",
+      "category": "一般"
+    },
+    {
+      "id": 686,
+      "question": "VERTU Agent Q手机可以使用电源键指纹解锁吗？",
+      "category": "一般"
+    },
+    {
+      "id": 687,
+      "question": "VERTU Agent Q手机屏幕支持什么规格？",
+      "category": "一般"
+    },
+    {
+      "id": 688,
+      "question": "VERTU AGENT Q智能手机可以连接华为手机吗?",
+      "category": "一般"
+    },
+    {
+      "id": 689,
+      "question": "VERTU AGENT Q智能手机与3万元的VERTU手机在参数上有何区别?",
+      "category": "一般"
+    },
+    {
+      "id": 690,
+      "question": "VERTU Agent Q的屏幕是三星屏幕吗?",
+      "category": "一般"
+    },
+    {
+      "id": 691,
+      "question": "VERTU Agent Q会不会卡顿？",
+      "category": "一般"
+    },
+    {
+      "id": 692,
+      "question": "VERTU Agent Q是目前最好的处理器吗？",
+      "category": "一般"
+    },
+    {
+      "id": 693,
+      "question": "VERTU Agent Q的配置是不是最高的？",
+      "category": "一般"
+    },
+    {
+      "id": 694,
+      "question": "VERTU Agent Q支持视频查看吗？",
+      "category": "一般"
+    },
+    {
+      "id": 695,
+      "question": "VERTU Agent Q手机的镶金装饰是99纯真金还是钛合金表层镀金？",
+      "category": "一般"
+    },
+    {
+      "id": 696,
+      "question": "VERTU Agent Q手机的后盖设计灵感来源于什么？",
+      "category": "一般"
+    },
+    {
+      "id": 697,
+      "question": "VERTU Agent Q手机的‘大展鸿图’寓意是否与产品设计有关？",
+      "category": "一般"
+    },
+    {
+      "id": 698,
+      "question": "VERTU AGENT Q 限量版旗舰新品的套餐和旗舰店品质是否一样？",
+      "category": "一般"
+    },
+    {
+      "id": 699,
+      "question": "VERTU Agent Q手机支持哪些主要性能配置？",
+      "category": "一般"
+    },
+    {
+      "id": 700,
+      "question": "VERTU Agent Q手机不同选项之间有什么区别？",
+      "category": "一般"
+    },
+    {
+      "id": 701,
+      "question": "VERTU AGENT Q 旗舰新品是否支持全球通用系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 702,
+      "question": "VERTU AGENT Q 旗舰新品是否支持华为鸿蒙系统以外的系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 703,
+      "question": "VERTU AGENT Q 手机的尖端科技具体指什么？",
+      "category": "一般"
+    },
+    {
+      "id": 704,
+      "question": "VERTU AGENT Q 手机的顶配具体指哪方面？",
+      "category": "一般"
+    },
+    {
+      "id": 705,
+      "question": "VERTU AGENT Q 手机在英国是否有人使用？",
+      "category": "一般"
+    },
+    {
+      "id": 706,
+      "question": "VERTU Agent Q手机配备的加密芯片和系统架构是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 707,
+      "question": "VERTU Agent Q手机的电池容量相比iPhone 17 Pro Max和三星Z Fold 7如何？",
+      "category": "一般"
+    },
+    {
+      "id": 708,
+      "question": "VERTU AGENT Q手机是否支持普通电话卡？",
+      "category": "一般"
+    },
+    {
+      "id": 709,
+      "question": "VERTU Agent Q前置摄像头多少像素？",
+      "category": "一般"
+    },
+    {
+      "id": 710,
+      "question": "VERTU Agent Q旗舰手机是否需要贴膜?",
+      "category": "一般"
+    },
+    {
+      "id": 711,
+      "question": "在天猫购买VERTU Agent Q旗舰手机与实体店购买有什么区别?",
+      "category": "一般"
+    },
+    {
+      "id": 712,
+      "question": "VERTU Agent Q旗舰手机的哪个外壳是鳄鱼皮材质？",
+      "category": "一般"
+    },
+    {
+      "id": 713,
+      "question": "VERTU Agent Q手机后置摄像头像素清晰吗？",
+      "category": "一般"
+    },
+    {
+      "id": 714,
+      "question": "VERTU Agent Q手机屏幕玻璃是什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 715,
+      "question": "VERTU AGENT Q系列手机的包装方式是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 716,
+      "question": "VERTU AGENT Q 5G智能手机支持抖音、微信、支付宝吗？",
+      "category": "一般"
+    },
+    {
+      "id": 717,
+      "question": "VERTU AGENT Q手机待机时间多长？",
+      "category": "一般"
+    },
+    {
+      "id": 718,
+      "question": "VERTU Agent Q手机的相机支持多少倍变焦？",
+      "category": "一般"
+    },
+    {
+      "id": 719,
+      "question": "VERTU AGENT Q旗舰新品支持1TB内存吗？",
+      "category": "一般"
+    },
+    {
+      "id": 720,
+      "question": "VERTU Agent Q旗舰手机运行怎样?",
+      "category": "一般"
+    },
+    {
+      "id": 721,
+      "question": "VERTU Agent Q的运行速度怎么样?",
+      "category": "一般"
+    },
+    {
+      "id": 722,
+      "question": "VERTU Agent Q是否支持双卡?",
+      "category": "一般"
+    },
+    {
+      "id": 723,
+      "question": "VERTU AGENT Q型号手机是否支持双系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 724,
+      "question": "VERTU Agent Q手机屏幕是激光玻璃吗?",
+      "category": "一般"
+    },
+    {
+      "id": 725,
+      "question": "VERTU Agent Q手机的主摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 726,
+      "question": "VERTU Agent Q 手机有配套的手机钢化膜吗？",
+      "category": "一般"
+    },
+    {
+      "id": 727,
+      "question": "VERTU AGENT Q 限量款手机边框是陶瓷材质吗？",
+      "category": "一般"
+    },
+    {
+      "id": 728,
+      "question": "VERTU AGENT Q 限量款手机后盖材质是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 729,
+      "question": "VERTU AGENT Q 限量款手机边框和铰链是否经过加固？",
+      "category": "一般"
+    },
+    {
+      "id": 730,
+      "question": "VERTU Agent Q需要插卡吗？",
+      "category": "一般"
+    },
+    {
+      "id": 731,
+      "question": "VERTU Agent Q手机能不能当我这平时用的手机？",
+      "category": "一般"
+    },
+    {
+      "id": 732,
+      "question": "VERTU Agent Q手机能打电话吗？",
+      "category": "一般"
+    },
+    {
+      "id": 733,
+      "question": "VERTU Agent Q直面屏手机最大屏幕几寸？",
+      "category": "一般"
+    },
+    {
+      "id": 734,
+      "question": "VERTU Agent Q直面屏手机背面可以变形吗？",
+      "category": "一般"
+    },
+    {
+      "id": 735,
+      "question": "VERTU Agent Q有不同款式颜色吗？",
+      "category": "一般"
+    },
+    {
+      "id": 736,
+      "question": "VERTU Agent Q直板手机支持双卡3系统吗？",
+      "category": "系统更新"
+    },
+    {
+      "id": 737,
+      "question": "VERTU Agent Q直板手机的硬件安全性如何？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 738,
+      "question": "VERTU Agent Q直板手机的最大优点是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 739,
+      "question": "VERTU Agent Q有哪些核心影像功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 740,
+      "question": "8848钛金手机与VERTU Agent Q有何区别?",
+      "category": "一般"
+    },
+    {
+      "id": 741,
+      "question": "VERTU AGENT Q 限量版手机的保密系统好吗?",
+      "category": "系统更新"
+    },
+    {
+      "id": 742,
+      "question": "VERTU Agent Q手机支持玩《三角洲行动》吗？",
+      "category": "一般"
+    },
+    {
+      "id": 743,
+      "question": "VERTU Agent Q手机支持玩《无畏契约》吗？",
+      "category": "一般"
+    },
+    {
+      "id": 744,
+      "question": "VERTU Agent Q手机的处理器和性能表现如何？",
+      "category": "一般"
+    },
+    {
+      "id": 745,
+      "question": "VERTU AGENT Q 限量版旗舰新品的防水等级是多少？",
+      "category": "一般"
+    },
+    {
+      "id": 746,
+      "question": "VERTU Agent Q防水吗？",
+      "category": "一般"
+    },
+    {
+      "id": 747,
+      "question": "VERTU Agent Q防摔吗？",
+      "category": "一般"
+    },
+    {
+      "id": 748,
+      "question": "VERTU Agent Q的性能如何？",
+      "category": "一般"
+    },
+    {
+      "id": 749,
+      "question": "VERTU Agent Q的A5加密芯片有何作用？",
+      "category": "一般"
+    },
+    {
+      "id": 750,
+      "question": "VERTU Agent Q的处理器和内存配置是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 751,
+      "question": "VERTU AGENT Q 机甲款折叠外屏是什么材质？",
+      "category": "一般"
+    },
+    {
+      "id": 752,
+      "question": "VERTU Agent Q支持机械变焦和人眼仿生镜头吗？",
+      "category": "一般"
+    },
+    {
+      "id": 753,
+      "question": "VERTU Agent Q手机屏幕会刮花吗？是什么材料？",
+      "category": "一般"
+    },
+    {
+      "id": 754,
+      "question": "VERTU Agent Q的超广角摄像头像素是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 755,
+      "question": "VERTU agent Q智能手表有哪些款式颜色？",
+      "category": "一般"
+    },
+    {
+      "id": 756,
+      "question": "VERTU Agent Q的硬件配置有哪些亮点？",
+      "category": "一般"
+    },
+    {
+      "id": 757,
+      "question": "VERTU Agent Q的续航和通信能力如何？",
+      "category": "一般"
+    },
+    {
+      "id": 758,
+      "question": "VERTU Agent Q手机是否采用宝石装饰？",
+      "category": "一般"
+    },
+    {
+      "id": 759,
+      "question": "VERTU Agent Q手机正常使用抖音和玩游戏可以吗？",
+      "category": "一般"
+    },
+    {
+      "id": 760,
+      "question": "VERTU Agent Q提供哪些皮质版本?",
+      "category": "一般"
+    },
+    {
+      "id": 761,
+      "question": "VERTU Agent Q手机的尺寸与苹果Pro Max系列相比如何？",
+      "category": "一般"
+    },
+    {
+      "id": 762,
+      "question": "VERTU Agent Q旗舰手机是全新未拆封未激活的吗?",
+      "category": "一般"
+    },
+    {
+      "id": 763,
+      "question": "VERTU Agent Q手机不用手机壳吗?",
+      "category": "一般"
+    },
+    {
+      "id": 764,
+      "question": "VERTU Agent Q手机支持哪些智能服务和安全特性？",
+      "category": "安全隐私"
+    },
+    {
+      "id": 765,
+      "question": "VERTU Agent Q手机的屏幕和影像系统配置是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 766,
+      "question": "VERTU Agent Q是安卓吗?",
+      "category": "一般"
+    },
+    {
+      "id": 767,
+      "question": "VERTU Agent Q的影像系统有哪些优势？",
+      "category": "系统更新"
+    },
+    {
+      "id": 768,
+      "question": "VERTU Agent Q手机的配置是否为目前市面上最顶级？",
+      "category": "一般"
+    },
+    {
+      "id": 769,
+      "question": "VERTU Agent Q手机散热吗？质量如何？",
+      "category": "一般"
+    },
+    {
+      "id": 770,
+      "question": "VERTU Agent Q全球限量发售的AI Agent手机有哪些核心配置？",
+      "category": "一般"
+    },
+    {
+      "id": 771,
+      "question": "VERTU Agent Q支持全网通吗?",
+      "category": "一般"
+    },
+    {
+      "id": 772,
+      "question": "VERTU Agent Q手机的配件包括哪些？",
+      "category": "一般"
+    },
+    {
+      "id": 773,
+      "question": "VERTU AGENT Q 旗舰新品有2T版本吗?",
+      "category": "一般"
+    },
+    {
+      "id": 774,
+      "question": "VERTU Agent Q手机的定位是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 775,
+      "question": "VERTU AGENT Q旗舰手机全球首发表面是否光滑?",
+      "category": "一般"
+    },
+    {
+      "id": 776,
+      "question": "VERTU AGENT Q旗舰手机全球首发支持旋转吗?",
+      "category": "一般"
+    },
+    {
+      "id": 777,
+      "question": "VERTU Agent Q有什么不同？",
+      "category": "一般"
+    },
+    {
+      "id": 778,
+      "question": "VERTU Agent Q支持游戏吗？",
+      "category": "一般"
+    },
+    {
+      "id": 779,
+      "question": "VERTU Agent Q的机身材质包括哪些？",
+      "category": "一般"
+    },
+    {
+      "id": 780,
+      "question": "VERTU Agent Q旗舰手机购买后有什么好处？",
+      "category": "一般"
+    },
+    {
+      "id": 781,
+      "question": "VERTU Agent Q旗舰手机的7x24真人管家会来吗？",
+      "category": "一般"
+    },
+    {
+      "id": 782,
+      "question": "VERTU Agent Q旗舰手机的管家能解决什么问题？",
+      "category": "一般"
+    },
+    {
+      "id": 783,
+      "question": "VERTU Agent Q旗舰手机的管家可以帮打官司吗？",
+      "category": "一般"
+    },
+    {
+      "id": 784,
+      "question": "VERTU AGENT Q 旗舰新品支持量子折叠技术吗？",
+      "category": "技术支持"
+    },
+    {
+      "id": 785,
+      "question": "VERTU Agent Q有几个系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 786,
+      "question": "VERTU Agent Q的系统支持哪些切换方式？",
+      "category": "系统更新"
+    },
+    {
+      "id": 787,
+      "question": "VERTU AGENT Q 支持哪些材质？",
+      "category": "一般"
+    },
+    {
+      "id": 788,
+      "question": "VERTU Agent Q旗舰手机支持哪两套卫星通信系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 789,
+      "question": "VERTU Agent Q手机在没有信号的情况下能否正常使用？",
+      "category": "一般"
+    },
+    {
+      "id": 790,
+      "question": "VERTU Agent Q有哪些核心配置？",
+      "category": "一般"
+    },
+    {
+      "id": 791,
+      "question": "VERTU AGENT Q旗舰手机支持哪些健康监测功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 792,
+      "question": "VERTU AGENT Q 旗舰新品有碳纤维版吗?",
+      "category": "一般"
+    },
+    {
+      "id": 793,
+      "question": "VERTU Agent Q手机能下载国内软件吗？",
+      "category": "一般"
+    },
+    {
+      "id": 794,
+      "question": "VERTU Agent Q手机支持哪些网络制式？",
+      "category": "一般"
+    },
+    {
+      "id": 795,
+      "question": "VERTU Agent Q手机是否支持通过不同指纹进入不同系统？",
+      "category": "系统更新"
+    },
+    {
+      "id": 796,
+      "question": "VERTU Agent Q手机的长焦摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 797,
+      "question": "VERTU Agent Q手机的超广角摄像头参数是什么？",
+      "category": "一般"
+    },
+    {
+      "id": 798,
+      "question": "VERTU Agent Q是5G智能机吗？可以刷视频吗？",
+      "category": "一般"
+    },
+    {
+      "id": 799,
+      "question": "VERTU Agent Q手机的鳄鱼皮套餐包含哪些内容？",
+      "category": "一般"
+    },
+    {
+      "id": 800,
+      "question": "VERTU AGENT Q奢品直面屏手机电池容量是否足够支持日常使用？",
+      "category": "一般"
+    },
+    {
+      "id": 801,
+      "question": "VERTU AGENT Q手机支持颜值支付吗?",
+      "category": "一般"
+    },
+    {
+      "id": 802,
+      "question": "VERTU Agent Q折叠后盖是干什么用的？",
+      "category": "一般"
+    },
+    {
+      "id": 803,
+      "question": "VERTU Agent Q智能手机有哪些突出功能？",
+      "category": "技术支持"
+    },
+    {
+      "id": 804,
+      "question": "VERTU Agent Q智能手机支持几个系统？分别是什么？",
+      "category": "系统更新"
+    },
+    {
+      "id": 805,
+      "question": "VERTU Agent Q是目前性能最好的手机吗？",
+      "category": "一般"
+    },
+    {
+      "id": 806,
+      "question": "VERTU Agent Q手机防水防尘级别是多少?",
+      "category": "一般"
+    },
+    {
+      "id": 807,
+      "question": "VERTU Agent Q手机能玩《和平精英》吗？",
+      "category": "一般"
+    },
+    {
+      "id": 808,
+      "question": "VERTU AGENT Q 旗舰新品能玩和平精英吗?",
+      "category": "一般"
+    },
+    {
+      "id": 809,
+      "question": "VERTU AGENT Q旗舰手机使用316L精钢和珍稀皮革材质吗?",
+      "category": "一般"
+    },
+    {
+      "id": 810,
+      "question": "VERTU Agent Q是否支持观看抖音？",
+      "category": "一般"
+    },
+    {
+      "id": 811,
+      "question": "VERTU Agent Q手机有哪些颜色适合女士?",
+      "category": "一般"
+    },
+    {
+      "id": 812,
+      "question": "VERTU Agent Q手机支持在美国使用吗？定位准确吗？卫星电话全球可用吗？",
+      "category": "一般"
+    }
+  ],
+  "generated_at": "2026-02-27T11:14:51.995208",
+  "categories": [
+    "系统更新",
+    "价格",
+    "技术支持",
+    "安全隐私",
+    "一般"
+  ]
+}
