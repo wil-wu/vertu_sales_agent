@@ -16,6 +16,7 @@ router = APIRouter(
 
 language_detector = LanguageDetector(
     react_agent_settings.language_detector_model_path,
+    react_agent_settings.language_detector_threshold,
     react_agent_settings.language_detector_exclude,
     react_agent_settings.language_detector_min_length,
     react_agent_settings.language_detector_max_length,
