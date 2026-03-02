@@ -1,0 +1,12 @@
+{
+  "session_id": "996d0059-fa3b-4712-b5ef-41754afec307",
+  "prompt": "模拟专业人士用户测试VERTU手机的电池续航",
+  "finish_reason": "error_'dict' object has no attribute 'message'",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T13:37:51.006965",
+    "end_time": "2026-03-02T13:37:51.006972",
+    "total_turns": 1
+  },
+  "conversation": []
+}

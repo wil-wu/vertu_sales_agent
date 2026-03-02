@@ -1,0 +1,43 @@
+{
+  "session_id": "b3bed1ec-4848-4b2a-b8c3-a824a7f7374e",
+  "prompt": "模拟专业人士用户测试VERTU手机的电池续航",
+  "finish_reason": "max_turns",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T13:55:41.046819",
+    "end_time": "2026-03-02T13:55:49.577141",
+    "total_turns": 3
+  },
+  "conversation": [
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 手机是否支持双系统多用户登录？",
+      "timestamp": "2026-03-02T13:55:41.046819"
+    },
+    {
+      "role": "target_bot",
+      "content": "AGENT Q支持双系统多用户登录，可3系统同时运行互不干扰，最多登录4个微信。",
+      "timestamp": "2026-03-02T13:55:41.046824"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机的分布式存储是否安全？",
+      "timestamp": "2026-03-02T13:55:46.376158"
+    },
+    {
+      "role": "target_bot",
+      "content": "10TB分布式存储数据加密上传，永久不可删改，绝对安全。",
+      "timestamp": "2026-03-02T13:55:46.376163"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机充电口是哪种？",
+      "timestamp": "2026-03-02T13:55:49.075662"
+    },
+    {
+      "role": "target_bot",
+      "content": "Type-C接口，支持65W快充与磁吸隐藏设计。",
+      "timestamp": "2026-03-02T13:55:49.075666"
+    }
+  ]
+}

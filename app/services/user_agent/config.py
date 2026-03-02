@@ -72,7 +72,7 @@ class UserAgentSettings(BaseSettings):
         description="仿真会话数据保存目录"
     )
     question_pool_file: str = Field(
-        default="jd_tm_qa_filtered.csv",
+        default="simulation/jd_tm_qa_filtered.csv",
         description="问题池文件路径"
     )
 

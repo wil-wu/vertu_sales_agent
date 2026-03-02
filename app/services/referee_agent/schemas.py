@@ -69,20 +69,36 @@ class AssessmentRequest(BaseModel):
 
 
 class AssessmentResponse(BaseModel):
-    """评估响应模型"""
+    """评估响应模型 - 销售与用户体验维度"""
 
     session_id: str = Field(..., description="会话ID")
     turn_number: int = Field(..., description="回合编号")
-    relevance_score: float = Field(..., description="相关性评分")
-    helpfulness_score: float = Field(..., description="有用性评分")
-    empathy_score: float = Field(..., description="共情性评分")
-    safety_score: float = Field(..., description="安全性评分")
-    overall_score: float = Field(..., description="综合评分")
-    sentiment: str = Field(..., description="情感分析")
-    intent_satisfied: bool = Field(..., description="意图是否满足")
+    
+    # 1. 拟人程度评分 (0-1)
+    anthropomorphism_score: float = Field(..., description="拟人程度评分 (0-1)，评估回复是否自然、像真人客服")
+    
+    # 2. 购买意愿评估
+    purchase_intent_change: str = Field(..., description="购买意愿变化: improved(提升)/unchanged(不变)/declined(下降)")
+    purchase_intent_reason: str = Field(..., description="购买意愿变化的判断依据")
+    
+    # 3. 问题解决情况
+    problem_resolved: bool = Field(..., description="用户问题是否得到解决")
+    problem_resolve_reason: str = Field(..., description="问题是否解决的判断依据")
+    
+    # 4. 销售话术质量 (优秀/良好/差)
+    sales_script_quality: str = Field(..., description="销售话术质量: excellent(优秀)/good(良好)/poor(差)")
+    sales_script_reason: str = Field(..., description="话术质量评价依据")
+    
+    # 5. 用户体验评价 (优/良/差)
+    user_experience: str = Field(..., description="用户体验: excellent(优)/good(良)/poor(差)")
+    user_experience_reason: str = Field(..., description="用户体验评价依据")
+    
+    # 是否终止会话
     should_terminate: bool = Field(..., description="是否应终止")
     termination_reason: Optional[str] = Field(None, description="终止原因")
-    feedback: Optional[str] = Field(None, description="评估反馈")
+    
+    # 总体反馈建议
+    feedback: Optional[str] = Field(None, description="总体评估反馈与改进建议")
 
 
 class BatchAssessmentRequest(BaseModel):

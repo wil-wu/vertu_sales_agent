@@ -1,0 +1,63 @@
+{
+  "session_id": "8110cf19-0321-41ba-8676-c355a9c3b171",
+  "prompt": "模拟专业人士用户测试VERTU手机的售后服务和支持能力",
+  "finish_reason": "max_turns",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T14:29:54.610172",
+    "end_time": "2026-03-02T14:30:08.625904",
+    "total_turns": 5
+  },
+  "conversation": [
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q 碳纤纹小牛皮手机的影像系统配置是什么？",
+      "timestamp": "2026-03-02T14:29:54.610172"
+    },
+    {
+      "role": "target_bot",
+      "content": "5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13mm-140mm全焦段。",
+      "timestamp": "2026-03-02T14:29:54.610172"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q全球首款AI Agent手机的屏幕和影像系统配置是什么？",
+      "timestamp": "2026-03-02T14:29:58.194574"
+    },
+    {
+      "role": "target_bot",
+      "content": "6.02英寸120Hz柔性AMOLED屏。  \n5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13-140mm全焦段。",
+      "timestamp": "2026-03-02T14:29:58.194574"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 碳纤纹小牛皮全球首发款手机支持AI智能体功能吗？",
+      "timestamp": "2026-03-02T14:30:01.494395"
+    },
+    {
+      "role": "target_bot",
+      "content": "支持，是全球首款AI智能体手机，内置200+AI智能体与7×24真人管家。",
+      "timestamp": "2026-03-02T14:30:01.494395"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 奢品Meta手机背面是否为天然玛瑙？",
+      "timestamp": "2026-03-02T14:30:04.881946"
+    },
+    {
+      "role": "target_bot",
+      "content": "是的，奢品Meta版背面采用巴西纯天然玛瑙，每块纹理独一无二。",
+      "timestamp": "2026-03-02T14:30:04.881946"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 搭载骁龙8至尊处理器吗?",
+      "timestamp": "2026-03-02T14:30:08.126341"
+    },
+    {
+      "role": "target_bot",
+      "content": "是的，搭载3nm高通骁龙8 Elite至尊版，主频4.32GHz。",
+      "timestamp": "2026-03-02T14:30:08.126341"
+    }
+  ]
+}

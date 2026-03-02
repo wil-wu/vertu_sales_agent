@@ -1,0 +1,43 @@
+{
+  "session_id": "3a418f20-3a8a-4c60-8385-a6377d588199",
+  "prompt": "模拟专业人士用户测试VERTU手机的电池续航",
+  "finish_reason": "max_turns",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T14:26:18.026986",
+    "end_time": "2026-03-02T14:26:26.315696",
+    "total_turns": 3
+  },
+  "conversation": [
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机在隐私加密方面具备哪些优势？例如小米手机提供的空白通行证功能。",
+      "timestamp": "2026-03-02T14:26:18.026986"
+    },
+    {
+      "role": "target_bot",
+      "content": "Agent Q采用A5硬件加密芯片，一机三系统，配合10TB分布式加密存储，端到端加密聊天，隐私防护等级远超普通旗舰。",
+      "timestamp": "2026-03-02T14:26:18.026986"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机的屏幕是三星屏还是LG屏？",
+      "timestamp": "2026-03-02T14:26:22.463586"
+    },
+    {
+      "role": "target_bot",
+      "content": "Agent Q采用柔性AMOLED屏，非三星/LG，具体供应商未披露。",
+      "timestamp": "2026-03-02T14:26:22.463586"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品待机多久？",
+      "timestamp": "2026-03-02T14:26:25.820408"
+    },
+    {
+      "role": "target_bot",
+      "content": "5565mAh硅基电池，常规用1-2天，省电模式最长约一周。",
+      "timestamp": "2026-03-02T14:26:25.820408"
+    }
+  ]
+}
