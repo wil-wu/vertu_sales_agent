@@ -16,8 +16,12 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 
 from .shared import chat_model
+from .config import user_agent_settings
 
 logger = logging.getLogger(__name__)
+
+# 项目根目录
+PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 
 class ConversationState(BaseModel):
     """对话状态"""
@@ -48,9 +52,14 @@ class UserAgent:
 
     async def load_question_pool(self, csv_file: str = "jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
         """加载问题池"""
-        logger.info(f"=== [AGENT] 加载问题池: {csv_file} ===")
+        # 转换为绝对路径
+        csv_path = Path(csv_file)
+        if not csv_path.is_absolute():
+            csv_path = PROJECT_ROOT / csv_file
+        
+        logger.info(f"=== [AGENT] 加载问题池: {csv_path} ===")
         try:
-            df = pd.read_csv(csv_file)
+            df = pd.read_csv(csv_path)
             questions = []
             for idx, row in df.iterrows():
                 questions.append({
@@ -68,7 +77,9 @@ class UserAgent:
                 "categories": list(set(q["category"] for q in questions))
             }
 
-            with open("mock_questions.json", "w", encoding="utf-8") as f:
+            # 保存到项目根目录
+            mock_path = PROJECT_ROOT / "mock_questions.json"
+            with open(mock_path, "w", encoding="utf-8") as f:
                 json.dump(mock_questions, f, ensure_ascii=False, indent=2)
 
             logger.info(f"=== [AGENT] 问题池已生成: {len(questions)} 个问题 ===")
@@ -104,7 +115,7 @@ class UserAgent:
         )
 
         # 加载问题池
-        state.question_pool = await self.load_question_pool()
+        state.question_pool = await self.load_question_pool(user_agent_settings.question_pool_file)
 
         # 开始多轮对话
         await self._run_conversation_loop(state)
@@ -140,7 +151,7 @@ class UserAgent:
                 try:
                     # 调用Target Bot API
                     response = await self._call_target_bot(client, current_question, state.session_id)
-                    bot_answer = response.message
+                    bot_answer = response.get("message", "")
 
                     # 记录对话历史
                     state.conversation_history.append({
