@@ -218,3 +218,5 @@ __marimo__/
 # huggingface
 .huggingface/
 .DS_Store
+
+mock_sessions/

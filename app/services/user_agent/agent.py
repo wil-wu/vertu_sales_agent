@@ -16,6 +16,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 
 from .shared import chat_model
+from .user_config import get_persona_config
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,7 @@ class ConversationState(BaseModel):
     question_pool: List[Dict[str, Any]] = Field(default_factory=list)
     invalid_response_count: int = Field(default=0)
     finish_reason: Optional[str] = Field(default=None)
+    finish_reason_description: Optional[str] = Field(default=None)
     preset_prompt: Optional[str] = Field(default=None)
 
 class UserAgent:
@@ -114,21 +116,15 @@ class UserAgent:
 
     def _get_persona_description(self, persona: str) -> str:
         """获取人格描述"""
-        persona_desc = {
-            "professional": "专业人士",
-            "novice": "技术小白",
-            "confrontational": "杠精",
-            "anxious": "焦虑客户",
-            "bilingual": "双语用户"
-        }
-        return persona_desc.get(persona, "中性")
+        config = get_persona_config(persona)
+        return config.description if config else "中性"
 
     async def _run_conversation_loop(self, state: ConversationState):
         """运行多轮对话循环"""
         logger.info(f"=== [AGENT] 开始多轮对话 - 会话ID: {state.session_id} ===")
 
         # 选择初始问题
-        initial_question = self._select_initial_question(state.persona, state.question_pool)
+        initial_question = await self._select_initial_question(state.persona, state.question_pool)
         current_question = initial_question
 
         # 创建客户端
@@ -172,10 +168,12 @@ class UserAgent:
                 except Exception as e:
                     logger.error(f"=== [AGENT] 第 {state.turn_count} 轮对话失败: {e} ===")
                     state.finish_reason = f"error_{e}"
+                    state.finish_reason_description = f"第{state.turn_count}轮对话出现错误: {str(e)}"
                     break
 
         if not state.finish_reason:
             state.finish_reason = "max_turns"
+            state.finish_reason_description = f"对话达到最大轮数限制({state.max_turns}轮)"
             logger.info(f"=== [AGENT] 达到最大轮数限制: {state.max_turns} ===")
 
     async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str) -> Any:
@@ -213,15 +211,26 @@ class UserAgent:
         """检查终止条件"""
         # 条件1: 转人工信息
         if any(keyword in bot_answer for keyword in self.human_escalation_keywords):
+            state.finish_reason_description = "客服建议转接人工客服"
             return "human_escalation"
 
         # 条件2: 无效回答
         if any(keyword in bot_answer for keyword in self.invalid_response_keywords):
             state.invalid_response_count += 1
             if state.invalid_response_count >= 3:
+                state.finish_reason_description = f"连续{state.invalid_response_count}次收到无效回答"
                 return "invalid_responses"
         elif state.invalid_response_count > 0:
             state.invalid_response_count = 0  # 重置计数
+
+        # 条件3: 如果用户表示满意或感谢，考虑结束对话
+        satisfaction_keywords = ["谢谢", "感谢", "明白了", "好的", "明白了", "清楚了", "没问题了"]
+        if any(keyword in bot_answer.lower() for keyword in satisfaction_keywords) and state.turn_count >= 3:
+            # 随机决定是否满意结束对话，避免每次都结束
+            import random
+            if random.random() < 0.3:  # 30%概率满意结束
+                state.finish_reason_description = "用户表示满意并结束对话"
+                return "satisfied"
 
         return None
 
@@ -251,11 +260,11 @@ class UserAgent:
 
                 上一轮客服回答: {bot_answer}
 
-                基于上述对话，请生成下一个问题，考虑以下要素:
-                1. 如果问题已解决，表示感谢
-                2. 如果回答不满意，继续追问
-                3. 根据你的{state.persona}人格特点调整提问方式
-                4. 避免与已问问题重复
+                基于上述对话，请决定下一步行动：
+                1. 如果你的主要疑问已经得到满意解答，礼貌地结束对话
+                2. 如果还需要了解更多信息，提出一个相关的新问题
+                3. 保持自然真实的对话节奏，不要过度追问细枝末节
+                4. 符合你的{state.persona}人格特征，但不要表演化
             """)
         ]
 
@@ -268,23 +277,25 @@ class UserAgent:
 
     def _build_agent_prompt(self, state: ConversationState) -> str:
         """构建代理提示词"""
-        return f"""
-            你正在模拟一个{self._get_persona_description(state.persona)}的电商客户。
-            你必须根据{state.persona}的客户行为特点来提问:
-            - 如果你认为问题已解决，可以说"谢谢"结束会话
-            - 如果回答不满意，继续提出有针对性的问题
-            - 避免重复之前问过的问题
-
-            {state.preset_prompt}
-        """
+        config = get_persona_config(state.persona)
+        if config:
+            return config.agent_prompt_template + f"\n\n{state.preset_prompt}"
+        else:
+            return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}"
 
     def _get_system_prompt(self, persona: str) -> str:
         """获取系统提示词"""
-        # 这里可以结合 prompts.py 中的定义
-        return f"""
-            你是Vertu手机的专业客服评估员。正在模拟{persona}类型的客户进行对话测试。
-            你的任务是根据{persona}的客户特征，自然地提出相关问题并评估客服答复。
-        """
+        config = get_persona_config(persona)
+        if config:
+            return config.system_prompt_template + """
+
+            重要提醒：
+            - 这是一个真实的线上客服对话场景
+            - 保持自然真实的对话风格，不要表演化
+            - 根据你的真实需求提出问题，不要过度纠缠细节
+            - 如果信息足够，及时结束对话表示感谢"""
+        else:
+            return "你是Vertu手机的用户，正在进行真实的客服对话。"
 
     def _get_fallback_question(self, state: ConversationState) -> str:
         """获取备用问题"""
@@ -293,20 +304,43 @@ class UserAgent:
         else:
             return "请介绍一下VERTU手机的主要特点"
 
-    def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]]) -> str:
-        """根据人格选择初始问题"""
+    async def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]]) -> str:
+        """根据人格选择并改写初始问题"""
         if not questions:
             return self._get_fallback_question(ConversationState())
 
-        # 根据人格选择合适的分类
-        if persona == "professional":
-            tech_questions = [q for q in questions if q.get('category', '') in ["技术支持", "系统更新"]]
-            return random.choice(tech_questions).get('question', questions[0]['question']) if tech_questions else questions[0]['question']
-        elif persona == "anxious":
-            support_questions = [q for q in questions if q.get('category', '') in ["技术支持", "安全隐私"]]
-            return random.choice(support_questions).get('question', questions[0]['question']) if support_questions else questions[0]['question']
+        config = get_persona_config(persona)
+        if config:
+            filtered_questions = [q for q in questions if q.get('category', '') in config.preferred_categories]
+            if filtered_questions:
+                selected_question = random.choice(filtered_questions)['question']
+            else:
+                selected_question = random.choice(questions)['question']
         else:
-            return random.choice(questions)['question']
+            selected_question = random.choice(questions)['question']
+
+        # 使用大模型改写问题
+        try:
+            rewritten_question = await self._rewrite_question_with_llm(selected_question, config)
+            return rewritten_question
+        except Exception as e:
+            logger.warning(f"问题改写失败，使用原问题: {e}")
+            return selected_question
+
+    async def _rewrite_question_with_llm(self, original_question: str, config=None) -> str:
+        """使用LLM改写问题"""
+        prompt = f"请将这个问题改写成更自然的口语化表达：{original_question}"
+
+        messages = [
+            SystemMessage(content="将技术问题改写成自然的用户咨询语气。"),
+            HumanMessage(content=prompt)
+        ]
+
+        try:
+            response = await self.chat_model.ainvoke(messages)
+            return response.content.strip()
+        except Exception:
+            return original_question
 
     async def _save_session_data(self, state: ConversationState) -> Dict[str, Any]:
         """保存会话数据"""
@@ -316,6 +350,7 @@ class UserAgent:
             "session_id": state.session_id,
             "prompt": state.preset_prompt,
             "finish_reason": state.finish_reason,
+            "finish_reason_description": state.finish_reason_description,
             "persona": state.persona,
             "metadata": {
                 "start_time": state.conversation_history[0]["timestamp"] if state.conversation_history else datetime.now().isoformat(),
@@ -325,7 +360,7 @@ class UserAgent:
             "conversation": [
                 {
                     "role": msg["role"],
-                    "content": msg["content"],
+                    "content": msg["content"].replace('\n', ' ').replace('\r', ' ').strip(),
                     "timestamp": msg["timestamp"]
                 }
                 for msg in state.conversation_history

@@ -4,11 +4,13 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from .user_config import get_all_persona_names
+
 
 class UserSimulationRequest(BaseModel):
     """仿真测试请求模型"""
 
-    persona: str = Field(..., description="用户人格类型：professional/novice/confrontational/anxious/bilingual")
+    persona: str = Field(..., description=f"用户人格类型：{', '.join(get_all_persona_names())}")
     scenario: str = Field(..., description="测试场景描述，例如：VERTU手机技术支持咨询")
     max_turns: int = Field(default=20, description="最大对话轮数，默认20轮")
     thread_id: str = Field(
