@@ -208,29 +208,82 @@ class UserAgent:
                 raise
 
     async def _check_termination_conditions(self, state: ConversationState, bot_answer: str) -> Optional[str]:
-        """检查终止条件"""
-        # 条件1: 转人工信息
-        if any(keyword in bot_answer for keyword in self.human_escalation_keywords):
-            state.finish_reason_description = "客服建议转接人工客服"
-            return "human_escalation"
+        """使用LLM检查终止条件"""
+        try:
+            # 构建分析提示词
+            analysis_prompt = f"""
+            分析客服回复，判断是否应该终止对话（销售场景）：
 
-        # 条件2: 无效回答
-        if any(keyword in bot_answer for keyword in self.invalid_response_keywords):
-            state.invalid_response_count += 1
-            if state.invalid_response_count >= 3:
-                state.finish_reason_description = f"连续{state.invalid_response_count}次收到无效回答"
-                return "invalid_responses"
-        elif state.invalid_response_count > 0:
-            state.invalid_response_count = 0  # 重置计数
+            客服回复: {bot_answer}
+            对话轮数: {state.turn_count}
+            用户人格: {state.persona}
 
-        # 条件3: 如果用户表示满意或感谢，考虑结束对话
-        satisfaction_keywords = ["谢谢", "感谢", "明白了", "好的", "明白了", "清楚了", "没问题了"]
-        if any(keyword in bot_answer.lower() for keyword in satisfaction_keywords) and state.turn_count >= 3:
-            # 随机决定是否满意结束对话，避免每次都结束
-            import random
-            if random.random() < 0.3:  # 30%概率满意结束
-                state.finish_reason_description = "用户表示满意并结束对话"
-                return "satisfied"
+            销售原则：
+            - 应该主动推销产品，介绍优势和特点
+            - 不要轻易结束对话，应该抓住销售机会
+            - 只有在用户明确拒绝或转人工时才终止
+            - 无效回答累积2次才终止
+
+            判断条件：
+            1. 是否明确要求转接人工客服？
+            2. 回复是否完全无法回答问题（累积2次）？
+            3. 用户是否明确表示不感兴趣并拒绝？
+
+            返回JSON格式：
+            {{
+                "should_terminate": true/false,
+                "reason": "human_escalation|invalid_response|user_rejection|continue",
+                "confidence": 0.0-1.0
+            }}
+            """
+
+            messages = [
+                SystemMessage(content="你是一个对话质量分析师，专门分析客服回复并判断是否应该终止对话。返回严格的JSON格式。"),
+                HumanMessage(content=analysis_prompt)
+            ]
+
+            response = await self.chat_model.ainvoke(messages)
+            result_text = response.content.strip()
+
+            # 解析JSON结果
+            import json
+            try:
+                result = json.loads(result_text)
+                should_terminate = result.get("should_terminate", False)
+                reason = result.get("reason", "continue")
+                confidence = result.get("confidence", 0.0)
+                explanation = result.get("explanation", "")
+
+                # 提高终止阈值，鼓励继续销售对话
+                if should_terminate and confidence > 0.85:
+                    # 简洁的终止原因描述
+                    reason_descriptions = {
+                        "human_escalation": "用户要求转接人工客服",
+                        "invalid_response": "客服连续提供无效回答",
+                        "user_rejection": "用户明确表示不感兴趣",
+                        "satisfied": "用户已满意并结束对话"
+                    }
+                    state.finish_reason_description = reason_descriptions.get(reason, f"对话终止: {reason}")
+
+                    # 无效回答累积逻辑 - 提高阈值鼓励客服改进
+                    if reason == "invalid_response":
+                        state.invalid_response_count += 1
+                        if state.invalid_response_count >= 3:  # 需要3次确认才终止
+                            return "invalid_responses"
+                    elif reason in ["human_escalation", "satisfied"]:
+                        return reason
+                    else:
+                        return reason
+
+                # 重置无效回答计数（如果回复质量正常）
+                if reason != "invalid_response" and state.invalid_response_count > 0:
+                    state.invalid_response_count = 0
+
+            except json.JSONDecodeError:
+                logger.warning(f"LLM返回格式错误: {result_text}")
+
+        except Exception as e:
+            logger.warning(f"终止条件分析失败: {e}")
 
         return None
 
