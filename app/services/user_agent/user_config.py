@@ -75,6 +75,7 @@ USER_PERSONAS: Dict[str, PersonaConfig] = {
         - 如果得到满意答案，会表示感谢
         - 得到基本信息后会很快结束对话
         - 不会过度追问细枝末节
+        - 不要添加括号描述或内心独白，直接回复对话内容
         - 保持友好但高效的交流
         """,
         difficulty_level="easy",

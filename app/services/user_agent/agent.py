@@ -208,82 +208,90 @@ class UserAgent:
                 raise
 
     async def _check_termination_conditions(self, state: ConversationState, bot_answer: str) -> Optional[str]:
-        """使用LLM检查终止条件"""
+        """使用LLM分析用户意图，判断是否应该终止对话"""
+        # 获取最近几轮对话历史
+        recent_messages = state.conversation_history[-8:] if len(state.conversation_history) >= 8 else state.conversation_history
+
+        # 构建对话历史文本
+        conversation_text = "\n".join([
+            f"{'用户' if msg['role'] == 'user_agent' else '客服'}: {msg['content']}"
+            for msg in recent_messages
+        ])
+
+        analysis_prompt = f"""
+        分析以下对话，判断是否应该终止对话：
+
+        对话历史（最近几轮）:
+        {conversation_text}
+
+        客服最新回复: {bot_answer}
+
+        对话轮数: {state.turn_count}
+        用户人格: {state.persona}
+
+        请从语义角度分析：
+        1. 用户是否表达了明确的结束对话意愿？
+        2. 用户是否连续多次表达相似的结束意图？
+        3. 用户是否明确表示拒绝或不感兴趣？
+        4. 客服回复是否有问题？（完全无法回答、答非所问等）
+
+        终止条件：
+        - 用户连续表达结束意愿（2次以上）
+        - 用户明确拒绝购买
+        - 客服连续提供无效回答（3次以上）
+        - 客服建议转接人工
+
+        返回JSON格式：
+        {{
+            "should_terminate": true/false,
+            "reason": "user_satisfied|user_rejection|invalid_response|human_escalation|continue",
+            "confidence": 0.0-1.0,
+            "analysis": "简要分析说明"
+        }}
+        """
+
+        messages = [
+            SystemMessage(content="你是一个对话分析师，专门分析用户客服对话，判断对话是否应该结束。基于语义理解而不是简单关键词匹配。返回JSON格式。"),
+            HumanMessage(content=analysis_prompt)
+        ]
+
+        import json
         try:
-            # 构建分析提示词
-            analysis_prompt = f"""
-            分析客服回复，判断是否应该终止对话（销售场景）：
-
-            客服回复: {bot_answer}
-            对话轮数: {state.turn_count}
-            用户人格: {state.persona}
-
-            销售原则：
-            - 应该主动推销产品，介绍优势和特点
-            - 不要轻易结束对话，应该抓住销售机会
-            - 只有在用户明确拒绝或转人工时才终止
-            - 无效回答累积2次才终止
-
-            判断条件：
-            1. 是否明确要求转接人工客服？
-            2. 回复是否完全无法回答问题（累积2次）？
-            3. 用户是否明确表示不感兴趣并拒绝？
-
-            返回JSON格式：
-            {{
-                "should_terminate": true/false,
-                "reason": "human_escalation|invalid_response|user_rejection|continue",
-                "confidence": 0.0-1.0
-            }}
-            """
-
-            messages = [
-                SystemMessage(content="你是一个对话质量分析师，专门分析客服回复并判断是否应该终止对话。返回严格的JSON格式。"),
-                HumanMessage(content=analysis_prompt)
-            ]
-
             response = await self.chat_model.ainvoke(messages)
             result_text = response.content.strip()
 
-            # 解析JSON结果
-            import json
-            try:
-                result = json.loads(result_text)
-                should_terminate = result.get("should_terminate", False)
-                reason = result.get("reason", "continue")
-                confidence = result.get("confidence", 0.0)
-                explanation = result.get("explanation", "")
+            # 清理可能的markdown代码块标记
+            if result_text.startswith("```json"):
+                result_text = result_text[7:]
+            if result_text.endswith("```"):
+                result_text = result_text[:-3]
 
-                # 提高终止阈值，鼓励继续销售对话
-                if should_terminate and confidence > 0.85:
-                    # 简洁的终止原因描述
-                    reason_descriptions = {
-                        "human_escalation": "用户要求转接人工客服",
-                        "invalid_response": "客服连续提供无效回答",
-                        "user_rejection": "用户明确表示不感兴趣",
-                        "satisfied": "用户已满意并结束对话"
-                    }
-                    state.finish_reason_description = reason_descriptions.get(reason, f"对话终止: {reason}")
+            result_text = result_text.strip()
 
-                    # 无效回答累积逻辑 - 提高阈值鼓励客服改进
-                    if reason == "invalid_response":
-                        state.invalid_response_count += 1
-                        if state.invalid_response_count >= 3:  # 需要3次确认才终止
-                            return "invalid_responses"
-                    elif reason in ["human_escalation", "satisfied"]:
-                        return reason
-                    else:
-                        return reason
+            result = json.loads(result_text)
+            should_terminate = result.get("should_terminate", False)
+            reason = result.get("reason", "continue")
+            confidence = result.get("confidence", 0.0)
+            analysis = result.get("analysis", "")
 
-                # 重置无效回答计数（如果回复质量正常）
-                if reason != "invalid_response" and state.invalid_response_count > 0:
-                    state.invalid_response_count = 0
+            if should_terminate and confidence > 0.75:
+                reason_descriptions = {
+                    "user_satisfied": "用户表达满意并准备结束对话",
+                    "user_rejection": "用户明确表示不感兴趣或拒绝",
+                    "invalid_response": "客服连续提供无效回答",
+                    "human_escalation": "客服建议转接人工客服"
+                }
+                state.finish_reason_description = reason_descriptions.get(reason, f"对话终止: {reason}")
 
-            except json.JSONDecodeError:
-                logger.warning(f"LLM返回格式错误: {result_text}")
+                if reason == "invalid_response":
+                    state.invalid_response_count += 1
+                    if state.invalid_response_count >= 3:
+                        return "invalid_responses"
+                elif reason in ["human_escalation", "user_satisfied", "user_rejection"]:
+                    return reason
 
         except Exception as e:
-            logger.warning(f"终止条件分析失败: {e}")
+            pass
 
         return None
 
