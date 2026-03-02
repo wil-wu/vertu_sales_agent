@@ -4,24 +4,12 @@ from langchain_core.messages import AIMessage, ToolMessage
 from .deps import get_react_agent
 from .agent import ReActAgent
 from .schemas import ReactAgentRequest, ReactAgentResponse
-from .utils import LanguageDetector, LanguageTranslator, MarkdownHelper
-from .config import react_agent_settings
-from .shared import chat_model
-from .prompts import TRANSLATE_SYSTEM_PROMPT
+from .utils import MarkdownHelper
 
 router = APIRouter(
     prefix="/api/v1/react",
     tags=["React Agent"],
 )
-
-language_detector = LanguageDetector(
-    react_agent_settings.language_detector_model_path,
-    react_agent_settings.language_detector_threshold,
-    react_agent_settings.language_detector_exclude,
-    react_agent_settings.language_detector_min_length,
-    react_agent_settings.language_detector_max_length,
-)
-language_translator = LanguageTranslator(chat_model, TRANSLATE_SYSTEM_PROMPT)
 
 
 @router.post("/chat", response_model=ReactAgentResponse)
@@ -62,12 +50,6 @@ async def chat(
         message = f"{agent_content}\n\n" + "\n".join(graph_query_links)
     else:
         message = agent_content
-    
-    user_lang = language_detector.detect(request.message)
-    answer_lang = language_detector.detect(message)
-
-    if user_lang != "unknown" and answer_lang != user_lang:
-        message = language_translator.translate(message, user_lang)
     
     return {
         "message": message,
