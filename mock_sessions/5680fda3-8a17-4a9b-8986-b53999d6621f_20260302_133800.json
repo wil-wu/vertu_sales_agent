@@ -1,0 +1,213 @@
+{
+  "session_id": "5680fda3-8a17-4a9b-8986-b53999d6621f",
+  "prompt": "模拟专业人士用户测试VERTU手机技术支持",
+  "finish_reason": "max_turns",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T13:37:08.013709",
+    "end_time": "2026-03-02T13:38:00.992045",
+    "total_turns": 20
+  },
+  "conversation": [
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q是否配备A5加密芯片和一机三系统?",
+      "timestamp": "2026-03-02T13:37:08.013709"
+    },
+    {
+      "role": "target_bot",
+      "content": "是的，Agent Q配备A5加密芯片和一机三系统。",
+      "timestamp": "2026-03-02T13:37:08.013709"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q旗舰新品是否有充电线？",
+      "timestamp": "2026-03-02T13:37:13.643117"
+    },
+    {
+      "role": "target_bot",
+      "content": "标配Type-C充电线，支持65W快充。",
+      "timestamp": "2026-03-02T13:37:13.643117"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q的超广角摄像头像素是多少?",
+      "timestamp": "2026-03-02T13:37:18.504670"
+    },
+    {
+      "role": "target_bot",
+      "content": "超广角5000万像素。",
+      "timestamp": "2026-03-02T13:37:18.504670"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品支持哪些国家的通话翻译语言?",
+      "timestamp": "2026-03-02T13:37:22.087480"
+    },
+    {
+      "role": "target_bot",
+      "content": "支持76国语言通话翻译。",
+      "timestamp": "2026-03-02T13:37:22.087480"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q 碳纤纹小牛皮手机的电池容量和充电功率是多少？",
+      "timestamp": "2026-03-02T13:37:25.267517"
+    },
+    {
+      "role": "target_bot",
+      "content": "5565mAh电池，65W快充。",
+      "timestamp": "2026-03-02T13:37:25.267517"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机的长焦摄像头参数是什么？",
+      "timestamp": "2026-03-02T13:37:28.961939"
+    },
+    {
+      "role": "target_bot",
+      "content": "6400万像素长焦，支持微距，覆盖13-140mm全焦段。",
+      "timestamp": "2026-03-02T13:37:28.961939"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q有几个系统？",
+      "timestamp": "2026-03-02T13:37:30.434537"
+    },
+    {
+      "role": "target_bot",
+      "content": "一机三系统。",
+      "timestamp": "2026-03-02T13:37:30.434537"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 二代折叠手机是第几代？",
+      "timestamp": "2026-03-02T13:37:33.284074"
+    },
+    {
+      "role": "target_bot",
+      "content": "第二代折叠旗舰。",
+      "timestamp": "2026-03-02T13:37:33.284074"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q手机是直面屏吗？",
+      "timestamp": "2026-03-02T13:37:36.451161"
+    },
+    {
+      "role": "target_bot",
+      "content": "是直板直面屏。",
+      "timestamp": "2026-03-02T13:37:36.451161"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品的1899元起售款式与59元的测量工具有什么区别？",
+      "timestamp": "2026-03-02T13:37:39.887681"
+    },
+    {
+      "role": "target_bot",
+      "content": "知识库未收录“59元测量工具”信息，无法对比。",
+      "timestamp": "2026-03-02T13:37:39.887681"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q手机是4G还是5G?",
+      "timestamp": "2026-03-02T13:37:41.587773"
+    },
+    {
+      "role": "target_bot",
+      "content": "5G全网通。",
+      "timestamp": "2026-03-02T13:37:41.587773"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品的免费升1TB是什么意思？",
+      "timestamp": "2026-03-02T13:37:43.518586"
+    },
+    {
+      "role": "target_bot",
+      "content": "指16GB+1TB顶配版限时免费升级，无需加价。",
+      "timestamp": "2026-03-02T13:37:43.518586"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q旗舰手机的哪个外壳是鳄鱼皮材质？",
+      "timestamp": "2026-03-02T13:37:47.154392"
+    },
+    {
+      "role": "target_bot",
+      "content": "粉色款为鳄鱼皮。",
+      "timestamp": "2026-03-02T13:37:47.154392"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q的配置参数是什么？",
+      "timestamp": "2026-03-02T13:37:49.838785"
+    },
+    {
+      "role": "target_bot",
+      "content": "骁龙8 Elite至尊版，16GB+1TB，6.02\" 120Hz AMOLED，5000万主摄+6400万长焦+5000万超广角，5565mAh电池，65W快充，A5加密芯片，一机三系统。",
+      "timestamp": "2026-03-02T13:37:49.838785"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机有蓝牙功能吗?",
+      "timestamp": "2026-03-02T13:37:51.512617"
+    },
+    {
+      "role": "target_bot",
+      "content": "有蓝牙。",
+      "timestamp": "2026-03-02T13:37:51.512617"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q智能腕表是机械表吗?",
+      "timestamp": "2026-03-02T13:37:53.212589"
+    },
+    {
+      "role": "target_bot",
+      "content": "智能芯，非机械。",
+      "timestamp": "2026-03-02T13:37:53.212589"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品是否带手机壳？",
+      "timestamp": "2026-03-02T13:37:54.806130"
+    },
+    {
+      "role": "target_bot",
+      "content": "标配专属皮套。",
+      "timestamp": "2026-03-02T13:37:54.806130"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU AGENT Q 旗舰新品是否具备金融级防护能力？",
+      "timestamp": "2026-03-02T13:37:56.717381"
+    },
+    {
+      "role": "target_bot",
+      "content": "A5加密芯片+一机三系统，金融级安全。",
+      "timestamp": "2026-03-02T13:37:56.717381"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q旗舰手机是全新未拆封未激活的吗?",
+      "timestamp": "2026-03-02T13:37:58.713485"
+    },
+    {
+      "role": "target_bot",
+      "content": "是的，官方渠道发售均为全新未拆封未激活状态。",
+      "timestamp": "2026-03-02T13:37:58.713485"
+    },
+    {
+      "role": "user_agent",
+      "content": "VERTU Agent Q手机搭载的芯片是什么？",
+      "timestamp": "2026-03-02T13:38:00.480383"
+    },
+    {
+      "role": "target_bot",
+      "content": "3nm骁龙8 Elite至尊版。",
+      "timestamp": "2026-03-02T13:38:00.480383"
+    }
+  ]
+}
