@@ -44,13 +44,13 @@ class UserAgent:
         system_prompt: str = "",
         target_bot_url: str = "http://localhost:8000/api/v1/react/chat"
     ):
-        self.chat_model = chat_model or chat_model
+        self.chat_model = chat_model
         self.system_prompt = system_prompt
         self.target_bot_url = target_bot_url
         self.human_escalation_keywords = ["转人工", "人工客服", "人工帮助", "人工", "客服", "投诉"]
         self.invalid_response_keywords = ["无法回答", "不知道", "不清楚", "我不懂", "无法找到", "没有找到"]
 
-    async def load_question_pool(self, csv_file: str = "jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
+    async def load_question_pool(self, csv_file: str = "simulation/jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
         """加载问题池"""
         # 转换为绝对路径
         csv_path = Path(csv_file)

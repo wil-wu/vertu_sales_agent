@@ -1,0 +1,12 @@
+{
+  "session_id": "3af9a662-fbf8-41b7-9710-5b85ec20dcfd",
+  "prompt": "模拟专业人士用户测试VERTU手机技术支持",
+  "finish_reason": "error_Server error '500 Internal Server Error' for url 'http://localhost:8000/api/v1/react/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+  "persona": "professional",
+  "metadata": {
+    "start_time": "2026-03-02T13:31:49.595525",
+    "end_time": "2026-03-02T13:31:49.595525",
+    "total_turns": 1
+  },
+  "conversation": []
+}
