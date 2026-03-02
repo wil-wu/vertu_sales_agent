@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # 设置时区为中国时区
