@@ -34,9 +34,11 @@ async def start_simulation(
         return UserSimulationResponse(
             session_id=result["session_id"],
             finish_reason=result["finish_reason"],
+            finish_reason_description=result.get("finish_reason_description"),
             persona=result["persona"],
             prompt=result["prompt"],
             conversation=result["conversation"],
+            llm_call_stats=result["llm_call_stats"],
             metadata=result["metadata"]
         )
 

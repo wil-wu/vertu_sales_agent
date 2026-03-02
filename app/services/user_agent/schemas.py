@@ -33,12 +33,24 @@ class SessionMetadata(BaseModel):
     total_turns: int = Field(..., description="总对话轮数")
 
 
+class LLMCallStats(BaseModel):
+    """LLM调用统计"""
+    total_calls: int = Field(..., description="总调用次数")
+    total_duration: float = Field(..., description="总耗时(秒)")
+    avg_duration: float = Field(..., description="平均耗时(秒)")
+    min_duration: float = Field(..., description="最短耗时(秒)")
+    max_duration: float = Field(..., description="最长耗时(秒)")
+    calls: List[Dict[str, Any]] = Field(..., description="每次调用的详细信息")
+
+
 class UserSimulationResponse(BaseModel):
     """仿真测试响应模型"""
 
     session_id: str = Field(..., description="会话ID")
     finish_reason: str = Field(..., description="结束原因: max_turns/human_escalation/invalid_responses")
+    finish_reason_description: Optional[str] = Field(None, description="结束原因详细描述")
     persona: str = Field(..., description="使用的人格类型")
     prompt: Optional[str] = Field(None, description="预设提示")
     conversation: List[Dict[str, Any]] = Field(..., description="完整对话记录")
+    llm_call_stats: LLMCallStats = Field(..., description="LLM调用统计信息")
     metadata: SessionMetadata = Field(..., description="会话元数据")

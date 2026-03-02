@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import random
+import time
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -32,6 +33,14 @@ class ConversationState(BaseModel):
     finish_reason: Optional[str] = Field(default=None)
     finish_reason_description: Optional[str] = Field(default=None)
     preset_prompt: Optional[str] = Field(default=None)
+    llm_call_stats: Dict[str, Any] = Field(default_factory=lambda: {
+        "calls": [],  # 每次调用的详细信息
+        "total_calls": 0,
+        "total_duration": 0.0,
+        "avg_duration": 0.0,
+        "min_duration": float('inf'),
+        "max_duration": 0.0
+    })
 
 class UserAgent:
     """仿真测试用户代理智能体"""
@@ -47,6 +56,32 @@ class UserAgent:
         self.target_bot_url = target_bot_url
         self.human_escalation_keywords = ["转人工", "人工客服", "人工帮助", "人工", "客服", "投诉"]
         self.invalid_response_keywords = ["无法回答", "不知道", "不清楚", "我不懂", "无法找到", "没有找到"]
+
+    def _record_llm_call(self, state: ConversationState, call_type: str, duration: float, details: str = ""):
+        """记录LLM调用统计"""
+        call_record = {
+            "type": call_type,
+            "duration": round(duration, 3),
+            "timestamp": datetime.now().isoformat(),
+            "details": details
+        }
+
+        state.llm_call_stats["calls"].append(call_record)
+        state.llm_call_stats["total_calls"] += 1
+        state.llm_call_stats["total_duration"] += duration
+
+        # 更新统计信息
+        state.llm_call_stats["min_duration"] = min(state.llm_call_stats["min_duration"], duration)
+        state.llm_call_stats["max_duration"] = max(state.llm_call_stats["max_duration"], duration)
+
+        if state.llm_call_stats["total_calls"] > 0:
+            state.llm_call_stats["avg_duration"] = round(
+                state.llm_call_stats["total_duration"] / state.llm_call_stats["total_calls"], 3
+            )
+
+        # 处理无穷大的情况
+        if state.llm_call_stats["min_duration"] == float('inf'):
+            state.llm_call_stats["min_duration"] = 0.0
 
     async def load_question_pool(self, csv_file: str = "simulation/jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
         """加载问题池"""
@@ -108,8 +143,11 @@ class UserAgent:
         # 加载问题池
         state.question_pool = await self.load_question_pool()
 
+        # 选择并改写初始问题
+        initial_question = await self._select_initial_question(persona, state.question_pool, state)
+
         # 开始多轮对话
-        await self._run_conversation_loop(state)
+        await self._run_conversation_loop(state, initial_question)
 
         # 保存会话数据
         return await self._save_session_data(state)
@@ -119,12 +157,10 @@ class UserAgent:
         config = get_persona_config(persona)
         return config.description if config else "中性"
 
-    async def _run_conversation_loop(self, state: ConversationState):
+    async def _run_conversation_loop(self, state: ConversationState, initial_question: str):
         """运行多轮对话循环"""
         logger.info(f"=== [AGENT] 开始多轮对话 - 会话ID: {state.session_id} ===")
 
-        # 选择初始问题
-        initial_question = await self._select_initial_question(state.persona, state.question_pool)
         current_question = initial_question
 
         # 创建客户端
@@ -255,9 +291,13 @@ class UserAgent:
             HumanMessage(content=analysis_prompt)
         ]
 
-        import json
         try:
+            start_time = time.time()
             response = await self.chat_model.ainvoke(messages)
+            duration = time.time() - start_time
+
+            self._record_llm_call(state, "termination_check", duration, f"检查第{state.turn_count}轮终止条件")
+
             result_text = response.content.strip()
 
             # 清理可能的markdown代码块标记
@@ -330,7 +370,12 @@ class UserAgent:
         ]
 
         try:
+            start_time = time.time()
             response = await self.chat_model.ainvoke(messages)
+            duration = time.time() - start_time
+
+            self._record_llm_call(state, "generate_question", duration, f"生成第{state.turn_count + 1}轮问题")
+
             return response.content.strip()
         except Exception as e:
             logger.error(f"=== [AGENT] 生成问题失败: {e} ===")
@@ -365,7 +410,7 @@ class UserAgent:
         else:
             return "请介绍一下VERTU手机的主要特点"
 
-    async def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]]) -> str:
+    async def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]], state: ConversationState) -> str:
         """根据人格选择并改写初始问题"""
         if not questions:
             return self._get_fallback_question(ConversationState())
@@ -382,13 +427,13 @@ class UserAgent:
 
         # 使用大模型改写问题
         try:
-            rewritten_question = await self._rewrite_question_with_llm(selected_question, config)
+            rewritten_question = await self._rewrite_question_with_llm(selected_question, config, state)
             return rewritten_question
         except Exception as e:
             logger.warning(f"问题改写失败，使用原问题: {e}")
             return selected_question
 
-    async def _rewrite_question_with_llm(self, original_question: str, config=None) -> str:
+    async def _rewrite_question_with_llm(self, original_question: str, config=None, state: ConversationState = None) -> str:
         """使用LLM改写问题"""
         prompt = f"请将这个问题改写成更自然的口语化表达：{original_question}"
 
@@ -398,7 +443,14 @@ class UserAgent:
         ]
 
         try:
+            
+            start_time = time.time()
             response = await self.chat_model.ainvoke(messages)
+            duration = time.time() - start_time
+
+            if state:
+                self._record_llm_call(state, "question_rewrite", duration, f"改写问题: {original_question[:50]}...")
+
             return response.content.strip()
         except Exception:
             return original_question
@@ -413,6 +465,14 @@ class UserAgent:
             "finish_reason": state.finish_reason,
             "finish_reason_description": state.finish_reason_description,
             "persona": state.persona,
+            "llm_call_stats": {
+                "total_calls": state.llm_call_stats["total_calls"],
+                "total_duration": round(state.llm_call_stats["total_duration"], 3),
+                "avg_duration": state.llm_call_stats["avg_duration"],
+                "min_duration": round(state.llm_call_stats["min_duration"], 3) if state.llm_call_stats["min_duration"] != float('inf') else 0.0,
+                "max_duration": round(state.llm_call_stats["max_duration"], 3),
+                "calls": state.llm_call_stats["calls"]
+            },
             "metadata": {
                 "start_time": state.conversation_history[0]["timestamp"] if state.conversation_history else datetime.now().isoformat(),
                 "end_time": datetime.now().isoformat(),
