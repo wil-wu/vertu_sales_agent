@@ -1,3 +1,7 @@
-from httpx import AsyncClient
+from httpx import AsyncClient, Client
+from apscheduler.schedulers.background import BackgroundScheduler
 
-httpx_client = AsyncClient()
+httpx_async_client = AsyncClient()
+httpx_sync_client = Client()
+
+scheduler = BackgroundScheduler()

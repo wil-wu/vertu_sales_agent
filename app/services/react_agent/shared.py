@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 
 from .config import react_agent_settings
+from .utils import DataManager
 
 chat_model = ChatOpenAI(
     base_url=react_agent_settings.openai_base_url,
@@ -8,3 +9,5 @@ chat_model = ChatOpenAI(
     model=react_agent_settings.llm_model,
     temperature=react_agent_settings.temperature,
 )
+
+data_manager = DataManager()

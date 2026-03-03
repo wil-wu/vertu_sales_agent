@@ -10,9 +10,9 @@ from fastapi.responses import JSONResponse
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from app.config import settings
-from app.scanner import RouterScanner
+from app.scanner import JobScanner, RouterScanner
 from app.core.middlewares import RequestLoggingMiddleware
-from app.core.shared import httpx_client
+from app.core.shared import httpx_async_client, httpx_sync_client, scheduler
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +23,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # 启动时执行
     logger.info(f"Starting {settings.app_name} v{settings.app_version}")
 
+    # 扫描并加载各服务下的定时任务
+    job_scanner = JobScanner()
+    job_scanner.scan_and_load()
+
+    scheduled_jobs = scheduler.get_jobs()
+
+    if scheduled_jobs:
+        scheduler.start()
+
     logger.info("Application startup completed")
 
     yield
@@ -30,7 +39,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # 关闭时执行
     logger.info("Shutting down application")
 
-    await httpx_client.aclose()
+    await httpx_async_client.aclose()
+    httpx_sync_client.close()
+
+    if scheduler.running:
+        scheduler.shutdown()
 
     logger.info("Application shutdown completed")
 
