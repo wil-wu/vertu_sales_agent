@@ -16,6 +16,9 @@ from .schemas import (
     SessionListResponse,
 )
 
+# 项目根目录
+PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
@@ -29,7 +32,7 @@ async def assess_conversation_turn(
     request: AssessmentRequest,
     referee_agent: RefereeAgent = Depends(get_referee_agent),
 ) -> AssessmentResponse:
-    """评估单轮对话质量"""
+    """评估单轮对话质量 - 销售与用户体验维度"""
     try:
         logger.info(f"=== [REFEREE] 评估会话: {request.session_id}, 第{request.turn_number}轮 ===")
 
@@ -43,13 +46,18 @@ async def assess_conversation_turn(
         return AssessmentResponse(
             session_id=request.session_id,
             turn_number=assessment.turn_number,
-            relevance_score=assessment.relevance_score,
-            helpfulness_score=assessment.helpfulness_score,
-            empathy_score=assessment.empathy_score,
-            safety_score=assessment.safety_score,
-            overall_score=assessment.overall_score,
-            sentiment=assessment.sentiment,
-            intent_satisfied=assessment.intent_satisfied,
+            # 1. 拟人程度（分别评估客服和用户）
+            agent_anthropomorphism_score=assessment.agent_anthropomorphism_score,
+            user_anthropomorphism_score=assessment.user_anthropomorphism_score,
+            # 2. 购买意愿变化
+            purchase_intent_change=assessment.purchase_intent_change,
+            # 3. 问题解决
+            problem_resolved=assessment.problem_resolved,
+            # 4. 销售话术质量
+            sales_script_quality=assessment.sales_script_quality,
+            # 5. 用户体验
+            user_experience=assessment.user_experience,
+            # 终止条件
             should_terminate=assessment.should_terminate,
             termination_reason=assessment.termination_reason,
             feedback=assessment.feedback,
@@ -96,7 +104,7 @@ async def list_sessions(
 ) -> SessionListResponse:
     """列出现有会话记录"""
     try:
-        sessions_dir = Path("mock_sessions")
+        sessions_dir = PROJECT_ROOT / "mock_sessions"
         if not sessions_dir.exists():
             return SessionListResponse(total=0, sessions=[])
 
@@ -175,7 +183,7 @@ async def health_check() -> Dict[str, str]:
 
 async def _load_session_data(session_id: str) -> Dict[str, Any] | None:
     """加载会话数据"""
-    sessions_dir = Path("mock_sessions")
+    sessions_dir = PROJECT_ROOT / "mock_sessions"
     if not sessions_dir.exists():
         return None
 
