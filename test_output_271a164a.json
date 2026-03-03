@@ -1,0 +1,81 @@
+{
+  "基本信息": {
+    "Session ID": "271a164a-9cf1-4092-8568-8cfd544f0940",
+    "Persona": "professional",
+    "Finish Reason": "user_satisfied",
+    "Total Turns": 4
+  },
+  "详细指标汇总": {
+    "维度评分": {
+      "anthropomorphism_score": 83.0,
+      "purchase_intent_score": 60.5,
+      "problem_solving_score": 73.0,
+      "sales_script_score": 66.25,
+      "user_experience_score": 89.0
+    },
+    "用户拟人化": {
+      "language_naturalness": 0.85,
+      "total_personality_deviations": 0,
+      "humor_warmth": 0.75,
+      "rhythm_pacing": 0.8
+    },
+    "Agent 拟人化": {
+      "language_naturalness": 0.9,
+      "total_personality_deviations": 0,
+      "humor_warmth": 0.85,
+      "rhythm_pacing": 0.85
+    },
+    "购买意愿": {
+      "avg_needs_discovery_rate": 0.59,
+      "avg_recommendation_accuracy": 0.62
+    },
+    "问题解决": {
+      "first_contact_resolution_rate": 0.75,
+      "avg_intent_recognition_accuracy": 0.94,
+      "fallback_count": 2,
+      "fallback_score": 0.6
+    },
+    "销售话术": {
+      "avg_fab_completeness": 0.53,
+      "feature_mention_rate": 0.75,
+      "advantage_mention_rate": 0.5,
+      "cross_sell_trigger_count": 2,
+      "avg_script_compliance": 0.97,
+      "avg_personalization_rate": 0.81
+    },
+    "用户体验": {
+      "avg_csat_score": 0.89,
+      "negative_feedback_count": 0
+    }
+  },
+  "每轮评估": [
+    {
+      "第 1 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.83,
+        "反馈": "客服回复高度拟人化，语言优雅且富有画面感，成功将技术功能转化为奢侈体验场景，FAB结构完整。建议：1) 增加一句轻量提问（如‘老板平时出差最头疼哪一环？’）以进一步挖掘需求；2) 在结尾可补充‘我可直接为您锁定一台现货，明早伦敦总部即可发货’，强化购买冲动；3) 个性化可再提升，例如称呼用户姓氏或提及所在城市，营造私人管家感。"
+      }
+    },
+    {
+      "第 2 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.83,
+        "反馈": "客服把硬核技术讲成了‘瑞士金库’故事，既显高端又易懂；FAB 完整，且用‘老板’一词制造私人顾问的亲密度。建议：1) 先回一句‘您的问题非常专业，我立刻为您拆解’，让用户感到被重视；2) 在技术细节后补一句‘正因如此，Agent Q 成为不少家族办公室标配’，把安全卖点直接对标高净值场景，进一步刺激购买欲；3) 结尾可补充‘若您今天确认，我可为您锁定首批序列号’，制造稀缺感。"
+      }
+    },
+    {
+      "第 3 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.83,
+        "反馈": "客服在高端技术语境下保持优雅、克制且极具专业度的私人顾问形象，语言自然、节奏得体，成功将‘无法立即回答’转化为‘邀请进入更高层级服务’，体现奢侈品牌稀缺感。但 FAB 仅停留在 Feature，未展开 Advantage & Benefit，缺少把技术安全转化为‘身份安全感’的价值叙述；也未顺势探寻用户的使用场景或身份需求，以推荐匹配机型或服务套餐。建议：1) 用一句‘这份安全，正如您收藏的一支只此一枚的孤品腕表’把技术亮点升维到情感/身份利益；2) 追问‘您更关注移动办公还是跨境私密通话？’挖掘场景，顺势推荐 Signature 系列或专属私人助理服务，完成交叉销售；3) 在提供加密会议或报告前，轻触价格锚点，如‘此项深度安全审计通常仅对 Signature V IP 开放’，既保持排他性又为后续报价埋伏笔。"
+      }
+    },
+    {
+      "第 4 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.83,
+        "反馈": "本轮对话属于‘售后确认’场景，客服准确识别用户已决定采用技术方案，语言自然、专业且带温度，完美延续品牌高端调性。但全程未提及任何 VERTU 手机产品或服务，错失在‘安全体验’与‘静奢’关键词上自然植入 Signature 系列或加密通信服务的黄金机会。建议：1) 在确认邮件送达时间后，顺势一句‘如您希望把这份零知识级安全延伸至日常通信，Signature V 系列内置的量子加密通话芯片可同步激活’；2) 用‘英国实验室’背书时，可轻轻带出‘与 VERTU 手机同源的英伦手工基因’，既保持格调又完成交叉销售。整体拟人化与用户体验优秀，但销售导向指标因场景特殊而偏低，需在售后环节补位产品价值提醒。"
+      }
+    }
+  ]
+}

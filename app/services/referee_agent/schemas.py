@@ -1,6 +1,75 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
+
+
+# ============ 详细评估指标模型 ============
+
+class UserAnthropomorphismMetrics(BaseModel):
+    """用户智能体(user_agent)拟人化体验指标 - 评估模拟用户的逼真程度"""
+    language_naturalness: float = Field(0.0, description="语言自然度评分 (0-1)，评估用户提问是否流畅、口语化，像真实用户")
+    personality_deviation_count: int = Field(0, description="用户人设偏离次数")
+    humor_warmth: float = Field(0.0, description="幽默/温度感评分 (0-1)，评估用户表达是否有真实情感温度")
+    rhythm_pacing: float = Field(0.0, description="停顿/节奏感评分 (0-1)，评估用户提问节奏是否像真人")
+    response_length_distribution: Optional[Dict[str, int]] = Field(None, description="用户回复字数分布统计")
+
+
+class AgentAnthropomorphismMetrics(BaseModel):
+    """客服智能体(react_agent)拟人化体验指标 - 评估客服回复的拟人化程度"""
+    language_naturalness: float = Field(0.0, description="语言自然度评分 (0-1)，评估客服回复是否流畅、口语化，避免机械感")
+    personality_deviation_count: int = Field(0, description="客服人设偏离次数")
+    humor_warmth: float = Field(0.0, description="幽默/温度感评分 (0-1)，评估适当使用轻松语气的能力")
+    rhythm_pacing: float = Field(0.0, description="停顿/节奏感评分 (0-1)，评估回复长度和节奏是否像真人")
+    response_length_distribution: Optional[Dict[str, int]] = Field(None, description="客服回复字数分布统计")
+
+
+class PurchaseIntentMetrics(BaseModel):
+    """购买意愿驱动指标"""
+    needs_discovery_rate: float = Field(0.0, description="需求挖掘率 (0-1)，成功识别用户潜在需求的比率")
+    product_recommendation_accuracy: float = Field(0.0, description="产品推荐精准度 (0-1)，推荐产品与需求的匹配程度")
+
+
+class ProblemSolvingMetrics(BaseModel):
+    """问题解决能力指标"""
+    first_contact_resolution: bool = Field(False, description="首次解决率，本轮是否一次性解决问题")
+    intent_recognition_accuracy: float = Field(0.0, description="意图识别准确率 (0-1)，正确理解用户问题的比率")
+    fallback_rate: float = Field(0.0, description="兜底率 (0-1)，无法回答而需要转人工的频率")
+
+
+class SalesScriptMetrics(BaseModel):
+    """销售话术质量指标"""
+    fab_completeness: float = Field(0.0, description="FAB 结构完整度 (0-1)，特性→优势→利益的表达完整性")
+    feature_mentioned: bool = Field(False, description="是否提及产品特性 (Feature)")
+    advantage_mentioned: bool = Field(False, description="是否提及产品优势 (Advantage)")
+    objection_handling_success: Optional[bool] = Field(None, description="异议处理是否成功，对价格/质量异议的化解")
+    objection_handling_score: float = Field(0.0, description="异议处理能力评分 (0-1)")
+    cross_sell_triggered: bool = Field(False, description="是否触发交叉销售，主动推荐关联产品")
+    script_compliance: float = Field(0.0, description="话术合规率 (0-1)，是否存在违规承诺/夸大宣传")
+    personalization_rate: float = Field(0.0, description="个性化表达率 (0-1)，根据用户画像定制话术的比例")
+
+
+class UserExperienceMetrics(BaseModel):
+    """用户体验指标"""
+    csat_score: float = Field(0.0, description="对话满意度评分 (0-1)，用户主观满意评分")
+    negative_feedback_triggered: bool = Field(False, description="是否触发负面反馈/投诉")
+
+
+class DetailedMetrics(BaseModel):
+    """详细评估指标汇总（5大维度，每个维度满分100分）"""
+    # 维度综合评分（0-100分）
+    anthropomorphism_score: int = Field(0, description="拟人化体验维度综合评分（0-100分），基于user和agent的拟人化表现")
+    purchase_intent_score: int = Field(0, description="购买意愿驱动维度综合评分（0-100分）")
+    problem_solving_score: int = Field(0, description="问题解决能力维度综合评分（0-100分）")
+    sales_script_score: int = Field(0, description="销售话术质量维度综合评分（0-100分）")
+    user_experience_score: int = Field(0, description="用户体验维度综合评分（0-100分）")
+    
+    # 各维度详细指标
+    user_anthropomorphism: UserAnthropomorphismMetrics = Field(default_factory=UserAnthropomorphismMetrics, description="用户智能体拟人化体验指标")
+    agent_anthropomorphism: AgentAnthropomorphismMetrics = Field(default_factory=AgentAnthropomorphismMetrics, description="客服智能体拟人化体验指标")
+    purchase_intent: PurchaseIntentMetrics = Field(default_factory=PurchaseIntentMetrics, description="购买意愿驱动指标")
+    problem_solving: ProblemSolvingMetrics = Field(default_factory=ProblemSolvingMetrics, description="问题解决能力指标")
+    sales_script: SalesScriptMetrics = Field(default_factory=SalesScriptMetrics, description="销售话术质量指标")
+    user_experience: UserExperienceMetrics = Field(default_factory=UserExperienceMetrics, description="用户体验指标")
 
 
 class TurnAssessment(BaseModel):
@@ -13,6 +82,10 @@ class TurnAssessment(BaseModel):
     helpfulness: float = Field(..., description="有用性评分 (0-1)")
     empathy: float = Field(..., description="同理心评分 (0-1)")
     overall_score: float = Field(..., description="综合评分")
+    
+    # 详细评估指标（新增）
+    detailed_metrics: Optional[DetailedMetrics] = Field(None, description="详细评估指标")
+    
     feedback: Optional[str] = Field(None, description="评估反馈")
     flags: Optional[Dict[str, Any]] = Field(None, description="特殊标识")
     timestamp: datetime = Field(default_factory=datetime.now)
@@ -69,35 +142,32 @@ class AssessmentRequest(BaseModel):
 
 
 class AssessmentResponse(BaseModel):
-    """评估响应模型 - 销售与用户体验维度"""
+    """评估响应模型 - 销售与用户体验维度（兼容旧版 + 新增详细指标）"""
 
     session_id: str = Field(..., description="会话ID")
     turn_number: int = Field(..., description="回合编号")
     
+    # ========== 基础评估指标（保留兼容）==========
     # 1. 拟人程度评分 (0-1)
-    anthropomorphism_score: float = Field(..., description="拟人程度评分 (0-1)，评估回复是否自然、像真人客服")
+    agent_anthropomorphism_score: float = Field(..., description="客服拟人程度评分 (0-1)，评估客服回复是否自然、像真人客服")
+    user_anthropomorphism_score: float = Field(..., description="用户拟人程度评分 (0-1)，评估用户提问是否自然、像真人用户")
     
     # 2. 购买意愿评估
     purchase_intent_change: str = Field(..., description="购买意愿变化: improved(提升)/unchanged(不变)/declined(下降)")
-    purchase_intent_reason: str = Field(..., description="购买意愿变化的判断依据")
     
     # 3. 问题解决情况
     problem_resolved: bool = Field(..., description="用户问题是否得到解决")
-    problem_resolve_reason: str = Field(..., description="问题是否解决的判断依据")
     
     # 4. 销售话术质量 (优秀/良好/差)
     sales_script_quality: str = Field(..., description="销售话术质量: excellent(优秀)/good(良好)/poor(差)")
-    sales_script_reason: str = Field(..., description="话术质量评价依据")
     
     # 5. 用户体验评价 (优/良/差)
     user_experience: str = Field(..., description="用户体验: excellent(优)/good(良)/poor(差)")
-    user_experience_reason: str = Field(..., description="用户体验评价依据")
     
-    # 是否终止会话
+    # ========== 详细评估指标（新增）==========
+    detailed_metrics: Optional[DetailedMetrics] = Field(None, description="详细评估指标，包含6大维度20+细分指标")
     should_terminate: bool = Field(..., description="是否应终止")
     termination_reason: Optional[str] = Field(None, description="终止原因")
-    
-    # 总体反馈建议
     feedback: Optional[str] = Field(None, description="总体评估反馈与改进建议")
 
 

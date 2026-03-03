@@ -46,20 +46,17 @@ async def assess_conversation_turn(
         return AssessmentResponse(
             session_id=request.session_id,
             turn_number=assessment.turn_number,
-            # 1. 拟人程度
-            anthropomorphism_score=assessment.anthropomorphism_score,
+            # 1. 拟人程度（分别评估客服和用户）
+            agent_anthropomorphism_score=assessment.agent_anthropomorphism_score,
+            user_anthropomorphism_score=assessment.user_anthropomorphism_score,
             # 2. 购买意愿变化
             purchase_intent_change=assessment.purchase_intent_change,
-            purchase_intent_reason=assessment.purchase_intent_reason,
             # 3. 问题解决
             problem_resolved=assessment.problem_resolved,
-            problem_resolve_reason=assessment.problem_resolve_reason,
             # 4. 销售话术质量
             sales_script_quality=assessment.sales_script_quality,
-            sales_script_reason=assessment.sales_script_reason,
             # 5. 用户体验
             user_experience=assessment.user_experience,
-            user_experience_reason=assessment.user_experience_reason,
             # 终止条件
             should_terminate=assessment.should_terminate,
             termination_reason=assessment.termination_reason,
