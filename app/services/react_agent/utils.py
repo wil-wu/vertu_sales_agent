@@ -1,6 +1,8 @@
 import re
 from pathlib import Path
 from typing import NamedTuple
+from types import MappingProxyType
+from datetime import datetime
 
 import fasttext
 from langchain_core.language_models import BaseChatModel
@@ -201,3 +203,28 @@ class MarkdownHelper:
     def extract_markdown_links(text: str) -> list[str]:
         """从文本中提取 markdown 链接（含 [text](url) 和 ![alt](url)）"""
         return re.findall(r"!?\[[^\]]*\]\([^\)]*\)", text)
+
+
+class DataManager:
+    """
+    数据管理器
+    """
+
+    def __init__(self): 
+        self._data = {}
+        self._view = MappingProxyType(self._data)
+        self._last_updated = None
+
+    def update_data(self, new_data: dict):
+        """
+        更新真实数据和只读视图
+        """
+        self._data = new_data 
+        self._view = MappingProxyType(self._data)
+        self._last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    def get_data(self) -> MappingProxyType:
+        """
+        返回只读视图
+        """
+        return self._view

@@ -1,4 +1,4 @@
-"""自动扫描和注册服务路由"""
+"""自动扫描和注册服务路由、定时任务"""
 
 import importlib
 import logging
@@ -98,3 +98,48 @@ class RouterScanner:
                     }
                 )
         return routes
+
+
+class JobScanner:
+    """任务扫描器 - 扫描每个服务下的 jobs.py 并加载执行（注册定时任务）"""
+
+    def __init__(self) -> None:
+        self.services_path = Path(settings.services_module.replace(".", "/"))
+
+    def scan_and_load(self) -> None:
+        """扫描所有服务下的 jobs.py 并导入执行"""
+        services = self._scan_services()
+        for service_name in services:
+            self._load_service_jobs(service_name)
+
+    def _scan_services(self) -> list[str]:
+        """扫描所有服务目录名"""
+        services: list[str] = []
+        if not self.services_path.exists():
+            logger.warning(
+                f"Services path {self.services_path} does not exist, skip job scan"
+            )
+            return services
+        for service in self.services_path.iterdir():
+            if not service.is_dir() or service.name.startswith("_"):
+                continue
+            services.append(service.name)
+        return services
+
+    def _load_service_jobs(self, service_name: str) -> None:
+        """加载并执行单个服务的 jobs 模块
+
+        导入模块时会执行模块顶层代码，从而将定时任务注册到全局 scheduler。
+        """
+        jobs_file = self.services_path / service_name / "jobs.py"
+        if not jobs_file.exists():
+            return
+        try:
+            module_path = f"{settings.services_module}.{service_name}.jobs"
+            importlib.import_module(module_path)
+            logger.info(f"Loaded jobs from service: {service_name}")
+        except Exception as e:
+            logger.error(
+                f"Error loading jobs for service {service_name}: {e}",
+                exc_info=True,
+            )

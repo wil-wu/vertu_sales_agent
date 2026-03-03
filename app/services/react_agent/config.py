@@ -32,6 +32,10 @@ class ReactAgentSettings(BaseSettings):
         default="http://192.168.151.84:10001/nl2graph_qa", description="图谱查询 URL"
     )
 
+    product_info_url: str = Field(default="", description="产品实时信息查询 URL")
+    product_info_token: str = Field(default="", description="产品实时信息 Token")
+    product_info_crontab: str = Field(default="0 0 * * *", description="产品实时信息更新 Crontab")
+
     wechat_push_url: str = Field(default="", description="微信群通知 URL")
     wechat_push_token: str = Field(default="", description="微信群通知 Token")
     wechat_push_api_key: str = Field(default="", description="微信群通知 API Key")
