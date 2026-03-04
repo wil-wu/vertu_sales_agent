@@ -39,10 +39,12 @@ async def graph_query(query: str):
 
 
 @tool
-async def send_wechat_notification(content: str) -> str:
+async def send_wechat_notification(reason: str, user: str, platform: str) -> str:
     """
     遇到无法解决的问题，或用户主动要求转人工，发送微信通知。
     """
+    content = f"用户：{user} 平台：{platform} 原因：{reason}"
+
     logger.info(f"--- [TOOL] 发送微信通知: {content} ---")
 
     url = react_agent_settings.wechat_push_url
@@ -65,4 +67,17 @@ async def send_wechat_notification(content: str) -> str:
         return "微信通知发送失败，请稍后再试。"
 
 
-TOOLS = [faq_query, graph_query, send_wechat_notification]
+async def get_product_price(index_name: str, query: str):
+    """
+    查询各个平台的产品价格
+    index_name: 平台索引名称，可选范围 [jd_product, tm_product], 默认值为 jd_product
+    query: 查询关键词
+    """
+    logger.info(f"--- [TOOL] 查询平台的产品价格: {index_name} {query} ---")
+    response = await httpx_async_client.post(
+        react_agent_settings.product_info_url, json={"query": query, "index_name": index_name}
+    )
+    return response.json()
+
+
+TOOLS = [faq_query, graph_query, send_wechat_notification, get_product_price]

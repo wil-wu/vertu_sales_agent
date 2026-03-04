@@ -33,8 +33,6 @@ class ReactAgentSettings(BaseSettings):
     )
 
     product_info_url: str = Field(default="", description="产品实时信息查询 URL")
-    product_info_token: str = Field(default="", description="产品实时信息 Token")
-    product_info_crontab: str = Field(default="0 0 * * *", description="产品实时信息更新 Crontab")
 
     wechat_push_url: str = Field(default="", description="微信群通知 URL")
     wechat_push_token: str = Field(default="", description="微信群通知 Token")
