@@ -20,8 +20,10 @@ async def chat(
     agent_content = ""
     graph_query_links: list[str] = []
 
+    user_message = request.message + f"\n严格遵循用户输入的语种进行回复！！！\n用户id：{request.user_id}\n平台：{request.platform}"
+
     async for event in react_agent.astream(
-        request.message, request.thread_id, stream_mode="updates"
+        user_message, request.thread_id, stream_mode="updates"
     ):
         if "agent" in event:
             msgs = event["agent"].get("messages", [])

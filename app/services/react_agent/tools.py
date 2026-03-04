@@ -39,10 +39,12 @@ async def graph_query(query: str):
 
 
 @tool
-async def send_wechat_notification(content: str) -> str:
+async def send_wechat_notification(reason: str, user: str, platform: str) -> str:
     """
     遇到无法解决的问题，或用户主动要求转人工，发送微信通知。
     """
+    content = f"用户：{user} 平台：{platform} 原因：{reason}"
+
     logger.info(f"--- [TOOL] 发送微信通知: {content} ---")
 
     url = react_agent_settings.wechat_push_url
