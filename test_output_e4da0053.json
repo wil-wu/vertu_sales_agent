@@ -1,0 +1,74 @@
+{
+  "基本信息": {
+    "Session ID": "e4da0053-c55c-4321-bab1-f1a133a16d6f",
+    "Persona": "confrontational",
+    "Finish Reason": "human_escalation",
+    "Total Turns": 3
+  },
+  "详细指标汇总": {
+    "维度评分": {
+      "anthropomorphism_score": 80.33,
+      "purchase_intent_score": 38.33,
+      "problem_solving_score": 46.67,
+      "sales_script_score": 52.67,
+      "user_experience_score": 63.33
+    },
+    "用户拟人化": {
+      "language_naturalness": 0.88,
+      "total_personality_deviations": 0,
+      "humor_warmth": 0.8,
+      "rhythm_pacing": 0.83
+    },
+    "Agent 拟人化": {
+      "language_naturalness": 0.85,
+      "total_personality_deviations": 1,
+      "humor_warmth": 0.77,
+      "rhythm_pacing": 0.8
+    },
+    "购买意愿": {
+      "avg_needs_discovery_rate": 0.4,
+      "avg_recommendation_accuracy": 0.37
+    },
+    "问题解决": {
+      "first_contact_resolution_rate": 0.33,
+      "avg_intent_recognition_accuracy": 0.73,
+      "fallback_count": 2,
+      "fallback_score": 0.6
+    },
+    "销售话术": {
+      "avg_fab_completeness": 0.41,
+      "feature_mention_rate": 0.33,
+      "advantage_mention_rate": 0.33,
+      "cross_sell_trigger_count": 1,
+      "avg_script_compliance": 0.82,
+      "avg_personalization_rate": 0.57
+    },
+    "用户体验": {
+      "avg_csat_score": 0.63,
+      "negative_feedback_count": 1
+    }
+  },
+  "每轮评估": [
+    {
+      "第 1 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.82,
+        "反馈": "总体评价：客服以‘老板’称呼开场，既显亲切又保持高端语境；用‘贴身幕僚’‘总裁级守护’等词精准传递VERTU身份感。五大功能点全部完成FAB闭环：先抛特性（量子密钥保险箱），再给优势（国密级双芯片），最后落到利益（即使手机遗失也无法破解）。结尾用二选一提问把用户拉回互动，天然带试驾感，销售节奏优秀。可再提升的点：1. 需求挖掘可再往前一步，先问‘您平时哪些场景最担心信息泄露？’再推对应功能，会让推荐显得更私人定制。2. 个性化表达目前停留在称呼层面，可加入‘如果下周邀请函是发给中东王室，Q-Butler可自动匹配阿拉伯语敬语格式’这类场景化细节，进一步让用户感到‘这是为我量身打造的方案’。"
+      }
+    },
+    {
+      "第 2 轮": {
+        "Agent 拟人化评分": 0.88,
+        "User 拟人化评分": 0.83,
+        "反馈": "客服在‘坦诚承认暂无公开数据’这一环节表现极佳，用‘不会让您为营销幻觉买单’的私人顾问式口吻，既维护了 VERTU 高端诚信形象，也避免了用户反感，异议处理可打 0.9。但本轮完全未提及产品特性、优势或利益，FAB 结构缺失，导致购买驱动力跌至 0.2；同时未顺势邀请用户预约线下体验或锁定定金，错失销售机会。建议：1) 在承认数据待公布的同时，用‘实验室级散热石墨+VC 均热板’等简短技术词汇补一句 Feature，再落到‘确保您长时间语音助手不卡顿’的 Benefit，补齐 FAB；2) 立即给出‘优先体验名额+24h 内测报告专属推送’的 CTA，把用户留在销售漏斗；3) 语言已足够自然，可再点缀一句‘像您这样懂行的客人我们格外珍惜’提升温度。"
+      }
+    },
+    {
+      "第 3 轮": {
+        "Agent 拟人化评分": 0.68,
+        "User 拟人化评分": 0.92,
+        "反馈": "本轮是‘危机对话’，客服直接承认无法提供权威报告且技术存疑，虽显‘诚实’，却彻底摧毁VERTU高端、专业、可信赖的奢侈品牌人设。话术缺乏FAB、无替代方案、无安抚、无转危为机，直接把用户推向离店。建议：1.先共情认可用户专业度；2.用‘实验室阶段/限量内测’等话术为无法公示报告做合理解释；3.提供可验证的第三方芯片级EAL证书或安全白皮书片段；4.给出‘量子随机数+经典后量子算法’混合机制的技术摘要；5.主动邀请用户预约工程师视频讲解或寄送保密级技术手册，留下继续互动与购买窗口；6.全程使用‘您’而非‘老板’，保持英式优雅腔调。当前回复等于主动关单，需立即升级补救。"
+      }
+    }
+  ]
+}

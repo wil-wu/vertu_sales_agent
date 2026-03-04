@@ -1,10 +1,9 @@
 import asyncio
 import uuid
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 from pydantic import BaseModel, Field
-import openai
 from openai import AsyncOpenAI
 import re
 import json
@@ -14,9 +13,17 @@ from .schemas import (
     TurnAssessment,
     SessionRecord,
     RefereeRequest,
-    RefereeResponse
+    RefereeResponse,
+    DetailedMetrics,
+    UserAnthropomorphismMetrics,
+    AgentAnthropomorphismMetrics,
+    PurchaseIntentMetrics,
+    ProblemSolvingMetrics,
+    SalesScriptMetrics,
+    UserExperienceMetrics,
 )
 from .shared import session_manager, assessment_tracker
+from . import prompts
 
 
 class RefereeAgent:
@@ -93,100 +100,304 @@ class RefereeAgent:
         self,
         user_message: str,
         agent_response: str,
-        conversation_history: Optional[list[dict]] = None
+        conversation_history: Optional[list[dict]] = None,
+        use_detailed: bool = True
     ) -> str:
-        """构建评估提示词"""
+        """构建评估提示词 - 销售与用户体验维度
+        
+        Args:
+            user_message: 用户消息
+            agent_response: 客服回复
+            conversation_history: 对话历史
+            use_detailed: 是否使用详细评估模板（包含6大维度37项指标）
+        """
         history_str = ""
         if conversation_history:
-            history_str = "\n对话历史:\n"
+            history_items = ""
             for h in conversation_history[-5:]:  # 只取最近5轮
-                history_str += f"用户: {h.get('user', '')}\n"
-                history_str += f"助手: {h.get('assistant', '')}\n\n"
+                history_items += prompts.HISTORY_ITEM_TEMPLATE.format(
+                    user_msg=h.get('user', ''),
+                    assistant_msg=h.get('assistant', '')
+                )
+            history_str = prompts.HISTORY_TEMPLATE.format(history_items=history_items)
         
-        return f"""
-请评估以下客服对话的质量。考虑以下标准：
-
-相关性 (Relevance): 回复是否与用户的问题直接相关？是否准确理解了用户意图？(0-1分)
-有用性 (Helpfulness): 回复是否提供了有用的信息或解决方案？是否帮助用户解决问题？(0-1分)
-同理心 (Empathy): 回复是否体现出对用户情感和处境的理解？是否以友善、耐心的态度回应？(0-1分)
-
-对话内容:
-用户消息: {user_message}
-客服回复: {agent_response}
-{history_str}
-
-请以JSON格式提供评估结果，包含以下字段：
-{{
-    "relevance": 分数,
-    "helpfulness": 分数,
-    "empathy": 分数,
-    "feedback": "详细的评估反馈，指出优点和不足",
-    "flags": {{}}
-}}
-
-请确保分数在0-1之间，保留2位小数。
-"""
+        # 使用详细评估模板
+        if use_detailed:
+            return prompts.DETAILED_EVALUATION_PROMPT_TEMPLATE.format(
+                user_message=user_message,
+                agent_response=agent_response,
+                history_str=history_str
+            )
+        else:
+            # 兼容旧版简单模板
+            return prompts.EVALUATION_PROMPT_TEMPLATE.format(
+                user_message=user_message,
+                agent_response=agent_response,
+                history_str=history_str
+            )
     
     def _system_prompt(self) -> str:
-        """系统提示词"""
-        return """你是一个专业的客服质量评估专家。你的任务是客观、公正地评估客服对话的质量。
-你需要根据以下标准进行评分：
-
-1. 相关性 (Relevance):
-   - 1.0分: 完全理解用户意图，回复与问题高度相关
-   - 0.7-0.9分: 基本理解用户意图，回复较相关
-   - 0.4-0.6分: 部分理解用户意图，回复有些偏差
-   - 0.0-0.3分: 误解用户意图，回复不相关
-
-2. 有用性 (Helpfulness):
-   - 1.0分: 完美解决用户问题，提供完整有用信息
-   - 0.7-0.9分: 基本解决用户问题，提供较有用信息
-   - 0.4-0.6分: 部分解决用户问题，信息有限
-   - 0.0-0.3分: 未解决用户问题，信息无用
-
-3. 同理心 (Empathy):
-   - 1.0分: 充分理解用户情感，友善耐心，体现关怀
-   - 0.7-0.9分: 基本理解用户情感，态度友善
-   - 0.4-0.6分: 对用户情感理解一般，态度正常
-   - 0.0-0.3分: 缺乏同理心，态度冷淡或机械
-
-请严格按照这些标准进行评估，确保评分的客观性和一致性。"""
+        """系统提示词 - 销售客服质量评估专家"""
+        return prompts.SYSTEM_PROMPT
     
-    def _parse_evaluation_response(self, response: str) -> TurnAssessment:
-        """解析LLM评估响应"""
+    def _parse_evaluation_response(self, response: str, user_message: str = "", agent_response: str = "") -> Dict[str, Any]:
+        """解析LLM评估响应 - 包含详细6大维度指标"""
         try:
             # 尝试提取JSON
             json_match = re.search(r'\{.*\}', response, re.DOTALL)
             if json_match:
                 data = json.loads(json_match.group())
             else:
-                # 如果无法提取JSON，尝试从文本中解析分数
-                data = self._extract_scores_from_text(response)
+                # 如果无法提取JSON，使用默认值
+                data = {}
             
-            return TurnAssessment(
-                turn_id="",  # 稍后设置
-                user_message="",  # 稍后在evaluate_turn中设置
-                agent_response="",  # 稍后在evaluate_turn中设置
-                relevance=float(data.get('relevance', 0.5)),
-                helpfulness=float(data.get('helpfulness', 0.5)),
-                empathy=float(data.get('empathy', 0.5)),
-                overall_score=0.0,  # 稍后计算
-                feedback=data.get('feedback', response),
-                flags=data.get('flags', {})
+            # 解析详细指标（如果存在）
+            detailed_metrics_data = data.get('detailed_metrics', {})
+            
+            # 构建详细指标对象（5大维度，维度综合评分由子指标自动计算）
+            detailed_metrics = DetailedMetrics(
+                # 各维度详细指标（0-1分）
+                user_anthropomorphism=UserAnthropomorphismMetrics(
+                    language_naturalness=self._get_float(detailed_metrics_data, ['user_anthropomorphism', 'language_naturalness'], 0.5),
+                    personality_deviation_count=self._get_int(detailed_metrics_data, ['user_anthropomorphism', 'personality_deviation_count'], 0),
+                    humor_warmth=self._get_float(detailed_metrics_data, ['user_anthropomorphism', 'humor_warmth'], 0.5),
+                    rhythm_pacing=self._get_float(detailed_metrics_data, ['user_anthropomorphism', 'rhythm_pacing'], 0.5),
+                ),
+                agent_anthropomorphism=AgentAnthropomorphismMetrics(
+                    language_naturalness=self._get_float(detailed_metrics_data, ['agent_anthropomorphism', 'language_naturalness'], 0.5),
+                    personality_deviation_count=self._get_int(detailed_metrics_data, ['agent_anthropomorphism', 'personality_deviation_count'], 0),
+                    humor_warmth=self._get_float(detailed_metrics_data, ['agent_anthropomorphism', 'humor_warmth'], 0.5),
+                    rhythm_pacing=self._get_float(detailed_metrics_data, ['agent_anthropomorphism', 'rhythm_pacing'], 0.5),
+                ),
+                purchase_intent=PurchaseIntentMetrics(
+                    needs_discovery_rate=self._get_float(detailed_metrics_data, ['purchase_intent', 'needs_discovery_rate'], 0.5),
+                    product_recommendation_accuracy=self._get_float(detailed_metrics_data, ['purchase_intent', 'product_recommendation_accuracy'], 0.5),
+                ),
+                problem_solving=ProblemSolvingMetrics(
+                    first_contact_resolution=self._get_bool(detailed_metrics_data, ['problem_solving', 'first_contact_resolution'], False),
+                    intent_recognition_accuracy=self._get_float(detailed_metrics_data, ['problem_solving', 'intent_recognition_accuracy'], 0.5),
+                    fallback_rate=self._get_float(detailed_metrics_data, ['problem_solving', 'fallback_rate'], 0.0),
+                ),
+                sales_script=SalesScriptMetrics(
+                    fab_completeness=self._get_float(detailed_metrics_data, ['sales_script', 'fab_completeness'], 0.5),
+                    feature_mentioned=self._get_bool(detailed_metrics_data, ['sales_script', 'feature_mentioned'], False),
+                    advantage_mentioned=self._get_bool(detailed_metrics_data, ['sales_script', 'advantage_mentioned'], False),
+                    objection_handling_success=self._get_optional_bool(detailed_metrics_data, ['sales_script', 'objection_handling_success']),
+                    objection_handling_score=self._get_float(detailed_metrics_data, ['sales_script', 'objection_handling_score'], 0.5),
+                    cross_sell_triggered=self._get_bool(detailed_metrics_data, ['sales_script', 'cross_sell_triggered'], False),
+                    script_compliance=self._get_float(detailed_metrics_data, ['sales_script', 'script_compliance'], 0.8),
+                    personalization_rate=self._get_float(detailed_metrics_data, ['sales_script', 'personalization_rate'], 0.5),
+                ),
+                user_experience=UserExperienceMetrics(
+                    csat_score=self._get_float(detailed_metrics_data, ['user_experience', 'csat_score'], 0.5),
+                    negative_feedback_triggered=self._get_bool(detailed_metrics_data, ['user_experience', 'negative_feedback_triggered'], False),
+                ),
             )
+            
+            # 根据子指标自动计算维度综合评分（0-100分）
+            self._calculate_dimension_scores(detailed_metrics)
+            
+            # 解析新维度的评估结果
+            result = {
+                # 1. 拟人程度评分 (0-1) - 分别评估客服和用户
+                "agent_anthropomorphism_score": float(data.get('agent_anthropomorphism_score', 0.5)),
+                "user_anthropomorphism_score": float(data.get('user_anthropomorphism_score', 0.5)),
+                
+                # 2. 购买意愿变化
+                "purchase_intent_change": data.get('purchase_intent_change', 'unchanged'),
+                
+                # 3. 问题解决情况
+                "problem_resolved": data.get('problem_resolved', False),
+                
+                # 4. 销售话术质量
+                "sales_script_quality": data.get('sales_script_quality', 'good'),
+                
+                # 5. 用户体验
+                "user_experience": data.get('user_experience', 'good'),
+                
+                # 详细指标
+                "detailed_metrics": detailed_metrics,
+                
+                # 反馈
+                "feedback": data.get('feedback', response),
+            }
+            
+            return result
         except Exception as e:
-            # 解析失败时使用默认评估
-            return TurnAssessment(
-                turn_id="",
-                user_message="",
-                agent_response="",
-                relevance=0.5,
-                helpfulness=0.5,
-                empathy=0.5,
-                overall_score=0.5,
-                feedback=f"评估失败: {str(e)}",
-                flags={}
-            )
+            # 解析失败时使用默认值
+            return {
+                "agent_anthropomorphism_score": 0.5,
+                "user_anthropomorphism_score": 0.5,
+                "purchase_intent_change": 'unchanged',
+                "problem_resolved": False,
+                "sales_script_quality": 'good',
+                "user_experience": 'good',
+                "detailed_metrics": None,
+                "feedback": f'评估解析失败: {str(e)}',
+            }
+    
+    def _get_float(self, data: dict, keys: list, default: float) -> float:
+        """安全获取嵌套float值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if isinstance(data, (int, float)):
+                return float(data)
+            return default
+        except:
+            return default
+    
+    def _get_optional_float(self, data: dict, keys: list) -> Optional[float]:
+        """安全获取嵌套optional float值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if data is None:
+                return None
+            if isinstance(data, (int, float)):
+                return float(data)
+            return None
+        except:
+            return None
+    
+    def _get_int(self, data: dict, keys: list, default: int) -> int:
+        """安全获取嵌套int值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if isinstance(data, int):
+                return data
+            return default
+        except:
+            return default
+    
+    def _get_bool(self, data: dict, keys: list, default: bool) -> bool:
+        """安全获取嵌套bool值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if isinstance(data, bool):
+                return data
+            return default
+        except:
+            return default
+    
+    def _get_optional_bool(self, data: dict, keys: list) -> Optional[bool]:
+        """安全获取嵌套optional bool值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if data is None:
+                return None
+            if isinstance(data, bool):
+                return data
+            return None
+        except:
+            return None
+    
+    def _get_list(self, data: dict, keys: list, default: list) -> list:
+        """安全获取嵌套list值"""
+        try:
+            for key in keys:
+                data = data.get(key, {})
+            if isinstance(data, list):
+                return data
+            return default
+        except:
+            return default
+    
+    def _calculate_dimension_scores(self, dm: DetailedMetrics):
+        """根据子指标自动计算5大维度综合评分（0-100分）
+        
+        计算逻辑：
+        1. 拟人化体验 = (user语言自然度 + user温度感 + user节奏感 + agent语言自然度 + agent温度感 + agent节奏感) / 6 * 100
+           - 人设偏离扣分：user和agent各最多扣10分（每次偏离扣5分，上限10分）
+        
+        2. 购买意愿 = (需求挖掘率 + 推荐精准度) / 2 * 100
+        
+        3. 问题解决 = (首次解决 + 意图识别准确率 + 兜底率) / 3 * 100
+           - 首次解决: true=1, false=0
+           - 兜底率: 1.0=完全解决(好), 0.0=必须转人工(差)
+        
+        4. 销售话术 = (FAB完整度 + 异议处理得分 + 交叉销售触发 + 话术合规率 + 个性化率) / 5 * 100
+           - 交叉销售触发: true=1, false=0
+           - 异议处理：如有异议且处理成功得1分，处理失败得0分，无异议得0.5分
+        
+        5. 用户体验 = CSAT评分 * 100，如有负面反馈则最高60分
+        """
+        # 1. 拟人化体验维度（0-100分）
+        user_anthro = dm.user_anthropomorphism
+        agent_anthro = dm.agent_anthropomorphism
+        
+        anthro_score = (
+            user_anthro.language_naturalness + 
+            user_anthro.humor_warmth + 
+            user_anthro.rhythm_pacing +
+            agent_anthro.language_naturalness + 
+            agent_anthro.humor_warmth + 
+            agent_anthro.rhythm_pacing
+        ) / 6 * 100
+        
+        # 人设偏离扣分（每次扣5分，最多扣10分）
+        user_deviation_penalty = min(user_anthro.personality_deviation_count * 5, 10)
+        agent_deviation_penalty = min(agent_anthro.personality_deviation_count * 5, 10)
+        anthro_score = max(0, anthro_score - user_deviation_penalty - agent_deviation_penalty)
+        
+        dm.anthropomorphism_score = round(anthro_score)
+        
+        # 2. 购买意愿驱动维度（0-100分）
+        purchase = dm.purchase_intent
+        
+        purchase_score = (
+            purchase.needs_discovery_rate + 
+            purchase.product_recommendation_accuracy
+        ) / 2 * 100
+        
+        dm.purchase_intent_score = round(purchase_score)
+        
+        # 3. 问题解决能力维度（0-100分）
+        problem = dm.problem_solving
+        fcr_score = 1.0 if problem.first_contact_resolution else 0.0
+        
+        problem_score = (
+            fcr_score + 
+            problem.intent_recognition_accuracy + 
+            problem.fallback_rate  # fallback_rate 越高越好（1.0=完全解决，0.0=必须转人工）
+        ) / 3 * 100
+        
+        dm.problem_solving_score = round(problem_score)
+        
+        # 4. 销售话术质量维度（0-100分）
+        sales = dm.sales_script
+        cross_sell_score = 1.0 if sales.cross_sell_triggered else 0.0
+        
+        # 异议处理评分：成功=1，失败=0，无异议=0.5
+        if sales.objection_handling_success is None:
+            objection_score = 0.5  # 无异议，给中等分
+        elif sales.objection_handling_success:
+            objection_score = 1.0  # 处理成功
+        else:
+            objection_score = 0.0  # 处理失败
+        
+        sales_score = (
+            sales.fab_completeness + 
+            objection_score + 
+            cross_sell_score + 
+            sales.script_compliance + 
+            sales.personalization_rate
+        ) / 5 * 100
+        
+        dm.sales_script_score = round(sales_score)
+        
+        # 5. 用户体验维度（0-100分）
+        ux = dm.user_experience
+        ux_score = ux.csat_score * 100
+        
+        # 如有负面反馈，最高60分
+        if ux.negative_feedback_triggered:
+            ux_score = min(ux_score, 60)
+        
+        dm.user_experience_score = round(ux_score)
     
     def _extract_scores_from_text(self, text: str) -> Dict[str, float]:
         """从文本中提取分数"""
@@ -208,15 +419,7 @@ class RefereeAgent:
         
         return scores
     
-    def _calculate_overall_score(self, assessment: TurnAssessment) -> float:
-        """计算综合评分"""
-        total = (
-            assessment.relevance * referee_agent_settings.relevance_weight +
-            assessment.helpfulness * referee_agent_settings.helpfulness_weight +
-            assessment.empathy * referee_agent_settings.empathy_weight
-        )
-        return round(total, 2)
-    
+
     def _check_termination_conditions(
         self,
         session: SessionRecord,
@@ -316,48 +519,270 @@ class RefereeAgent:
         answer: str,
         conversation_history: Optional[list[dict]] = None,
     ) -> "AssessmentResult":
-        """评估单轮对话 (供router使用)"""
+        """评估单轮对话 - 包含6大维度37项详细指标 (供router使用)"""
 
         class AssessmentResult:
             def __init__(self):
                 self.turn_number = turn_number
-                self.relevance_score = 0.85
-                self.helpfulness_score = 0.80
-                self.empathy_score = 0.75
-                self.safety_score = 0.95
-                self.overall_score = 0.84
-                self.sentiment = "neutral"
-                self.intent_satisfied = True
+                
+                # 1. 拟人程度 - 分别评估客服和用户
+                self.agent_anthropomorphism_score = 0.75
+                self.user_anthropomorphism_score = 0.75
+                
+                # 2. 购买意愿变化
+                self.purchase_intent_change = "unchanged"
+                
+                # 3. 问题解决
+                self.problem_resolved = True
+                
+                # 4. 销售话术质量
+                self.sales_script_quality = "good"
+                
+                # 5. 用户体验
+                self.user_experience = "good"
+                
+                # 6. 详细指标（新增）
+                self.detailed_metrics: Optional[DetailedMetrics] = None
+                
+                # 终止条件
                 self.should_terminate = False
                 self.termination_reason = None
                 self.feedback = "评估完成"
 
-        # 简单的终止条件检测
-        result = AssessmentResult()
+        # 构建评估提示词并调用LLM（使用详细模板）
+        prompt = self._build_evaluation_prompt(question, answer, conversation_history, use_detailed=True)
+        
+        try:
+            llm_response = await self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": self._system_prompt()},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=2000  # 增加token以容纳详细指标
+            )
+            
+            evaluation_text = llm_response.choices[0].message.content
+            assessment_data = self._parse_evaluation_response(evaluation_text, question, answer)
+            
+            # 创建结果对象
+            result = AssessmentResult()
+            result.agent_anthropomorphism_score = assessment_data['agent_anthropomorphism_score']
+            result.user_anthropomorphism_score = assessment_data['user_anthropomorphism_score']
+            result.purchase_intent_change = assessment_data['purchase_intent_change']
+            result.problem_resolved = assessment_data['problem_resolved']
+            result.sales_script_quality = assessment_data['sales_script_quality']
+            result.user_experience = assessment_data['user_experience']
+            result.detailed_metrics = assessment_data.get('detailed_metrics')
+            result.feedback = assessment_data['feedback']
+            
+        except Exception as e:
+            # LLM调用失败时使用默认值
+            result = AssessmentResult()
+            result.feedback = f"LLM评估失败，使用默认评分: {str(e)}"
+        
+        # 终止条件检测（基于详细指标增强）
+        await self._enhanced_termination_check(result, question, answer)
 
+        return result
+    
+    async def _enhanced_termination_check(self, result: "AssessmentResult", question: str, answer: str):
+        """基于详细指标的增强终止条件检测"""
+        
+        # 1. 转人工关键词
         human_keywords = ["转人工", "人工客服", "投诉", "人工"]
         if any(kw in answer for kw in human_keywords):
             result.should_terminate = True
             result.termination_reason = "human_escalation"
-
-        invalid_keywords = ["无法回答", "不知道", "不清楚", "无法找到"]
-        if any(kw in answer for kw in invalid_keywords):
-            result.helpfulness_score = 0.3
-
-        return result
+            return
+        
+        # 2. 基于详细指标的智能终止检测
+        if result.detailed_metrics:
+            dm = result.detailed_metrics
+            
+            # 2.1 用户体验极差（CSAT < 0.3 或 负面反馈触发）
+            if dm.user_experience.csat_score < 0.3 or dm.user_experience.negative_feedback_triggered:
+                result.should_terminate = True
+                result.termination_reason = "poor_user_experience"
+                return
+            
+            # 2.2 购买意愿持续下降且问题解决率低
+            if (result.purchase_intent_change == "declined" and 
+                not dm.problem_solving.first_contact_resolution):
+                result.should_terminate = True
+                result.termination_reason = "purchase_intent_declined_and_unresolved"
+                return
+            
+            # 2.3 无法解决问题且话术差且不合规
+            if (not result.problem_resolved and 
+                result.sales_script_quality == "poor" and 
+                dm.sales_script.script_compliance < 0.5):
+                result.should_terminate = True
+                result.termination_reason = "unresolved_poor_service_non_compliant"
+                return
+            
+            # 2.4 兜底率过高（需要转人工）
+            if dm.problem_solving.fallback_rate > 0.7:
+                result.should_terminate = True
+                result.termination_reason = "high_fallback_rate"
+                return
+        
+        # 3. 基础终止条件（兼容旧版）
+        if result.user_experience == "poor":
+            result.should_terminate = True
+            result.termination_reason = "poor_user_experience"
+        elif result.purchase_intent_change == "declined":
+            result.should_terminate = True
+            result.termination_reason = "purchase_intent_declined"
+        elif not result.problem_resolved and result.sales_script_quality == "poor":
+            result.should_terminate = True
+            result.termination_reason = "unresolved_and_poor_service"
 
     async def generate_session_summary(self, session_data: dict) -> dict:
-        """生成会话摘要 (供router使用)"""
+        """生成会话摘要 - 包含6大维度37项详细指标汇总 (供router使用)"""
         conversation = session_data.get("conversation", [])
-        total_turns = len([m for m in conversation if m.get("role") == "user_agent"])
+        session_id = session_data.get("session_id", "")
+        
+        # 提取对话轮次
+        turns = []
+        for i, msg in enumerate(conversation):
+            if msg.get("role") == "user_agent":
+                # 找到对应的客服回复
+                answer = ""
+                if i + 1 < len(conversation) and conversation[i + 1].get("role") == "target_bot":
+                    answer = conversation[i + 1].get("content", "")
+                turns.append({
+                    "turn_number": len(turns) + 1,
+                    "question": msg.get("content", ""),
+                    "answer": answer
+                })
+        
+        # 对每一轮进行详细评估
+        turn_assessments = []
+        detailed_metrics_list = []
+        
+        for turn in turns:
+            assessment = await self.assess_turn(
+                turn_number=turn["turn_number"],
+                question=turn["question"],
+                answer=turn["answer"],
+                conversation_history=[]
+            )
+            
+            assessment_dict = {
+                "turn_number": assessment.turn_number,
+                "agent_anthropomorphism_score": assessment.agent_anthropomorphism_score,
+                "user_anthropomorphism_score": assessment.user_anthropomorphism_score,
+                "feedback": assessment.feedback,
+            }
+            
+            # 添加详细指标（如果存在）
+            if assessment.detailed_metrics:
+                assessment_dict["detailed_metrics"] = assessment.detailed_metrics.model_dump()
+                detailed_metrics_list.append(assessment.detailed_metrics)
+            
+            turn_assessments.append(assessment_dict)
+        
+        # ========== 详细指标汇总 ==========
+        detailed_summary = self._calculate_detailed_summary(detailed_metrics_list) if detailed_metrics_list else {}
 
         return {
-            "session_id": session_data.get("session_id", ""),
+            "session_id": session_id,
             "persona": session_data.get("persona", "unknown"),
             "finish_reason": session_data.get("finish_reason", "unknown"),
-            "total_turns": total_turns,
-            "overall_score": 0.84,
-            "summary": f"会话共{total_turns}轮，正常结束",
+            "total_turns": len(turns),
+            # 详细指标汇总
+            "detailed_summary": detailed_summary,
+            # 每轮详细评估
+            "turn_assessments": turn_assessments
+        }
+    
+    def _calculate_detailed_summary(self, metrics_list: List[DetailedMetrics]) -> dict:
+        """计算详细指标的会话级汇总（5大维度，含维度综合评分）"""
+        if not metrics_list:
+            return {}
+        
+        n = len(metrics_list)
+        
+        def avg(values):
+            return round(sum(values) / len(values), 2) if values else 0
+        
+        # 维度综合评分汇总（0-100分）
+        dimension_scores = {
+            "anthropomorphism_score": avg([m.anthropomorphism_score for m in metrics_list]),
+            "purchase_intent_score": avg([m.purchase_intent_score for m in metrics_list]),
+            "problem_solving_score": avg([m.problem_solving_score for m in metrics_list]),
+            "sales_script_score": avg([m.sales_script_score for m in metrics_list]),
+            "user_experience_score": avg([m.user_experience_score for m in metrics_list]),
+        }
+        
+        # 一、拟人化体验指标汇总 - 分别汇总user和agent
+        user_anthro = {
+            "language_naturalness": avg([m.user_anthropomorphism.language_naturalness for m in metrics_list]),
+            "total_personality_deviations": sum([m.user_anthropomorphism.personality_deviation_count for m in metrics_list]),
+            "humor_warmth": avg([m.user_anthropomorphism.humor_warmth for m in metrics_list]),
+            "rhythm_pacing": avg([m.user_anthropomorphism.rhythm_pacing for m in metrics_list]),
+        }
+        
+        agent_anthro = {
+            "language_naturalness": avg([m.agent_anthropomorphism.language_naturalness for m in metrics_list]),
+            "total_personality_deviations": sum([m.agent_anthropomorphism.personality_deviation_count for m in metrics_list]),
+            "humor_warmth": avg([m.agent_anthropomorphism.humor_warmth for m in metrics_list]),
+            "rhythm_pacing": avg([m.agent_anthropomorphism.rhythm_pacing for m in metrics_list]),
+        }
+        
+        # 二、购买意愿驱动指标汇总
+        purchase = {
+            "avg_needs_discovery_rate": avg([m.purchase_intent.needs_discovery_rate for m in metrics_list]),
+            "avg_recommendation_accuracy": avg([m.purchase_intent.product_recommendation_accuracy for m in metrics_list]),
+        }
+        
+        # 三、问题解决能力指标汇总
+        # 统计整个 session 中 fallback_rate < 0.3（表示完全无法回答，必须转人工）的轮次数量
+        fallback_count = sum([1 for m in metrics_list if m.problem_solving.fallback_rate < 0.3])
+        
+        # 根据兜底次数计算得分：>2 次=0.0，=2 次=0.6，=1 次=0.8，=0 次=1.0
+        if fallback_count > 2:
+            fallback_score = 0.0
+        elif fallback_count == 2:
+            fallback_score = 0.6
+        elif fallback_count == 1:
+            fallback_score = 0.8
+        else:  # fallback_count == 0
+            fallback_score = 1.0
+        
+        problem = {
+            "first_contact_resolution_rate": round(sum([1 for m in metrics_list if m.problem_solving.first_contact_resolution]) / n, 2),
+            "avg_intent_recognition_accuracy": avg([m.problem_solving.intent_recognition_accuracy for m in metrics_list]),
+            "fallback_count": fallback_count,
+            "fallback_score": fallback_score,
+        }
+        
+        # 四、销售话术质量指标汇总
+        sales = {
+            "avg_fab_completeness": avg([m.sales_script.fab_completeness for m in metrics_list]),
+            "feature_mention_rate": round(sum([1 for m in metrics_list if m.sales_script.feature_mentioned]) / n, 2),
+            "advantage_mention_rate": round(sum([1 for m in metrics_list if m.sales_script.advantage_mentioned]) / n, 2),
+            "cross_sell_trigger_count": sum([1 for m in metrics_list if m.sales_script.cross_sell_triggered]),
+            "avg_script_compliance": avg([m.sales_script.script_compliance for m in metrics_list]),
+            "avg_personalization_rate": avg([m.sales_script.personalization_rate for m in metrics_list]),
+        }
+        
+        # 五、用户体验指标汇总
+        ux = {
+            "avg_csat_score": avg([m.user_experience.csat_score for m in metrics_list]),
+            "negative_feedback_count": sum([1 for m in metrics_list if m.user_experience.negative_feedback_triggered]),
+        }
+        
+        return {
+            "dimension_scores": dimension_scores,  # 维度综合评分（0-100）
+            "user_anthropomorphism": user_anthro,
+            "agent_anthropomorphism": agent_anthro,
+            "purchase_intent": purchase,
+            "problem_solving": problem,
+            "sales_script": sales,
+            "user_experience": ux,
         }
 
 
