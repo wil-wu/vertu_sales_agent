@@ -33,6 +33,8 @@ class ConversationState(BaseModel):
     finish_reason: Optional[str] = Field(default=None)
     finish_reason_description: Optional[str] = Field(default=None)
     preset_prompt: Optional[str] = Field(default=None)
+    user_id: str = Field(default="simulation_user")
+    platform: str = Field(default="simulation")
     llm_call_stats: Dict[str, Any] = Field(default_factory=lambda: {
         "calls": [],  # 每次调用的详细信息
         "total_calls": 0,
@@ -171,7 +173,7 @@ class UserAgent:
 
                 try:
                     # 调用Target Bot API
-                    response = await self._call_target_bot(client, current_question, state.session_id)
+                    response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, state.platform)
                     bot_answer = response["message"]
 
                     # 记录对话历史
@@ -212,7 +214,7 @@ class UserAgent:
             state.finish_reason_description = f"对话达到最大轮数限制({state.max_turns}轮)"
             logger.info(f"=== [AGENT] 达到最大轮数限制: {state.max_turns} ===")
 
-    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str) -> Any:
+    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation") -> Any:
         """调用Target Bot API"""
         logger.info(f"=== [AGENT] 向目标机器人提问: {question[:50]}... ===")
 
@@ -225,7 +227,9 @@ class UserAgent:
                     self.target_bot_url,
                     json={
                         "message": question,
-                        "thread_id": thread_id
+                        "thread_id": thread_id,
+                        "user_id": user_id,
+                        "platform": platform
                     },
                     timeout=30.0
                 )
