@@ -20,7 +20,7 @@ async def chat(
     agent_content = ""
     graph_query_links: list[str] = []
 
-    user_message = request.message + f"\n严格遵循用户输入的语种进行回复！！！\n用户id：{request.user_id}\n平台：{request.platform}"
+    user_message = request.message + f"\n严格遵循用户输入的语种进行回复！！！\n用户id：{request.user_id}\n平台：{request.platform}\n地区：{request.region}"
 
     async for event in react_agent.astream(
         user_message, request.thread_id, stream_mode="updates"
