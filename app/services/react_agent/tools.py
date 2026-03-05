@@ -74,7 +74,7 @@ async def get_product_price(index_name: str, query: str):
     index_name: 平台索引名称，可选范围 [tm_product, jd_product, overseas_product]
                 中文用户选择 tm_product 和 jd_product
                 非中文用户选择 overseas_product
-    query: 查询关键词
+    query: 查询关键词，可能包含产品名称、型号、类型、颜色、材质、价格范围等
     """
     logger.info(f"--- [TOOL] 查询平台的产品价格: {index_name} {query} ---")
     response = await httpx_async_client.post(
