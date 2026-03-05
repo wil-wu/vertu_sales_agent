@@ -13,6 +13,7 @@ class UserSimulationRequest(BaseModel):
     persona: str = Field(..., description=f"用户人格类型：{', '.join(get_all_persona_names())}")
     scenario: str = Field(..., description="测试场景描述，例如：VERTU手机技术支持咨询")
     max_turns: int = Field(default=20, description="最大对话轮数，默认20轮")
+    platform: Optional[str] = Field(None, description="用户来源平台，不指定则在任意平台查询")
     thread_id: str = Field(
         default_factory=lambda: str(uuid.uuid4()),
         description="会话 ID，用于跟踪对话上下文"
