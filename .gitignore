@@ -224,3 +224,5 @@ mock_sessions/
 simulation/*.csv
 
 /*.csv
+
+mock_questions.json
