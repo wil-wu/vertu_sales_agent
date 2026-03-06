@@ -42,7 +42,8 @@ class ReactAgentService:
         """查询图谱素材。"""    
         response = await httpx_async_client.post(
             react_agent_settings.graph_url,
-            json={"query": query}
+            json={"query": query},
+            timeout=20,
         )
         return response.json()["data"]["result"]
 
