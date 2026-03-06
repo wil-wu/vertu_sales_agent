@@ -28,8 +28,9 @@ async def faq_query(query: str):
         data = await ReactAgentService.faq_query(query)
         return tool_result_ok(data)
     except Exception as e:
-        logger.exception("--- [TOOL] 查询 FAQ 失败 ---")
-        return tool_result_fail(str(e))
+        exc_info = f"{e.__class__.__name__}: {e}"
+        logger.warning(f"--- [TOOL] 查询 FAQ 失败: {exc_info} ---")
+        return tool_result_fail(exc_info)
 
 
 @tool
@@ -42,8 +43,9 @@ async def graph_query(query: str):
         data = await ReactAgentService.graph_query(query)
         return tool_result_ok(data)
     except Exception as e:
-        logger.exception("--- [TOOL] 查询图谱失败 ---")
-        return tool_result_fail(str(e))
+        exc_info = f"{e.__class__.__name__}: {e}"
+        logger.warning(f"--- [TOOL] 查询图谱失败: {exc_info} ---")
+        return tool_result_fail(exc_info)
 
 
 @tool
@@ -58,8 +60,9 @@ async def send_wechat_notification(reason: str, user: str, platform: str):
         data = await ReactAgentService.send_wechat_notification(content)
         return tool_result_ok(data)
     except Exception as e:
-        logger.exception("--- [TOOL] 发送微信通知失败 ---")
-        return tool_result_fail(str(e))
+        exc_info = f"{e.__class__.__name__}: {e}"
+        logger.warning(f"--- [TOOL] 发送微信通知失败: {exc_info} ---")
+        return tool_result_fail(exc_info)
 
 
 @tool
@@ -76,8 +79,9 @@ async def get_product_price(index_name: str, query: str):
         data = await ReactAgentService.get_product_price(index_name, query)
         return tool_result_ok(data)
     except Exception as e:
-        logger.exception("--- [TOOL] 查询产品价格失败 ---")
-        return tool_result_fail(str(e))
+        exc_info = f"{e.__class__.__name__}: {e}"
+        logger.warning(f"--- [TOOL] 查询产品价格失败: {exc_info} ---")
+        return tool_result_fail(exc_info)
 
 
 TOOLS = [faq_query, graph_query, send_wechat_notification, get_product_price]
