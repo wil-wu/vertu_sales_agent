@@ -45,7 +45,7 @@ class ReactAgentService:
             json={"query": query},
             timeout=20,
         )
-        return response.json()["data"]["result"]
+        return response.json()["data"]["full_context"]
 
     @staticmethod
     @_retry
