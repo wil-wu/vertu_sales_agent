@@ -1,11 +1,21 @@
 import logging
+from typing import Any
 
 from langchain_core.tools import tool
 
-from app.core.shared import httpx_async_client
-from .config import react_agent_settings
+from .service import ReactAgentService
 
 logger = logging.getLogger(__name__)
+
+
+def tool_result_ok(data: Any) -> dict[str, Any]:
+    """构造成功的统一 tool 返回结果。"""
+    return {"success": True, "data": data, "error": None}
+
+
+def tool_result_fail(error: str) -> dict[str, Any]:
+    """构造失败的统一 tool 返回结果。"""
+    return {"success": False, "data": None, "error": error}
 
 
 @tool
@@ -14,16 +24,12 @@ async def faq_query(query: str):
     查询 FAQ 知识库，产品相关的咨询问题。
     """
     logger.info(f"--- [TOOL] 查询 FAQ: {query} ---")
-    response = await httpx_async_client.post(
-        react_agent_settings.faq_url, json={"query": query}
-    )
-    
-    return [
-        item["answer"]
-        for item in response.json()["categories"][0]["items"][
-            : react_agent_settings.faq_top_n
-        ]
-    ]
+    try:
+        data = await ReactAgentService.faq_query(query)
+        return tool_result_ok(data)
+    except Exception as e:
+        logger.exception("--- [TOOL] 查询 FAQ 失败 ---")
+        return tool_result_fail(str(e))
 
 
 @tool
@@ -32,39 +38,28 @@ async def graph_query(query: str):
     查询图谱，产品相关的图片、视频等素材内容。
     """
     logger.info(f"--- [TOOL] 查询图谱: {query} ---")
-    response = await httpx_async_client.post(
-        react_agent_settings.graph_url, json={"query": query}, timeout=20
-    )
-    return response.json()["result"]
+    try:
+        data = await ReactAgentService.graph_query(query)
+        return tool_result_ok(data)
+    except Exception as e:
+        logger.exception("--- [TOOL] 查询图谱失败 ---")
+        return tool_result_fail(str(e))
 
 
 @tool
-async def send_wechat_notification(reason: str, user: str, platform: str) -> str:
+async def send_wechat_notification(reason: str, user: str, platform: str):
     """
     遇到无法解决的问题，或用户主动要求转人工，发送微信通知。
     """
-    content = f"用户：{user} 平台：{platform} 原因：{reason}"
+    content = f"用户：{user}\n平台：{platform}\n原因：{reason}"
 
-    logger.info(f"--- [TOOL] 发送微信通知: {content} ---")
-
-    url = react_agent_settings.wechat_push_url
-    headers = {
-        "Authorization": f"Bearer {react_agent_settings.wechat_push_token}",
-        "X-API-Key": react_agent_settings.wechat_push_api_key,
-    }
-
-    payload = {"content": content, "ats": ""}
-
-    params = {"nickName": react_agent_settings.wechat_push_group_name}
-
+    logger.info(f"--- [TOOL] 发送微信通知: \n{content} ---")
     try:
-        await httpx_async_client.post(
-            url, json=payload, headers=headers, params=params, timeout=10
-        )
-        return "微信通知发送成功。"
+        data = await ReactAgentService.send_wechat_notification(content)
+        return tool_result_ok(data)
     except Exception as e:
-        logger.error(f"--- [TOOL] 发送微信通知失败: {e} ---")
-        return "微信通知发送失败，请稍后再试。"
+        logger.exception("--- [TOOL] 发送微信通知失败 ---")
+        return tool_result_fail(str(e))
 
 
 @tool
@@ -77,10 +72,12 @@ async def get_product_price(index_name: str, query: str):
     query: 查询关键词，可能包含产品名称、型号、类型、颜色、材质、价格范围等
     """
     logger.info(f"--- [TOOL] 查询平台的产品价格: {index_name} {query} ---")
-    response = await httpx_async_client.post(
-        react_agent_settings.product_info_url, json={"query": query, "index_name": index_name}
-    )
-    return response.json()
+    try:
+        data = await ReactAgentService.get_product_price(index_name, query)
+        return tool_result_ok(data)
+    except Exception as e:
+        logger.exception("--- [TOOL] 查询产品价格失败 ---")
+        return tool_result_fail(str(e))
 
 
 TOOLS = [faq_query, graph_query, send_wechat_notification, get_product_price]
