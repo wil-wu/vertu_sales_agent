@@ -1,0 +1,183 @@
+{
+  "_report_description": "Vertu Sales Agent 批量测试报告 - 包含多人格对话生成与评估结果",
+  "_note": "详细对话数据保存在同目录下的 {persona}_detailed.json 文件中",
+  "report_info": {
+    "generated_at": "2026-03-09T18:38:35.943467",
+    "total_sessions": 50,
+    "successful_evaluations": 50,
+    "failed_evaluations": 0,
+    "success_rate": 100.0,
+    "tested_personas": [
+      "professional",
+      "novice",
+      "anxious",
+      "confrontational",
+      "bilingual"
+    ],
+    "total_duration_seconds": 7473.04
+  },
+  "_dimension_score_comments": {
+    "anthropomorphism_score": "拟人化体验：语言自然度、人设一致性、温度感",
+    "purchase_intent_score": "购买意愿驱动：需求挖掘率、推荐精准度",
+    "problem_solving_score": "问题解决能力：首次解决率、意图识别准确率、兜底率",
+    "sales_script_score": "销售话术质量：FAB完整度、异议处理、交叉销售、合规性",
+    "user_experience_score": "用户体验：CSAT评分、负面反馈触发"
+  },
+  "overall_first_contact_resolution_stats": {
+    "总会话数": 50,
+    "有预期答案的会话": 45,
+    "首次解决成功": 29,
+    "首次解决率": 64.44,
+    "无预期答案的会话": 5
+  },
+  "overall_dimension_scores": {
+    "拟人化体验": 67.78,
+    "购买意愿驱动": 35.33,
+    "问题解决能力": 57.17,
+    "销售话术质量": 51.88,
+    "用户体验": 65.37
+  },
+  "persona_summaries": [
+    {
+      "persona": "professional",
+      "description": "专业人士",
+      "total_sessions": 10,
+      "successful_evaluations": 10,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 66.47,
+        "购买意愿驱动": 27.23,
+        "问题解决能力": 59.11,
+        "销售话术质量": 49.25,
+        "用户体验": 64.68
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 8,
+        "max_turns": 1,
+        "invalid_responses": 1
+      },
+      "avg_turns": 6.1,
+      "total_duration": 1762.3,
+      "first_contact_resolution_stats": {
+        "总会话数": 10,
+        "有预期答案的会话": 9,
+        "首次解决成功": 5,
+        "首次解决率": 55.56,
+        "无预期答案的会话": 1
+      }
+    },
+    {
+      "persona": "novice",
+      "description": "技术小白",
+      "total_sessions": 10,
+      "successful_evaluations": 10,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 72.11,
+        "购买意愿驱动": 43.42,
+        "问题解决能力": 60.65,
+        "销售话术质量": 58.3,
+        "用户体验": 70.72
+      },
+      "finish_reason_distribution": {
+        "invalid_responses": 2,
+        "user_satisfied": 4,
+        "user_rejection": 2,
+        "max_turns": 2
+      },
+      "avg_turns": 5.6,
+      "total_duration": 1151.26,
+      "first_contact_resolution_stats": {
+        "总会话数": 10,
+        "有预期答案的会话": 10,
+        "首次解决成功": 7,
+        "首次解决率": 70.0,
+        "无预期答案的会话": 0
+      }
+    },
+    {
+      "persona": "anxious",
+      "description": "焦虑客户",
+      "total_sessions": 10,
+      "successful_evaluations": 10,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 55.71,
+        "购买意愿驱动": 15.49,
+        "问题解决能力": 40.34,
+        "销售话术质量": 36.86,
+        "用户体验": 43.77
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 3,
+        "invalid_responses": 4,
+        "max_turns": 3
+      },
+      "avg_turns": 6.3,
+      "total_duration": 1255.46,
+      "first_contact_resolution_stats": {
+        "总会话数": 10,
+        "有预期答案的会话": 6,
+        "首次解决成功": 6,
+        "首次解决率": 100.0,
+        "无预期答案的会话": 4
+      }
+    },
+    {
+      "persona": "confrontational",
+      "description": "挑剔型用户（杠精）",
+      "total_sessions": 10,
+      "successful_evaluations": 10,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 64.25,
+        "购买意愿驱动": 32.63,
+        "问题解决能力": 56.9,
+        "销售话术质量": 51.72,
+        "用户体验": 63.5
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 6,
+        "max_turns": 2,
+        "invalid_responses": 2
+      },
+      "avg_turns": 6.5,
+      "total_duration": 1549.38,
+      "first_contact_resolution_stats": {
+        "总会话数": 10,
+        "有预期答案的会话": 10,
+        "首次解决成功": 5,
+        "首次解决率": 50.0,
+        "无预期答案的会话": 0
+      }
+    },
+    {
+      "persona": "bilingual",
+      "description": "双语用户",
+      "total_sessions": 10,
+      "successful_evaluations": 10,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 80.35,
+        "购买意愿驱动": 57.86,
+        "问题解决能力": 68.86,
+        "销售话术质量": 63.28,
+        "用户体验": 84.17
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 6,
+        "human_escalation": 1,
+        "max_turns": 3
+      },
+      "avg_turns": 6.7,
+      "total_duration": 1754.64,
+      "first_contact_resolution_stats": {
+        "总会话数": 10,
+        "有预期答案的会话": 10,
+        "首次解决成功": 6,
+        "首次解决率": 60.0,
+        "无预期答案的会话": 0
+      }
+    }
+  ]
+}

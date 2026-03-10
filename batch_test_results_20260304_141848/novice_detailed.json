@@ -1,0 +1,1168 @@
+{
+  "persona": "novice",
+  "description": "技术小白",
+  "generated_at": "2026-03-04T14:24:59.165532",
+  "total_sessions": 5,
+  "sessions": [
+    {
+      "session_id": "341fca2a-bee9-40bb-9144-5ab080414af9",
+      "persona": "novice",
+      "scenario": "咨询VERTU novice手机的产品特性和价格",
+      "finish_reason": "user_satisfied",
+      "total_turns": 3,
+      "duration_seconds": 84.924726,
+      "dimension_scores": {
+        "anthropomorphism_score": 83.0,
+        "purchase_intent_score": 80.67,
+        "problem_solving_score": 74.67,
+        "sales_script_score": 71.33,
+        "user_experience_score": 89.33
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.75,
+        "rhythm_pacing": 0.8
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.9,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.85,
+        "rhythm_pacing": 0.85
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.78,
+        "avg_recommendation_accuracy": 0.83
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.67,
+        "avg_intent_recognition_accuracy": 0.9,
+        "fallback_count": 1,
+        "fallback_score": 0.8
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.71,
+        "feature_mention_rate": 0.67,
+        "advantage_mention_rate": 0.67,
+        "cross_sell_trigger_count": 2,
+        "avg_script_compliance": 0.95,
+        "avg_personalization_rate": 0.73
+      },
+      "user_experience": {
+        "avg_csat_score": 0.89,
+        "negative_feedback_count": 0
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "总体评价：客服以‘老板’开场，亲切不失分寸；用‘瑞士级精密测量工具’‘隐形武器’等具象比喻，既解释‘59’代号又强化稀缺感，FAB 结构完整。节奏张弛有度，结尾用‘红宝石按键仪式感实拍’制造体验钩子，成功把功能升维为身份象征，有效驱动试驾式兴趣。建议：1. 可追加一句‘您平时更偏好户外探险还是商务品鉴？’轻量挖掘场景，方便后续精准推荐。2. 称谓可交替使用‘您/先生’，避免‘老板’略显江湖气，与 VERTU 优雅调性微冲突。3. 图鉴发送后，可顺势邀请‘预约私享线上演示，由瑞士工程师连线讲解’，进一步锁定高净值客户专属感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.81,
+          "feedback": "总体评价：客服语言极具私人顾问感，FAB 完整，温度与格调兼顾；但面对用户最在意的‘价格+现货’痛点，未给出任何数字或区间，直接推给‘30 分钟内电话’，首次解决失败，可能让务实型客户产生被‘吊胃口’的距离感。建议：1) 先给公开起步价或区间（‘约××万起’），再解释定制溢价，降低心理门槛；2) 用‘今日现货：黑色小牛皮/12G+512G 版本，可即刻调货’等具体信息锁定兴趣；3) 交叉销售可点名‘免费镌刻、全球 24 时私人助理 6 个月’等具象权益，而非泛称‘尊享礼赠’。保持优雅，但让‘立刻可买’的信号更明确。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 30,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮是结束语，客服语气亲切、节奏舒缓，成功延续高端私人顾问形象。但未再强化产品 FAB、未顺势埋下下次沟通的价值点（如专属配色、限量编号、交付仪式），错失最后一次加码购买意愿的机会。建议：1.用一句‘已为老板预留 AGENT Q 首发序号’制造稀缺；2.轻触交叉销售‘同期到店的意大利小牛皮保护套’；3.约定次日致电时段，减少用户等待焦虑。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 78,
+            "problem_solving_score": 97,
+            "sales_script_score": 50,
+            "user_experience_score": 88,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.75,
+              "product_recommendation_accuracy": 0.8
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.6,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.88,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "session_id": "7d99474c-d331-4c79-aa3b-ae2dd31d64fc",
+      "persona": "novice",
+      "scenario": "了解VERTU售后服务和保修政策",
+      "finish_reason": "user_satisfied",
+      "total_turns": 6,
+      "duration_seconds": 188.21543,
+      "dimension_scores": {
+        "anthropomorphism_score": 79.17,
+        "purchase_intent_score": 24.83,
+        "problem_solving_score": 87.67,
+        "sales_script_score": 44.17,
+        "user_experience_score": 79.83
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.76,
+        "rhythm_pacing": 0.83
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.81,
+        "total_personality_deviations": 1,
+        "humor_warmth": 0.74,
+        "rhythm_pacing": 0.83
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.23,
+        "avg_recommendation_accuracy": 0.27
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.83,
+        "avg_intent_recognition_accuracy": 0.97,
+        "fallback_count": 1,
+        "fallback_score": 0.8
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.2,
+        "feature_mention_rate": 0.17,
+        "advantage_mention_rate": 0.17,
+        "cross_sell_trigger_count": 1,
+        "avg_script_compliance": 0.86,
+        "avg_personalization_rate": 0.48
+      },
+      "user_experience": {
+        "avg_csat_score": 0.8,
+        "negative_feedback_count": 1
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "客服表现亮点：1) 语言自然、带英伦温度，成功塑造私人顾问形象；2) FAB 结构完整，把‘262 g’转化为‘扎实质感+从容优雅’的利益点；3) 主动提供实拍图并抛出二选一问题，既交叉销售又制造下一步互动。改进建议：① 需求挖掘仍停留在‘颜色偏好’层面，可追加使用场景（商务/收藏/送礼）与手感偏好，提升推荐深度；② 个性化称呼‘老板’略显江湖，可换成‘您’或‘先生/女士’以保持尊贵调性；③ 可在结尾加一句限量编号或手工时长等稀缺价值，进一步刺激购买欲。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 86,
+            "purchase_intent_score": 77,
+            "problem_solving_score": 100,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.7,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 1.0,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.42,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮对话严重失分。客服直接以‘知识库未列出’为由将用户推向人工，既未给出任何 VERTU 保修政策亮点（如 2 年全球联保、尊享备用机、上门取送等），也未安抚用户情绪，完全丧失奢侈品私人顾问应有的从容与尊贵感。建议：1. 立即补充官方保修年限与特色服务，用‘您可享 24 个月全球联保，一旦故障我们提供备用机与专人上门取送’替代‘未列出’；2. 用第一人称‘我’而非‘知识库’，避免暴露系统痕迹；3. 先给确定性信息，再礼貌征询是否需人工深度讲解，而非直接甩锅。当前回复让用户感知‘官方都不知道自家保修’，极易引发负面口碑。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 55,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 30,
+            "sales_script_score": 18,
+            "user_experience_score": 25,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.35,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.2,
+              "rhythm_pacing": 0.55,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.3,
+              "personalization_rate": 0.1
+            },
+            "user_experience": {
+              "csat_score": 0.25,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮为结束语，客服用‘老板您太客气了’等敬语+祝福，温度与节奏俱佳，但已无销售动作。建议：1.在告别时预埋下一次触点，如‘稍后同事会为您展示限量款私享图册，期待与您共赏’；2.用‘呈上更多惊喜’暗示新品或会员权益，而非空泛祝福，保持高端期待感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 84,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 100,
+            "sales_script_score": 34,
+            "user_experience_score": 92,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 1.0,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.2
+            },
+            "user_experience": {
+              "csat_score": 0.92,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮为礼貌收尾，客服用语自然、温暖且保持品牌调性，成功让用户安心等待后续对接。但缺乏任何销售动作（如预告新品、邀请线下体验、提醒配件/延保等），错失潜在转化机会。建议：1. 在祝福前轻触下一步场景，如‘待保修完成后，若您想为手机搭配专属皮套或体验我们即将发布的限量款，我很乐意第一时间为您预留’；2. 用‘专属顾问’替代‘高级同事’，强化私人尊享感；3. 附上一句‘稍后我会将我的直线联系方式一并转交，方便您随时找到我’，保持持续触达。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 100,
+            "sales_script_score": 42,
+            "user_experience_score": 92,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 1.0,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.92,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮为收尾致谢场景，客服用‘老板您太客气’等口语化敬语，既亲切又保留尊贵感；节奏短促有力，符合‘加急’语境。但奢侈品牌应避免‘老板’这类稍带江湖气的称呼，可换成‘先生/女士’或‘您’；同时可顺势植入下一步价值（例如‘稍后同事会为您准备专属签收仪式’），保持销售温度。整体拟人度高，销售动作已结束，故相关指标为0，无负面风险。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 98,
+            "sales_script_score": 42,
+            "user_experience_score": 92,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.92,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 6,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮是结束语，客服用‘老板’等口语化称呼显得亲切，但略显市井，与VERTU顶级奢侈定位略有偏差；建议改用‘先生/女士’或‘您’并保持优雅尾语。FAB、特性、交叉销售在本轮无需硬植入，但可温和预埋下一步尊贵体验（如‘稍后同事会为您安排专属私享讲解’），既延续温度又强化奢侈仪式感。整体节奏、温度感良好，无兜底风险，用户满意度预计较高。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 84,
+            "purchase_intent_score": 72,
+            "problem_solving_score": 98,
+            "sales_script_score": 47,
+            "user_experience_score": 88,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.7,
+              "product_recommendation_accuracy": 0.75
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.7,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.88,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "session_id": "f88f0a3e-5aa6-48dc-870b-3ce68d9b3ce8",
+      "persona": "novice",
+      "scenario": "询问VERTU手机的技术规格和功能",
+      "finish_reason": "user_satisfied",
+      "total_turns": 3,
+      "duration_seconds": 76.762683,
+      "dimension_scores": {
+        "anthropomorphism_score": 83.33,
+        "purchase_intent_score": 66.33,
+        "problem_solving_score": 97.33,
+        "sales_script_score": 70.33,
+        "user_experience_score": 89.33
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.75,
+        "rhythm_pacing": 0.8
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.9,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.85,
+        "rhythm_pacing": 0.87
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.63,
+        "avg_recommendation_accuracy": 0.7
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.92,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.71,
+        "feature_mention_rate": 0.67,
+        "advantage_mention_rate": 0.67,
+        "cross_sell_trigger_count": 2,
+        "avg_script_compliance": 0.93,
+        "avg_personalization_rate": 0.7
+      },
+      "user_experience": {
+        "avg_csat_score": 0.89,
+        "negative_feedback_count": 0
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.82,
+          "feedback": "总体评价：客服回复专业自然，完整使用了 FAB 结构推荐产品，语言华丽且贴合 VERTU 高端定位；节奏与温度感俱佳，成功触发交叉销售（私人定制名额）。建议：1) 先以一句温暖确认回应用户情感（如“您对用料的讲究眼光真独到”），再展开技术细节，可再提升亲密度；2) 需求挖掘可再深入一步，询问用户日常场景或风格偏好，以便后续推荐更精准；3) 个性化表达目前依赖材质选项，可加入“为您预留”等专属话术，强化一对一私人顾问感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "总体评价：客服回复专业自然，完整使用了 FAB 结构推荐产品，语言优雅且带温度，成功将‘奢华’与‘顺手’绑定，打消用户耐用性顾虑；顺势抛出线下私密品鉴与数据迁移服务，交叉销售自然。建议：1) 先以一句共情回应‘顺手’需求，再进入性能说明，会更显私人顾问感；2) 可追问用户具体使用场景（商务/旅行/摄影），以进一步提升推荐精准度与个性化；3) 结尾可补充‘随时微信/电话找我，一对一服务’，强化专属感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮是礼貌收尾，客服用词优雅、节奏自然，成功维持品牌高端调性。但销售层面几乎‘零进攻’：既未追问用户放弃品鉴的真实顾虑（价格？时间？），也未顺势提供折中方案（线上专属讲解、限时礼遇、VIP 通道等），导致需求挖掘与产品推荐得分极低。建议：1. 在用户说‘不麻烦品鉴’时，先共情致谢，再轻探原因：‘方便问下是日程冲突，还是想再对比看看？’ 2. 提供‘零压力’替代方案：‘我可为您预留 30 天优先品鉴权，专属顾问随时待命，无需即刻决定。’ 3. 埋下下次触点：‘稍后为您奉上一份 VERTU 私人印记定制图鉴，若一眼心动，我们再约时间可好？’ 既保持尊贵感，又延续销售线索。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 84,
+            "purchase_intent_score": 35,
+            "problem_solving_score": 98,
+            "sales_script_score": 47,
+            "user_experience_score": 88,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.4
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.88,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "session_id": "5eca21fc-91be-4fa9-b7cb-d216f46a2fd4",
+      "persona": "novice",
+      "scenario": "比较不同VERTU手机型号的差异",
+      "finish_reason": "user_satisfied",
+      "total_turns": 3,
+      "duration_seconds": 132.206736,
+      "dimension_scores": {
+        "anthropomorphism_score": 83.67,
+        "purchase_intent_score": 80.67,
+        "problem_solving_score": 97.67,
+        "sales_script_score": 81.33,
+        "user_experience_score": 90.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.75,
+        "rhythm_pacing": 0.8
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.9,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.85,
+        "rhythm_pacing": 0.88
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.77,
+        "avg_recommendation_accuracy": 0.85
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.93,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.9,
+        "feature_mention_rate": 1.0,
+        "advantage_mention_rate": 1.0,
+        "cross_sell_trigger_count": 3,
+        "avg_script_compliance": 0.95,
+        "avg_personalization_rate": 0.72
+      },
+      "user_experience": {
+        "avg_csat_score": 0.9,
+        "negative_feedback_count": 0
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "客服把‘后盖灵感’这一功能问题，用故事化、场景化的语言完整回答，并自然过渡到‘实拍细节’与‘定制羽片’两项高净值服务，既展示品牌工艺深度，又创造下一步互动理由。建议：1) 在回答后可补一句‘您更偏爱哪种羽片材质？钛合金的冷冽还是玫瑰金的温润？’以进一步锁定偏好；2) 若用户仅随口一问，可先用一张高清微距图做‘视觉钩子’，再提定制，降低压迫感。整体已具备私人顾问温度与奢侈品格调。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 84,
+            "purchase_intent_score": 80,
+            "problem_solving_score": 98,
+            "sales_script_score": 81,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.75,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.81,
+          "feedback": "客服表现亮点：1) 用‘四位主力成员’‘由简到奢’等生活化比喻，语言自然且带奢侈腔调；2) 每款机用一句话提炼‘顺手’差异（IVERTU零学习、Signature S单手优雅），FAB完整；3) 结尾以选择题锁定用户偏好，为下一步铺垫。改进点：1) 可再追问用户‘日常’场景（商务/娱乐/差旅占比），提升推荐精准度；2) 交叉销售仅停留在‘对比实拍图’，可顺势提及‘小牛皮保护壳或全球私人助理服务’，强化奢华附加值；3) 温度感略偏理性，可加一句‘您喜欢握在掌中那种踏实感，还是更轻一点放口袋几乎忘了它的存在？’让用户产生触觉想象，进一步升温。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "本轮为成交收尾，客服用‘老板眼光独到’自然抬高客户身份，再以‘零学习成本’强化 IVERTU 核心卖点，语言优雅、节奏利落；顺势抛出‘定制后盖/私享服务’轻量级交叉销售，既留钩子又不压迫。唯一可提升：可再补一句‘我这就为您锁货，预计明午送达’，把购买动作顺势推进到支付环节，而非停留在祝福层面。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 84,
+            "purchase_intent_score": 80,
+            "problem_solving_score": 98,
+            "sales_script_score": 81,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.9,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.75,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "session_id": "2ed58e5e-4d0c-49cb-997d-2e63c522f37c",
+      "persona": "novice",
+      "scenario": "咨询VERTU手机的安全和隐私功能",
+      "finish_reason": "user_satisfied",
+      "total_turns": 3,
+      "duration_seconds": 61.744216,
+      "dimension_scores": {
+        "anthropomorphism_score": 83.0,
+        "purchase_intent_score": 70.33,
+        "problem_solving_score": 97.33,
+        "sales_script_score": 77.33,
+        "user_experience_score": 89.33
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.75,
+        "rhythm_pacing": 0.8
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.9,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.85,
+        "rhythm_pacing": 0.85
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.6,
+        "avg_recommendation_accuracy": 0.82
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.92,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.71,
+        "feature_mention_rate": 0.67,
+        "advantage_mention_rate": 0.33,
+        "cross_sell_trigger_count": 3,
+        "avg_script_compliance": 0.95,
+        "avg_personalization_rate": 0.7
+      },
+      "user_experience": {
+        "avg_csat_score": 0.89,
+        "negative_feedback_count": 0
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.82,
+          "feedback": "客服语言极具画面感与奢侈质感，成功将‘转屏’这一功能转化为可感知的尊贵体验（精钢转轴、咔嗒声、鳄鱼皮+18K金）。FAB结构完整，且用‘亲手感受’‘专属实机演示’等话术把线上问答直接导向线下高净值客户专属服务，销售节奏优雅。不足：未先追问用户购机用途或审美偏好，需求挖掘浅，导致推荐虽精准却略显单向；可补一句‘方便告诉我您平时更常用手机处理商务投屏，还是私享影音？’既深挖需求，又保持私人顾问式温度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 57,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.82,
+          "feedback": "总体评价：客服回复专业自然，完整使用了 FAB 结构推荐产品，语言高端且富有温度，成功将隐私功能转化为头等舱级礼遇，符合 VERTU 奢侈品牌调性。建议：1) 在结尾可加入一句‘您平时在哪些场景最担心隐私泄露？我可以帮您定制专属策略’进一步挖掘需求；2) 交叉销售可具体提及‘隐私钢化膜’或‘加密U盘’等配件，提升客单价；3) 减少‘老板’称呼，改用‘您’或‘先生/女士’更显优雅。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 82,
+            "problem_solving_score": 97,
+            "sales_script_score": 82,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.8,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.75
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.88,
+          "user_anthropomorphism_score": 0.83,
+          "feedback": "本轮是结束语，客服用‘老板’+‘为您解忧是我的荣幸’+‘随时恭候’把 VERTU 的私人管家感拉满，语言自然、节奏优雅，用户情绪被很好承接。但 FAB 缺失，未再强化隐私功能的具体利益点，也未顺势追问用户偏好或留下下一次体验钩子（如‘方便的话，我可以为您预留一台签名版真机，您何时有空？’）。建议：1. 在祝福前补一句价值回圈：‘VERTU 的加密通话与零数据云端，可让您未来每一次重要沟通都高枕无忧。’2. 用封闭式提问锁定下次接触：‘您看本周五或周六，我亲自为您安排 15 分钟私享体验，哪一刻方便？’既保持温度，又把销售节奏推进到预约，提升转化。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 83,
+            "purchase_intent_score": 72,
+            "problem_solving_score": 98,
+            "sales_script_score": 68,
+            "user_experience_score": 88,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.7,
+              "product_recommendation_accuracy": 0.75
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.7,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.88,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "error": null
+    }
+  ]
+}

@@ -2,6 +2,9 @@ import asyncio
 import uuid
 from datetime import datetime
 from typing import Optional, Dict, Any, List
+from pathlib import Path
+import csv
+import logging
 
 from pydantic import BaseModel, Field
 from openai import AsyncOpenAI
@@ -26,6 +29,35 @@ from .shared import session_manager, assessment_tracker
 from . import prompts
 
 
+def load_qa_csv(csv_path: str = None) -> Dict[str, str]:
+    """加载 QA CSV 文件，建立问题-答案映射"""
+    if csv_path is None:
+        # 默认在项目根目录查找
+        csv_path = Path(__file__).parent.parent.parent.parent / "jd_tm_qa_filtered.csv"
+    else:
+        csv_path = Path(csv_path)
+    
+    qa_mapping = {}
+    if csv_path.exists():
+        try:
+            with open(csv_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    question = row.get('question') or ''
+                    answer = row.get('answer') or ''
+                    question = question.strip()
+                    answer = answer.strip()
+                    if question and answer:
+                        qa_mapping[question] = answer
+            print(f"[RefereeAgent] 已加载 {len(qa_mapping)} 条 QA 数据")
+        except Exception as e:
+            print(f"[RefereeAgent] 加载 QA CSV 失败: {e}")
+    else:
+        print(f"[RefereeAgent] QA CSV 文件不存在: {csv_path}")
+    
+    return qa_mapping
+
+
 class RefereeAgent:
     """裁判员智能体"""
     
@@ -37,6 +69,8 @@ class RefereeAgent:
         )
         self.model = referee_agent_settings.llm_model
         self._initialized = True
+        # 加载 QA 数据
+        self.qa_mapping = load_qa_csv()
     
     async def evaluate_turn(self, request: RefereeRequest) -> RefereeResponse:
         """评估对话回合"""
@@ -65,6 +99,13 @@ class RefereeAgent:
             )
             
             evaluation = llm_response.choices[0].message.content
+            
+            # 记录 token 使用情况
+            if llm_response.usage:
+                input_tokens = llm_response.usage.prompt_tokens
+                output_tokens = llm_response.usage.completion_tokens
+                logging.info(f"[RefereeAgent] Token 使用 - 输入: {input_tokens}, 输出: {output_tokens}, 总计: {input_tokens + output_tokens}")
+            
             assessment = self._parse_evaluation_response(evaluation)
             assessment.turn_id = str(uuid.uuid4())
             
@@ -101,7 +142,8 @@ class RefereeAgent:
         user_message: str,
         agent_response: str,
         conversation_history: Optional[list[dict]] = None,
-        use_detailed: bool = True
+        expected_answer: Optional[str] = None,
+        is_first_turn: bool = False,
     ) -> str:
         """构建评估提示词 - 销售与用户体验维度
         
@@ -109,7 +151,8 @@ class RefereeAgent:
             user_message: 用户消息
             agent_response: 客服回复
             conversation_history: 对话历史
-            use_detailed: 是否使用详细评估模板（包含6大维度37项指标）
+            expected_answer: 预期答案（用于首轮对话评估）
+            is_first_turn: 是否为首轮对话
         """
         history_str = ""
         if conversation_history:
@@ -122,19 +165,13 @@ class RefereeAgent:
             history_str = prompts.HISTORY_TEMPLATE.format(history_items=history_items)
         
         # 使用详细评估模板
-        if use_detailed:
-            return prompts.DETAILED_EVALUATION_PROMPT_TEMPLATE.format(
-                user_message=user_message,
-                agent_response=agent_response,
-                history_str=history_str
-            )
-        else:
-            # 兼容旧版简单模板
-            return prompts.EVALUATION_PROMPT_TEMPLATE.format(
-                user_message=user_message,
-                agent_response=agent_response,
-                history_str=history_str
-            )
+        return prompts.DETAILED_EVALUATION_PROMPT_TEMPLATE.format(
+            user_message=user_message,
+            agent_response=agent_response,
+            history_str=history_str,
+            expected_answer=expected_answer if expected_answer else "",
+            is_first_turn=str(is_first_turn).lower()
+        )
     
     def _system_prompt(self) -> str:
         """系统提示词 - 销售客服质量评估专家"""
@@ -143,10 +180,15 @@ class RefereeAgent:
     def _parse_evaluation_response(self, response: str, user_message: str = "", agent_response: str = "") -> Dict[str, Any]:
         """解析LLM评估响应 - 包含详细6大维度指标"""
         try:
-            # 尝试提取JSON
-            json_match = re.search(r'\{.*\}', response, re.DOTALL)
+            # 尝试提取JSON - 使用更精确的正则表达式
+            # 先尝试提取完整的JSON对象
+            json_match = re.search(r'\{[\s\S]*\}', response.strip())
             if json_match:
-                data = json.loads(json_match.group())
+                json_str = json_match.group()
+                # 尝试修复常见的JSON格式问题
+                # 移除行内注释（// 开头到行尾的内容）
+                json_str = re.sub(r'//.*$', '', json_str, flags=re.MULTILINE)
+                data = json.loads(json_str)
             else:
                 # 如果无法提取JSON，使用默认值
                 data = {}
@@ -549,8 +591,16 @@ class RefereeAgent:
                 self.termination_reason = None
                 self.feedback = "评估完成"
 
-        # 构建评估提示词并调用LLM（使用详细模板）
-        prompt = self._build_evaluation_prompt(question, answer, conversation_history, use_detailed=True)
+        # 为首轮对话查找预期答案
+        expected_answer = None
+        is_first_turn = (turn_number == 1)
+        if is_first_turn and hasattr(self, 'qa_mapping'):
+            expected_answer = self.qa_mapping.get(question.strip())
+            if expected_answer:
+                print(f"[RefereeAgent] 首轮对话找到预期答案，问题: {question[:50]}...")
+        
+        # 构建评估提示词并调用LLM
+        prompt = self._build_evaluation_prompt(question, answer, conversation_history, expected_answer, is_first_turn)
         
         try:
             llm_response = await self.client.chat.completions.create(
@@ -564,6 +614,13 @@ class RefereeAgent:
             )
             
             evaluation_text = llm_response.choices[0].message.content
+            
+            # 记录 token 使用情况
+            if llm_response.usage:
+                input_tokens = llm_response.usage.prompt_tokens
+                output_tokens = llm_response.usage.completion_tokens
+                logging.info(f"[RefereeAgent] Token 使用 - 输入: {input_tokens}, 输出: {output_tokens}, 总计: {input_tokens + output_tokens}")
+            
             assessment_data = self._parse_evaluation_response(evaluation_text, question, answer)
             
             # 创建结果对象
@@ -644,6 +701,20 @@ class RefereeAgent:
         conversation = session_data.get("conversation", [])
         session_id = session_data.get("session_id", "")
         
+        # 从 calls 中提取 question_rewrite 类型的原问题（用于查找预期答案）
+        original_questions = {}
+        llm_call_stats = session_data.get("llm_call_stats", {})
+        calls = llm_call_stats.get("calls", [])
+        for call in calls:
+            if call.get("type") == "question_rewrite":
+                details = call.get("details", "")
+                # 解析 "改写问题: 原问题..." 格式
+                if "改写问题:" in details:
+                    original_question = details.replace("改写问题:", "").strip()
+                    # 使用轮次作为键（假设 question_rewrite 按顺序对应每轮）
+                    turn_num = len(original_questions) + 1
+                    original_questions[turn_num] = original_question
+        
         # 提取对话轮次
         turns = []
         for i, msg in enumerate(conversation):
@@ -662,7 +733,47 @@ class RefereeAgent:
         turn_assessments = []
         detailed_metrics_list = []
         
+        # 记录首轮对话的预期回答和实际回答（用于 first_contact_resolution 评估）
+        first_turn_qa = {}
+        
         for turn in turns:
+            # 为首轮对话查找预期答案（使用 calls 中的原问题）
+            expected_answer = None
+            if turn["turn_number"] == 1:
+                # 优先使用 calls 中的原问题，如果没有则使用 conversation 中的问题
+                original_question = original_questions.get(1, turn["question"])
+                if hasattr(self, 'qa_mapping'):
+                    # 首先尝试精确匹配
+                    expected_answer = self.qa_mapping.get(original_question.strip())
+                    
+                    # 如果精确匹配失败，尝试前缀匹配（处理截断的情况）
+                    if not expected_answer:
+                        for qa_question, qa_answer in self.qa_mapping.items():
+                            # 检查 CSV 中的问题是否以提取的问题开头（去除可能的...）
+                            clean_original = original_question.strip().rstrip('.').rstrip('...')
+                            if qa_question.startswith(clean_original):
+                                expected_answer = qa_answer
+                                print(f"[RefereeAgent] 使用前缀匹配找到预期答案")
+                                break
+                            # 或者反过来，检查提取的问题是否以 CSV 中的问题开头
+                            if clean_original.startswith(qa_question[:50]):
+                                expected_answer = qa_answer
+                                print(f"[RefereeAgent] 使用反向前缀匹配找到预期答案")
+                                break
+                
+                # 无论是否找到预期答案，都记录问答对比
+                first_turn_qa = {
+                    "question": original_question,
+                    "conversation_question": turn["question"],
+                    "expected_answer": expected_answer if expected_answer else "",
+                    "actual_answer": turn["answer"]
+                }
+                
+                if expected_answer:
+                    print(f"[RefereeAgent] 首轮对话找到预期答案，原问题: {original_question[:50]}...")
+                else:
+                    print(f"[RefereeAgent] 首轮对话未找到预期答案，原问题: {original_question[:50]}...")
+            
             assessment = await self.assess_turn(
                 turn_number=turn["turn_number"],
                 question=turn["question"],
@@ -681,11 +792,19 @@ class RefereeAgent:
             if assessment.detailed_metrics:
                 assessment_dict["detailed_metrics"] = assessment.detailed_metrics.model_dump()
                 detailed_metrics_list.append(assessment.detailed_metrics)
+                
+                # 为首轮对话添加 first_contact_resolution
+                if turn["turn_number"] == 1:
+                    assessment_dict["first_contact_resolution"] = assessment.detailed_metrics.problem_solving.first_contact_resolution
+            
+            # 为首轮对话添加问答对比（无论 detailed_metrics 是否存在）
+            if turn["turn_number"] == 1 and first_turn_qa:
+                assessment_dict["qa_comparison"] = first_turn_qa
             
             turn_assessments.append(assessment_dict)
         
         # ========== 详细指标汇总 ==========
-        detailed_summary = self._calculate_detailed_summary(detailed_metrics_list) if detailed_metrics_list else {}
+        detailed_summary = self._calculate_detailed_summary(detailed_metrics_list, turn_assessments) if detailed_metrics_list else {}
 
         return {
             "session_id": session_id,
@@ -698,7 +817,7 @@ class RefereeAgent:
             "turn_assessments": turn_assessments
         }
     
-    def _calculate_detailed_summary(self, metrics_list: List[DetailedMetrics]) -> dict:
+    def _calculate_detailed_summary(self, metrics_list: List[DetailedMetrics], turn_assessments: List[Dict] = None) -> dict:
         """计算详细指标的会话级汇总（5大维度，含维度综合评分）"""
         if not metrics_list:
             return {}
@@ -752,8 +871,16 @@ class RefereeAgent:
         else:  # fallback_count == 0
             fallback_score = 1.0
         
+        # 计算 first_contact_resolution_rate - 只计算首轮对话
+        # 从 turn_assessments 中找到首轮对话的 first_contact_resolution
+        first_contact_resolution_rate = 0.0
+        if turn_assessments:
+            first_turn = next((t for t in turn_assessments if t.get("turn_number") == 1), None)
+            if first_turn:
+                first_contact_resolution_rate = 1.0 if first_turn.get("first_contact_resolution") else 0.0
+        
         problem = {
-            "first_contact_resolution_rate": round(sum([1 for m in metrics_list if m.problem_solving.first_contact_resolution]) / n, 2),
+            "first_contact_resolution_rate": first_contact_resolution_rate,
             "avg_intent_recognition_accuracy": avg([m.problem_solving.intent_recognition_accuracy for m in metrics_list]),
             "fallback_count": fallback_count,
             "fallback_score": fallback_score,

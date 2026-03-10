@@ -1,0 +1,135 @@
+{
+  "_report_description": "Vertu Sales Agent 批量测试报告 - 包含多人格对话生成与评估结果",
+  "_note": "详细对话数据保存在同目录下的 {persona}_detailed.json 文件中",
+  "report_info": {
+    "generated_at": "2026-03-04T21:14:11.823867",
+    "total_sessions": 25,
+    "successful_evaluations": 25,
+    "failed_evaluations": 0,
+    "success_rate": 100.0,
+    "tested_personas": [
+      "professional",
+      "novice",
+      "anxious",
+      "confrontational",
+      "bilingual"
+    ],
+    "total_duration_seconds": 3148.5
+  },
+  "_dimension_score_comments": {
+    "anthropomorphism_score": "拟人化体验：语言自然度、人设一致性、温度感",
+    "purchase_intent_score": "购买意愿驱动：需求挖掘率、推荐精准度",
+    "problem_solving_score": "问题解决能力：首次解决率、意图识别准确率、兜底率",
+    "sales_script_score": "销售话术质量：FAB完整度、异议处理、交叉销售、合规性",
+    "user_experience_score": "用户体验：CSAT评分、负面反馈触发"
+  },
+  "overall_dimension_scores": {
+    "anthropomorphism_score": 81.19,
+    "purchase_intent_score": 38.06,
+    "problem_solving_score": 74.54,
+    "sales_script_score": 57.78,
+    "user_experience_score": 79.86
+  },
+  "persona_summaries": [
+    {
+      "persona": "professional",
+      "description": "专业人士",
+      "total_sessions": 5,
+      "successful_evaluations": 5,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 82.68,
+        "purchase_intent_score": 37.01,
+        "problem_solving_score": 68.42,
+        "sales_script_score": 60.46,
+        "user_experience_score": 80.47
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 3,
+        "max_turns": 2
+      },
+      "avg_turns": 6.8,
+      "total_duration": 703.13
+    },
+    {
+      "persona": "novice",
+      "description": "技术小白",
+      "total_sessions": 5,
+      "successful_evaluations": 5,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 80.66,
+        "purchase_intent_score": 55.94,
+        "problem_solving_score": 85.15,
+        "sales_script_score": 69.86,
+        "user_experience_score": 82.54
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 5
+      },
+      "avg_turns": 5.8,
+      "total_duration": 560.03
+    },
+    {
+      "persona": "anxious",
+      "description": "焦虑客户",
+      "total_sessions": 5,
+      "successful_evaluations": 5,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 80.21,
+        "purchase_intent_score": 17.08,
+        "problem_solving_score": 78.54,
+        "sales_script_score": 46.22,
+        "user_experience_score": 78.96
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 4,
+        "max_turns": 1
+      },
+      "avg_turns": 7.0,
+      "total_duration": 768.31
+    },
+    {
+      "persona": "confrontational",
+      "description": "挑剔型用户（杠精）",
+      "total_sessions": 5,
+      "successful_evaluations": 5,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 78.93,
+        "purchase_intent_score": 31.43,
+        "problem_solving_score": 56.87,
+        "sales_script_score": 49.12,
+        "user_experience_score": 70.7
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 3,
+        "user_rejection": 1,
+        "max_turns": 1
+      },
+      "avg_turns": 7.0,
+      "total_duration": 683.67
+    },
+    {
+      "persona": "bilingual",
+      "description": "双语用户",
+      "total_sessions": 5,
+      "successful_evaluations": 5,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 83.47,
+        "purchase_intent_score": 48.86,
+        "problem_solving_score": 83.73,
+        "sales_script_score": 63.24,
+        "user_experience_score": 86.62
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 4,
+        "max_turns": 1
+      },
+      "avg_turns": 6.0,
+      "total_duration": 433.36
+    }
+  ]
+}

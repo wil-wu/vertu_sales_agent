@@ -85,7 +85,7 @@ class UserAgent:
         if state.llm_call_stats["min_duration"] == float('inf'):
             state.llm_call_stats["min_duration"] = 0.0
 
-    async def load_question_pool(self, csv_file: str = "simulation/jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
+    async def load_question_pool(self, csv_file: str = "jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
         """加载问题池"""
         logger.info(f"=== [AGENT] 加载问题池: {csv_file} ===")
         try:

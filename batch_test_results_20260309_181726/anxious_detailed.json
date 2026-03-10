@@ -1,0 +1,3818 @@
+{
+  "persona": "anxious",
+  "description": "焦虑客户",
+  "generated_at": "2026-03-09T18:29:33.460460",
+  "total_sessions": 10,
+  "sessions": [
+    {
+      "session_id": "31772707-1b5b-4713-a31a-a47a53382dba",
+      "persona": "anxious",
+      "scenario": "咨询VERTU anxious手机的产品特性和价格",
+      "finish_reason": "user_satisfied",
+      "total_turns": 4,
+      "duration_seconds": 88.556812,
+      "dimension_scores": {
+        "anthropomorphism_score": 70.0,
+        "purchase_intent_score": 17.5,
+        "problem_solving_score": 64.0,
+        "sales_script_score": 45.75,
+        "user_experience_score": 63.75
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.84,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.54,
+        "rhythm_pacing": 0.79
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.77,
+        "total_personality_deviations": 3,
+        "humor_warmth": 0.71,
+        "rhythm_pacing": 0.8
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.17,
+        "avg_recommendation_accuracy": 0.17
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.93,
+        "fallback_count": 1,
+        "fallback_score": 0.8
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.47,
+        "feature_mention_rate": 0.75,
+        "advantage_mention_rate": 0.5,
+        "cross_sell_trigger_count": 0,
+        "avg_script_compliance": 0.89,
+        "avg_personalization_rate": 0.42
+      },
+      "user_experience": {
+        "avg_csat_score": 0.64,
+        "negative_feedback_count": 1
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.86,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服在语言上保持了亲切感，使用了‘老板’等称呼提升温度，并完整解释了产品的核心特性和优势，符合FAB结构。可以进一步提升的地方：\n1. 主动进行需求挖掘，例如询问用户对AI助理的具体使用场景或预算，以提升需求发现率。\n2. 在介绍核心功能后，可适当推荐配套的高端配件或延保服务，实现交叉销售。\n3. 虽然语言自然，但在奢侈品牌的语调上可以稍微收敛一点，避免过于口语化的称呼，以保持更高的品牌尊贵感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 77,
+            "purchase_intent_score": 45,
+            "problem_solving_score": 100,
+            "sales_script_score": 59,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.6
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 1.0,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "VERTU Agent Q手机有没有超级岛功能？...",
+            "conversation_question": "VERTU Agent Q 这款手机有“超级岛”功能吗？",
+            "expected_answer": "VERTU Agent Q手机没有超级岛功能。",
+            "actual_answer": "老板，VERTU Agent Q 并未搭载“超级岛”功能。   它真正的核心，是作为全球首款 AI Agent 手机——内置 200+ 专属 AI 智能体，随时替您处理行程、投资、甚至私人飞机预订；再辅以 7×24 真人管家，双线并行，比任何“岛”都更懂您的世界。"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.73,
+          "user_anthropomorphism_score": 0.7,
+          "feedback": "客服对用户的技术询问作出了及时的响应，并说明了加密体系的核心特性，这在一定程度上展示了产品的安全优势。但在奢侈品牌的语境下，使用“老板”称呼显得过于随意，偏离了VERTU的高端形象。回复未能直接提供用户要求的标准条款编号，而是转人工处理，这导致问题未在本轮得到解决，可能降低用户满意度。建议：\n1. 保持品牌专属的礼貌称呼（如‘尊敬的客户’），避免口语化称呼。 \n2. 在无法立即提供条款编号时，可先给出公开的加密标准概览，并承诺后续跟进，以提升透明度和信任感。 \n3. 主动询问用户的使用场景或预算，以便后续进行需求挖掘和精准推荐。 \n4. 如有机会，可顺势推荐配套的安全配件或延长保修服务，实现交叉销售。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 66,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 30,
+            "sales_script_score": 47,
+            "user_experience_score": 50,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.66,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.5,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.68,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在语言上较为自然，但使用了“老板”等口语化称呼，偏离了VERTU高端、优雅的品牌形象，导致人格偏离计数为1。未对用户的需求进行进一步挖掘，也未提供具体的产品推荐或价值阐述，导致需求发现率和推荐精准度均偏低。回复虽承诺通过微信发送合规文档，但未直接提供信息，未能一次性解决用户的问题（first_contact_resolution 为 false）。在FAB结构上仅提及了特性，缺少优势和利益的阐释，且未进行交叉销售或个性化定制。建议：\n1. 保持品牌调性，避免使用过于随意的称呼，使用如“尊敬的客户”。\n2. 主动询问用户的具体使用场景或预算，以便进一步挖掘需求。\n3. 在提供文档的同时，简要说明这些合规条款如何提升用户的安全体验（优势/利益），形成完整的FAB结构。\n4. 如有适配的配件或延保服务，可适时进行交叉销售。\n5. 提供直接的文档链接或明确的获取路径，争取一次性解决用户需求，提高满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 64,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 63,
+            "sales_script_score": 41,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.82,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.45,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.72,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.78,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.1
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": true,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.85,
+          "feedback": "客服的回复整体语气温暖且及时，但在奢侈品牌的语境下使用“老板”显得过于随意，偏离了VERTU的高端形象。建议：\n1. 避免使用过于口语化或亲昵的称呼，改为“尊敬的客户”或直接使用客户姓名。 \n2. 在对话中加入对产品价值或服务优势的简要说明（FAB结构），即使用户未主动询问，也能提升购买意愿。 \n3. 继续保持24/7服务承诺的表达，但语言可更简洁、专业，避免冗长的诗意措辞，以提升信息传递效率。 \n4. 如用户仅表达感谢，适当的回复即可，无需额外的营销信息，以免产生不必要的干扰。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 73,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 63,
+            "sales_script_score": 36,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.8,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "VERTU Agent Q手机有没有超级岛功能？...",
+        "conversation_question": "VERTU Agent Q 这款手机有“超级岛”功能吗？",
+        "expected_answer": "VERTU Agent Q手机没有超级岛功能。",
+        "actual_answer": "老板，VERTU Agent Q 并未搭载“超级岛”功能。   它真正的核心，是作为全球首款 AI Agent 手机——内置 200+ 专属 AI 智能体，随时替您处理行程、投资、甚至私人飞机预订；再辅以 7×24 真人管家，双线并行，比任何“岛”都更懂您的世界。",
+        "first_contact_resolution": true
+      },
+      "error": null
+    },
+    {
+      "session_id": "174835ca-ca76-49dc-a1a9-eb7d90f773fc",
+      "persona": "anxious",
+      "scenario": "了解VERTU售后服务和保修政策",
+      "finish_reason": "invalid_responses",
+      "total_turns": 5,
+      "duration_seconds": 77.167067,
+      "dimension_scores": {
+        "anthropomorphism_score": 33.6,
+        "purchase_intent_score": 0.0,
+        "problem_solving_score": 0.0,
+        "sales_script_score": 18.0,
+        "user_experience_score": 10.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.81,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.41,
+        "rhythm_pacing": 0.74
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.14,
+        "total_personality_deviations": 5,
+        "humor_warmth": 0.04,
+        "rhythm_pacing": 0.18
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.0,
+        "avg_recommendation_accuracy": 0.0
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.0,
+        "avg_intent_recognition_accuracy": 0.0,
+        "fallback_count": 5,
+        "fallback_score": 0.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.0,
+        "feature_mention_rate": 0.0,
+        "advantage_mention_rate": 0.0,
+        "cross_sell_trigger_count": 0,
+        "avg_script_compliance": 0.4,
+        "avg_personalization_rate": 0.0
+      },
+      "user_experience": {
+        "avg_csat_score": 0.1,
+        "negative_feedback_count": 5
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.2,
+          "user_anthropomorphism_score": 0.75,
+          "feedback": "客服回复仅返回系统错误信息，未体现VERTU品牌的高端、专业形象，也未对用户的需求进行任何探索或回应。建议：\n1. 立即识别用户意图——用户在询问 META 双曲屏手机的 AI 功能演示动图，客服应先确认是否了解该产品或提供官方演示链接。\n2. 保持品牌调性——使用温暖、礼貌且富有品味的语言，如“非常感谢您的关注，关于 META 双曲屏的 AI 演示，我可以为您提供官方视频链接或安排专属顾问为您演示”。\n3. 若系统确实无法提供，需明确说明原因并主动提供替代方案（如发送官方资料、预约线下体验），而不是简单的错误提示。\n4. 在对话中加入 FAB 结构，说明产品特性、优势以及对用户的价值，提升购买意愿。\n5. 避免出现技术错误信息，确保系统稳定或在出现故障时及时转接人工，防止负面反馈。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 42,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 30,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.1,
+              "rhythm_pacing": 0.3,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          },
+          "first_contact_resolution": false,
+          "qa_comparison": {
+            "question": "META 双曲屏 AI 智能体手机的 AI 功能演示动图有吗？...",
+            "conversation_question": "有没看到过 META 双曲屏那款 AI 智能体手机的 AI 功能演示动图啊？",
+            "expected_answer": "",
+            "actual_answer": "抱歉，服务暂时不可用: 'result'"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.12,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服未能提供用户请求的售后维修承诺信息，直接返回系统错误，导致严重的品牌形象受损。建议：①在无法即时获取信息时，使用专业且温暖的语言表达歉意并承诺尽快跟进，而不是展示技术错误；②立即提供标准的售后政策概述（如维修时效、保修条款编号），并引导用户获取完整文档；③保持品牌调性，避免机械化或技术性语言；④若需要转人工，明确告知并提供预计等待时间，以降低负面情绪。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 32,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.1,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服未能提供用户请求的官方售后政策文档链接，回复内容是系统错误信息，严重偏离VERTU高端、专业的品牌形象。建议：①立即修复系统调用错误，确保能够返回正式、礼貌的文字回复；②在识别到用户需求后，主动提供政策文档链接或说明获取方式；③使用温暖、尊敬的语气，体现私人顾问的关怀；④如无法即时提供，明确说明后续处理流程并承诺跟进，而不是返回技术错误；⑤在回复中加入品牌的特色优势（如全球保修、贵金属机身等），并适当进行交叉销售（如延保服务），提升购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 30,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 30,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.15,
+          "user_anthropomorphism_score": 0.48,
+          "feedback": "客服未能提供用户请求的售后政策链接，回复中出现技术错误信息，严重偏离VERTU高端、专业的品牌形象。建议：①立即修复系统错误，确保能够返回正确的文档链接或明确的人工转接说明；②在回复中使用礼貌、温暖的语言，如“非常抱歉给您带来不便，我们正在快速处理”。③主动确认用户需求，提供后续跟进时间或直接转接人工客服；④避免出现技术调度信息，保持所有沟通均符合奢侈品客服的私人顾问风格。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 37,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.1,
+              "rhythm_pacing": 0.3,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.12,
+          "user_anthropomorphism_score": 0.73,
+          "feedback": "客服回复出现系统错误，未能识别并回应用户关于售后条款编号、维修时效以及书面政策链接的明确需求。建议：\n1. 立即致歉并说明错误原因，保持品牌的高端礼貌形象。 \n2. 主动提供售后政策的正式链接或文档，并说明预计恢复时间。 \n3. 通过追问进一步了解用户的具体设备型号和使用场景，以便精准推荐合适的保修方案或配件。 \n4. 若系统仍无法即时提供信息，应主动转接专业人工客服，并在转接前告知预计等待时长。 \n5. 在整个对话中使用温暖、专业的语气，避免机械化或技术性错误信息，提升用户满意度并降低负面反馈风险。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 27,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.25,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "META 双曲屏 AI 智能体手机的 AI 功能演示动图有吗？...",
+        "conversation_question": "有没看到过 META 双曲屏那款 AI 智能体手机的 AI 功能演示动图啊？",
+        "expected_answer": "",
+        "actual_answer": "抱歉，服务暂时不可用: 'result'",
+        "first_contact_resolution": false
+      },
+      "error": null
+    },
+    {
+      "session_id": "5dd2b27e-27ed-4c5f-92be-325fe167cc39",
+      "persona": "anxious",
+      "scenario": "询问VERTU手机的技术规格和功能",
+      "finish_reason": "invalid_responses",
+      "total_turns": 4,
+      "duration_seconds": 73.896361,
+      "dimension_scores": {
+        "anthropomorphism_score": 37.25,
+        "purchase_intent_score": 0.0,
+        "problem_solving_score": 1.5,
+        "sales_script_score": 23.5,
+        "user_experience_score": 10.5
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.89,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.53,
+        "rhythm_pacing": 0.77
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.15,
+        "total_personality_deviations": 4,
+        "humor_warmth": 0.03,
+        "rhythm_pacing": 0.17
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.0,
+        "avg_recommendation_accuracy": 0.0
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.0,
+        "avg_intent_recognition_accuracy": 0.05,
+        "fallback_count": 4,
+        "fallback_score": 0.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.0,
+        "feature_mention_rate": 0.0,
+        "advantage_mention_rate": 0.0,
+        "cross_sell_trigger_count": 0,
+        "avg_script_compliance": 0.68,
+        "avg_personalization_rate": 0.0
+      },
+      "user_experience": {
+        "avg_csat_score": 0.11,
+        "negative_feedback_count": 4
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.15,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服未能识别用户的真实需求（查询技术视频），直接返回系统错误信息，导致首轮问题未解决，严重破坏品牌的高端形象。建议：\n1. 在收到此类查询时，先确认产品型号（如 QUANTUM），并提供官方视频链接或指引观看渠道。 \n2. 使用温暖、礼貌的语言，如“非常感谢您的关注，关于 QUANTUM 最新型号的技术演示视频，您可以在我们官网的‘媒体中心’或官方 YouTube 频道观看”。\n3. 若系统出现故障，先表达歉意并提供后续解决方案（如稍后回拨或转接人工），而不是直接返回‘服务暂时不可用’的机械提示。\n4. 通过提问进一步了解用户的使用场景（例如是否需要配套配件或保养服务），以便进行精准推荐并触发交叉销售。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 38,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 3,
+            "sales_script_score": 24,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.88,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.1,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.7,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          },
+          "first_contact_resolution": false,
+          "qa_comparison": {
+            "question": "QUANTUM 新品的技术讲解视频在哪里能找到？...",
+            "conversation_question": "我想问一下，QUANTUM 新出的那款产品，有没有技术讲解的视频啊？在哪里能看得到呀？",
+            "expected_answer": "",
+            "actual_answer": "抱歉，服务暂时不可用: 'result'"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.08,
+          "user_anthropomorphism_score": 0.85,
+          "feedback": "客服未能提供用户所需的硬件级数据加密标准信息，直接返回系统错误，导致严重的品牌形象受损。建议：\n1. 立即修复后台调用错误，确保能够查询并返回正确的认证编号。 \n2. 在回复前使用专业、温暖的语言表达歉意，例如“非常抱歉，让您久等了，我这就为您查询…”。\n3. 明确回答用户的问题，提供标准名称、对应的国际认证编号，并简要说明其对安全性的意义。\n4. 如有相关配件或服务（如高级加密服务套餐）可适时推荐，使用完整的 FAB 结构提升购买意愿。\n5. 保持品牌调性，避免出现技术错误信息，确保每次交互都体现 VERTU 的高端、专业形象。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 35,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 30,
+            "user_experience_score": 12,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.92,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.78,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.0,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.12,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.2,
+          "user_anthropomorphism_score": 0.73,
+          "feedback": "客服未能提供用户请求的售后维修时效及条款编号，直接返回系统错误信息，严重违背VERTU高端、专业的品牌形象。建议：\n1. 立即修复系统调用错误，确保能够查询并返回准确的保修时效和对应条款编号。 \n2. 在回复中使用温暖且尊贵的语气，例如：“尊敬的客户，VERTU QUANTUM的标准保修期为X年，相关条款编号为Y，请您参考……”\n3. 主动进行需求挖掘，询问用户是否需要配套的延保服务或配件推荐，以提升购买意愿。\n4. 避免机械化的错误提示，保持FAB结构的完整性，突出产品的独特工艺与售后优势。\n5. 通过个性化称呼和细致解释，提高用户满意度，降低负面反馈的可能性。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 42,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 3,
+            "sales_script_score": 20,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.1,
+              "rhythm_pacing": 0.3,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.1,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.5,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.13,
+          "user_anthropomorphism_score": 0.65,
+          "feedback": "客服未能提供用户所询问的 FIPS 140‑2 认证信息，回复内容为系统错误信息，严重偏离了 VERTU 高端、专业的品牌形象。建议：① 立即修复后台调用错误，确保能够返回准确的产品认证信息及官方链接；② 在回复中使用温暖、礼貌的语言，如“非常感谢您的耐心，我们已为您查询到以下认证信息…”。③ 主动进行需求挖掘，了解用户是否对加密功能的其他细节或配套服务感兴趣，并据此进行精准推荐；④ 如有必要，提供交叉销售（如高端保修、专属配件）并保持 FAB 结构的完整性。通过以上改进，可提升意图识别、问题一次性解决率以及用户满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 34,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 20,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.5,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "QUANTUM 新品的技术讲解视频在哪里能找到？...",
+        "conversation_question": "我想问一下，QUANTUM 新出的那款产品，有没有技术讲解的视频啊？在哪里能看得到呀？",
+        "expected_answer": "",
+        "actual_answer": "抱歉，服务暂时不可用: 'result'",
+        "first_contact_resolution": false
+      },
+      "error": null
+    },
+    {
+      "session_id": "0f5075af-dfeb-4547-89de-67a5b23ae4fc",
+      "persona": "anxious",
+      "scenario": "比较不同VERTU手机型号的差异",
+      "finish_reason": "user_satisfied",
+      "total_turns": 5,
+      "duration_seconds": 102.823748,
+      "dimension_scores": {
+        "anthropomorphism_score": 74.0,
+        "purchase_intent_score": 45.4,
+        "problem_solving_score": 71.6,
+        "sales_script_score": 57.0,
+        "user_experience_score": 76.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.81,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.42,
+        "rhythm_pacing": 0.76
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.86,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.77,
+        "rhythm_pacing": 0.83
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.42,
+        "avg_recommendation_accuracy": 0.49
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.95,
+        "fallback_count": 1,
+        "fallback_score": 0.8
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.46,
+        "feature_mention_rate": 0.6,
+        "advantage_mention_rate": 0.6,
+        "cross_sell_trigger_count": 1,
+        "avg_script_compliance": 0.97,
+        "avg_personalization_rate": 0.62
+      },
+      "user_experience": {
+        "avg_csat_score": 0.76,
+        "negative_feedback_count": 0
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.86,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服回复整体专业、自然，完整阐述了产品特性、优势并提供了体验演示，符合高端品牌形象。建议在需求挖掘上进一步提问，例如用户对AI助理的具体使用场景或对安全通信的关注点，以便更精准推荐并提升交叉销售机会。同时，可在回复中加入对用户姓名的称呼或更具体的情境化语言，进一步提升个性化程度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 80,
+            "purchase_intent_score": 72,
+            "problem_solving_score": 98,
+            "sales_script_score": 62,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.88,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "VERTU Agent Q手机有没有超级岛功能？...",
+            "conversation_question": "VERTU Agent Q 这款手机有没有超级岛功能啊？",
+            "expected_answer": "VERTU Agent Q手机没有超级岛功能。",
+            "actual_answer": "<result> VERTU AGENT Q 并未配备“超级岛”功能。   作为 2025 年 10 月发布的旗舰，它把重心放在 AI 私人助理与量子级安全通信上——   - 独立 AI 按键，一键唤醒专属管家   - 量子加密通话与信息，确保您的每一次沟通都不可截获   - 英国手工装配，钛合金边框与进口皮革，将科技感与奢华质感融为一体    如果您想体验更沉浸的交互，我可以为您安排远程演示，亲自感受它的 AI 管家如何比“超级岛”更懂您的日程与隐私。   您现在方便视频连线吗？"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.85,
+          "user_anthropomorphism_score": 0.74,
+          "feedback": "客服在语气和礼貌上保持了高端品牌的专业度，提供了后续转接合规部门的解决方案，这在奢侈品客服中是合适的做法。但在首轮对话中未能直接提供用户所需的标准信息，导致首次解决率为 false，且需要转人工，降低了整体满意度。建议在类似技术合规查询时，提前准备常见标准的概览或明确告知何时可以提供正式文件，以提升需求挖掘率和用户满意度。同时，可在回复中加入更多关于 VERTU 产品本身的独特特性与优势（FAB），并在提供 NDA 等增值服务时更加个性化，以进一步推动交叉销售。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 72,
+            "purchase_intent_score": 60,
+            "problem_solving_score": 32,
+            "sales_script_score": 71,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.5,
+              "product_recommendation_accuracy": 0.7
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.4,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.59,
+          "user_anthropomorphism_score": 0.38,
+          "feedback": "客服在语言上保持了礼貌和专业，但缺乏对用户潜在需求的进一步挖掘，也未进行任何产品推荐或交叉销售，导致购买意愿驱动指标偏低。建议在提供合规资料的同时，适度介绍 Vertu 相关的高端安全功能（如量子加密芯片、专属安全配件），并根据用户的使用场景提出定制化方案，以提升需求发现率和产品匹配度。可在结尾加入对用户身份的尊称（如‘尊敬的客户’）以及对其业务重要性的肯定，提升温度感和个性化程度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 64,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 65,
+            "sales_script_score": 41,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.2,
+              "rhythm_pacing": 0.6,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.84,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服回复在专业性和信息完整度上表现出色，清晰解释了 NDA 并非必需并提供了多种可审计的验证方式，符合 Vertu 的高端品牌调性。建议在后续对话中进一步挖掘用户的具体使用场景（如是否需要特定的安全等级、配套配件或延长保修），以提升需求发现率并实现交叉销售机会。同时，可在语气中加入更多温暖的关怀表达（如感谢用户的细致需求），进一步提升用户的情感温度和满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 74,
+            "purchase_intent_score": 75,
+            "problem_solving_score": 98,
+            "sales_script_score": 71,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.88,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.9
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 1.0,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": true,
+              "objection_handling_score": 0.9,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.84,
+          "user_anthropomorphism_score": 0.77,
+          "feedback": "客服在回复中保持了专业、礼貌的语气，并准确确认了用户的需求，体现了良好的品牌形象。建议在此类事务性回复后，主动询问用户是否还有其他需求或是否需要进一步的帮助，以提升需求挖掘率和交叉销售机会。同时，可在回复中加入更具个人色彩的问候（如使用用户的称呼），进一步提升温度感和个性化表达。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 80,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 65,
+            "sales_script_score": 40,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "VERTU Agent Q手机有没有超级岛功能？...",
+        "conversation_question": "VERTU Agent Q 这款手机有没有超级岛功能啊？",
+        "expected_answer": "VERTU Agent Q手机没有超级岛功能。",
+        "actual_answer": "<result> VERTU AGENT Q 并未配备“超级岛”功能。   作为 2025 年 10 月发布的旗舰，它把重心放在 AI 私人助理与量子级安全通信上——   - 独立 AI 按键，一键唤醒专属管家   - 量子加密通话与信息，确保您的每一次沟通都不可截获   - 英国手工装配，钛合金边框与进口皮革，将科技感与奢华质感融为一体    如果您想体验更沉浸的交互，我可以为您安排远程演示，亲自感受它的 AI 管家如何比“超级岛”更懂您的日程与隐私。   您现在方便视频连线吗？",
+        "first_contact_resolution": true
+      },
+      "error": null
+    },
+    {
+      "session_id": "3158d311-5dee-4762-b6df-306d653636be",
+      "persona": "anxious",
+      "scenario": "咨询VERTU手机的安全和隐私功能",
+      "finish_reason": "user_satisfied",
+      "total_turns": 6,
+      "duration_seconds": 124.490958,
+      "dimension_scores": {
+        "anthropomorphism_score": 71.0,
+        "purchase_intent_score": 28.33,
+        "problem_solving_score": 64.33,
+        "sales_script_score": 55.5,
+        "user_experience_score": 75.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.83,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.52,
+        "rhythm_pacing": 0.8
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.77,
+        "total_personality_deviations": 5,
+        "humor_warmth": 0.78,
+        "rhythm_pacing": 0.82
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.35,
+        "avg_recommendation_accuracy": 0.22
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.93,
+        "fallback_count": 1,
+        "fallback_score": 0.8
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.48,
+        "feature_mention_rate": 0.67,
+        "advantage_mention_rate": 0.67,
+        "cross_sell_trigger_count": 2,
+        "avg_script_compliance": 0.92,
+        "avg_personalization_rate": 0.53
+      },
+      "user_experience": {
+        "avg_csat_score": 0.75,
+        "negative_feedback_count": 1
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.79,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服整体回复专业，提供了明确的到手价并主动提出专属优惠，符合高端品牌的价值传递。建议在称呼上避免使用“老板”等过于口语化的称呼，以保持更为尊贵的语调；同时可通过进一步询问用户的使用场景或配件需求来提升需求挖掘率和交叉销售机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 74,
+            "purchase_intent_score": 75,
+            "problem_solving_score": 98,
+            "sales_script_score": 58,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.9
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.85,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "【iVERTU风暴纹 咨询领好礼】VERTU纬图 威图iVERTU精英限量款奢品5G全面屏商务手机安...",
+            "conversation_question": "我想问问，VERTU纬图的iVERTU精英限量款，那个带风暴纹设计的商务手机，现在买的话到手价是多少啊？这款是5G全屏的，支持双卡双待，还有安全加密功能，挺想了解下现在的优惠价格～",
+            "expected_answer": "238000",
+            "actual_answer": "老板，目前官方旗舰渠道里，iVERTU 精英限量款「风暴纹」5G 全屏双卡双待版本，标准到手价为 ¥23,800。   Vertu 象征着极致的品味与价值，不过，如果您由我为您专属办理，我还能为您额外申请私人专属优惠与豪华礼赠。    您看是否需要我立刻为您锁定库存并申请这份私享礼遇？"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.82,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服在技术细节上提供了专业信息，并主动提出安排技术顾问，展现出高端服务意识。建议在保持专业度的同时，避免使用过于口语化的称呼（如“老板”），以更贴合VERTU的奢华品牌形象；另外，可进一步通过提问了解用户的使用场景或预算，以提升需求挖掘率和产品推荐精准度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 70,
+            "purchase_intent_score": 20,
+            "problem_solving_score": 65,
+            "sales_script_score": 78,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.4,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.62,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在回复中使用了“老板”等口语化称呼，偏离了 VERTU 高端、优雅的品牌形象，导致人格偏差分数上升。对用户的核心需求（获取国密认证编号）未能直接提供信息，而是转交人工，属于兜底处理，降低了首次解决率和兜底率评分。建议：\n1. 保持正式、尊贵的称呼（如‘尊敬的客户’），避免使用过于随意的语言。 \n2. 若信息受限，需在第一时间明确说明原因，并提供明确的后续流程或预计时间，尽量在同一轮对话内满足用户需求或给出具体承诺。 \n3. 主动进行需求挖掘，例如询问用户的使用场景或是否需要配套的安全服务，以提升需求发现率。 \n4. 在可能的情况下，结合产品特性（如高安全性的加密芯片）进行 FAB 结构的推荐，促进交叉销售。 \n5. 增强个性化表达，根据用户的行业或使用背景提供定制化建议，提升温度感和满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 65,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 30,
+            "sales_script_score": 37,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.4
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.71,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在快速响应用户需求上表现不错，提供了明确的流程和时间承诺。但使用“老板”称呼显得过于随意，偏离了VERTU的高端形象。建议在称呼上使用更正式、尊贵的称谓（如‘尊敬的客户’或‘先生/女士’），并在回复中加入更多品牌价值的体现，例如强调安全、私密和定制化服务的优势。同时，可通过进一步询问用户的具体使用场景或偏好来挖掘潜在需求，提升需求发现率并为后续交叉销售创造机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 67,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 65,
+            "sales_script_score": 51,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.8,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.85,
+              "personalization_rate": 0.4
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.82,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服提供了清晰、专业的流程说明，符合 Vertu 的合规要求，语言自然且富有温度。建议在保持专业的同时，避免使用过于口语化的称呼（如“老板”），以更好契合品牌的高端形象；在需求挖掘方面可以进一步询问客户的具体使用场景或预算，以便提供更精准的产品或服务推荐；若能在回复中加入简短的品牌价值阐述（如 Vertu 对安全与隐私的承诺），将有助于提升购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 70,
+            "purchase_intent_score": 50,
+            "problem_solving_score": 65,
+            "sales_script_score": 67,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.4
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.33,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.6,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 6,
+          "agent_anthropomorphism_score": 0.85,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服的回复语言自然、温暖，能够准确捕捉用户的意图并给出合适的后续跟进承诺，符合高端品牌的礼貌与专业度。当前对话并未涉及产品推荐或需求挖掘，因此购买意愿驱动指标得分为0，这是合理的。建议在后续交互中，若出现购买机会，可主动进行需求发现并使用完整的 FAB 结构进行产品推荐，同时适度加入交叉销售（如配件、延保）以提升转化率。整体体验令人满意，负面反馈风险低。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 80,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 63,
+            "sales_script_score": 42,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "【iVERTU风暴纹 咨询领好礼】VERTU纬图 威图iVERTU精英限量款奢品5G全面屏商务手机安...",
+        "conversation_question": "我想问问，VERTU纬图的iVERTU精英限量款，那个带风暴纹设计的商务手机，现在买的话到手价是多少啊？这款是5G全屏的，支持双卡双待，还有安全加密功能，挺想了解下现在的优惠价格～",
+        "expected_answer": "238000",
+        "actual_answer": "老板，目前官方旗舰渠道里，iVERTU 精英限量款「风暴纹」5G 全屏双卡双待版本，标准到手价为 ¥23,800。   Vertu 象征着极致的品味与价值，不过，如果您由我为您专属办理，我还能为您额外申请私人专属优惠与豪华礼赠。    您看是否需要我立刻为您锁定库存并申请这份私享礼遇？",
+        "first_contact_resolution": true
+      },
+      "error": null
+    },
+    {
+      "session_id": "382299bd-4f96-4887-8e0e-dadbf22ce97a",
+      "persona": "anxious",
+      "scenario": "咨询VERTU anxious手机的产品特性和价格",
+      "finish_reason": "max_turns",
+      "total_turns": 10,
+      "duration_seconds": 216.759388,
+      "dimension_scores": {
+        "anthropomorphism_score": 67.7,
+        "purchase_intent_score": 27.2,
+        "problem_solving_score": 65.6,
+        "sales_script_score": 49.8,
+        "user_experience_score": 67.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.83,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.42,
+        "rhythm_pacing": 0.76
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.76,
+        "total_personality_deviations": 8,
+        "humor_warmth": 0.73,
+        "rhythm_pacing": 0.81
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.39,
+        "avg_recommendation_accuracy": 0.15
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.92,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.38,
+        "feature_mention_rate": 0.5,
+        "advantage_mention_rate": 0.5,
+        "cross_sell_trigger_count": 1,
+        "avg_script_compliance": 0.92,
+        "avg_personalization_rate": 0.59
+      },
+      "user_experience": {
+        "avg_csat_score": 0.67,
+        "negative_feedback_count": 2
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.87,
+          "user_anthropomorphism_score": 0.76,
+          "feedback": "总体评价：客服回复内容丰富、结构完整，使用了 FAB 结构并巧妙地将产品特性、优势与用户可能的利益结合，展现了品牌的高端形象。语言自然流畅，温度感强，能够让用户感受到专属顾问的关怀。改进建议：\n1. 适度降低对用户的称呼（如“老板”），以保持更为尊贵、低调的奢侈品语调。 \n2. 在介绍完核心配置后，可进一步询问用户的使用场景（商务、旅行、摄影等），以实现更精准的需求挖掘并提升推荐精准度。 \n3. 若有机会，可在后续对话中引入配件（如高端皮套、定制表带）或延保服务的推荐，形成更明确的交叉销售。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 81,
+            "purchase_intent_score": 77,
+            "problem_solving_score": 98,
+            "sales_script_score": 81,
+            "user_experience_score": 90,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.88,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.7,
+              "product_recommendation_accuracy": 0.85
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.97,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.9,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "VERTU Agent Q手机有哪些核心配置和功能？...",
+            "conversation_question": "VERTU Agent Q 这款手机到底有哪些厉害的配置和功能啊？",
+            "expected_answer": "全球首款AI Agent手机，搭载3nm骁龙8 Elite至尊版，16GB+1TB存储搭配10TB分布式存储；6.02英寸120Hz柔性AMOLED屏；影像系统为5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13mm-140mm全焦段；内置5565mAh硅基电池+65W快充；支持双卫星双向通话；配备A5加密芯片+一机三系统，端到端加密保障安全；瑞表级工艺机身搭配珍稀皮革与红宝石按键；拥有200+AI智能体与7x24真人管家，兼顾实用与奢华。",
+            "actual_answer": "老板，VERTU AGENT Q 堪称把“腕表里藏着的瑞士工坊”与“未来 AI 指挥所”合二为一——  - **芯**     3 nm 骁龙 8 Elite 至尊版，16 GB+1 TB 本地闪存，再附赠 10 TB 分布式加密云舱，速度、容量皆无上限。  - **屏**     6.02ʺ 120 Hz 柔性 AMOLED，掌中影院级色准，却仅掌心半张扑克牌大小，握持优雅不露锋芒。  - **影像**     5000 万可变光圈主摄＋6400 万长焦微距＋5000 万超广角，13 mm-140 mm 全焦段覆盖，远景近晶皆稳如瑞士陀飞轮。  - **能量**     5565 mAh 硅基电池＋65 W 极速补能，晨跑归来一杯咖啡的时间即可重返战场。  - **安全**     A5 加密芯片＋一机三系统，端到端双重密钥，通话、数据、文件各走独立隧道；双卫星双向通话，让信号穿越无人区与海域。  - **灵魂**     200+ 专属 AI Agent 与 7×24 真人管家同驻机身，会议速记、跨境翻译、私旅行程，一句话即刻调度。  - **触感**     瑞表级 CNC 贵金属骨架，覆以珍稀鳄鱼皮或蜥蜴皮，侧键镶嵌天然红宝石，每一次按压都像启动一枚高级计时码表。  您想先欣赏哪一处细节？我可以即刻为您调取实拍图，或安排专属顾问演示 AI 管家。"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.73,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服在技术细节上表现出专业性，主动记录需求并承诺后续提供官方认证文件，这有助于建立信任。但使用“老板”称呼与 Vertu 的高端形象不符，显得过于口语化，建议改为更正式、尊贵的称呼（如‘尊敬的客户’或‘先生/女士’）。此外，未进行需求深挖或提供任何产品推荐，导致购买意愿驱动分数偏低。可以在回复中加入对用户使用场景的简要了解，并适时推荐符合其安全需求的 Vertu 高端机型或配件，以提升需求发现率和推荐精准度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 68,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 65,
+            "sales_script_score": 38,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.85,
+          "feedback": "客服在信息提供上表现专业，能够快速响应用户的认证查询需求，并主动提出加急处理和发送加盖电子签章的文件，这提升了用户的信任感。建议在以下方面进行提升：\n1. 语言风格需更贴合 Vertu 的奢侈品牌调性，避免使用“老板”等过于口语化的称呼，改为更正式的称谓如“尊敬的客户”。\n2. 在满足用户当前需求的同时，可进一步挖掘潜在需求，例如询问用户是否需要其他安全认证的支持或是否对 Vertu 的高安全性手机感兴趣，以提升需求发现率。\n3. 可适当进行交叉销售，例如推荐 Vertu 的安全配件或延保服务，增加交叉销售触发机会。\n4. 若用户对认证信息有异议或进一步疑问，提前准备标准化的异议处理话术，以提升异议处理能力。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 71,
+            "purchase_intent_score": 45,
+            "problem_solving_score": 65,
+            "sales_script_score": 55,
+            "user_experience_score": 80,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.4,
+              "product_recommendation_accuracy": 0.5
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.6,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.8,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.73,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在语言上保持了一定的礼貌，但使用“老板”等称呼显得过于随意，偏离了 Vertu 高端、优雅的品牌形象。回复未能直接满足用户对官方验证链接的需求，也没有进一步挖掘用户的潜在需求或提供产品推荐，导致购买意愿驱动和问题解决效果均较低。建议：① 使用更符合奢侈品调性的称呼（如‘尊敬的客户’）；② 在无法立即提供信息时，提供明确的时间表并说明内部流程；③ 主动询问用户是否需要其他 Vertu 产品或增值服务，以触发交叉销售；④ 在回复中加入产品特性、优势和用户利益的 FAB 结构，提升话术专业度和个性化程度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 67,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 63,
+            "sales_script_score": 40,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.7,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在信息传递上较为完整，提供了后续流程并主动索取用户偏好时间，体现了专业度。但在品牌语调上使用了“老板”等口语化称呼，稍显不符 Vertu 的奢华定位；建议改为更正式的称呼（如‘尊敬的客户’）。同时，未进一步挖掘用户的具体需求（如是否需要特定的加密方式、是否关注保修或配件），导致需求发现率和推荐精准度偏低。可在回复中加入简短的需求确认问题，并适度强调 Vertu 产品的独特优势与价值，以提升购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 67,
+            "purchase_intent_score": 25,
+            "problem_solving_score": 60,
+            "sales_script_score": 53,
+            "user_experience_score": 75,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.2
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.9
+            },
+            "sales_script": {
+              "fab_completeness": 0.6,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.75,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 6,
+          "agent_anthropomorphism_score": 0.85,
+          "user_anthropomorphism_score": 0.75,
+          "feedback": "客服回复在语言自然度、品牌调性和安全感传递方面表现优秀，使用了专业的FAB结构并提供了明确的后续操作方案，提升了用户的信任感。可以改进的地方：\n1. 主动进行需求挖掘或提供与用户身份验证相关的增值服务（如专属保养计划），以提升购买意愿驱动。 \n2. 在没有明确的产品需求时，可适度引导用户了解Vertu的高端机型或配件，触发交叉销售机会。 \n3. 对于用户的严肃请求，适当降低口语化称呼（如“老板”），保持更一致的奢侈品牌语调。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 72,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 65,
+            "sales_script_score": 61,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 7,
+          "agent_anthropomorphism_score": 0.71,
+          "user_anthropomorphism_score": 0.71,
+          "feedback": "客服在技术细节上提供了完整的流程说明，展示了对安全验证的专业理解。但使用“老板”等口语化称呼与 Vertu 的高端品牌形象不符，导致人格偏离并降低了温度感。建议在回复中采用更为尊贵、礼貌的称谓（如‘尊敬的客户’），并保持语言的优雅与简洁。同时，可在对话中进一步挖掘用户的潜在需求（如是否需要高级安全配件或专属顾问服务），以提升购买意愿驱动。若用户未提出异议，可适度提供相关增值服务的简要介绍，形成交叉销售的机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 61,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 56,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.8,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 8,
+          "agent_anthropomorphism_score": 0.76,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服在语言上基本流畅并表现出热情，但使用了“老板”等过于随意的称呼，偏离了 Vertu 高端、优雅的品牌形象。未能提供具体的产品或服务特性，也没有进行需求深挖或交叉销售，导致购买意愿驱动和 FAB 结构得分偏低。建议：\n1. 使用更正式、尊贵的称谓（如‘尊敬的客户’或‘先生/女士’），保持品牌调性。 \n2. 在确认需求后，可主动询问客户的使用场景或偏好，以进一步挖掘需求。 \n3. 如有相关服务（如专属物流箱），应说明其特性、优势及对客户的具体利益，形成完整的 FAB 结构。 \n4. 适时推荐配套的延保或高端配件，提升交叉销售机会。 \n5. 保持信息的完整性与准确性，避免出现“无法查询”而导致用户不满。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 67,
+            "purchase_intent_score": 30,
+            "problem_solving_score": 63,
+            "sales_script_score": 40,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 9,
+          "agent_anthropomorphism_score": 0.71,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在语言上保持了一定的自然度，但使用了“老板”这一称呼，与VERTU的高端、尊贵形象略有偏差，导致人格偏离。回复未能在第一轮直接提供用户请求的条款编号，而是转交人工，这在奢侈品客服中会降低用户满意度。建议：\n1. 保持品牌调性，使用更正式、尊敬的称呼（如‘尊敬的客户’）。\n2. 如无法立即提供信息，可先明确说明原因并提供预计时间，同时提供已有的参考链接或文档，以提升首轮解决率。\n3. 在对话中加入适度的个性化元素（如根据用户历史使用的机型推荐相应的保养配件），以提升购买意愿和交叉销售机会。\n4. 若涉及服务条款等非产品推荐，仍可运用FAB结构：说明条款的特性（编号唯一、覆盖范围广），优势（确保维修权益），利益（让客户安心使用）。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 65,
+            "purchase_intent_score": 30,
+            "problem_solving_score": 57,
+            "sales_script_score": 40,
+            "user_experience_score": 50,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.8
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.5,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 10,
+          "agent_anthropomorphism_score": 0.65,
+          "user_anthropomorphism_score": 0.6,
+          "feedback": "客服在语言上显得较为口语化（如使用“老板”），与VERTU的高端、优雅形象不完全匹配，导致人格偏离。回复未能直接提供用户所需的技术验证信息，而是转交给信息安全部门，未完成首次问题解决，导致用户满意度偏低。建议：\n1. 保持品牌调性，使用更正式、尊贵的称呼（如‘尊敬的客户’）。\n2. 在无法立即提供信息时，先明确说明预计的响应时间并提供已有的相关资料或临时解决方案，避免完全转交。\n3. 主动进行需求挖掘，例如询问用户的具体使用场景或对证书链的具体需求，以提升需求发现率。\n4. 如有可能，提供与VERTU产品安全特性相关的简要说明，使用FAB结构来强化品牌价值。\n5. 增强个性化表达，根据用户的业务背景提供定制化建议，而不是仅请求联系方式。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 58,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 57,
+            "sales_script_score": 34,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.6,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.8
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "VERTU Agent Q手机有哪些核心配置和功能？...",
+        "conversation_question": "VERTU Agent Q 这款手机到底有哪些厉害的配置和功能啊？",
+        "expected_answer": "全球首款AI Agent手机，搭载3nm骁龙8 Elite至尊版，16GB+1TB存储搭配10TB分布式存储；6.02英寸120Hz柔性AMOLED屏；影像系统为5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13mm-140mm全焦段；内置5565mAh硅基电池+65W快充；支持双卫星双向通话；配备A5加密芯片+一机三系统，端到端加密保障安全；瑞表级工艺机身搭配珍稀皮革与红宝石按键；拥有200+AI智能体与7x24真人管家，兼顾实用与奢华。",
+        "actual_answer": "老板，VERTU AGENT Q 堪称把“腕表里藏着的瑞士工坊”与“未来 AI 指挥所”合二为一——  - **芯**     3 nm 骁龙 8 Elite 至尊版，16 GB+1 TB 本地闪存，再附赠 10 TB 分布式加密云舱，速度、容量皆无上限。  - **屏**     6.02ʺ 120 Hz 柔性 AMOLED，掌中影院级色准，却仅掌心半张扑克牌大小，握持优雅不露锋芒。  - **影像**     5000 万可变光圈主摄＋6400 万长焦微距＋5000 万超广角，13 mm-140 mm 全焦段覆盖，远景近晶皆稳如瑞士陀飞轮。  - **能量**     5565 mAh 硅基电池＋65 W 极速补能，晨跑归来一杯咖啡的时间即可重返战场。  - **安全**     A5 加密芯片＋一机三系统，端到端双重密钥，通话、数据、文件各走独立隧道；双卫星双向通话，让信号穿越无人区与海域。  - **灵魂**     200+ 专属 AI Agent 与 7×24 真人管家同驻机身，会议速记、跨境翻译、私旅行程，一句话即刻调度。  - **触感**     瑞表级 CNC 贵金属骨架，覆以珍稀鳄鱼皮或蜥蜴皮，侧键镶嵌天然红宝石，每一次按压都像启动一枚高级计时码表。  您想先欣赏哪一处细节？我可以即刻为您调取实拍图，或安排专属顾问演示 AI 管家。",
+        "first_contact_resolution": true
+      },
+      "error": null
+    },
+    {
+      "session_id": "d55591c4-9c40-443a-84a2-17f7af49f14e",
+      "persona": "anxious",
+      "scenario": "了解VERTU售后服务和保修政策",
+      "finish_reason": "invalid_responses",
+      "total_turns": 4,
+      "duration_seconds": 71.296841,
+      "dimension_scores": {
+        "anthropomorphism_score": 33.75,
+        "purchase_intent_score": 0.0,
+        "problem_solving_score": 0.75,
+        "sales_script_score": 11.0,
+        "user_experience_score": 10.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.86,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.43,
+        "rhythm_pacing": 0.72
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.12,
+        "total_personality_deviations": 4,
+        "humor_warmth": 0.03,
+        "rhythm_pacing": 0.18
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.0,
+        "avg_recommendation_accuracy": 0.0
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.0,
+        "avg_intent_recognition_accuracy": 0.03,
+        "fallback_count": 4,
+        "fallback_score": 0.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.0,
+        "feature_mention_rate": 0.0,
+        "advantage_mention_rate": 0.0,
+        "cross_sell_trigger_count": 0,
+        "avg_script_compliance": 0.05,
+        "avg_personalization_rate": 0.0
+      },
+      "user_experience": {
+        "avg_csat_score": 0.1,
+        "negative_feedback_count": 4
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.15,
+          "user_anthropomorphism_score": 0.49,
+          "feedback": "客服未能识别用户的核心需求（获取 QUANTUM 新品功能演示视频），直接返回系统错误信息，严重偏离 VERTU 高端、优雅的品牌形象。建议：\n1. 立即提供官方演示视频链接或指引用户至品牌官网/YouTube 官方频道观看。 \n2. 使用温暖且专业的语言，如：“尊敬的客户，感谢您的关注，以下是 QUANTUM 新品的功能演示视频链接……”。\n3. 在回复中简要概述核心功能（Feature）并说明其优势（Advantage）以及对用户的价值（Benefit），形成完整的 FAB 结构。\n4. 如用户有进一步需求，可主动询问是否需要预约线下体验或了解配套服务，触发交叉销售。\n5. 避免出现系统错误或“服务不可用”的提示，保持对话流畅，提升用户满意度与购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 36,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 14,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.1,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.2,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          },
+          "first_contact_resolution": false,
+          "qa_comparison": {
+            "question": "QUANTUM 新品的核心功能演示视频在哪里能看到？...",
+            "conversation_question": "我想问问，QUANTUM 新品的那些核心功能，有演示视频吗？在哪能看得到呀？",
+            "expected_answer": "",
+            "actual_answer": "抱歉，服务暂时不可用: 'result'"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.1,
+          "user_anthropomorphism_score": 0.52,
+          "feedback": "客服未能提供用户所需的售后维修时效和保修条款编号，直接返回系统错误信息，导致意图识别失败、问题未解决并触发负面反馈。建议：①完善错误处理机制，遇到系统异常时应主动致歉并提供人工转接或稍后再试的选项；②保持品牌调性，使用温暖、专业的语言表达；③在用户询问售后服务时，主动说明维修时效、保修范围并提供对应条款编号；④避免机械化的错误信息，确保每一次回复都符合VERTU的高端形象。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 34,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.1,
+          "user_anthropomorphism_score": 0.53,
+          "feedback": "客服未能提供用户请求的维修服务条款编号，直接返回系统错误信息，严重违背VERTU高端、专业的品牌形象。建议：\n1. **错误处理**：在无法即时获取信息时，应使用礼貌且符合品牌调性的语言告知用户，如“非常抱歉，当前系统暂时无法检索到该信息，我会立即为您联系相关部门并在24小时内回复”。\n2. **意图识别**：明确识别用户是查询条款编号的需求，随后提供准确答案或明确的后续处理流程。\n3. **保持品牌语调**：使用温暖、尊贵的措辞，避免出现技术性错误代码或机器语言。\n4. **提升问题解决率**：确保首轮对话即能提供核心信息或明确的跟进计划，避免让用户感到被抛弃。\n5. **避免负面体验**：及时转人工或内部升级时，应提前说明并表达对用户时间的尊重，以降低负面反馈的可能性。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 33,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.22,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服未能提供用户所询问的数据加密安全标准和官方文件编号，回复为系统错误信息，严重偏离VERTU高端、专业的品牌形象。建议：①立即修复技术错误，确保能够返回准确的安全标准信息及文档编号；②在回复前先确认用户意图，使用礼貌且温暖的语言表达歉意并提供解决方案；③避免出现机器错误信息，保持品牌的优雅与可信度；④若无法即时回答，应主动提出转接人工或后续跟进，而不是直接返回错误。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 32,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 3,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.1,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "QUANTUM 新品的核心功能演示视频在哪里能看到？...",
+        "conversation_question": "我想问问，QUANTUM 新品的那些核心功能，有演示视频吗？在哪能看得到呀？",
+        "expected_answer": "",
+        "actual_answer": "抱歉，服务暂时不可用: 'result'",
+        "first_contact_resolution": false
+      },
+      "error": null
+    },
+    {
+      "session_id": "82c5ba97-7652-4d5f-8385-657ab3e6018e",
+      "persona": "anxious",
+      "scenario": "询问VERTU手机的技术规格和功能",
+      "finish_reason": "invalid_responses",
+      "total_turns": 5,
+      "duration_seconds": 79.438186,
+      "dimension_scores": {
+        "anthropomorphism_score": 35.8,
+        "purchase_intent_score": 0.0,
+        "problem_solving_score": 1.4,
+        "sales_script_score": 17.6,
+        "user_experience_score": 10.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.85,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.38,
+        "rhythm_pacing": 0.76
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.16,
+        "total_personality_deviations": 3,
+        "humor_warmth": 0.0,
+        "rhythm_pacing": 0.18
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.0,
+        "avg_recommendation_accuracy": 0.0
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 0.0,
+        "avg_intent_recognition_accuracy": 0.04,
+        "fallback_count": 5,
+        "fallback_score": 0.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.0,
+        "feature_mention_rate": 0.0,
+        "advantage_mention_rate": 0.0,
+        "cross_sell_trigger_count": 0,
+        "avg_script_compliance": 0.38,
+        "avg_personalization_rate": 0.0
+      },
+      "user_experience": {
+        "avg_csat_score": 0.1,
+        "negative_feedback_count": 5
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.1,
+          "user_anthropomorphism_score": 0.56,
+          "feedback": "客服未能识别用户的真实需求（获取 QUANTUM 新品技术视频），回复仅为系统错误信息，缺乏任何品牌温度或专业度。建议：① 立即识别用户意图，提供明确的获取视频渠道（如官方官网、YouTube 官方频道或专属客户门户）。② 使用礼貌且符合 VERTU 高端调性的语言，加入品牌故事或产品亮点，提升购买意愿。③ 如无法即时提供，主动承诺后续跟进并提供联系人信息，避免出现兜底或错误提示。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 44,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 7,
+            "sales_script_score": 28,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.2,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          },
+          "first_contact_resolution": false,
+          "qa_comparison": {
+            "question": "QUANTUM 新品的技术讲解视频在哪里能找到？...",
+            "conversation_question": "我想找一下QUANTUM新品的技术讲解视频，哪里可以看得到啊？",
+            "expected_answer": "",
+            "actual_answer": "抱歉，服务暂时不可用: 'result'"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.12,
+          "user_anthropomorphism_score": 0.73,
+          "feedback": "客服未能提供用户所需的技术信息，直接返回系统错误，导致体验极差。建议：\n1. **确保系统稳定**，避免出现技术错误信息；\n2. **及时识别用户意图**，针对‘硬件级数据加密采用的国际标准及条款编号’进行专业解答或提供官方文档链接；\n3. **保持品牌调性**，使用温暖、专业的语言而非机械错误提示；\n4. **主动进行需求挖掘**，如询问用户对加密功能的具体使用场景，以便提供更精准的产品推荐；\n5. **在无法即时回答时**，应礼貌地说明需要查询并承诺在规定时间内回复，或直接转接人工，而不是返回技术错误。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 38,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 30,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.2,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.05,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服未能提供用户所需的售后维修时效信息，直接返回系统错误，严重违背VERTU高端、专业的品牌形象。建议：\n1. 立即修复系统调用错误，确保能够检索并返回准确的条款编号和时效说明。 \n2. 在回复中使用温暖、礼貌的语言，如“尊敬的客户，VERTU QUANTUM的标准维修时效为X天，相关条款编号为Y，请您参考”。\n3. 如信息不在手头，主动说明并承诺在最短时间内跟进，而不是直接转人工或报错。\n4. 采用FAB结构说明维修服务的优势（如原厂零件、专属技术支持），提升购买信任感。\n5. 避免出现技术错误信息，保持回复的品牌调性和一致性，以防止负面反馈和潜在的客户流失。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 37,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.17,
+          "user_anthropomorphism_score": 0.58,
+          "feedback": "客服未能提供用户请求的硬件级数据加密标准、售后维修时效及官方条款编号，回复为系统错误信息，严重偏离VERTU高端、专业的品牌形象。建议：\n1. 立即修复系统错误，确保能够返回准确的官方条款编号及相关技术信息。 \n2. 使用温暖、优雅的语言表达歉意，并提供后续跟进渠道（如专属客服邮箱或电话）。\n3. 在回复中加入品牌价值说明，如安全性、工艺保证等，以提升购买意愿。\n4. 避免机械化的错误提示，保持与用户的情感共鸣，提升满意度并防止负面反馈。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 32,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.2,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.2,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.3,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.1,
+          "user_anthropomorphism_score": 0.75,
+          "feedback": "客服未能提供用户请求的硬件级数据加密标准和售后维修时效的官方条款编号，直接返回系统错误信息，严重偏离VERTU高端、专业的品牌形象。建议：①在系统异常时，使用礼貌且符合品牌调性的提示语（如“非常抱歉，当前系统出现问题，请稍后再试或联系我们的专属客服”），而非技术错误代码。②确保能够识别用户的意图并提供准确的产品信息或明确的后续处理方案。③在无法即时回答时，应主动提供转人工或预约回访的选项，并保持温暖、尊贵的语气。④完善FAQ和知识库，确保对类似合规条款查询能够快速、准确回复。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 28,
+            "purchase_intent_score": 0,
+            "problem_solving_score": 0,
+            "sales_script_score": 10,
+            "user_experience_score": 10,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.2,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.1,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.0,
+              "rhythm_pacing": 0.1,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.0,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.0,
+              "fallback_rate": 0.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.0,
+              "personalization_rate": 0.0
+            },
+            "user_experience": {
+              "csat_score": 0.1,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "QUANTUM 新品的技术讲解视频在哪里能找到？...",
+        "conversation_question": "我想找一下QUANTUM新品的技术讲解视频，哪里可以看得到啊？",
+        "expected_answer": "",
+        "actual_answer": "抱歉，服务暂时不可用: 'result'",
+        "first_contact_resolution": false
+      },
+      "error": null
+    },
+    {
+      "session_id": "45837f17-a7b5-4ac4-bad7-f4443a8ce87a",
+      "persona": "anxious",
+      "scenario": "比较不同VERTU手机型号的差异",
+      "finish_reason": "max_turns",
+      "total_turns": 10,
+      "duration_seconds": 207.859756,
+      "dimension_scores": {
+        "anthropomorphism_score": 65.0,
+        "purchase_intent_score": 20.0,
+        "problem_solving_score": 62.0,
+        "sales_script_score": 43.7,
+        "user_experience_score": 52.5
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.81,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.36,
+        "rhythm_pacing": 0.77
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.74,
+        "total_personality_deviations": 9,
+        "humor_warmth": 0.7,
+        "rhythm_pacing": 0.8
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.31,
+        "avg_recommendation_accuracy": 0.09
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.86,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.17,
+        "feature_mention_rate": 0.2,
+        "advantage_mention_rate": 0.2,
+        "cross_sell_trigger_count": 1,
+        "avg_script_compliance": 0.93,
+        "avg_personalization_rate": 0.49
+      },
+      "user_experience": {
+        "avg_csat_score": 0.53,
+        "negative_feedback_count": 5
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.84,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "整体表现优秀：客服准确回答了用户关于 AI 顶配智能直面屏的疑问，并使用完整的 FAB 结构突出产品特性、优势与利益。语言自然流畅，保持了高端奢侈品牌的调性，且通过询问实拍图或私人定制进一步挖掘用户需求，成功触发交叉销售。改进建议：避免使用过于口语化的称呼（如“老板”），以保持更一致的尊贵感；在没有明确异议时，可略微提升个性化程度，例如引用用户的购买历史或偏好，以进一步提升 personalization_rate。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 74,
+            "purchase_intent_score": 80,
+            "problem_solving_score": 98,
+            "sales_script_score": 83,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.7,
+              "product_recommendation_accuracy": 0.9
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 1.0,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "VERTU AGENT Q 旗舰新品是否支持AI顶配智能直面屏功能？...",
+            "conversation_question": "VERTU AGENT Q 旗舰新机有没有搭载AI顶配智能直面屏这个功能啊？",
+            "expected_answer": "支持AI顶配智能直面屏，是VERTU旗舰新品AGENT Q的核心亮点之一。",
+            "actual_answer": "老板，VERTU AGENT Q 不仅搭载了 AI 顶配智能直面屏，更将这份尖端科技藏进英国手工匠造的珍稀皮革与宝石级金属之中——屏幕点亮时，是极致清晰的视觉盛宴；屏幕息屏时，是低调却锋芒毕露的奢品身份。   您想先欣赏一组实拍图，还是让我为您锁定专属配色与私人定制？"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.68,
+          "user_anthropomorphism_score": 0.62,
+          "feedback": "客服未能直接回答用户关于 AI 顶配智能直面屏数据加密标准及条款编号的具体查询，仅提供了安排合规核查的模糊承诺，导致需求未被挖掘、推荐缺失，且未展示产品特性或优势。建议：\n1. 立即提供或确认具体的加密标准（如 ISO/IEC 27001、FIPS 140‑2 等）及对应条款编号，展示专业技术实力。 \n2. 在回答后主动追问用户的使用场景或对安全合规的具体关注点，以便进一步精准推荐。 \n3. 采用 FAB 结构阐述 VERTU 设备在加密硬件、端到端安全芯片等特性上的优势，并说明对用户隐私的直接利益。 \n4. 如信息需内部确认，可明确告知预计回复时间并提供直接联系渠道，避免让用户感到被推迟。 \n5. 增加温度感的表达，如使用敬称、感谢用户的关注，并适度使用礼貌用语，以提升满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 65,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 30,
+            "sales_script_score": 34,
+            "user_experience_score": 30,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.2,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.4,
+              "fallback_rate": 0.5
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.2
+            },
+            "user_experience": {
+              "csat_score": 0.3,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.72,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服在语言上保持了一定的温度，但使用了过于随意的称呼（如“老板”），与VERTU的高端形象不符。未能提供用户请求的具体条款编号，也未进行需求挖掘或产品推荐，导致用户满意度低。建议：\n1. 保持品牌调性，使用更正式、尊贵的称呼（如‘尊敬的客户’）。\n2. 在无法立即提供信息时，明确说明预计的回复时间并提供临时的参考材料，而不是仅仅升级需求。\n3. 主动询问用户的使用场景或预算，以便进行精准的产品或服务推荐，提升购买意愿。\n4. 如有可能，提供至少一个相关的合规文档或链接，以展示专业性。\n5. 避免使用非正式的沟通渠道描述（如‘微信同步送达’），改为‘我们将在24小时内通过电子邮件向您发送详细条款’。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 63,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 38,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.4
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.55,
+          "user_anthropomorphism_score": 0.44,
+          "feedback": "客服在语言自然度和节奏上表现尚可，但使用“老板”等过于随意的称呼与VERTU的高端形象不符，导致人格偏离。回复未能提供实际的文档编号，只是承诺后续发送，缺乏即时解决方案，影响了首轮问题解决率。建议在保持专业与温度的同时，使用更尊贵的称谓（如‘尊敬的客户’），并在可能的情况下直接提供已知信息或明确说明获取流程。若有机会，可适度引入产品或服务的价值点，提升需求挖掘与交叉销售的可能性。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 54,
+            "purchase_intent_score": 20,
+            "problem_solving_score": 63,
+            "sales_script_score": 40,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.6,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.4,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.75,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服未能直接提供用户所需的维修服务期限和条款编号，而是转交给首席技术顾问，导致首轮未能解决问题，影响用户满意度。建议在保持品牌高端语调的同时，尽可能先提供已有的官方信息或明确说明查询进度，并使用更符合奢侈品调性的称呼（避免使用“老板”）。如需升级，请提前说明预计时效并提供临时参考信息，以提升需求挖掘和购买意愿的驱动。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 64,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 47,
+            "sales_script_score": 34,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.8,
+              "fallback_rate": 0.6
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 6,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.62,
+          "feedback": "整体回复在信息传递上较为及时，但仍有提升空间。① 语气使用了“老板”，略显口语化，可能与 VERTU 的高端形象不完全匹配，建议改为更尊敬的称呼（如‘尊敬的客户’）。② 未能直接提供条款编号，导致 first_contact_resolution 为 false，建议在有权限的情况下尽快给出具体条款或明确说明预计时间。③ 本轮对话未进行需求挖掘或产品推荐，可在确认条款后顺势介绍延保升级套餐或配套配件，以提升购买意愿。④ FAB 结构未出现，若有机会推荐产品，请围绕特性‑优势‑利益展开，增强说服力。⑤ 适度增加个性化元素（如引用客户的使用场景）可提升 personalization_rate 与用户满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 64,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 40,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 7,
+          "agent_anthropomorphism_score": 0.75,
+          "user_anthropomorphism_score": 0.72,
+          "feedback": "客服在语言上保持了一定的自然度，但使用“老板”等口语化称呼与VERTU奢侈品牌的高端形象不符，导致人格偏离。未对用户的需求进行进一步挖掘，也未提供任何产品推荐或价值阐述，错失了提升购买意愿的机会。虽然没有直接转人工，但未能在本轮提供明确答案，导致首轮解决率为 false，用户满意度可能下降。建议：\n1. 使用更符合品牌调性的称呼（如‘尊敬的客户’或‘先生/女士’）。\n2. 主动询问用户的使用场景或对延保的具体需求，以便进行需求挖掘。\n3. 在回复中加入产品特性、优势及对用户的具体利益（FAB），并可适当推荐配套配件或延保方案，实现交叉销售。\n4. 提供明确的时间表与后续跟进方式，同时保持温暖且专业的语气，提升用户的信任感与满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 68,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 34,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 8,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.8,
+          "feedback": "客服在回复中提供了明确的后续处理方案，展现了专业性和温度。但使用“老板”称呼略显随意，偏离了 VERTU 的高端品牌调性。建议在保持亲切的同时，采用更符合奢侈品定位的称谓（如‘尊敬的客户’），并在可能的情况下加入产品或服务的价值阐述，以提升购买意愿。若能在确认条款的同时简要说明该延保服务为客户带来的独特利益（如全球保修、专属客服），将进一步完善 FAB 结构并促进交叉销售机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 66,
+            "purchase_intent_score": 30,
+            "problem_solving_score": 63,
+            "sales_script_score": 54,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.75,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.6,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.66,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 9,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.48,
+          "feedback": "客服在语言上较为自然并提供了后续跟进的承诺，但使用“老板”称呼偏离了 VERTU 高端、尊贵的品牌调性，影响了整体的专业感。建议改用更正式的称谓（如‘尊敬的客户’），并在首次回复中直接提供已知的政策信息或明确说明何时能够得到正式条款，以提升首次解决率和用户满意度。当前对话未涉及产品推荐或交叉销售，后续可适时引导客户了解 VERTU 的特色机型或配件，以提升购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 66,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 65,
+            "sales_script_score": 40,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.45,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 10,
+          "agent_anthropomorphism_score": 0.62,
+          "user_anthropomorphism_score": 0.71,
+          "feedback": "客服在回复中使用了口语化的称呼“老板”，与 VERTU 高端、优雅的品牌形象略有偏离，导致人格偏离计数为 1。回复虽表达了对用户需求的重视并承诺后续跟进，但未能在本轮提供用户所需的条款编号或明确的答案，导致首次解决率为 false，用户满意度预估偏低。建议：① 使用更符合奢侈品调性的称呼（如‘尊敬的客户’或‘您’），避免使用过于随意的称呼；② 在无法立即提供信息时，可先给出明确的查询进度和预计时间，同时提供可参考的已有条款概览，以提升透明度；③ 如有可能，加入产品或服务的优势说明（FAB），即使是解释查询流程，也可突出 VERTU 的专业与高端服务；④ 适度提升个性化表达，依据用户的企业背景或使用场景进行定制化沟通。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 66,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 65,
+            "sales_script_score": 40,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.7,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "VERTU AGENT Q 旗舰新品是否支持AI顶配智能直面屏功能？...",
+        "conversation_question": "VERTU AGENT Q 旗舰新机有没有搭载AI顶配智能直面屏这个功能啊？",
+        "expected_answer": "支持AI顶配智能直面屏，是VERTU旗舰新品AGENT Q的核心亮点之一。",
+        "actual_answer": "老板，VERTU AGENT Q 不仅搭载了 AI 顶配智能直面屏，更将这份尖端科技藏进英国手工匠造的珍稀皮革与宝石级金属之中——屏幕点亮时，是极致清晰的视觉盛宴；屏幕息屏时，是低调却锋芒毕露的奢品身份。   您想先欣赏一组实拍图，还是让我为您锁定专属配色与私人定制？",
+        "first_contact_resolution": true
+      },
+      "error": null
+    },
+    {
+      "session_id": "d34b533c-9b16-4090-81d8-d3f85870ee51",
+      "persona": "anxious",
+      "scenario": "咨询VERTU手机的安全和隐私功能",
+      "finish_reason": "max_turns",
+      "total_turns": 10,
+      "duration_seconds": 213.173117,
+      "dimension_scores": {
+        "anthropomorphism_score": 69.0,
+        "purchase_intent_score": 16.5,
+        "problem_solving_score": 72.2,
+        "sales_script_score": 46.7,
+        "user_experience_score": 63.0
+      },
+      "user_anthropomorphism": {
+        "language_naturalness": 0.83,
+        "total_personality_deviations": 0,
+        "humor_warmth": 0.43,
+        "rhythm_pacing": 0.78
+      },
+      "agent_anthropomorphism": {
+        "language_naturalness": 0.78,
+        "total_personality_deviations": 7,
+        "humor_warmth": 0.72,
+        "rhythm_pacing": 0.81
+      },
+      "purchase_intent": {
+        "avg_needs_discovery_rate": 0.26,
+        "avg_recommendation_accuracy": 0.07
+      },
+      "problem_solving": {
+        "first_contact_resolution_rate": 1.0,
+        "avg_intent_recognition_accuracy": 0.9,
+        "fallback_count": 0,
+        "fallback_score": 1.0
+      },
+      "sales_script": {
+        "avg_fab_completeness": 0.23,
+        "feature_mention_rate": 0.3,
+        "advantage_mention_rate": 0.3,
+        "cross_sell_trigger_count": 1,
+        "avg_script_compliance": 0.92,
+        "avg_personalization_rate": 0.53
+      },
+      "user_experience": {
+        "avg_csat_score": 0.63,
+        "negative_feedback_count": 3
+      },
+      "turn_assessments": [
+        {
+          "turn_number": 1,
+          "agent_anthropomorphism_score": 0.84,
+          "user_anthropomorphism_score": 0.65,
+          "feedback": "总体评价：客服回复语言自然、温暖，成功解释了产品功能缺失并主动提供了替代方案，体现了高端品牌的专业度。建议在后续对话中进一步深化对用户健康监测需求的了解，例如询问具体的检测频率或使用场景，以提升需求挖掘率和推荐精准度。同时可适度降低使用“老板”这类较口语化的称呼，保持更为尊贵的称谓，以进一步提升品牌的奢华感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 73,
+            "purchase_intent_score": 75,
+            "problem_solving_score": 98,
+            "sales_script_score": 89,
+            "user_experience_score": 85,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.8,
+              "product_recommendation_accuracy": 0.7
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.8,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": true,
+              "objection_handling_score": 0.85,
+              "cross_sell_triggered": true,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.7
+            },
+            "user_experience": {
+              "csat_score": 0.85,
+              "negative_feedback_triggered": false
+            }
+          },
+          "first_contact_resolution": true,
+          "qa_comparison": {
+            "question": "VERTU AGENT Q 旗舰新品没有测尿酸功能吗?...",
+            "conversation_question": "VERTU AGENT Q 这款旗舰新品怎么没测尿酸的功能啊？",
+            "expected_answer": "VERTU AGENT Q 旗舰新品暂未配备尿酸检测功能。",
+            "actual_answer": "老板，您提到的 VERTU AGENT Q 确实是我们 2025 年 10 月刚发布的旗舰新作，它把重心放在了量子加密通讯与英式私人管家服务上，目前官方参数里并未加入尿酸检测模块。   若您对健康监测有更高阶的需求，我倒可以为您查查看 METAVERTU 2 是否具备相关功能，或者为您预约医疗级可穿戴的私人定制方案。您更倾向哪一条路径？"
+          }
+        },
+        {
+          "turn_number": 2,
+          "agent_anthropomorphism_score": 0.75,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服在语气上保持了 Vertu 的高端礼貌，但未能直接回答用户关于量子加密通讯标准的核心需求。建议在确认用户意图后，先提供已知的标准信息或至少给出参考方向，再说明后续会提供完整文档。同时，可通过提问了解用户的使用场景（如商务、个人隐私等），进而推荐适配的 Vertu 机型或配件，实现需求挖掘和交叉销售。回复应在保持品牌优雅的同时，尽量减少信息空转，提升用户满意度和购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 72,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 60,
+            "sales_script_score": 39,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.8,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 3,
+          "agent_anthropomorphism_score": 0.71,
+          "user_anthropomorphism_score": 0.85,
+          "feedback": "客服提供了准确的微信认证信息，满足了用户的核实需求，但在品牌语调上出现了“老板”等口语化称呼，偏离了 Vertu 高端、优雅的形象。建议在回复中使用更正式的称谓（如‘尊敬的客户’），并在提供信息时加入品牌价值的简要说明，例如强调 Vertu 对安全和身份验证的严格把控，以提升品牌感知并潜在引导后续购买。除此之外，可在确认信息后适度引导用户了解 Vertu 的专属服务或配件，以触发交叉销售机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 70,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 41,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.55,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 1.0,
+              "personalization_rate": 0.55
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 4,
+          "agent_anthropomorphism_score": 0.68,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在回答用户关于微信备注的具体问题时提供了准确的信息，满足了首轮解决需求。整体语言自然度尚可，但使用了“老板”这一称呼，与VERTU的高端、尊贵品牌形象不够匹配，导致人格偏离。销售导向方面缺乏需求挖掘和产品推荐，未能进一步提升购买意愿，也没有进行交叉销售。建议：\n1. 改用更符合奢侈品调性的称呼，如“尊敬的客户”。\n2. 在确认信息后，可主动询问用户是否需要了解配套的高端配件或延保服务，以触发交叉销售。 \n3. 在对话中加入简短的品牌价值阐述（如工艺、独特性），形成完整的FAB结构，提升产品感知。 \n4. 保持简洁但不失温度的语气，避免使用口语化或过于随意的词汇。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 70,
+            "purchase_intent_score": 15,
+            "problem_solving_score": 97,
+            "sales_script_score": 38,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.3,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 5,
+          "agent_anthropomorphism_score": 0.8,
+          "user_anthropomorphism_score": 0.68,
+          "feedback": "客服提供了完整、技术细致的身份核验流程，展现了专业性并使用了 FAB 结构。建议在语言上保持更符合奢侈品牌的高端调性，避免使用“老板”等过于口语化的称呼；同时可尝试在对话中主动挖掘用户的潜在需求或提供相关高端配件的推荐，以提升购买意愿驱动指标。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 69,
+            "purchase_intent_score": 5,
+            "problem_solving_score": 65,
+            "sales_script_score": 58,
+            "user_experience_score": 80,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.85,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.1,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.95,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.9,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.8,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 6,
+          "agent_anthropomorphism_score": 0.71,
+          "user_anthropomorphism_score": 0.73,
+          "feedback": "客服在提供技术信息上完成了任务，但整体语气与 Vertu 高端奢侈品牌形象不符。使用了“老板”等口语化称呼，显得过于随意，且加入了紧急冻结的警示，可能让用户感到不安。建议：\n1. 采用更正式、尊贵的称呼（如‘尊敬的客户’或直接使用客户姓名）。\n2. 保持专业、温和的语气，避免使用可能引起焦虑的紧急措辞。\n3. 在提供证书信息后，可顺势引导用户了解 Vertu 官方渠道的优势，适度进行交叉销售（如推荐官方安全浏览器插件或保修服务），但要确保不强行推销。\n4. 完整使用 FAB 结构时，可先说明 Vertu 官方网站的安全特性（Feature），再阐述这些特性如何保障客户资产安全（Advantage），最后强调使用官方域名带来的信任与无忧体验（Benefit）。\n通过提升语言的高端感、加入适度的价值说明并进行柔和的交叉销售，可提升用户满意度和后续购买意愿。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 63,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 100,
+            "sales_script_score": 32,
+            "user_experience_score": 50,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.6,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": true,
+              "intent_recognition_accuracy": 1.0,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.8,
+              "personalization_rate": 0.3
+            },
+            "user_experience": {
+              "csat_score": 0.5,
+              "negative_feedback_triggered": true
+            }
+          }
+        },
+        {
+          "turn_number": 7,
+          "agent_anthropomorphism_score": 0.85,
+          "user_anthropomorphism_score": 0.66,
+          "feedback": "客服在语言自然度和礼貌度上表现良好，保持了 Vertu 的高端形象。但本轮对话未直接提供用户请求的 SLA 条款编号，也未进一步挖掘用户的具体需求或进行产品推荐，导致需求发现和购买意愿驱动指标偏低。建议在确认用户需求后，直接提供文档编号或链接，并可顺势介绍 Vertu 的售后服务优势（如专属维修渠道、快速响应保障），以 FAB 结构强化价值传递。同时，可适当进行交叉销售（如延长保修、配件套餐），提升转化机会。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 75,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 60,
+            "sales_script_score": 41,
+            "user_experience_score": 70,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.3,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.9,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.8,
+              "rhythm_pacing": 0.85,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.8,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.7,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 8,
+          "agent_anthropomorphism_score": 0.73,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "整体来看，客服能够准确识别用户的需求（SLA 条款编号及生效日期），但未能在本轮对话中直接提供答案，导致首次解决率为 false。回复中使用了“老板”这一称呼，虽有亲切感，却偏离了 Vertu 高端、优雅的品牌调性，产生一次人格偏离。建议：\n1. 在无法立即提供信息时，可更明确说明预计的响应时间，并提供临时的参考链接或文档，以提升首次解决率。\n2. 避免使用过于口语化的称呼（如“老板”），改为更正式的称谓（如“尊敬的客户”），保持品牌形象。\n3. 主动进行需求挖掘，例如询问客户是否需要其他配套服务（如延长保修、专属配件），以触发交叉销售机会。\n4. 若涉及内部流程转交，说明转交的具体负责人及预计完成时间，增强透明度并提升用户满意度。\n5. 在回复中加入简要的价值说明（如 Vertu 的 SLA 保障如何提升客户业务连续性），即使不是直接的产品推荐，也能体现 FAB 结构的 Benefit 部分，提升品牌价值感。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 68,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 53,
+            "sales_script_score": 38,
+            "user_experience_score": 60,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.85,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.5,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 0.7
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.6,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 9,
+          "agent_anthropomorphism_score": 0.77,
+          "user_anthropomorphism_score": 0.73,
+          "feedback": "客服在专业性上表现不错，能够快速定位用户需求并提供后续跟进方案。但使用“老板”称呼显得过于随意，偏离了 Vertu 高端、优雅的品牌调性。建议改为更正式的称呼（如‘尊敬的客户’），并在回复中加入更多关于 SLA 条款的具体价值说明，以提升 FAB 完整度和购买意愿驱动。若能在同一次对话中直接提供条款编号或链接，将进一步提升首次解决率和用户满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 65,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 52,
+            "user_experience_score": 75,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.7,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.78,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.6,
+              "feature_mentioned": true,
+              "advantage_mentioned": true,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.0,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.9,
+              "personalization_rate": 0.6
+            },
+            "user_experience": {
+              "csat_score": 0.75,
+              "negative_feedback_triggered": false
+            }
+          }
+        },
+        {
+          "turn_number": 10,
+          "agent_anthropomorphism_score": 0.78,
+          "user_anthropomorphism_score": 0.78,
+          "feedback": "客服在语言上基本保持了专业度，但使用了“老板”这一称呼，与 Vertu 高端、优雅的品牌调性略有偏差，导致人格偏离。回复未能直接满足用户对 SLA 条款编号及生效日期的查询需求，仅是升级处理，导致首次解决率为 false，可能引发用户不满。建议：① 使用更符合奢侈品牌的称呼（如‘尊敬的客户’）；② 在无法立即提供信息时，明确给出预计完成时间或提供临时查询渠道，以提升首次解决率；③ 如有机会，可顺势介绍 Vertu 的售后服务优势，加入 FAB 结构，提高购买意愿驱动；④ 增强个性化表达，避免模板化称呼，提升用户满意度。",
+          "detailed_metrics": {
+            "anthropomorphism_score": 65,
+            "purchase_intent_score": 10,
+            "problem_solving_score": 63,
+            "sales_script_score": 39,
+            "user_experience_score": 40,
+            "user_anthropomorphism": {
+              "language_naturalness": 0.8,
+              "personality_deviation_count": 0,
+              "humor_warmth": 0.4,
+              "rhythm_pacing": 0.75,
+              "response_length_distribution": null
+            },
+            "agent_anthropomorphism": {
+              "language_naturalness": 0.75,
+              "personality_deviation_count": 1,
+              "humor_warmth": 0.7,
+              "rhythm_pacing": 0.8,
+              "response_length_distribution": null
+            },
+            "purchase_intent": {
+              "needs_discovery_rate": 0.2,
+              "product_recommendation_accuracy": 0.0
+            },
+            "problem_solving": {
+              "first_contact_resolution": false,
+              "intent_recognition_accuracy": 0.9,
+              "fallback_rate": 1.0
+            },
+            "sales_script": {
+              "fab_completeness": 0.0,
+              "feature_mentioned": false,
+              "advantage_mentioned": false,
+              "objection_handling_success": null,
+              "objection_handling_score": 0.5,
+              "cross_sell_triggered": false,
+              "script_compliance": 0.95,
+              "personalization_rate": 0.5
+            },
+            "user_experience": {
+              "csat_score": 0.4,
+              "negative_feedback_triggered": true
+            }
+          }
+        }
+      ],
+      "first_turn_qa_comparison": {
+        "question": "VERTU AGENT Q 旗舰新品没有测尿酸功能吗?...",
+        "conversation_question": "VERTU AGENT Q 这款旗舰新品怎么没测尿酸的功能啊？",
+        "expected_answer": "VERTU AGENT Q 旗舰新品暂未配备尿酸检测功能。",
+        "actual_answer": "老板，您提到的 VERTU AGENT Q 确实是我们 2025 年 10 月刚发布的旗舰新作，它把重心放在了量子加密通讯与英式私人管家服务上，目前官方参数里并未加入尿酸检测模块。   若您对健康监测有更高阶的需求，我倒可以为您查查看 METAVERTU 2 是否具备相关功能，或者为您预约医疗级可穿戴的私人定制方案。您更倾向哪一条路径？",
+        "first_contact_resolution": true
+      },
+      "error": null
+    }
+  ]
+}
