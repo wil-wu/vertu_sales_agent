@@ -17,6 +17,7 @@ class ReactAgentRequest(BaseModel):
     thread_id: str = Field(
         default_factory=lambda: str(uuid.uuid4()), description="会话 ID"
     )
+    debug: bool = Field(False, description="是否调试模式")
 
 
 class ReactAgentResponse(BaseModel):
@@ -24,3 +25,4 @@ class ReactAgentResponse(BaseModel):
     thread_id: str = Field(
         default_factory=lambda: str(uuid.uuid4()), description="会话 ID"
     )
+    debug_info: list = Field(..., description="调试信息")
