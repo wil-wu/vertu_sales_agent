@@ -34,7 +34,8 @@ class ConversationState(BaseModel):
     finish_reason_description: Optional[str] = Field(default=None)
     preset_prompt: Optional[str] = Field(default=None)
     user_id: str = Field(default="simulation_user")
-    platform: str = Field(default="simulation")
+    platform: Optional[str] = Field(default=None)
+    region: str = Field(default="国内")
     llm_call_stats: Dict[str, Any] = Field(default_factory=lambda: {
         "calls": [],  # 每次调用的详细信息
         "total_calls": 0,
@@ -130,7 +131,7 @@ class UserAgent:
         else:
             return "一般"
 
-    async def start_simulation(self, persona: str, scenario: str, max_turns: int = 20) -> Dict[str, Any]:
+    async def start_simulation(self, persona: str, scenario: str, max_turns: int = 20, platform: Optional[str] = None) -> Dict[str, Any]:
         """启动仿真测试"""
         logger.info(f"=== [AGENT] 启动仿真测试 - 人格: {persona}, 场景: {scenario} ===")
 
@@ -139,6 +140,7 @@ class UserAgent:
             session_id=str(uuid.uuid4()),
             max_turns=max_turns,
             persona=persona,
+            platform=platform,
             preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}"
         )
 
@@ -173,7 +175,8 @@ class UserAgent:
 
                 try:
                     # 调用Target Bot API
-                    response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, state.platform)
+                    platform_info = state.platform if state.platform else "任意平台"
+                    response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, platform_info, state.region)
                     bot_answer = response["message"]
 
                     # 记录对话历史
@@ -214,7 +217,7 @@ class UserAgent:
             state.finish_reason_description = f"对话达到最大轮数限制({state.max_turns}轮)"
             logger.info(f"=== [AGENT] 达到最大轮数限制: {state.max_turns} ===")
 
-    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation") -> Any:
+    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> Any:
         """调用Target Bot API"""
         logger.info(f"=== [AGENT] 向目标机器人提问: {question[:50]}... ===")
 
@@ -229,7 +232,8 @@ class UserAgent:
                         "message": question,
                         "thread_id": thread_id,
                         "user_id": user_id,
-                        "platform": platform
+                        "platform": platform,
+                        "region": region
                     },
                     timeout=30.0
                 )
