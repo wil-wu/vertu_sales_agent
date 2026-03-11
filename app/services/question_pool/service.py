@@ -168,7 +168,6 @@ class QuestionPoolService:
         logger.info(f"开始生成问题池: product={product_name}, platform={platform}, count={count}")
 
         config = PLATFORM_CONFIG.get(platform)
-        platform_label = config["platform_label"]
 
         # 计算各渠道需要的数量（1.5倍冗余以应对可能的不足）
         faq_target = int(count * DISTRIBUTION_RATIO["faq"])
@@ -198,27 +197,27 @@ class QuestionPoolService:
 
         # 转换 FAQ 数据
         faq_pool = [
-            {"question": item["question"], "answer": item["answer"], "platform": platform_label}
+            {"question": item["question"], "answer": item["answer"], "platform": platform}
             for item in faq_data[:faq_target]
         ]
 
         # 转换价格数据
         price_pool = [
-            {"question": item["name"], "answer": f"{item['price']}元", "platform": platform_label}
+            {"question": item["name"], "answer": f"{item['price']}元", "platform": platform}
             for item in price_data[:price_target]
         ]
 
         # 生成图谱问答对
         graph_qa_list = await self._generate_graph_qa(graph_data)
         graph_pool = [
-            {"question": qa["question"], "answer": qa["answer"], "platform": platform_label}
+            {"question": qa["question"], "answer": qa["answer"], "platform": platform}
             for qa in graph_qa_list[:graph_target]
         ]
 
         # 兜底策略：如果某个渠道数据不足，用其他渠道补足
         combined_pool = await self._generate_combined_pool(
             faq_data, price_data, graph_data,
-            combined_target, platform_label
+            combined_target, platform
         )
 
         # 合并所有数据
@@ -264,7 +263,7 @@ class QuestionPoolService:
         price_data: List[dict],
         graph_data: dict,
         target_count: int,
-        platform_label: str
+        platform: str
     ) -> List[dict]:
         """生成综合问答池"""
         combined_pool = []
@@ -283,7 +282,7 @@ class QuestionPoolService:
             combined_pool.append({
                 "question": qa.get("question", ""),
                 "answer": qa.get("answer", ""),
-                "platform": platform_label
+                "platform": platform
             })
 
         return combined_pool
