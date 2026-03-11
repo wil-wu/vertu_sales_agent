@@ -24,6 +24,8 @@ from .schemas import (
     ProblemSolvingMetrics,
     SalesScriptMetrics,
     UserExperienceMetrics,
+    TraditionalScriptMetrics,
+    LanguageConsistencyMetrics,
 )
 from .shared import session_manager, assessment_tracker
 from . import prompts
@@ -234,6 +236,12 @@ class RefereeAgent:
                     csat_score=self._get_float(detailed_metrics_data, ['user_experience', 'csat_score'], 0.5),
                     negative_feedback_triggered=self._get_bool(detailed_metrics_data, ['user_experience', 'negative_feedback_triggered'], False),
                 ),
+                traditional_script=TraditionalScriptMetrics(
+                    technical_term_simplification=self._get_float(detailed_metrics_data, ['traditional_script', 'technical_term_simplification'], 0.5),
+                ),
+                language_consistency=LanguageConsistencyMetrics(
+                    language_match=self._get_bool(detailed_metrics_data, ['language_consistency', 'language_match'], True),
+                ),
             )
             
             # 根据子指标自动计算维度综合评分（0-100分）
@@ -349,7 +357,7 @@ class RefereeAgent:
             return default
     
     def _calculate_dimension_scores(self, dm: DetailedMetrics):
-        """根据子指标自动计算5大维度综合评分（0-100分）
+        """根据子指标自动计算7大维度综合评分（0-100分）
         
         计算逻辑：
         1. 拟人化体验 = (user语言自然度 + user温度感 + user节奏感 + agent语言自然度 + agent温度感 + agent节奏感) / 6 * 100
@@ -366,6 +374,12 @@ class RefereeAgent:
            - 异议处理：如有异议且处理成功得1分，处理失败得0分，无异议得0.5分
         
         5. 用户体验 = CSAT评分 * 100，如有负面反馈则最高60分
+        
+        6. 传统话术 = 专业名词通俗化解释 * 100
+           - 评估客服是否将专业术语转化为通俗易懂的白话描述
+        
+        7. 语言一致性 = 语言一致性判断 × 100
+           - 语言一致性: true=100分(一致), false=0分(不一致)
         """
         # 1. 拟人化体验维度（0-100分）
         user_anthro = dm.user_anthropomorphism
@@ -440,6 +454,20 @@ class RefereeAgent:
             ux_score = min(ux_score, 60)
         
         dm.user_experience_score = round(ux_score)
+        
+        # 6. 传统话术质量维度（0-100分）
+        traditional = dm.traditional_script
+        traditional_score = traditional.technical_term_simplification * 100
+        
+        dm.traditional_script_score = round(traditional_score)
+        
+        # 7. 语言一致性维度（0-100分）
+        language = dm.language_consistency
+        
+        # 语言一致性：true=100分，false=0分
+        language_score = 100.0 if language.language_match else 0.0
+        
+        dm.language_consistency_score = round(language_score)
     
     def _extract_scores_from_text(self, text: str) -> Dict[str, float]:
         """从文本中提取分数"""
@@ -834,6 +862,8 @@ class RefereeAgent:
             "problem_solving_score": avg([m.problem_solving_score for m in metrics_list]),
             "sales_script_score": avg([m.sales_script_score for m in metrics_list]),
             "user_experience_score": avg([m.user_experience_score for m in metrics_list]),
+            "traditional_script_score": avg([m.traditional_script_score for m in metrics_list]),
+            "language_consistency_score": avg([m.language_consistency_score for m in metrics_list]),
         }
         
         # 一、拟人化体验指标汇总 - 分别汇总user和agent

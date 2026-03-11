@@ -1,0 +1,19 @@
+{
+  "测试信息": {
+    "测试时间": "2026-03-11T22:15:35.973841",
+    "会话ID": "9571b4e8-7ff3-4144-a612-365a9ce97a56",
+    "人格类型": "confrontational",
+    "结束原因": "error_DirectUserAgent._call_target_bot() takes from 4 to 6 positional arguments but 7 were given",
+    "总轮数": 0
+  },
+  "维度评分汇总": {},
+  "详细指标": {
+    "用户拟人化": {},
+    "Agent拟人化": {},
+    "购买意愿": {},
+    "问题解决": {},
+    "销售话术": {},
+    "用户体验": {}
+  },
+  "每轮评估": []
+}

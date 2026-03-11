@@ -171,13 +171,11 @@ class DirectUserAgent(UserAgent):
         super().__init__(chat_model, system_prompt, "")
         self.direct_react_agent = react_agent
     
-    @retry_async(tries=3, delay=1, backoff=2, logger=logger)
     async def _generate_next_question(self, state, bot_answer, last_question):
         """生成问题（带重试）"""
         return await super()._generate_next_question(state, bot_answer, last_question)
     
-    @retry_async(tries=3, delay=1, backoff=2, logger=logger)
-    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> any:
+    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> Any:
         """直接调用 ReActAgent 而不是 HTTP API（带重试）"""
         try:
             # 传递 platform 参数给 ReAct Agent
@@ -206,6 +204,8 @@ class TestResult:
     problem_solving: Dict[str, Any]
     sales_script: Dict[str, Any]
     user_experience: Dict[str, Any]
+    traditional_script: Dict[str, Any]
+    language_consistency: Dict[str, Any]
     
     # 每轮评估
     turn_assessments: List[Dict[str, Any]]
@@ -240,6 +240,9 @@ class PersonaSummary:
     
     # 首次解决率统计
     first_contact_resolution_stats: Dict[str, Any] = None
+    
+    # 语言一致性统计
+    language_consistency_stats: Dict[str, Any] = None
 
 
 class BatchTestRunner:
@@ -321,6 +324,39 @@ class BatchTestRunner:
             
             # 构建结果
             detailed = summary.get('detailed_summary', {})
+            
+            # 从 turn_assessments 汇总 traditional_script 和 language_consistency
+            traditional_script_data = {}
+            language_consistency_data = {}
+            
+            if turn_assessments:
+                # 汇总 traditional_script
+                tech_simplifications = []
+                for ta in turn_assessments:
+                    dm = ta.get('detailed_metrics', {})
+                    ts = dm.get('traditional_script', {})
+                    if ts and 'technical_term_simplification' in ts:
+                        tech_simplifications.append(ts['technical_term_simplification'])
+                
+                if tech_simplifications:
+                    traditional_script_data = {
+                        'avg_technical_term_simplification': round(sum(tech_simplifications) / len(tech_simplifications), 2)
+                    }
+                
+                # 汇总 language_consistency
+                language_matches = []
+                for ta in turn_assessments:
+                    dm = ta.get('detailed_metrics', {})
+                    lc = dm.get('language_consistency', {})
+                    if lc and 'language_match' in lc:
+                        language_matches.append(lc['language_match'])
+                
+                if language_matches:
+                    match_count = sum(1 for m in language_matches if m)
+                    language_consistency_data = {
+                        'language_match_rate': round(match_count / len(language_matches) * 100, 2)
+                    }
+            
             result = TestResult(
                 session_id=session_data.get('session_id', session_id),
                 persona=persona,
@@ -335,6 +371,8 @@ class BatchTestRunner:
                 problem_solving=detailed.get('problem_solving', {}),
                 sales_script=detailed.get('sales_script', {}),
                 user_experience=detailed.get('user_experience', {}),
+                traditional_script=traditional_script_data if traditional_script_data else detailed.get('traditional_script', {}),
+                language_consistency=language_consistency_data if language_consistency_data else detailed.get('language_consistency', {}),
                 turn_assessments=turn_assessments,
                 first_turn_qa_comparison=first_turn_qa,
                 error=None
@@ -361,6 +399,8 @@ class BatchTestRunner:
                 problem_solving={},
                 sales_script={},
                 user_experience={},
+                traditional_script={},
+                language_consistency={},
                 turn_assessments=[],
                 error=str(e)
             )
@@ -379,7 +419,7 @@ class BatchTestRunner:
         
         # 为每个人格生成不同的场景变体
         base_scenarios = [
-            f"咨询VERTU {persona}手机的产品特性和价格",
+            f"咨询VERTU手机的产品特性和价格",
             f"了解VERTU售后服务和保修政策",
             f"询问VERTU手机的技术规格和功能",
             f"比较不同VERTU手机型号的差异",
@@ -460,6 +500,27 @@ class BatchTestRunner:
                 "无预期答案的会话": len(successful) - total_with_expected
             }
         
+        # 计算语言一致性统计
+        lc_stats = None
+        if successful:
+            # 统计语言一致的session数量
+            sessions_language_match = [r for r in successful if r.language_consistency and r.language_consistency.get('language_match') == True]
+            # 统计语言不一致的session数量
+            sessions_language_mismatch = [r for r in successful if r.language_consistency and r.language_consistency.get('language_match') == False]
+            
+            total_match = len(sessions_language_match)
+            total_mismatch = len(sessions_language_mismatch)
+            
+            # 计算语言一致性得分：一致的session占比
+            lc_score = round(total_match / len(successful) * 100, 2) if successful else 0.0
+            
+            lc_stats = {
+                "总会话数": len(successful),
+                "语言一致": total_match,
+                "语言不一致": total_mismatch,
+                "语言一致性得分": lc_score
+            }
+        
         return PersonaSummary(
             persona=persona,
             description=config.description if config else "",
@@ -470,7 +531,8 @@ class BatchTestRunner:
             finish_reason_distribution=finish_reasons,
             avg_turns=round(avg_turns, 2),
             total_duration=round(total_duration, 2),
-            first_contact_resolution_stats=fcr_stats
+            first_contact_resolution_stats=fcr_stats,
+            language_consistency_stats=lc_stats
         )
     
     async def run_all_tests(
@@ -586,11 +648,7 @@ class BatchTestRunner:
             total_fcr_true = len(sessions_fcr_true)
             
             overall_fcr_stats = {
-                "总会话数": len(successful_results),
-                "有预期答案的会话": total_with_expected,
-                "首次解决成功": total_fcr_true,
-                "首次解决率": round(total_fcr_true / total_with_expected * 100, 2) if total_with_expected > 0 else 0.0,
-                "无预期答案的会话": len(successful_results) - total_with_expected
+                "首次解决率": round(total_fcr_true / total_with_expected * 100, 2) if total_with_expected > 0 else 0.0
             }
         
         report = {
@@ -610,7 +668,9 @@ class BatchTestRunner:
                 "purchase_intent_score": "购买意愿驱动：需求挖掘率、推荐精准度",
                 "problem_solving_score": "问题解决能力：首次解决率、意图识别准确率、兜底率",
                 "sales_script_score": "销售话术质量：FAB完整度、异议处理、交叉销售、合规性",
-                "user_experience_score": "用户体验：CSAT评分、负面反馈触发"
+                "user_experience_score": "用户体验：CSAT评分、负面反馈触发",
+                "traditional_script_score": "传统话术质量：专业名词通俗化解释能力",
+                "language_consistency_score": "语言一致性：用户-sales_agent问答语言一致性"
             },
             "overall_first_contact_resolution_stats": overall_fcr_stats,
             "overall_dimension_scores": convert_scores_to_chinese(overall_avg_scores),
@@ -627,7 +687,9 @@ def convert_scores_to_chinese(scores: Dict[str, float]) -> Dict[str, float]:
         "purchase_intent_score": "购买意愿驱动",
         "problem_solving_score": "问题解决能力",
         "sales_script_score": "销售话术质量",
-        "user_experience_score": "用户体验"
+        "user_experience_score": "用户体验",
+        "traditional_script_score": "传统话术质量",
+        "language_consistency_score": "语言一致性"
     }
     return {dimension_names.get(k, k): v for k, v in scores.items()}
 
@@ -791,10 +853,6 @@ def print_report_summary(report: Dict[str, Any]):
     if report.get("overall_first_contact_resolution_stats"):
         fcr_stats = report["overall_first_contact_resolution_stats"]
         print(f"\n【首次解决率统计】")
-        print(f"  总会话数: {fcr_stats['总会话数']}")
-        print(f"  有预期答案的会话: {fcr_stats['有预期答案的会话']}")
-        print(f"  无预期答案的会话: {fcr_stats['无预期答案的会话']}")
-        print(f"  首次解决成功: {fcr_stats['首次解决成功']}")
         print(f"  首次解决率: {fcr_stats['首次解决率']}%")
     
     print(f"\n【各人格汇总】")

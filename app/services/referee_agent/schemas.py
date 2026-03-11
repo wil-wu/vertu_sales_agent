@@ -54,14 +54,26 @@ class UserExperienceMetrics(BaseModel):
     negative_feedback_triggered: bool = Field(False, description="是否触发负面反馈/投诉")
 
 
+class TraditionalScriptMetrics(BaseModel):
+    """传统话术质量指标 - 评估专业名词通俗化解释能力"""
+    technical_term_simplification: float = Field(0.0, description="专业名词通俗化解释评分 (0-1)，评估是否将专业术语转化为通俗易懂的白话描述")
+
+
+class LanguageConsistencyMetrics(BaseModel):
+    """语言一致性指标 - 评估用户-sales_agent问答中的语言一致性"""
+    language_match: bool = Field(True, description="语言一致性，评估客服回复语言是否与用户提问语言一致")
+
+
 class DetailedMetrics(BaseModel):
-    """详细评估指标汇总（5大维度，每个维度满分100分）"""
+    """详细评估指标汇总（7大维度，每个维度满分100分）"""
     # 维度综合评分（0-100分）
     anthropomorphism_score: int = Field(0, description="拟人化体验维度综合评分（0-100分），基于user和agent的拟人化表现")
     purchase_intent_score: int = Field(0, description="购买意愿驱动维度综合评分（0-100分）")
     problem_solving_score: int = Field(0, description="问题解决能力维度综合评分（0-100分）")
     sales_script_score: int = Field(0, description="销售话术质量维度综合评分（0-100分）")
     user_experience_score: int = Field(0, description="用户体验维度综合评分（0-100分）")
+    traditional_script_score: int = Field(0, description="传统话术质量维度综合评分（0-100分），评估专业名词通俗化解释能力，等于 technical_term_simplification * 100")
+    language_consistency_score: int = Field(0, description="语言一致性维度综合评分（0-100分），评估用户-sales_agent问答中的语言一致性")
     
     # 各维度详细指标
     user_anthropomorphism: UserAnthropomorphismMetrics = Field(default_factory=UserAnthropomorphismMetrics, description="用户智能体拟人化体验指标")
@@ -70,6 +82,8 @@ class DetailedMetrics(BaseModel):
     problem_solving: ProblemSolvingMetrics = Field(default_factory=ProblemSolvingMetrics, description="问题解决能力指标")
     sales_script: SalesScriptMetrics = Field(default_factory=SalesScriptMetrics, description="销售话术质量指标")
     user_experience: UserExperienceMetrics = Field(default_factory=UserExperienceMetrics, description="用户体验指标")
+    traditional_script: TraditionalScriptMetrics = Field(default_factory=TraditionalScriptMetrics, description="传统话术质量指标")
+    language_consistency: LanguageConsistencyMetrics = Field(default_factory=LanguageConsistencyMetrics, description="语言一致性指标")
 
 
 class TurnAssessment(BaseModel):
