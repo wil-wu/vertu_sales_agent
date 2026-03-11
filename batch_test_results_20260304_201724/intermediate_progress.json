@@ -1,0 +1,159 @@
+{
+  "timestamp": "2026-03-04T20:17:27.714318",
+  "completed_personas": 5,
+  "total_sessions": 5,
+  "summaries": [
+    {
+      "persona": "professional",
+      "description": "专业人士",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {},
+      "finish_reason_distribution": {
+        "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given": 1
+      },
+      "avg_turns": 1.0,
+      "total_duration": 0.66
+    },
+    {
+      "persona": "novice",
+      "description": "技术小白",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {},
+      "finish_reason_distribution": {
+        "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given": 1
+      },
+      "avg_turns": 1.0,
+      "total_duration": 0.59
+    },
+    {
+      "persona": "anxious",
+      "description": "焦虑客户",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {},
+      "finish_reason_distribution": {
+        "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given": 1
+      },
+      "avg_turns": 1.0,
+      "total_duration": 0.58
+    },
+    {
+      "persona": "confrontational",
+      "description": "挑剔型用户（杠精）",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {},
+      "finish_reason_distribution": {
+        "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given": 1
+      },
+      "avg_turns": 1.0,
+      "total_duration": 0.66
+    },
+    {
+      "persona": "bilingual",
+      "description": "双语用户",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {},
+      "finish_reason_distribution": {
+        "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given": 1
+      },
+      "avg_turns": 1.0,
+      "total_duration": 0.84
+    }
+  ],
+  "recent_results": [
+    {
+      "session_id": "5f30a2a6-5714-4df6-9e76-bff84ec8b0f2",
+      "persona": "professional",
+      "scenario": "咨询VERTU professional手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.664398,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    },
+    {
+      "session_id": "bbbe582e-6324-47b4-a26b-88172a005f60",
+      "persona": "novice",
+      "scenario": "咨询VERTU novice手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.588097,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    },
+    {
+      "session_id": "eb8724c9-8be4-4d3b-9b3c-83ad6331dc3c",
+      "persona": "anxious",
+      "scenario": "咨询VERTU anxious手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.579073,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    },
+    {
+      "session_id": "89d9e1f8-c84e-47f9-b257-2472cd54cf84",
+      "persona": "confrontational",
+      "scenario": "咨询VERTU confrontational手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.662599,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    },
+    {
+      "session_id": "be7018db-711a-49b8-a536-122a2dd39280",
+      "persona": "bilingual",
+      "scenario": "咨询VERTU bilingual手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.835721,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    }
+  ]
+}

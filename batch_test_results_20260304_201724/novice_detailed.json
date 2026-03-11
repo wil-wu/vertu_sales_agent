@@ -1,0 +1,25 @@
+{
+  "persona": "novice",
+  "description": "技术小白",
+  "generated_at": "2026-03-04T20:17:25.614506",
+  "total_sessions": 1,
+  "sessions": [
+    {
+      "session_id": "bbbe582e-6324-47b4-a26b-88172a005f60",
+      "persona": "novice",
+      "scenario": "咨询VERTU novice手机的产品特性和价格",
+      "finish_reason": "error_DirectUserAgent._call_target_bot() takes 4 positional arguments but 6 were given",
+      "total_turns": 1,
+      "duration_seconds": 0.588097,
+      "dimension_scores": {},
+      "user_anthropomorphism": {},
+      "agent_anthropomorphism": {},
+      "purchase_intent": {},
+      "problem_solving": {},
+      "sales_script": {},
+      "user_experience": {},
+      "turn_assessments": [],
+      "error": null
+    }
+  ]
+}

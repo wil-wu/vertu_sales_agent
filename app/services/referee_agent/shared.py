@@ -12,8 +12,8 @@ from .schemas import SessionRecord
 
 # 聊天模型实例
 chat_model = ChatOpenAI(
-    api_key=referee_agent_settings.openai_api_key,
-    base_url=referee_agent_settings.openai_base_url,
+    openai_api_key=referee_agent_settings.openai_api_key,
+    openai_api_base=referee_agent_settings.openai_base_url,
     model=referee_agent_settings.llm_model,
     temperature=0.7,
     max_tokens=4000,

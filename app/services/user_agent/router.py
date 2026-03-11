@@ -28,7 +28,8 @@ async def start_simulation(
         result = await user_agent.start_simulation(
             persona=request.persona,
             scenario=request.scenario,
-            max_turns=request.max_turns
+            max_turns=request.max_turns,
+            platform=request.platform
         )
 
         return UserSimulationResponse(

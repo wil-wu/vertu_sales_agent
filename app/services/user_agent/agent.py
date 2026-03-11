@@ -33,6 +33,9 @@ class ConversationState(BaseModel):
     finish_reason: Optional[str] = Field(default=None)
     finish_reason_description: Optional[str] = Field(default=None)
     preset_prompt: Optional[str] = Field(default=None)
+    user_id: str = Field(default="simulation_user")
+    platform: Optional[str] = Field(default=None)
+    region: str = Field(default="国内")
     llm_call_stats: Dict[str, Any] = Field(default_factory=lambda: {
         "calls": [],  # 每次调用的详细信息
         "total_calls": 0,
@@ -83,7 +86,7 @@ class UserAgent:
         if state.llm_call_stats["min_duration"] == float('inf'):
             state.llm_call_stats["min_duration"] = 0.0
 
-    async def load_question_pool(self, csv_file: str = "simulation/jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
+    async def load_question_pool(self, csv_file: str = "jd_tm_qa_filtered.csv") -> List[Dict[str, Any]]:
         """加载问题池"""
         logger.info(f"=== [AGENT] 加载问题池: {csv_file} ===")
         try:
@@ -93,7 +96,8 @@ class UserAgent:
                 questions.append({
                     "id": idx + 1,
                     "question": row.get('question', ''),
-                    "category": self._categorize_question(row.get('question', ''))
+                    "category": self._categorize_question(row.get('question', '')),
+                    "platform": row.get('generate_source', '') if pd.notna(row.get('generate_source')) else ''
                 })
 
             # 保存mock_questions.json
@@ -128,7 +132,7 @@ class UserAgent:
         else:
             return "一般"
 
-    async def start_simulation(self, persona: str, scenario: str, max_turns: int = 20) -> Dict[str, Any]:
+    async def start_simulation(self, persona: str, scenario: str, max_turns: int = 20, platform: Optional[str] = None) -> Dict[str, Any]:
         """启动仿真测试"""
         logger.info(f"=== [AGENT] 启动仿真测试 - 人格: {persona}, 场景: {scenario} ===")
 
@@ -137,6 +141,7 @@ class UserAgent:
             session_id=str(uuid.uuid4()),
             max_turns=max_turns,
             persona=persona,
+            platform=platform,
             preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}"
         )
 
@@ -171,7 +176,8 @@ class UserAgent:
 
                 try:
                     # 调用Target Bot API
-                    response = await self._call_target_bot(client, current_question, state.session_id)
+                    platform_info = state.platform if state.platform else "任意平台"
+                    response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, platform_info, state.region)
                     bot_answer = response["message"]
 
                     # 记录对话历史
@@ -212,7 +218,7 @@ class UserAgent:
             state.finish_reason_description = f"对话达到最大轮数限制({state.max_turns}轮)"
             logger.info(f"=== [AGENT] 达到最大轮数限制: {state.max_turns} ===")
 
-    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str) -> Any:
+    async def _call_target_bot(self, client: httpx.AsyncClient, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> Any:
         """调用Target Bot API"""
         logger.info(f"=== [AGENT] 向目标机器人提问: {question[:50]}... ===")
 
@@ -225,7 +231,10 @@ class UserAgent:
                     self.target_bot_url,
                     json={
                         "message": question,
-                        "thread_id": thread_id
+                        "thread_id": thread_id,
+                        "user_id": user_id,
+                        "platform": platform,
+                        "region": region
                     },
                     timeout=30.0
                 )
@@ -406,7 +415,13 @@ class UserAgent:
     def _get_fallback_question(self, state: ConversationState) -> str:
         """获取备用问题"""
         if state.question_pool:
-            return random.choice([q['question'] for q in state.question_pool])
+            selected = random.choice(state.question_pool)
+            # 从备用问题中获取 platform
+            question_platform = selected.get('platform', '')
+            if question_platform:
+                state.platform = question_platform
+                logger.info(f"=== [AGENT] 从备用问题设置 platform: {question_platform} ===")
+            return selected['question']
         else:
             return "请介绍一下VERTU手机的主要特点"
 
@@ -419,11 +434,18 @@ class UserAgent:
         if config:
             filtered_questions = [q for q in questions if q.get('category', '') in config.preferred_categories]
             if filtered_questions:
-                selected_question = random.choice(filtered_questions)['question']
+                selected = random.choice(filtered_questions)
             else:
-                selected_question = random.choice(questions)['question']
+                selected = random.choice(questions)
         else:
-            selected_question = random.choice(questions)['question']
+            selected = random.choice(questions)
+        
+        selected_question = selected['question']
+        # 从问题中获取 platform 并设置到 state
+        question_platform = selected.get('platform', '')
+        if question_platform:
+            state.platform = question_platform
+            logger.info(f"=== [AGENT] 从问题池设置 platform: {question_platform} ===")
 
         # 使用大模型改写问题
         try:

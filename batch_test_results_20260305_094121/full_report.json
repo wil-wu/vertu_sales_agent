@@ -1,0 +1,140 @@
+{
+  "_report_description": "Vertu Sales Agent 批量测试报告 - 包含多人格对话生成与评估结果",
+  "_note": "详细对话数据保存在同目录下的 {persona}_detailed.json 文件中",
+  "report_info": {
+    "generated_at": "2026-03-05T10:15:18.858336",
+    "total_sessions": 500,
+    "successful_evaluations": 500,
+    "failed_evaluations": 0,
+    "success_rate": 100.0,
+    "tested_personas": [
+      "professional",
+      "novice",
+      "anxious",
+      "confrontational",
+      "bilingual"
+    ],
+    "total_duration_seconds": 78791.55
+  },
+  "_dimension_score_comments": {
+    "anthropomorphism_score": "拟人化体验：语言自然度、人设一致性、温度感",
+    "purchase_intent_score": "购买意愿驱动：需求挖掘率、推荐精准度",
+    "problem_solving_score": "问题解决能力：首次解决率、意图识别准确率、兜底率",
+    "sales_script_score": "销售话术质量：FAB完整度、异议处理、交叉销售、合规性",
+    "user_experience_score": "用户体验：CSAT评分、负面反馈触发"
+  },
+  "overall_dimension_scores": {
+    "anthropomorphism_score": 80.33,
+    "purchase_intent_score": 35.13,
+    "problem_solving_score": 76.76,
+    "sales_script_score": 56.21,
+    "user_experience_score": 79.19
+  },
+  "persona_summaries": [
+    {
+      "persona": "professional",
+      "description": "专业人士",
+      "total_sessions": 100,
+      "successful_evaluations": 100,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 79.19,
+        "purchase_intent_score": 25.83,
+        "problem_solving_score": 75.59,
+        "sales_script_score": 52.52,
+        "user_experience_score": 77.49
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 93,
+        "max_turns": 3,
+        "user_rejection": 3,
+        "human_escalation": 1
+      },
+      "avg_turns": 4.89,
+      "total_duration": 11658.37
+    },
+    {
+      "persona": "novice",
+      "description": "技术小白",
+      "total_sessions": 100,
+      "successful_evaluations": 100,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 82.01,
+        "purchase_intent_score": 47.72,
+        "problem_solving_score": 85.45,
+        "sales_script_score": 64.42,
+        "user_experience_score": 83.04
+      },
+      "finish_reason_distribution": {
+        "user_rejection": 18,
+        "user_satisfied": 64,
+        "max_turns": 18
+      },
+      "avg_turns": 5.43,
+      "total_duration": 12308.75
+    },
+    {
+      "persona": "anxious",
+      "description": "焦虑客户",
+      "total_sessions": 100,
+      "successful_evaluations": 100,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 78.7,
+        "purchase_intent_score": 16.97,
+        "problem_solving_score": 62.64,
+        "sales_script_score": 45.77,
+        "user_experience_score": 74.13
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 22,
+        "max_turns": 78
+      },
+      "avg_turns": 9.44,
+      "total_duration": 25531.0
+    },
+    {
+      "persona": "confrontational",
+      "description": "挑剔型用户（杠精）",
+      "total_sessions": 100,
+      "successful_evaluations": 100,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 79.47,
+        "purchase_intent_score": 33.06,
+        "problem_solving_score": 73.92,
+        "sales_script_score": 54.28,
+        "user_experience_score": 77.36
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 61,
+        "max_turns": 28,
+        "user_rejection": 9,
+        "human_escalation": 2
+      },
+      "avg_turns": 7.41,
+      "total_duration": 17897.57
+    },
+    {
+      "persona": "bilingual",
+      "description": "双语用户",
+      "total_sessions": 100,
+      "successful_evaluations": 100,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "anthropomorphism_score": 82.3,
+        "purchase_intent_score": 52.09,
+        "problem_solving_score": 86.2,
+        "sales_script_score": 64.07,
+        "user_experience_score": 83.95
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 86,
+        "max_turns": 14
+      },
+      "avg_turns": 6.02,
+      "total_duration": 11395.86
+    }
+  ]
+}

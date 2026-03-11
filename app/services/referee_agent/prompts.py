@@ -17,73 +17,7 @@ SYSTEM_PROMPT = """你是 VERTU 奢侈品手机的专业销售客服质量评估
 
 请严格按照评分标准进行评估，确保评价的客观性和一致性。"""
 
-# 评估提示词模板（基础版 - 保留兼容）
-EVALUATION_PROMPT_TEMPLATE = """
-你是一位专业的销售客服质量评估专家。请评估以下 VERTU 奢侈品手机客服对话的质量。
-
-请从以下5个维度进行评估：
-
-1. 拟人程度评分:
-   1.1 客服拟人程度 (agent_anthropomorphism_score):
-      - 评估客服回复是否自然流畅，像真人客服而非机器
-      - 0.0-0.3分: 明显机械，模板化严重
-      - 0.4-0.6分: 有一定自然度，但仍有机器痕迹
-      - 0.7-0.8分: 比较自然，接近真人
-      - 0.9-1.0分: 非常自然，完全像专业真人客服
-   
-   1.2 用户拟人程度 (user_anthropomorphism_score):
-      - 评估用户agent提问是否自然流畅，像真人用户而非机器生成的提问
-      - 0.0-0.3分: 明显机械，像模板问题
-      - 0.4-0.6分: 有一定自然度，但略显生硬
-      - 0.7-0.8分: 比较自然，接近真实用户提问
-      - 0.9-1.0分: 非常自然，完全像真实用户
-
-2. 购买意愿变化 (purchase_intent_change):
-   - 评估这轮对话后，用户的购买意愿相比之前如何变化
-   - 选项: "improved"(提升), "unchanged"(不变), "declined"(下降)
-
-3. 问题解决情况 (problem_resolved):
-   - 用户当前提出的问题是否得到了满意的解答
-   - true: 问题已解决, false: 未解决
-
-4. 销售话术质量 (sales_script_quality):
-   - 评估客服的销售技巧和专业话术水平
-   - "excellent"(优秀): 专业、有说服力、体现品牌价值
-   - "good"(良好): 较为专业，基本达到销售标准
-   - "poor"(差): 不专业、生硬、可能损害品牌形象
-
-5. 用户体验评价 (user_experience):
-   - 评估用户在这轮对话中的整体感受
-   - "excellent"(优): 满意、愉悦、愿意继续交流
-   - "good"(良): 基本满意，无明显不满
-   - "poor"(差): 不满意、 frustrated、可能流失
-
-对话内容:
-用户消息: {user_message}
-客服回复: {agent_response}
-{history_str}
-
-请以JSON格式提供评估结果，包含以下字段：
-{{
-    "agent_anthropomorphism_score": 0.85,
-    "user_anthropomorphism_score": 0.90,
-    "purchase_intent_change": "improved",
-    "problem_resolved": true,
-    "sales_script_quality": "excellent",
-    "user_experience": "excellent",
-    "feedback": "总体评价和改进建议"
-}}
-
-注意:
-- agent_anthropomorphism_score 和 user_anthropomorphism_score 必须是0-1之间的数字
-- purchase_intent_change 只能是: improved/unchanged/declined
-- sales_script_quality 只能是: excellent/good/poor
-- user_experience 只能是: excellent/good/poor
-- problem_resolved 必须是: true 或 false
-"""
-
-
-# 详细评估提示词模板（新增 - 5大维度指标）
+# 详细评估提示词模板（5大维度指标）
 DETAILED_EVALUATION_PROMPT_TEMPLATE = """
 你是一位专业的VERTU奢侈品手机销售客服质量评估专家。请对以下客服对话进行全面、详细的评估。
 
@@ -153,8 +87,13 @@ VERTU是顶级奢侈品牌，客服应当像私人顾问一样专业、自然、
 三、问题解决能力指标 (Problem Solving)
 ========================================
 
-9. first_contact_resolution (首次解决):
-    - true/false: 用户问题是否在本轮得到一次性解决
+9. first_contact_resolution (首次解决) - 仅评估首轮对话:
+    - 本指标仅针对每轮会话的第一轮对话进行评估
+    - 评估标准：将客服回答与【预期答案】对比，判断是否包含了正确答案的全部核心信息
+    - 如果是价格查询类问题，需检查客服回答中的产品信息和价格是否与预期答案匹配
+    - true: 客服回答完整包含了预期答案的核心信息，一次性解决用户问题
+    - false: 客服回答缺失关键信息、答非所问或信息错误
+    - 注意：如果【预期答案】为空，则此指标设为 false
 
 10. intent_recognition_accuracy (意图识别准确率 0-1):
     - 客服是否正确理解了用户的真实意图
@@ -221,6 +160,12 @@ VERTU是顶级奢侈品牌，客服应当像私人顾问一样专业、自然、
 用户消息: {user_message}
 客服回复: {agent_response}
 
+【预期答案 - 仅用于首轮对话评估 first_contact_resolution】
+{expected_answer}
+
+【是否为首轮对话】
+{is_first_turn}
+
 【上下文历史信息 - 前面几轮的对话记录，供参考】
 {history_str}
 
@@ -261,7 +206,7 @@ VERTU是顶级奢侈品牌，客服应当像私人顾问一样专业、自然、
         
         // 【维度 3】问题解决能力 - 评估服务专业性
         "problem_solving": {{
-            "first_contact_resolution": true,   // 首次解决
+            "first_contact_resolution": true,   // 首次解决 - 仅首轮对话评估，对比预期答案判断
             "intent_recognition_accuracy": 0.90, // 意图识别准确率
             "fallback_rate": 0.0                // 兜底率 (0-1，0.0=必须转人工，1.0=完全解决)
         }},

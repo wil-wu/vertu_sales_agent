@@ -14,7 +14,7 @@ class RefereeAgentSettings(BaseSettings):
     
     # 模型配置
     llm_model: str = Field(
-        default="kimi-k2-turbo-preview",
+        default="openai/gpt-5-nano",
         description="评估LLM模型名称"
     )
     openai_api_key: str = Field(
@@ -22,22 +22,8 @@ class RefereeAgentSettings(BaseSettings):
         description="OpenAI API 密钥"
     )
     openai_base_url: str = Field(
-        default="https://api.moonshot.cn/v1",
+        default="https://openrouter.ai/api/v1",
         description="OpenAI API 基础 URL"
-    )
-    
-    # 评估标准阈值
-    relevance_threshold: float = Field(
-        default=0.7,
-        description="相关性阈值，低于此值认为不相关"
-    )
-    helpfulness_threshold: float = Field(
-        default=0.6,
-        description="有用性阈值，低于此值认为无用"
-    )
-    empathy_threshold: float = Field(
-        default=0.5,
-        description="同理心阈值，低于此值认为缺乏同理心"
     )
     
     # 终止条件配置
@@ -64,19 +50,6 @@ class RefereeAgentSettings(BaseSettings):
         description="是否保存会话数据"
     )
     
-    # 评估权重配置
-    relevance_weight: float = Field(
-        default=0.4,
-        description="相关性权重"
-    )
-    helpfulness_weight: float = Field(
-        default=0.4,
-        description="有用性权重"
-    )
-    empathy_weight: float = Field(
-        default=0.2,
-        description="同理心权重"
-    )
 
 
 referee_agent_settings = RefereeAgentSettings()
