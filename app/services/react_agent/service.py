@@ -28,12 +28,12 @@ class ReactAgentService:
 
     @staticmethod
     @_retry
-    async def faq_query(query: str) -> Any:
+    async def faq_query(collection_names: list, query: str, top_k: int = react_agent_settings.faq_top_n) -> Any:
         """查询 FAQ 知识库。"""
         response = await httpx_async_client.post(
-            react_agent_settings.faq_url, json={"query": query}
+            react_agent_settings.faq_url, json={"collection_names": collection_names, "query": query, "top_k": top_k}
         )
-        items = response.json()["categories"][0]["items"][: react_agent_settings.faq_top_n]
+        items = response.json()["categories"][0]["items"]
         return [{"question": item["question"], "answer": item["answer"]} for item in items]
 
     @staticmethod
