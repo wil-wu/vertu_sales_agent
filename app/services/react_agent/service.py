@@ -34,7 +34,7 @@ class ReactAgentService:
             react_agent_settings.faq_url, json={"query": query}
         )
         items = response.json()["categories"][0]["items"][: react_agent_settings.faq_top_n]
-        return [item["answer"] for item in items]
+        return [{"question": item["question"], "answer": item["answer"]} for item in items]
 
     @staticmethod
     @_retry
@@ -45,7 +45,7 @@ class ReactAgentService:
             json={"query": query},
             timeout=20,
         )
-        return response.json()["data"]["result"]
+        return response.json()["data"]["full_context"]
 
     @staticmethod
     @_retry
