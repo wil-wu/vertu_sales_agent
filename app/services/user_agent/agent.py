@@ -35,6 +35,8 @@ class ConversationState(BaseModel):
     preset_prompt: Optional[str] = Field(default=None)
     user_id: str = Field(default="simulation_user")
     platform: Optional[str] = Field(default=None)
+    channel_param: Optional[str] = Field(default=None)
+    language: str = Field(default="zh")
     region: str = Field(default="国内")
     llm_call_stats: Dict[str, Any] = Field(default_factory=lambda: {
         "calls": [],  # 每次调用的详细信息
@@ -396,6 +398,8 @@ class UserAgent:
             return config.agent_prompt_template + f"\n\n{state.preset_prompt}"
         else:
             return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}"
+        if state.language == "en":
+            return "Can you tell me about the main features of VERTU phones?"
 
     def _get_system_prompt(self, persona: str) -> str:
         """获取系统提示词"""
@@ -496,22 +500,15 @@ class UserAgent:
             ]
         }
 
-        try:
-            # 创建mock_sessions目录
-            sessions_dir = Path("mock_sessions")
-            sessions_dir.mkdir(exist_ok=True)
+        sessions_dir = Path("mock_sessions")
+        sessions_dir.mkdir(exist_ok=True)
 
-            # 生成文件名
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"{state.session_id}_{timestamp}.json"
-            filepath = sessions_dir / filename
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{state.session_id}_{timestamp}.json"
+        filepath = sessions_dir / filename
 
-            # 保存文件
-            with open(filepath, "w", encoding="utf-8") as f:
-                json.dump(session_data, f, ensure_ascii=False, indent=2)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(session_data, f, ensure_ascii=False, indent=2)
 
-            logger.info(f"会话数据已保存到: {filepath}")
-            return session_data
-        except Exception as e:
-            logger.error(f"保存会话数据失败: {e}")
-            raise
+        logger.info(f"会话数据已保存到: {filepath}")
+        return session_data
