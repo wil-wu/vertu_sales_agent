@@ -19,13 +19,15 @@ def tool_result_fail(error: str) -> dict[str, Any]:
 
 
 @tool
-async def faq_query(query: str):
+async def faq_query(collection_names: list, query: str):
     """
     查询 FAQ 知识库，产品相关的咨询问题。
+    collection_names: 知识库名称，可选范围 [domestic, overseas]，中文用户选择 domestic，非中文用户选择 overseas
+    query: 查询关键词
     """
-    logger.info(f"--- [TOOL] 查询 FAQ: {query} ---")
+    logger.info(f"--- [TOOL] 查询 FAQ: {collection_names} {query} ---")
     try:
-        data = await ReactAgentService.faq_query(query)
+        data = await ReactAgentService.faq_query(collection_names, query)
         return tool_result_ok(data)
     except Exception as e:
         exc_info = f"{e.__class__.__name__}: {e}"
