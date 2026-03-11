@@ -20,7 +20,7 @@ class QuestionPoolSettings(BaseSettings):
 
     # 价格 API 配置
     price_url: str = Field(
-        default="http://192.168.151.84:8030/api/v1/semantic/product_search",
+        default="http://192.168.151.84:8030/api/v1/semantic/product/search",
         description="价格查询 API URL"
     )
 

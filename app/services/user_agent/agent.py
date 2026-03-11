@@ -17,7 +17,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 
 from .shared import chat_model
-from .user_config import get_persona_config
+from .user_config import get_persona_config, PLATFORM_API_CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,8 @@ class ConversationState(BaseModel):
         "min_duration": float('inf'),
         "max_duration": 0.0
     })
+    initial_question: str = Field(default="")
+    initial_query_results: Dict[str, Any] = Field(default_factory=dict)
 
 class UserAgent:
     """仿真测试用户代理智能体"""
@@ -54,13 +56,56 @@ class UserAgent:
         self,
         chat_model=None,
         system_prompt: str = "",
-        target_bot_url: str = "http://localhost:8000/api/v1/react/chat"
+        target_bot_url: str = "http://localhost:8000/api/v1/react/chat",
+        faq_url: str = "http://192.168.151.84:8888/query",
+        price_url: str = "http://192.168.151.84:8030/api/v1/semantic/product/search"
     ):
         self.chat_model = chat_model
         self.system_prompt = system_prompt
         self.target_bot_url = target_bot_url
+        self.faq_url = faq_url
+        self.price_url = price_url
         self.human_escalation_keywords = ["转人工", "人工客服", "人工帮助", "人工", "客服", "投诉"]
         self.invalid_response_keywords = ["无法回答", "不知道", "不清楚", "我不懂", "无法找到", "没有找到"]
+
+    async def _fetch_faq(self, query: str, collection_name: str = "domestic", top_k: int = 5) -> List[dict]:
+        """获取 FAQ 数据"""
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                self.faq_url,
+                json={"query": query, "collection_names": [collection_name], "top_k": top_k},
+                timeout=15.0
+            )
+            response.raise_for_status()
+            data = response.json()
+
+        items = []
+        for category in data.get("categories", []):
+            for item in category.get("items", []):
+                items.append({
+                    "question": item.get("question", ""),
+                    "answer": item.get("answer", "")
+                })
+        return items[:top_k]
+
+    async def _fetch_price(self, query: str, index_name: str = "jd_product", hits_per_page: int = 5) -> List[dict]:
+        """获取价格数据"""
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                self.price_url,
+                json={"query": query, "index_name": index_name, "hits_per_page": hits_per_page, "page": 1},
+                timeout=15.0
+            )
+            response.raise_for_status()
+            data = response.json()
+
+        items = []
+        for hit in data.get("hits", [])[:hits_per_page]:
+            items.append({
+                "name": hit.get("name", ""),
+                "price": hit.get("price", 0)
+            })
+        return items
 
     def _record_llm_call(self, state: ConversationState, call_type: str, duration: float, details: str = ""):
         """记录LLM调用统计"""
@@ -151,6 +196,24 @@ class UserAgent:
 
         # 选择并改写初始问题
         initial_question = await self._select_initial_question(persona, state.question_pool, state)
+        state.initial_question = initial_question
+
+        # 根据平台确定查询参数
+        platform_config = PLATFORM_API_CONFIG.get(platform, PLATFORM_API_CONFIG["domestic_jd"])
+        faq_collection = platform_config["faq_collection"]
+        price_index = platform_config["price_index"]
+
+        # 查询 FAQ 和价格 API
+        logger.info(f"=== [AGENT] 查询初始问题的 FAQ 和价格数据 - 问题: {initial_question[:50]}... ===")
+        faq_results = await self._fetch_faq(initial_question, faq_collection, top_k=5)
+        price_results = await self._fetch_price(initial_question, price_index, hits_per_page=5)
+
+        state.initial_query_results = {
+            "faq": faq_results,
+            "price": price_results,
+            "query_time": datetime.now().isoformat()
+        }
+        logger.info(f"=== [AGENT] FAQ 查询到 {len(faq_results)} 条，价格查询到 {len(price_results)} 条 ===")
 
         # 开始多轮对话
         await self._run_conversation_loop(state, initial_question)
@@ -497,7 +560,9 @@ class UserAgent:
                     "timestamp": msg["timestamp"]
                 }
                 for msg in state.conversation_history
-            ]
+            ],
+            "initial_question": state.initial_question,
+            "initial_query_results": state.initial_query_results
         }
 
         sessions_dir = Path("mock_sessions")

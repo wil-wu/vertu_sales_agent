@@ -245,6 +245,23 @@ USER_PERSONAS: Dict[str, PersonaConfig] = {
     )
 }
 
+# 渠道API配置映射
+# platform -> {faq_collection, price_index}
+PLATFORM_API_CONFIG = {
+    "domestic_jd": {
+        "faq_collection": "domestic",
+        "price_index": "jd_product"
+    },
+    "domestic_tm": {
+        "faq_collection": "domestic",
+        "price_index": "tm_product"
+    },
+    "overseas": {
+        "faq_collection": "overseas",
+        "price_index": "overseas_product"
+    }
+}
+
 
 def get_persona_config(persona_name: str):
     """获取人格配置"""
