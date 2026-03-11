@@ -1,2524 +1,613 @@
 {
   "source_file": "jd_tm_qa_filtered.csv",
-  "total_count": 502,
+  "total_count": 100,
   "questions": [
     {
       "id": 1,
-      "question": "VERTU Agent Q手机系统可以更新5年吗?",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q手机是干什么用的？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 2,
-      "question": "VERTU agent Q 国际版在国内使用是否方便？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 搭载什么系统？",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 3,
-      "question": "VERTU Agent Q手机有没有超级岛功能？",
-      "category": "技术支持"
+      "question": "VERTU Agent Q是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 4,
-      "question": "VERTU AGENT Q 旗舰新品手机的材质和工艺有哪些特点？",
-      "category": "一般"
+      "question": "VERTU Agent Q在玩游戏时会有问题吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 5,
-      "question": "VERTU AGENT Q 旗舰新品是否有多个系统？",
-      "category": "系统更新"
+      "question": "VERTU Agent Q支持游戏吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 6,
-      "question": "VERTU AGENT Q旗舰手机耐摔吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 安全性能怎么样?",
+      "category": "安全隐私",
+      "platform": ""
     },
     {
       "id": 7,
-      "question": "VERTU AGENT Q旗舰新品内存多大？",
-      "category": "一般"
+      "question": "VERTU AGENT Q是否适合当兵使用？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 8,
-      "question": "VERTU AGENT Q 旗舰新品手机防监听吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q的AI与安全功能有哪些?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 9,
-      "question": "VERTU AGENT Q 旗舰新品是否包含皮套？",
-      "category": "一般"
+      "question": "VERTU AGENT Q有遥控功能吗?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 10,
-      "question": "VERTU AGENT Q 旗舰新品基于安卓系统吗？",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q待机时间多长？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 11,
-      "question": "VERTU Agent Q防水吗?",
-      "category": "一般"
+      "question": "VERTU AGENT Q 旗舰新品功能好用吗？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 12,
-      "question": "VERTU AGENT Q基于华为系统吗?",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q手机有哪些具体优点？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 13,
-      "question": "VERTU Agent Q手机有哪些核心配置和功能？",
-      "category": "技术支持"
+      "question": "VERTU AGENT Q手机支持哪些AI智能体功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 14,
-      "question": "VERTU AGENT Q旗舰手机价格贵的特点有哪些？",
-      "category": "价格"
+      "question": "VERTU AGENT Q手机的摄像头配置和拍摄能力如何？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 15,
-      "question": "VERTU AGENT Q旗舰手机需要使用手机套吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 手机的顶配指的是什么方面？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 16,
-      "question": "VERTU AGENT Q 橙色鳄鱼皮款手机使用什么材质？",
-      "category": "一般"
+      "question": "VERTU Agent Q支持哪些核心功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 17,
-      "question": "VERTU AGENT Q 旗舰新品包含哪些配件？",
-      "category": "一般"
+      "question": "VERTU Agent Q有什么不同？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 18,
-      "question": "VERTU AGENT Q支持获取root权限吗?",
-      "category": "一般"
+      "question": "VERTU Agent Q在安全和隐私方面有何优势？",
+      "category": "安全隐私",
+      "platform": ""
     },
     {
       "id": 19,
-      "question": "VERTU AGENT Q 手机贴膜是否包含专用工具？",
-      "category": "一般"
+      "question": "VERTU Agent Q手机的AI功能如何实现？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 20,
-      "question": "VERTU AGENT Q 旗舰新品手机最大的优势是什么？",
-      "category": "一般"
+      "question": "VERTU Agent Q有哪些特色功能?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 21,
-      "question": "VERTU AGENT Q旗舰新品是否具备量子级加密功能？如何保障信息安全？",
-      "category": "技术支持"
+      "question": "VERTU Agent Q的系统架构是什么?",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 22,
-      "question": "VERTU AGENT Q 奢品AI智能体手机的配置、价格和AI功能有哪些？",
-      "category": "价格"
+      "question": "VERTU AGENT Q 旗舰新品的最大的优势是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 23,
-      "question": "METAVERTU和VERTU量子折叠手机有什么区别？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 旗舰新品是否支持AI功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 24,
-      "question": "VERTU Agent Q手机产地是哪里？",
-      "category": "一般"
+      "question": "VERTU Agent Q支持哪些安全防护功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 25,
-      "question": "VERTU Agent Q手机在隐私加密方面具备哪些优势？例如小米手机提供的空白通行证功能。",
-      "category": "技术支持"
+      "question": "VERTU Agent Q搭载什么处理器？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 26,
-      "question": "VERTU agent Q 国际版能否使用国内SIM卡？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 旗舰新品出厂时间是哪一年？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 27,
-      "question": "VERTU AGENT Q 旗舰新品是折叠屏手机吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q有实图吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 28,
-      "question": "VERTU AGENT Q旗舰新品支持多少个微信账号同时登录？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 旗舰新品的材质和工艺有哪些特点？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 29,
-      "question": "VERTU Agent Q的卡巢是防水吗?",
-      "category": "一般"
+      "question": "VERTU Agent Q旗舰新品的配置参数是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 30,
-      "question": "VERTU AGENT Q旗舰新品的AI功能有哪些？",
-      "category": "技术支持"
+      "question": "VERTU Agent Q手机属于什么类型？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 31,
-      "question": "VERTU AGENT Q 朱雀焰碳纤维材质款与棕色小牛皮款后盖有什么区别？",
-      "category": "一般"
+      "question": "【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 32,
-      "question": "VERTU AGENT Q智能钻戒能否无创测血糖？",
-      "category": "一般"
+      "question": "【天猫专属 新品上市】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 33,
-      "question": "VERTU AGENT Q旗舰新品自带钱包吗?",
-      "category": "一般"
+      "question": "【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 34,
-      "question": "VERTU AGENT Q旗舰新品采用什么处理器？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 手机的屏幕尺寸和电池容量分别是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 35,
-      "question": "VERTU AGENT Q旗舰手机的火神图腾设计寓意是什么？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 是否支持快速充电功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 36,
-      "question": "VERTU AGENT Q 旗舰新品是品牌配置最高的一款吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的可选颜色和存储规格有哪些？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 37,
-      "question": "VERTU AGENT Q 旗舰新品与朱雀款在配置和功能上有什么区别？",
-      "category": "技术支持"
+      "question": "VERTU AGENT Q 与标准版在材质上有什么不同？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 38,
-      "question": "VERTU AGENT Q 旗舰新品支持国家公职人员使用吗?",
-      "category": "一般"
+      "question": "请详细介绍 VERTU AGENT Q 手机的整体配置情况。",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 39,
-      "question": "VERTU AGENT Q 旗舰新品是否支持蒙语通话翻译?",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机支持哪些AI智能体功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 40,
-      "question": "VERTU AGENT Q旗舰新品支持无限充电吗?",
-      "category": "一般"
+      "question": "VERTU AGENT Q 搭载什么系统？",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 41,
-      "question": "VERTU AGENT Q 全球首发预售款手机在通话时能否确保对方不能录音？",
-      "category": "一般"
+      "question": "VERTU Agent Q的存储配置是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 42,
-      "question": "VERTU AGENT Q旗舰新品支持5G吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q在玩游戏时会有问题吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 43,
-      "question": "VERTU AGENT Q旗舰新品支持下载谷歌软件吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q支持游戏吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 44,
-      "question": "VERTU AGENT Q 旗舰新品16GB+1TB+10t分布式储存内存有多大？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的安全性能如何?",
+      "category": "安全隐私",
+      "platform": ""
     },
     {
       "id": 45,
-      "question": "VERTU AGENT Q 手机是鸿蒙系统吗？",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q是否适合当兵使用？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 46,
-      "question": "VERTU AGENT Q 旗舰新品支持骁龙 8 Elite至尊版 AI 芯片和量子密钥吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q的AI与安全功能有哪些?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 47,
-      "question": "VERTU AGENT Q旗舰手机支持AI财运推演系统吗？",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q有遥控功能吗?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 48,
-      "question": "VERTU AGENT Q旗舰新品外观设计是什么样的？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 配备的快充充电器功率是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 49,
-      "question": "VERTU AGENT Q 旗舰新品 16GB+1TB 版本是否有18GB+1TB配置？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 搭载的处理器型号和主频是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 50,
-      "question": "VERTU AGENT Q 旗舰新品是否支持AI顶配智能直面屏功能？",
-      "category": "技术支持"
+      "question": "VERTU AGENT Q手机的电池容量和充电功率是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 51,
-      "question": "VERTU AGENT Q旗舰新品支持哪些核心工艺或结构设计？",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机支持哪些AI智能体功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 52,
-      "question": "VERTU AGENT Q 旗舰新品支持哪些国家的通话翻译语言?",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机的摄像头配置和拍摄能力如何？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 53,
-      "question": "VERTU AGENT Q 旗舰新品全球首发预售支持量子折叠屏技术吗？",
-      "category": "技术支持"
+      "question": "VERTU AGENT Q 手机的顶配版本采用了哪些核心配置和特色功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 54,
-      "question": "VERTU AGENT Q 旗舰新品是直板还是折叠设计？",
-      "category": "一般"
+      "question": "VERTU Agent Q的处理器型号和存储配置是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 55,
-      "question": "VERTU AGENT Q 旗舰新品是否支持降噪功能？",
-      "category": "技术支持"
+      "question": "VERTU Agent Q的存储配置是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 56,
-      "question": "VERTU AGENT Q 旗舰新品与佛戒款、水晶款相比，哪个更窄？",
-      "category": "一般"
+      "question": "VERTU Agent Q配备的硬件加密芯片型号是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 57,
-      "question": "VERTU AGENT Q 旗舰新品全球首发预售的表盘是否为天然水晶？",
-      "category": "一般"
+      "question": "VERTU Agent Q手机的AI-VERMOY会议纪要功能有哪些特点？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 58,
-      "question": "VERTU AGENT Q 旗舰新品盲盒中固定赠送的物品是什么？",
-      "category": "一般"
+      "question": "VERTU Agent Q支持哪些特色功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 59,
-      "question": "VERTU AGENT Q手机是4G还是5G?",
-      "category": "一般"
+      "question": "VERTU Agent Q旗舰新品的配置参数是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 60,
-      "question": "VERTU AGENT Q 旗舰新品线上能购买吗？",
-      "category": "一般"
+      "question": "【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 61,
-      "question": "VERTU AGENT Q旗舰新品玩游戏能带动吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 手机的屏幕尺寸和电池容量分别是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 62,
-      "question": "VERTU AGENT Q手机有什么特点？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 搭载什么系统？",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 63,
-      "question": "VERTU AGENT Q手机的VDAO加密聊天软件有什么功能？",
-      "category": "技术支持"
+      "question": "VERTU Agent Q是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 64,
-      "question": "VERTU Agent Q手机使用什么系统？",
-      "category": "系统更新"
+      "question": "【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 65,
-      "question": "VERTU AGENT Q旗舰新品的抗压性能如何？",
-      "category": "一般"
+      "question": "请详细介绍 VERTU AGENT Q 手机的整体配置情况。",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 66,
-      "question": "VERTU Agent Q系列哪个最好？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的安全性能如何?",
+      "category": "安全隐私",
+      "platform": ""
     },
     {
       "id": 67,
-      "question": "VERTU AGENT Q 旗舰新品手机支持下载微信和携程吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q是否适合当兵使用？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 68,
-      "question": "VERTU AGENT Q 旗舰新品手机支持移动和联通网络吗？",
-      "category": "一般"
+      "question": "【天猫专属 新品上市】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 69,
-      "question": "VERTU Agent Q手机的电池容量和快充功率是多少？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 与标准版在材质上有什么不同？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 70,
-      "question": "VERTU Agent Q手机的影像系统配置是什么？",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q 配备的快充充电器功率是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 71,
-      "question": "VERTU AGENT Q 旗舰新品手机的鳄鱼皮材质是否怕水？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 旗舰新品功能好用吗？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 72,
-      "question": "VERTU AGENT Q折叠屏手机在零下三十几度会不会折断？",
-      "category": "一般"
+      "question": "【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 73,
-      "question": "VERTU AGENT Q 旗舰新品盲盒包含哪些内容？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的可选颜色和存储规格有哪些？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 74,
-      "question": "VERTU AGENT Q 旗舰新品盲盒中的手机是随机的吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机的摄像头配置和拍摄能力如何？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 75,
-      "question": "VERTU AGENT Q 手机是内折还是外折？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 手机的顶配指的是什么方面？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 76,
-      "question": "VERTU AGENT Q 旗舰新品盲盒是否只包含女士用品？",
-      "category": "一般"
+      "question": "【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 77,
-      "question": "VERTU Agent Q手机的葡萄紫版本是否有产品视频？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 是否支持快速充电功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 78,
-      "question": "VERTU Agent Q手机的葡萄紫版本是否支持双卫星双向通话？",
-      "category": "一般"
+      "question": "VERTU Agent Q配备的硬件加密芯片型号是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 79,
-      "question": "VERTU AGENT Q旗舰新品支持卫星通话吗？",
-      "category": "一般"
+      "question": "VERTU Agent Q手机的AI功能如何实现？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 80,
-      "question": "VERTU AGENT Q 旗舰新品手机是智能机吗？",
-      "category": "一般"
+      "question": "【天猫专属 新品上市】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 81,
-      "question": "VERTU AGENT Q旗舰新品后续有没有碳纤维款？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 手机的屏幕尺寸和电池容量分别是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 82,
-      "question": "VERTU Agent Q手机和普通手机的功能一样吗?",
-      "category": "技术支持"
+      "question": "VERTU AGENT Q 搭载什么系统？",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 83,
-      "question": "VERTU Agent Q手机的私密系统有什么作用?",
-      "category": "系统更新"
+      "question": "VERTU AGENT Q 旗舰新品是否支持AI功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 84,
-      "question": "VERTU Agent Q手机的幽灵系统有什么作用?",
-      "category": "系统更新"
+      "question": "【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 85,
-      "question": "VERTU AGENT Q 旗舰新品手机的碳纤维后盖抗摔吗？",
-      "category": "一般"
+      "question": "请详细介绍 VERTU AGENT Q 手机的整体配置情况。",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 86,
-      "question": "VERTU AGENT Q 旗舰新品白色款使用的是什么皮革？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的安全性能如何?",
+      "category": "安全隐私",
+      "platform": ""
     },
     {
       "id": 87,
-      "question": "VERTU Agent Q手机支持多少个AI智能体？",
-      "category": "一般"
+      "question": "VERTU Agent Q有实图吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 88,
-      "question": "VERTU Agent Q手机是否配备真人管家服务？",
-      "category": "一般"
+      "question": "【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 89,
-      "question": "VERTU AGENT Q旗舰新品能否用来砸核桃？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 与标准版在材质上有什么不同？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 90,
-      "question": "VERTU Agent Q手机拍照怎么样？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 配备的快充充电器功率是多少？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 91,
-      "question": "VERTU Agent Q是老年机吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机是干什么用的？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 92,
-      "question": "VERTU AGENT Q 手机为什么不能用鸿蒙系统？",
-      "category": "系统更新"
+      "question": "【天猫专属 新品上市】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 93,
-      "question": "VERTU Agent Q手机的葡萄紫版本是否支持机械变焦和人眼仿生镜头？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 的可选颜色和存储规格有哪些？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 94,
-      "question": "VERTU AGENT Q 手机的电池有卖吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q手机的摄像头配置和拍摄能力如何？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 95,
-      "question": "VERTU Agent Q手机是否好用？",
-      "category": "一般"
+      "question": "VERTU Agent Q支持游戏吗？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 96,
-      "question": "VERTU Agent Q手机支持系统升级吗？",
-      "category": "系统更新"
+      "question": "【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     },
     {
       "id": 97,
-      "question": "VERTU AGENT Q旗舰新品手机买回来不暂时不用的话，平时需要充电吗？",
-      "category": "一般"
+      "question": "VERTU AGENT Q 是否支持快速充电功能？",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 98,
-      "question": "VERTU AGENT Q 旗舰新品的免费升1TB是什么意思？",
-      "category": "一般"
+      "question": "VERTU Agent Q配备的硬件加密芯片型号是什么？",
+      "category": "一般",
+      "platform": ""
     },
     {
       "id": 99,
-      "question": "VERTU Agent Q手机充满电能用几天？",
-      "category": "一般"
+      "question": "VERTU AGENT Q有遥控功能吗?",
+      "category": "技术支持",
+      "platform": ""
     },
     {
       "id": 100,
-      "question": "VERTU AGENT Q 旗舰新品手机有手机膜吗？",
-      "category": "一般"
-    },
-    {
-      "id": 101,
-      "question": "VERTU AGENT Q旗舰新品是否有震动提醒功能？",
-      "category": "技术支持"
-    },
-    {
-      "id": 102,
-      "question": "VERTU Agent Q手机的哪个模块贵？",
-      "category": "一般"
-    },
-    {
-      "id": 103,
-      "question": "VERTU AGENT Q 旗舰新品 23800元价位有几个颜色？",
-      "category": "一般"
-    },
-    {
-      "id": 104,
-      "question": "VERTU AGENT Q手机16GB+1TB内存有多大？",
-      "category": "一般"
-    },
-    {
-      "id": 105,
-      "question": "VERTU Agent Q 是哪款手机？",
-      "category": "一般"
-    },
-    {
-      "id": 106,
-      "question": "VERTU VERTU Agent Q手机是卫星手机吗?",
-      "category": "一般"
-    },
-    {
-      "id": 107,
-      "question": "VERTU Agent Q处理器是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 108,
-      "question": "VERTU Agent Q支持哪些核心配置？",
-      "category": "一般"
-    },
-    {
-      "id": 109,
-      "question": "VERTU Agent Q的摄像头配置是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 110,
-      "question": "VERTU AGENT Q 旗舰新品支持无创血糖检测吗？",
-      "category": "一般"
-    },
-    {
-      "id": 111,
-      "question": "VERTU AGENT Q 旗舰新品的光学传感器支持哪些光谱？",
-      "category": "一般"
-    },
-    {
-      "id": 112,
-      "question": "VERTU Agent Q的电池和快充支持情况如何？",
-      "category": "一般"
-    },
-    {
-      "id": 113,
-      "question": "VERTU Agent Q是否具备端到端加密能力？",
-      "category": "一般"
-    },
-    {
-      "id": 114,
-      "question": "VERTU AGENT Q手机电池多少毫安？",
-      "category": "一般"
-    },
-    {
-      "id": 115,
-      "question": "VERTU AGENT Q 旗舰新品盲盒中手机颜色是否可以指定？",
-      "category": "一般"
-    },
-    {
-      "id": 116,
-      "question": "VERTU AGENT Q 旗舰新品盲盒是否包含领带？",
-      "category": "一般"
-    },
-    {
-      "id": 117,
-      "question": "VERTU AGENT Q旗舰新品支持与苹果手机连接使用吗？",
-      "category": "一般"
-    },
-    {
-      "id": 118,
-      "question": "VERTU Agent Q手机能打王者荣耀吗？",
-      "category": "一般"
-    },
-    {
-      "id": 119,
-      "question": "VERTU Agent Q手机卡不卡？",
-      "category": "一般"
-    },
-    {
-      "id": 120,
-      "question": "VERTU AGENT Q 手机的免费升级1TB与直接1TB有什么区别？",
-      "category": "一般"
-    },
-    {
-      "id": 121,
-      "question": "VERTU Agent Q是什么型号？",
-      "category": "一般"
-    },
-    {
-      "id": 122,
-      "question": "VERTU AGENT Q旗舰新品可以同时绑定2部手机吗?",
-      "category": "一般"
-    },
-    {
-      "id": 123,
-      "question": "VERTU Agent Q手机支持双微信吗？",
-      "category": "一般"
-    },
-    {
-      "id": 124,
-      "question": "VERTU Agent Q有什么特殊功能?",
-      "category": "技术支持"
-    },
-    {
-      "id": 125,
-      "question": "VERTU Agent Q智能机的电池和充电规格是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 126,
-      "question": "VERTU Agent Q智能机是否搭载A5加密芯片和一机三系统？",
-      "category": "系统更新"
-    },
-    {
-      "id": 127,
-      "question": "VERTU Agent Q智能机的机身工艺和材质是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 128,
-      "question": "VERTU AGENT Q 旗舰新品的血糖监测是否需要扎手指？",
-      "category": "一般"
-    },
-    {
-      "id": 129,
-      "question": "VERTU Agent Q的屏幕参数是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 130,
-      "question": "VERTU Agent Q的存储配置是什么？",
-      "category": "一般"
-    },
-    {
-      "id": 131,
-      "question": "VERTU Agent Q是全球首款AI Agent手机吗？",
-      "category": "一般"
-    },
-    {
-      "id": 132,
-      "question": "VERTU Agent Q手机打游戏掉帧吗？",
-      "category": "一般"
-    },
-    {
-      "id": 133,
-      "question": "VERTU Agent Q手机支持王者120帧游戏吗？",
-      "category": "一般"
-    },
-    {
-      "id": 134,
-      "question": "VERTU Agent Q手机充电时可以玩游戏吗？",
-      "category": "一般"
-    },
-    {
-      "id": 135,
-      "question": "VERTU AGENT Q智能腕表与其他手机能匹配吗?",
-      "category": "一般"
-    },
-    {
-      "id": 136,
-      "question": "VERTU AGENT Q智能钻戒测血糖准确率是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 137,
-      "question": "VERTU AGENT Q智能钻戒的软件系统是否与京东自营的血糖检测设备共用？",
-      "category": "系统更新"
-    },
-    {
-      "id": 138,
-      "question": "VERTU Agent Q手机是中文版吗？",
-      "category": "一般"
-    },
-    {
-      "id": 139,
-      "question": "VERTU Agent Q手机用几年应该没问题吗?",
-      "category": "一般"
-    },
-    {
-      "id": 140,
-      "question": "VERTU AGENT Q 是否支持双卡双待？",
-      "category": "一般"
-    },
-    {
-      "id": 141,
-      "question": "VERTU AGENT Q旗舰新品可以测血糖吗?",
-      "category": "一般"
-    },
-    {
-      "id": 142,
-      "question": "VERTU AGENT Q 旗舰新品是否带手机壳？",
-      "category": "一般"
-    },
-    {
-      "id": 143,
-      "question": "VERTU AGENT Q 旗舰新品没有测尿酸功能吗?",
-      "category": "技术支持"
-    },
-    {
-      "id": 144,
-      "question": "VERTU AGENT Q 旗舰新品屏幕是双屏还是单屏？",
-      "category": "一般"
-    },
-    {
-      "id": 145,
-      "question": "VERTU AGENT Q 旗舰新品支持一机三系统和量子级加密吗？",
-      "category": "系统更新"
-    },
-    {
-      "id": 146,
-      "question": "VERTU AGENT Q 旗舰新品是否具备金融级防护能力？",
-      "category": "一般"
-    },
-    {
-      "id": 147,
-      "question": "VERTU Agent Q手机支持无线充吗?",
-      "category": "一般"
-    },
-    {
-      "id": 148,
-      "question": "VERTU AGENT Q 智能手机支持蓝牙耳机吗?",
-      "category": "一般"
-    },
-    {
-      "id": 149,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 墨玉黑小牛皮-京仓发货 12GB+512GB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 150,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 碳纤维旗舰款-京仓发货 12GB+512GB的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 151,
-      "question": "请问VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-碳纤维 12GB+1TB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 152,
-      "question": "咨询一下VERTU【大额补贴 历史底价】威图纬图奢品手机QUANTUM新品量子AI智能体小折叠屏手机FLIP商务礼物礼盒 墨玉黑小牛皮【京仓速发】 16GB+1TB 官方标配的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 153,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 墨玉黑小牛皮-京仓发货 18GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 154,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 曙光橙小牛皮 12GB+512GB现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 155,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 维罗纳绿小牛皮 18GB+1TB的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 156,
-      "question": "想买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-巴黎钉曙光橙 12GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 157,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 巴黎钉碳纤维-京仓发货 12GB+512GB现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 158,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 巴黎钉碳纤维-京仓发货 18GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 159,
-      "question": "这款VERTU【限时大额补贴】威图纬图官方奢品GrandWatch智能手表手环运动通话腕表测心率血氧睡眠高端礼物 微晶黑陶的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 160,
-      "question": "VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 新品-黑色巴黎钉 戒指测量工具的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 161,
-      "question": "想买VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 AI戒指-余晖 戒指测量工具，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 162,
-      "question": "VERTU威图纬图官方奢品AI佛戒新款智能戒指男女RING测血氧心率睡眠监测适配华为苹果安卓礼物补贴 AI戒指-般若 其他尺码咨询客服的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 163,
-      "question": "这款VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-巴黎钉墨玉黑 12GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 164,
-      "question": "VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 戒指尺码测量工具套装 9号（内径18.9mm）现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 165,
-      "question": "这款VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 纬业宏图-紫水晶 8号（内径18mm）的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 166,
-      "question": "请问VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 金玉满堂 7号（内径17mm）当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 167,
-      "question": "咨询一下VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 金玉满堂 8号（内径18mm）的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 168,
-      "question": "这款VERTU威图纬图奢品 手机钢化膜手机膜 超清透亮威图手机保护膜水凝膜透明膜 META二代钢化膜的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 169,
-      "question": "这款VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 巴黎钉-曙光橙小牛皮 18GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 170,
-      "question": "咨询一下VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 纬业宏图-黄水晶 12号（内径21.6mm）的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 171,
-      "question": "VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 金玉满堂 12号（内径21.6mm）的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 172,
-      "question": "咨询一下VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 【限量奢品盲盒+指定手机颜色】套餐 18GB+1TB的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 173,
-      "question": "想买VERTU【新品上市 大额补贴】威图纬图AGENT Q奢品AI智能体手机旗舰高端商务直面屏安全加密三系统礼品 玄铁黑高定款 16GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 174,
-      "question": "请问VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 新品-银色巴黎钉 11号（内径20.6mm）当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 175,
-      "question": "这款VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 纬业宏图-紫水晶 10号（内径19.9mm）的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 176,
-      "question": "VERTU【新品】威图纬图MetaRing水晶智能戒指Ai男女无创血糖血氧测心率睡眠监测适配apple苹果三星 纬业宏图-黄水晶 10号（内径19.9mm）的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 177,
-      "question": "这款VERTU【新品上市 大额补贴】威图纬图AGENT Q奢品AI智能体手机旗舰高端商务直面屏安全加密三系统礼品 曙光橙小牛皮 16GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 178,
-      "question": "现在购买VERTU【新品上市 大额补贴】威图纬图AGENT Q奢品AI智能体手机旗舰高端商务直面屏安全加密三系统礼品 【马年款】黑钢骑士黑顺水纹 16GB+1TB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 179,
-      "question": "VERTU【新品上市 大额补贴】威图纬图AGENT Q奢品AI智能体手机旗舰高端商务直面屏安全加密三系统礼品 【马年款】黑钢马鞍棕顺水纹 16GB+1TB的最新报价是多少？",
-      "category": "系统更新"
-    },
-    {
-      "id": 180,
-      "question": "这款VERTU【新品二代旗舰】威图纬图QUANTUM量子折叠屏玛瑙AI智能体奢品手机至尊25年新款商务礼物补贴17pro 马年限定-金丝红玛瑙 16GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 181,
-      "question": "咨询一下VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 精钢基础款的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 182,
-      "question": "咨询一下VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 钛黑基础款的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 183,
-      "question": "请问VERTU威图纬图 手机充电器套装 适用于ASTER P系列手机 充电套装1个充电器+1个数据线 拍下请留言手机型号 【18W】充电套装当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 184,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 普贤菩萨 3GB+32GB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 185,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 白度母 3GB+32GB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 186,
-      "question": "请问VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 玄铁黑色黄金V标 18GB+1T当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 187,
-      "question": "现在购买VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 玄铁黑色黄金镶钻V标 18GB+1T需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 188,
-      "question": "想买VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 樱花粉色玫瑰金镶钻V标 18GB+1T，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 189,
-      "question": "这款VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 玄铁黑色黄金 18GB+1T的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 190,
-      "question": "现在购买VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 琥珀棕色黄金 18GB+1T需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 191,
-      "question": "请问VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 玄铁黑色黄金镶钻 18GB+1T当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 192,
-      "question": "这款VERTU威图纬图官方奢品手机METAVERTU高奢定制系列 5G旗舰 WEB3AI智能体奢品手机上市送礼物臻品威图 喜马拉雅黑色黄金镶钻 18GB+1T的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 193,
-      "question": "现在购买VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 千手观音 3GB+32GB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 194,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 虚空藏菩萨 3GB+32GB的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 195,
-      "question": "请问VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 文殊菩萨 3GB+32GB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 196,
-      "question": "现在购买VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 大势至菩萨 3GB+32GB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 197,
-      "question": "咨询一下VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 大日如来 3GB+32GB的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 198,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 不动明王 3GB+32GB的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 199,
-      "question": "请问VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 阿弥陀佛 3GB+32GB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 200,
-      "question": "这款VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 长寿佛 3GB+32GB的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 201,
-      "question": "现在购买VERTU威图纬图官方奢品手机 Signature顶奢系列4G全网通高奢商务手机全新上市 本命佛 好运五路财神唐卡 黄财神 3GB+32GB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 202,
-      "question": "想买VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 曙光橙小牛皮 18GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 203,
-      "question": "这款VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 绅士蓝小牛皮 12GB+512GB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 204,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 绅士蓝小牛皮 18GB+1TB的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 205,
-      "question": "咨询一下VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 树莓红小牛皮 12GB+512GB的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 206,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 树莓红小牛皮 18GB+1TB的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 207,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 维罗纳绿小牛皮 12GB+512GB现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 208,
-      "question": "现在购买VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 焦糖棕小牛皮 12GB+512GB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 209,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 焦糖棕小牛皮 18GB+1TB的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 210,
-      "question": "请问VERTU威图纬图官方奢品手机METAVERTU喜马拉雅高奢系列新款AI智能体上市高端商务5G智能手机送礼臻品 喜马拉雅镶钻 18GB+1TB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 211,
-      "question": "VERTU威图纬图 手机充电器套装 适用于ASTER P系列手机 充电套装1个充电器+1个数据线 拍下请留言手机型号 【55W】META快充套装的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 212,
-      "question": "请问VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 【定制需求联系客服】单拍不发货 12GB+512GB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 213,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 【定制需求联系客服】单拍不发货 18GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 214,
-      "question": "这款VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 皓月白小牛皮 12GB+512GB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 215,
-      "question": "VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 皓月白小牛皮 18GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 216,
-      "question": "现在购买VERTU【享大额补贴】威图纬图官方手表METAWATCH新款智能手表运动电话腕表高奢测心率血氧男士定制礼物 黑钻黑色【京仓发货】需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 217,
-      "question": "VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-曙光橙 12GB+1TB的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 218,
-      "question": "VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-墨玉黑 12GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 219,
-      "question": "这款VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-树莓红 12GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 220,
-      "question": "想买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-深邃蓝 12GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 221,
-      "question": "这款VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-焦糖棕 12GB+1TB的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 222,
-      "question": "请问VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-皓月白 12GB+1TB当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 223,
-      "question": "想买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-维罗纳绿 12GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 224,
-      "question": "VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 玄铁黑高定款 12GB+1TB的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 225,
-      "question": "VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 赤焰红高定款 12GB+1TB的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 226,
-      "question": "这款VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 琥珀棕高定款 12GB+1TB的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 227,
-      "question": "想买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 樱花粉高定款 12GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 228,
-      "question": "咨询一下VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 喜马拉雅高定款 12GB+1TB的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 229,
-      "question": "想买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 定制需求详询客服丨单拍不发 12GB+1TB，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 230,
-      "question": "咨询一下VERTU威图纬图奢品 超薄卡片充电器 轻薄随身带 68W大功率超级快充套装手机支持多种设备Type-C的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 231,
-      "question": "VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-巴黎钉朱雀焰 12GB+1TB现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 232,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 白钢基本款-卡其棕的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 233,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 白钢基本款-树莓红的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 234,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 白钢基本款-曙光橙现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 235,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 白钢基本款-天空蓝的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 236,
-      "question": "VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 白钢巴黎钉的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 237,
-      "question": "现在购买VERTU威图纬图官方奢品手机 Signature顶奢系列经典复刻4G款高奢高端手机商务全新上市高端送礼奢华礼盒 黑钢熊猫机需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 238,
-      "question": "这款VERTU【抢半价购 下单省万元】威图纬图奢品加密手机META双曲屏AI智能体手机5G商务高端礼物补贴17pro 碳纤维旗舰款-京仓发货 18GB+1TB的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 239,
-      "question": "现在购买VERTU【新品 咨询专属特惠】威图纬图官方奢品手机META全面屏AI智能体手机新机上市5g高端加密商务手机 浅金款-朱雀焰碳纤 12GB+1TB需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 240,
-      "question": "这款VERTU威图纬图奢品CRUSH蓝牙挂耳式AI开放式耳机会议降噪翻译运动无线钻石配饰礼物ows 心动系列-轻奢白金耳机的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 241,
-      "question": "咨询一下VERTU【限时大额补贴】威图纬图官方奢品GrandWatch智能手表手环运动通话腕表测心率血氧睡眠高端礼物 白色碳纤维的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 242,
-      "question": "VERTU【限时大额补贴】威图纬图官方奢品GrandWatch智能手表手环运动通话腕表测心率血氧睡眠高端礼物 绿色碳纤维的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 243,
-      "question": "这款VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 AI戒指-对影 戒指测量工具的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 244,
-      "question": "VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 AI戒指-浮光 戒指测量工具的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 245,
-      "question": "请问VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 新品-黑色巴黎钉 12号（内径21.6mm）当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 246,
-      "question": "请问VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 新品-黑色巴黎钉 13号（内径22.3mm）当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 247,
-      "question": "现在购买VERTU威图纬图官方MetaRing智能戒指Ai男女测血糖血氧测心率佛戒钻戒适配apple苹果三星礼物补贴 AI戒指-对影 9号（内径18.9mm）需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 248,
-      "question": "这款威图VERTU 纬图奢品手机META直面屏定制AI智能体手机加密商务手机奢品新款官方正品 黄金雕花高定限量版的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 249,
-      "question": "VERTU纬图 ASTER P 小牛皮保护套手机壳皮套的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 250,
-      "question": "这款威图【新年焕新】VERTU 纬图MetaRing新品智能AI水晶智能戒指睡眠监测健康血氧血糖心率运动苹果礼品聚财送礼的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 251,
-      "question": "威图【新年焕新 立享85折】VERTU纬图奢品手表WATCH S1智能AI腕表健康睡眠监测血氧心率血糖运动定制礼盒礼品的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 252,
-      "question": "威图【新年焕新 历史底价】VERTU 纬图朱雀焰奢品META2全面屏离火祥云加密5G商务官方AI智能体手机分期礼物现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 253,
-      "question": "威图VERTU 纬图蛇年牛皮金箔香薰香氛囊挂件车载礼物送礼首选的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 254,
-      "question": "咨询一下威图VERTU 纬图奢品手机 META2喜马拉雅直面屏定制AI智能体手机双模型黄金镶钻商务加密手机 限量版的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 255,
-      "question": "这款威图VERTU 纬图奢品新品官方NFC智能成人无线电动牙刷软毛全自动充电式礼盒套装威图礼品的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 256,
-      "question": "威图VERTU纬图 IRONFLIP折叠屏高配PU礼品袋 手提袋的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 257,
-      "question": "这款威图VERTU 纬图奢品男士公文皮革智能商务手提包礼品礼物的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 258,
-      "question": "威图VERTU 纬图奢品mini珍珠单肩斜挎包 时尚百搭现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 259,
-      "question": "威图VERTU 纬图奢品男士手拿包男士复古擦色英伦风的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 260,
-      "question": "请问【礼赠首选】威图VERTU 纬图新品巴黎钉朗声充气式打火机礼盒装当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 261,
-      "question": "威图VERTU 纬图奢品CRUSH挂耳AI耳机运动OWS蓝牙AI耳机礼品现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 262,
-      "question": "现在购买威图VERTU 纬图 手机充电器套装 Type-C接口 适用于VERTU手机系列 奢品快充需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 263,
-      "question": "威图VERTU 纬图 高清水凝膜奢品钢化膜保护膜适用于METAVERTU iVERTU手机的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 264,
-      "question": "请问威图VERTU纬图 PHANTOM OWS新品二代蓝牙耳机幻影系列礼品礼盒当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 265,
-      "question": "威图VERTU 纬图SIGNATURE经典眼镜蛇奢华4G官方正品手机 全球限量发行8款 限量版的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 266,
-      "question": "威图VERTU 纬图奢品Vbag单肩小方包女士包现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 267,
-      "question": "这款威图VERTU纬图 奢品灵蛇权杖钢笔礼盒礼物男女士商务办公学生签字名加密U盘储存墨水笔的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 268,
-      "question": "威图VERTU 纬图超体AI奢品男士信用卡钱夹卡包礼品礼物的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 269,
-      "question": "想买威图VERTU 纬图 奢品高定款男士手提包鳄鱼皮托特包，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 270,
-      "question": "这款威图VERTU 纬图 奢品VBAG女士墩墩包手提包水桶包的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 271,
-      "question": "威图VERTU 纬图奢品男士斜挎包商务皮革通勤休闲礼品礼物现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 272,
-      "question": "威图VERTU 纬图奢品直插款缝线款手机皮套META2的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 273,
-      "question": "请问威图【新年焕新 历史底价】VERTU 纬图奢品25年新款折叠屏QuantumFlip量子AI智能体手机礼物 安全加密三系统当前的售价是多少？",
-      "category": "系统更新"
-    },
-    {
-      "id": 274,
-      "question": "威图VERTU 纬图奢品卡片充电器超薄超快手机全能新款68W官方原装正品兼容多设备Type-C充电器的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 275,
-      "question": "威图【新年焕新 历史底价】VERTU 纬图奢品25年新款钛合金机甲碳纤维折叠屏QuantumFlip量子AI智能体手机礼物的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 276,
-      "question": "【天猫专属 新品上市】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 277,
-      "question": "现在购买威图【新款Signature S】VERTU 纬图奢品Sig S 全网通4G卫星版总裁商务手机官方正品蓝宝石 奢品限量版AI手机需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 278,
-      "question": "咨询一下威图【新年焕新 历史底价】VERTU 纬图奢品25年新款折叠屏缠丝玛瑙鳄鱼皮QuantumFlip量子AI智能体手机礼物的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 279,
-      "question": "威图VERTU 纬图适配 META1奢品原装无线磁吸充电器的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 280,
-      "question": "威图【新年焕新 5折起】VERTU 纬图奢品 METAWATCH H1智能手表腕表蓝牙商务休闲男女士定制礼盒礼物礼品送礼现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 281,
-      "question": "咨询一下威图VERTU纬图奢品 经典高档正装商务老花领带礼盒礼品礼物的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 282,
-      "question": "VERTU纬威图 迷境香水经典香氛奢品单支6ml的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 283,
-      "question": "咨询一下威图VERTU 纬图 直插式真皮手机Meta皮套奢品皮套保护套 适用META一代的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 284,
-      "question": "【新品首发】威图VERTU 纬图MetaRing智能AI巴黎钉健康监测血氧血糖心率运动苹果智能戒指礼物官方送礼首选的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 285,
-      "question": "威图【SignatureV总裁唐卡】VERTU 纬图Signature十二生肖唐卡4G款高端总裁黄金手机官方正品 奢品限量版手机的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 286,
-      "question": "威图【SignatureV总裁】VERTU 纬图 经典Signature 全网通4G新款总裁商务手机官方正品蓝宝石 奢品限量版手机现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 287,
-      "question": "这款威图VERTU 纬图 奢品限量款喜马拉雅鳄鱼皮包的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 288,
-      "question": "这款威图VERTU 纬图超体 奢品头层牛皮商务男士AI腰带礼品礼物的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 289,
-      "question": "威图VERTU 纬图META1双曲屏奢品双系统隐私安全加密蛇皮AI智能体手机5G商务智能礼盒现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 290,
-      "question": "这款威图VERTU 纬图奢品Meta2全面屏双模型三系统加密AI智能体手机商务5G蛇皮礼盒官方礼物的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 291,
-      "question": "咨询一下威图VERTU 纬图MetaRing新品智能AI水晶智能戒指睡眠监测健康血氧血糖心率运动礼品聚财礼物的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 292,
-      "question": "这款威图VERTU 纬图 补差价专拍 【单拍不发货，拍前联系客服】的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 293,
-      "question": "现在购买【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 294,
-      "question": "想买威图VERTU纬图MetaRing新品智能AI戒指睡眠监测健康血氧血糖心率，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 295,
-      "question": "这款威图VERTU 纬图奢品FILP折叠屏手机皮套小牛皮真皮的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 296,
-      "question": "现在购买威图VERTU 纬图超体奢品公文包皮革AI指纹商务智能需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 297,
-      "question": "威图VERTU 纬图超体 男士奢品插口钱包钱夹AI卡包礼物的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 298,
-      "question": "威图【新年焕新 6折起】VERTU 纬图奢品 META2全面屏AI智能体双模型三系统加密手机商务5G官方限量礼品礼物的最新报价是多少？",
-      "category": "系统更新"
-    },
-    {
-      "id": 299,
-      "question": "威图VERTU 纬图新款偏光太阳眼镜防晒防紫外线墨镜礼赠首选现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 300,
-      "question": "请问威图VERTU纬图 专属会员权益入会卡【确认收货即可入会】当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 301,
-      "question": "请问威图【新年焕新】VERTU 纬图MetaRing新品智能AI钻戒礼盒睡眠监测健康血氧血糖心率运动苹果智能戒指礼品送礼当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 302,
-      "question": "这款威图【新年焕新 历史底价5折】VERTU 纬图META1双曲屏奢品AI双系统隐私安全加密AI智能体手机5G商务智能礼盒的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 303,
-      "question": "现在购买VERTU纬图威图 明星同款奢品高颜值经典老花一次性口罩礼盒不勒耳需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 304,
-      "question": "想买威图VERTU 纬图超体新款奢品商务男士手拿包礼品礼物，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 305,
-      "question": "现在购买【旗舰新品 现货速发】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 306,
-      "question": "这款威图【新年焕新 享5折】VERTU 纬图奢品 METAWATCH H1智能手表腕表蓝牙商务休闲男女士定制礼盒礼物礼品送礼的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 307,
-      "question": "这款【新品】威图纬图VERTU 奢品盲盒限定礼品礼盒福袋潮玩送礼的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 308,
-      "question": "威图VERTU 纬图MetaRing新品金玉满堂AI水晶智能戒指健康血氧血糖心率运动苹果礼品聚财礼物送礼首选现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 309,
-      "question": "威图VERTU 纬图 超体双肩背包商务奢品休闲指纹解锁现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 310,
-      "question": "这款威图VERTU 纬图男士奢品双肩包背包商务出勤旅行包的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 311,
-      "question": "请问【新品首发】威图VERTU 纬图MetaRing智能AI巴黎钉健康监测血氧血糖心率运动苹果智能戒指礼物官方送礼首选当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 312,
-      "question": "咨询一下威图VERTU 纬图MetaRing新品纬业宏图AI紫水晶智能戒指健康血氧血糖心率运动苹果礼品聚财送礼首选礼物的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 313,
-      "question": "这款威图VERTU 纬图MetaRing新品纬业宏图AI黄水晶智能戒指健康血氧血糖心率运动苹果礼品聚财送礼首选礼物的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 314,
-      "question": "咨询一下威图VERTU 纬图MetaRing新品智能AI余晖钻戒睡眠监测健康血氧血糖心率运动苹果智能戒指礼物礼盒官方送礼首选的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 315,
-      "question": "这款威图VERTU 纬图MetaRing新品智能AI对影钻戒睡眠监测健康血氧血糖心率运动苹果智能戒指礼物礼盒送礼首选的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 316,
-      "question": "这款威图【双11狂欢 限时9折】VERTU 纬图奢品旗舰IRONFLIP折叠屏5G高端商务奢华瑞表全网通最贵加密AI智能体手机的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 317,
-      "question": "威图【双11狂欢 9折】VERTU 纬图奢品新款旗舰IRONFLIP碳纤维折叠AI智能体手机高端商务奢华最贵手机礼物礼盒现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 318,
-      "question": "VERTU纬图 威图奢品LIFE迷境香水奢品香氛礼盒装经典持久留香便携礼物清新淡香水6ml的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 319,
-      "question": "威图VERTU 纬图flip奢品加密商务折叠屏健康监测血糖智能手表幻影碳纤维套餐礼品礼盒的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 320,
-      "question": "这款威图VERTU 纬图奢品AI智能宠物拉杆箱包语言翻译便携牛皮礼盒的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 321,
-      "question": "这款威图VERTU纬图 英式私人管家服务 【服务时长：1年】的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 322,
-      "question": "威图VERTU纬图 奢品安全加密通话VTalk使用介绍 【免费使用】的最新报价是多少？",
-      "category": "安全隐私"
-    },
-    {
-      "id": 323,
-      "question": "想买威图【七夕礼物】VERTU 纬图 RING 新品智能AI星河钻戒睡眠监测健康血氧血糖心率运动苹果智能戒指礼品礼盒，现在多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 324,
-      "question": "威图【七夕礼物】VERTU 纬图 RING 新品智能AI浮光钻戒睡眠监测健康血氧血糖心率运动苹果智能戒指礼品礼盒的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 325,
-      "question": "VERTU威图纬图奢品手机 METAVERTU双曲屏AI手机DeepSeek大模型5G商务奢华加密礼品礼物补贴焦糖棕小牛皮现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 326,
-      "question": "现在购买威图VERTU 纬图奢品 Folded V Link 男士皮包卡包需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 327,
-      "question": "这款【618限时全店9折】威图VERTU 纬图META1双曲屏赛道传奇AI智能体手机奢品双系统礼盒高通骁龙商务手机礼品的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 328,
-      "question": "【618历史底价 限时7折】威图VERTU 纬图奢品META1双曲屏小牛皮蓝宝石双系统高通商务高端最贵AI智能体手机现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 329,
-      "question": "咨询一下VERTU纬图【618 手机10元预定】10元预定618五大购机权益的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 330,
-      "question": "现在购买【年度旗舰新品QuantumFlip】VERTU纬图威图奢品25年新款折叠屏QuantumFlipAI量子手机预定开启需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 331,
-      "question": "这款VERTU纬图 威图男士商务通勤奢品单肩包智能锁包的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 332,
-      "question": "这款VERTU纬图 威图 手提袋奢品礼袋（颜色随机）的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 333,
-      "question": "这款VERTU纬图 威图 精美奢华手机礼盒包装奢品的促销价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 334,
-      "question": "VERTU纬图 威图奢品小白蛇925银 玛瑙宝石项链 时尚百搭个性设计的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 335,
-      "question": "【咨询领好礼】VERTU纬图 威图iVERTU Plus单卡AI智能隐私加密安全奢品商务高端商务礼盒手机的到手价是多少？",
-      "category": "安全隐私"
-    },
-    {
-      "id": 336,
-      "question": "【iVERTU拼皮 咨询领礼品】VERTU纬图 威图奢品5G旗舰全面屏AI拼皮12+512GB高端商务手机双卡双待保时捷现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 337,
-      "question": "【iVERTU风暴纹 咨询领好礼】VERTU纬图 威图iVERTU精英限量款奢品5G全面屏商务手机安全隐私加密双卡双待的到手价是多少？",
-      "category": "安全隐私"
-    },
-    {
-      "id": 338,
-      "question": "【iVERTU享5折】VERTU纬图 威图奢品5G旗舰全面屏AI手机安全隐私加密礼盒礼物最贵商务高端手机现在卖多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 339,
-      "question": "咨询一下【Meta1珐琅】VERTU纬图 威图奢品META双曲屏珐琅定制全网通5G智能AI手机WEB3.0高通八核商务高端礼物的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 340,
-      "question": "现在购买【VERTU风暴纹小牛皮腰带】VERTU纬图 威图 风暴纹设计奢华限量腰带 男士奢品腰带皮带需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 341,
-      "question": "现在购买【加密U盘钢笔】VERTU纬图 威图奢品V盾钢笔礼盒礼物男女士商务办公学生签字名加密U盘储存墨水笔需要多少钱？",
-      "category": "价格"
-    },
-    {
-      "id": 342,
-      "question": "请问【旗舰新品】VERTU纬图 威图奢品手表WATCH S1智能AI腕表健康睡眠监测血氧心率血糖运动商务定制礼盒礼物当前的售价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 343,
-      "question": "这款【黄金AI耳机】VERTU纬图 威图奢品黄金运动OWS翻译蓝牙AI耳机的最新价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 344,
-      "question": "VERTU纬图 威图META2奢品双模型一机三系统加密AI手机商务5G小牛皮官方正品 圣诞赠礼的最终价格是多少？",
-      "category": "价格"
-    },
-    {
-      "id": 345,
-      "question": "咨询一下【礼盒限定9折】VERTU纬图 威图奢品新款旗舰IRONFLIP折叠屏5G高端商务奢华瑞表全网通最贵手机的价格？",
-      "category": "价格"
-    },
-    {
-      "id": 346,
-      "question": "VERTU纬图 威图奢品新款旗舰IRONFLIP折叠屏5G高端商务奢华瑞表全网通最贵手机的到手价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 347,
-      "question": "【1元福袋】双11开门红 VERTU纬图 1元福袋加赠好礼详情咨询客服的最新报价是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 348,
-      "question": "AGENT Q 的官方高清图片在哪里可以查看？",
-      "category": "一般"
-    },
-    {
-      "id": 349,
-      "question": "能否提供 AGENT Q 的产品实拍图？",
-      "category": "一般"
-    },
-    {
-      "id": 350,
-      "question": "AGENT Q 有详细的功能演示视频吗？",
-      "category": "技术支持"
-    },
-    {
-      "id": 351,
-      "question": "哪里能找到 AGENT Q 的开箱视频？",
-      "category": "一般"
-    },
-    {
-      "id": 352,
-      "question": "AGENT Q 的官方宣传册可以下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 353,
-      "question": "有没有 AGENT Q 不同颜色款式的对比图片？",
-      "category": "一般"
-    },
-    {
-      "id": 354,
-      "question": "AGENT Q 的内部结构拆解图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 355,
-      "question": "能否分享 AGENT Q 的使用教程视频？",
-      "category": "一般"
-    },
-    {
-      "id": 356,
-      "question": "AGENT Q 的产品规格参数图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 357,
-      "question": "哪里可以获取 AGENT Q 的高清宣传海报？",
-      "category": "一般"
-    },
-    {
-      "id": 358,
-      "question": "AGENT Q 的 360 度全景展示视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 359,
-      "question": "有没有 AGENT Q 在不同场景下使用的实拍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 360,
-      "question": "AGENT Q 的官方产品手册 PDF 版本能下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 361,
-      "question": "能否提供 AGENT Q 的细节特写图片？",
-      "category": "一般"
-    },
-    {
-      "id": 362,
-      "question": "AGENT Q 的发布会完整视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 363,
-      "question": "哪里可以看到 AGENT Q 的功能测评视频？",
-      "category": "技术支持"
-    },
-    {
-      "id": 364,
-      "question": "AGENT Q 的包装展示图片有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 365,
-      "question": "有没有 AGENT Q 的尺寸对比图？",
-      "category": "一般"
-    },
-    {
-      "id": 366,
-      "question": "AGENT Q 的官方宣传片在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 367,
-      "question": "能否分享 AGENT Q 的用户体验视频？",
-      "category": "一般"
-    },
-    {
-      "id": 368,
-      "question": "AGENT Q 的高清产品图能发给我吗？",
-      "category": "一般"
-    },
-    {
-      "id": 369,
-      "question": "哪里能获取 AGENT Q 的产品说明书电子版？",
-      "category": "一般"
-    },
-    {
-      "id": 370,
-      "question": "AGENT Q 的功能演示动图有吗？",
-      "category": "技术支持"
-    },
-    {
-      "id": 371,
-      "question": "有没有 AGENT Q 的配件展示图片？",
-      "category": "一般"
-    },
-    {
-      "id": 372,
-      "question": "AGENT Q 的使用场景实拍图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 373,
-      "question": "能否提供 AGENT Q 的高清壁纸？",
-      "category": "一般"
-    },
-    {
-      "id": 374,
-      "question": "AGENT Q 的技术解析视频在哪里能找到？",
-      "category": "技术支持"
-    },
-    {
-      "id": 375,
-      "question": "哪里可以下载 AGENT Q 的官方产品资料包？",
-      "category": "一般"
-    },
-    {
-      "id": 376,
-      "question": "AGENT Q 的不同角度展示图片有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 377,
-      "question": "有没有 AGENT Q 的性能测试视频？",
-      "category": "一般"
-    },
-    {
-      "id": 378,
-      "question": "AGENT Q 的产品介绍 PPT 能获取吗？",
-      "category": "一般"
-    },
-    {
-      "id": 379,
-      "question": "能否分享 AGENT Q 的设计理念讲解视频？",
-      "category": "一般"
-    },
-    {
-      "id": 380,
-      "question": "AGENT Q 的高清产品图分辨率是多少？",
-      "category": "一般"
-    },
-    {
-      "id": 381,
-      "question": "哪里能看到 AGENT Q 的售后维修指南视频？",
-      "category": "一般"
-    },
-    {
-      "id": 382,
-      "question": "META 双曲屏 AI 智能体手机的官方高清图在哪里查看？",
-      "category": "一般"
-    },
-    {
-      "id": 383,
-      "question": "能否提供 META 双曲屏 AI 智能体手机的产品实拍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 384,
-      "question": "哪里能找到 META 双曲屏 AI 智能体手机的详细功能演示视频？",
-      "category": "技术支持"
-    },
-    {
-      "id": 385,
-      "question": "META 双曲屏 AI 智能体手机的开箱视频有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 386,
-      "question": "能否下载 META 双曲屏 AI 智能体手机的官方宣传册？",
-      "category": "一般"
-    },
-    {
-      "id": 387,
-      "question": "有没有 META 双曲屏 AI 智能体手机不同配置版本的对比图片？",
-      "category": "一般"
-    },
-    {
-      "id": 388,
-      "question": "META 双曲屏 AI 智能体手机的屏幕显示效果实拍图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 389,
-      "question": "能否分享 META 双曲屏 AI 智能体手机的设置教程视频？",
-      "category": "一般"
-    },
-    {
-      "id": 390,
-      "question": "META 双曲屏 AI 智能体手机的产品规格图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 391,
-      "question": "哪里可以获取 META 双曲屏 AI 智能体手机的高清宣传图？",
-      "category": "一般"
-    },
-    {
-      "id": 392,
-      "question": "META 双曲屏 AI 智能体手机的 360 度旋转展示视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 393,
-      "question": "有没有 META 双曲屏 AI 智能体手机与其他机型的对比视频？",
-      "category": "一般"
-    },
-    {
-      "id": 394,
-      "question": "META 双曲屏 AI 智能体手机的用户手册 PDF 能下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 395,
-      "question": "能否提供 META 双曲屏 AI 智能体手机的摄像头样张？",
-      "category": "一般"
-    },
-    {
-      "id": 396,
-      "question": "META 双曲屏 AI 智能体手机的发布会精彩片段视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 397,
-      "question": "哪里可以看到 META 双曲屏 AI 智能体手机的专业测评视频？",
-      "category": "一般"
-    },
-    {
-      "id": 398,
-      "question": "META 双曲屏 AI 智能体手机的包装细节图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 399,
-      "question": "有没有 META 双曲屏 AI 智能体手机的重量对比图？",
-      "category": "一般"
-    },
-    {
-      "id": 400,
-      "question": "META 双曲屏 AI 智能体手机的官方广告视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 401,
-      "question": "能否分享 META 双曲屏 AI 智能体手机的日常使用视频？",
-      "category": "一般"
-    },
-    {
-      "id": 402,
-      "question": "META 双曲屏 AI 智能体手机的高清产品图片能发给我吗？",
-      "category": "一般"
-    },
-    {
-      "id": 403,
-      "question": "哪里能获取 META 双曲屏 AI 智能体手机的快速入门指南图片？",
-      "category": "一般"
-    },
-    {
-      "id": 404,
-      "question": "META 双曲屏 AI 智能体手机的 AI 功能演示动图有吗？",
-      "category": "技术支持"
-    },
-    {
-      "id": 405,
-      "question": "有没有 META 双曲屏 AI 智能体手机的配件套装展示图？",
-      "category": "一般"
-    },
-    {
-      "id": 406,
-      "question": "META 双曲屏 AI 智能体手机在户外使用的实拍视频在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 407,
-      "question": "能否提供 META 双曲屏 AI 智能体手机的桌面壁纸？",
-      "category": "一般"
-    },
-    {
-      "id": 408,
-      "question": "META 双曲屏 AI 智能体手机的硬件配置解析视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 409,
-      "question": "哪里可以下载 META 双曲屏 AI 智能体手机的完整产品资料？",
-      "category": "一般"
-    },
-    {
-      "id": 410,
-      "question": "META 双曲屏 AI 智能体手机的正面、背面、侧面展示图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 411,
-      "question": "有没有 META 双曲屏 AI 智能体手机的电池续航测试视频？",
-      "category": "一般"
-    },
-    {
-      "id": 412,
-      "question": "META 双曲屏 AI 智能体手机的产品介绍视频能在线观看吗？",
-      "category": "一般"
-    },
-    {
-      "id": 413,
-      "question": "能否分享 META 双曲屏 AI 智能体手机的研发故事视频？",
-      "category": "一般"
-    },
-    {
-      "id": 414,
-      "question": "META 双曲屏 AI 智能体手机的高清图片支持下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 415,
-      "question": "哪里能看到 META 双曲屏 AI 智能体手机的故障排除视频？",
-      "category": "一般"
-    },
-    {
-      "id": 416,
-      "question": "QUANTUM 新品的官方产品图片在哪里可以查看？",
-      "category": "一般"
-    },
-    {
-      "id": 417,
-      "question": "能否提供 QUANTUM 新品的实拍图片集？",
-      "category": "一般"
-    },
-    {
-      "id": 418,
-      "question": "QUANTUM 新品有官方发布的产品视频吗？",
-      "category": "一般"
-    },
-    {
-      "id": 419,
-      "question": "哪里能找到 QUANTUM 新品的详细介绍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 420,
-      "question": "QUANTUM 新品的宣传册电子版可以获取吗？",
-      "category": "一般"
-    },
-    {
-      "id": 421,
-      "question": "有没有 QUANTUM 新品的多角度展示图片？",
-      "category": "一般"
-    },
-    {
-      "id": 422,
-      "question": "QUANTUM 新品的核心功能演示视频在哪里能看到？",
-      "category": "技术支持"
-    },
-    {
-      "id": 423,
-      "question": "能否分享 QUANTUM 新品的开箱实拍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 424,
-      "question": "QUANTUM 新品的规格参数图表有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 425,
-      "question": "哪里可以下载 QUANTUM 新品的高清宣传图片？",
-      "category": "一般"
-    },
-    {
-      "id": 426,
-      "question": "QUANTUM 新品的 3D 展示视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 427,
-      "question": "有没有 QUANTUM 新品的使用场景图片？",
-      "category": "一般"
-    },
-    {
-      "id": 428,
-      "question": "QUANTUM 新品的产品手册能在线查看吗？",
-      "category": "一般"
-    },
-    {
-      "id": 429,
-      "question": "能否提供 QUANTUM 新品的细节展示图片？",
-      "category": "一般"
-    },
-    {
-      "id": 430,
-      "question": "QUANTUM 新品的发布会视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 431,
-      "question": "哪里可以看到 QUANTUM 新品的性能测试图片？",
-      "category": "一般"
-    },
-    {
-      "id": 432,
-      "question": "QUANTUM 新品的包装设计图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 433,
-      "question": "有没有 QUANTUM 新品的尺寸规格图？",
-      "category": "一般"
-    },
-    {
-      "id": 434,
-      "question": "QUANTUM 新品的官方推广视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 435,
-      "question": "能否分享 QUANTUM 新品的用户评价视频？",
-      "category": "一般"
-    },
-    {
-      "id": 436,
-      "question": "QUANTUM 新品的高清图片能保存吗？",
-      "category": "一般"
-    },
-    {
-      "id": 437,
-      "question": "哪里能获取 QUANTUM 新品的快速参考指南？",
-      "category": "一般"
-    },
-    {
-      "id": 438,
-      "question": "QUANTUM 新品的功能演示 GIF 图有吗？",
-      "category": "技术支持"
-    },
-    {
-      "id": 439,
-      "question": "有没有 QUANTUM 新品的配件清单图片？",
-      "category": "一般"
-    },
-    {
-      "id": 440,
-      "question": "QUANTUM 新品在不同环境下的实拍图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 441,
-      "question": "能否提供 QUANTUM 新品的官方壁纸下载链接？",
-      "category": "一般"
-    },
-    {
-      "id": 442,
-      "question": "QUANTUM 新品的技术讲解视频在哪里能找到？",
-      "category": "技术支持"
-    },
-    {
-      "id": 443,
-      "question": "哪里可以下载 QUANTUM 新品的完整产品资料包？",
-      "category": "一般"
-    },
-    {
-      "id": 444,
-      "question": "QUANTUM 新品的颜色选择展示图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 445,
-      "question": "有没有 QUANTUM 新品的充电速度测试视频？",
-      "category": "一般"
-    },
-    {
-      "id": 446,
-      "question": "QUANTUM 新品的产品介绍 PPT 能获取吗？",
-      "category": "一般"
-    },
-    {
-      "id": 447,
-      "question": "能否分享 QUANTUM 新品的设计亮点视频？",
-      "category": "一般"
-    },
-    {
-      "id": 448,
-      "question": "QUANTUM 新品的高清图片分辨率足够打印吗？",
-      "category": "一般"
-    },
-    {
-      "id": 449,
-      "question": "哪里能看到 QUANTUM 新品的保养指南图片？",
-      "category": "一般"
-    },
-    {
-      "id": 450,
-      "question": "Signature 顶奢系列的官方高清图片在哪里可以查看？",
-      "category": "一般"
-    },
-    {
-      "id": 451,
-      "question": "能否提供 Signature 顶奢系列的产品实拍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 452,
-      "question": "Signature 顶奢系列有详细的工艺展示视频吗？",
-      "category": "一般"
-    },
-    {
-      "id": 453,
-      "question": "哪里能找到 Signature 顶奢系列的开箱视频？",
-      "category": "一般"
-    },
-    {
-      "id": 454,
-      "question": "Signature 顶奢系列的官方画册可以下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 455,
-      "question": "有没有 Signature 顶奢系列不同款式的对比图片？",
-      "category": "一般"
-    },
-    {
-      "id": 456,
-      "question": "Signature 顶奢系列的材质细节图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 457,
-      "question": "能否分享 Signature 顶奢系列的定制流程视频？",
-      "category": "一般"
-    },
-    {
-      "id": 458,
-      "question": "Signature 顶奢系列的产品规格图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 459,
-      "question": "哪里可以获取 Signature 顶奢系列的高清宣传海报？",
-      "category": "一般"
-    },
-    {
-      "id": 460,
-      "question": "Signature 顶奢系列的 360 度全景展示视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 461,
-      "question": "有没有 Signature 顶奢系列在高端场合使用的实拍图？",
-      "category": "一般"
-    },
-    {
-      "id": 462,
-      "question": "Signature 顶奢系列的产品手册 PDF 版本能下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 463,
-      "question": "能否提供 Signature 顶奢系列的细节特写高清图？",
-      "category": "一般"
-    },
-    {
-      "id": 464,
-      "question": "Signature 顶奢系列的发布会完整视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 465,
-      "question": "哪里可以看到 Signature 顶奢系列的专业鉴赏视频？",
-      "category": "一般"
-    },
-    {
-      "id": 466,
-      "question": "Signature 顶奢系列的包装展示图片有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 467,
-      "question": "有没有 Signature 顶奢系列的尺寸对比图？",
-      "category": "一般"
-    },
-    {
-      "id": 468,
-      "question": "Signature 顶奢系列的官方宣传片在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 469,
-      "question": "能否分享 Signature 顶奢系列的用户体验视频？",
-      "category": "一般"
-    },
-    {
-      "id": 470,
-      "question": "Signature 顶奢系列的高清产品图能发给我吗？",
-      "category": "一般"
-    },
-    {
-      "id": 471,
-      "question": "哪里能获取 Signature 顶奢系列的保养指南图片？",
-      "category": "一般"
-    },
-    {
-      "id": 472,
-      "question": "Signature 顶奢系列的工艺制作过程视频有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 473,
-      "question": "有没有 Signature 顶奢系列的配件展示图片？",
-      "category": "一般"
-    },
-    {
-      "id": 474,
-      "question": "Signature 顶奢系列的设计灵感来源视频在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 475,
-      "question": "能否提供 Signature 顶奢系列的定制选项图片？",
-      "category": "一般"
-    },
-    {
-      "id": 476,
-      "question": "Signature 顶奢系列的收藏价值讲解视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 477,
-      "question": "哪里可以下载 Signature 顶奢系列的官方产品资料？",
-      "category": "一般"
-    },
-    {
-      "id": 478,
-      "question": "Signature 顶奢系列的不同颜色展示图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 479,
-      "question": "有没有 Signature 顶奢系列的限量版编号展示图？",
-      "category": "一般"
-    },
-    {
-      "id": 480,
-      "question": "Signature 顶奢系列的产品介绍 PPT 能获取吗？",
-      "category": "一般"
-    },
-    {
-      "id": 481,
-      "question": "能否分享 Signature 顶奢系列的历史传承视频？",
-      "category": "一般"
-    },
-    {
-      "id": 482,
-      "question": "Signature 顶奢系列的高清图片支持商业使用吗？",
-      "category": "一般"
-    },
-    {
-      "id": 483,
-      "question": "哪里能看到 Signature 顶奢系列的真伪鉴别图片？",
-      "category": "一般"
-    },
-    {
-      "id": 484,
-      "question": "纬图 QUANTUM 量子折叠屏的官方高清图片在哪里可以查看？",
-      "category": "一般"
-    },
-    {
-      "id": 485,
-      "question": "能否提供纬图 QUANTUM 量子折叠屏的产品实拍视频？",
-      "category": "一般"
-    },
-    {
-      "id": 486,
-      "question": "哪里能找到纬图 QUANTUM 量子折叠屏的折叠过程演示视频？",
-      "category": "一般"
-    },
-    {
-      "id": 487,
-      "question": "纬图 QUANTUM 量子折叠屏的开箱视频有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 488,
-      "question": "能否下载纬图 QUANTUM 量子折叠屏的官方宣传册？",
-      "category": "一般"
-    },
-    {
-      "id": 489,
-      "question": "有没有纬图 QUANTUM 量子折叠屏展开状态的高清图？",
-      "category": "一般"
-    },
-    {
-      "id": 490,
-      "question": "纬图 QUANTUM 量子折叠屏的屏幕折痕展示图在哪里能看到？",
-      "category": "一般"
-    },
-    {
-      "id": 491,
-      "question": "能否分享纬图 QUANTUM 量子折叠屏的多任务操作视频？",
-      "category": "一般"
-    },
-    {
-      "id": 492,
-      "question": "纬图 QUANTUM 量子折叠屏的产品规格参数图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 493,
-      "question": "哪里可以获取纬图 QUANTUM 量子折叠屏的高清宣传图片？",
-      "category": "一般"
-    },
-    {
-      "id": 494,
-      "question": "纬图 QUANTUM 量子折叠屏的 360 度旋转展示视频在哪里观看？",
-      "category": "一般"
-    },
-    {
-      "id": 495,
-      "question": "有没有纬图 QUANTUM 量子折叠屏与其他折叠屏手机的对比视频？",
-      "category": "一般"
-    },
-    {
-      "id": 496,
-      "question": "纬图 QUANTUM 量子折叠屏的用户手册 PDF 能下载吗？",
-      "category": "一般"
-    },
-    {
-      "id": 497,
-      "question": "能否提供纬图 QUANTUM 量子折叠屏的铰链细节图？",
-      "category": "一般"
-    },
-    {
-      "id": 498,
-      "question": "纬图 QUANTUM 量子折叠屏的发布会视频在哪里能找到？",
-      "category": "一般"
-    },
-    {
-      "id": 499,
-      "question": "哪里可以看到纬图 QUANTUM 量子折叠屏的专业测评视频？",
-      "category": "一般"
-    },
-    {
-      "id": 500,
-      "question": "纬图 QUANTUM 量子折叠屏的包装细节图有吗？",
-      "category": "一般"
-    },
-    {
-      "id": 501,
-      "question": "有没有纬图 QUANTUM 量子折叠屏的厚度对比图？",
-      "category": "一般"
-    },
-    {
-      "id": 502,
-      "question": "纬图 QUANTUM 量子折叠屏的官方广告视频在哪里观看？",
-      "category": "一般"
+      "question": "【旗舰新品】威图VERTU纬图 AGENT Q奢品直面屏手机 安全加密三系统 礼品礼盒商务送礼 24期免息",
+      "category": "系统更新",
+      "platform": ""
     }
   ],
-  "generated_at": "2026-03-04T09:16:38.925586",
+  "generated_at": "2026-03-11T22:45:11.059553",
   "categories": [
-    "价格",
+    "技术支持",
     "系统更新",
-    "一般",
     "安全隐私",
-    "技术支持"
+    "一般"
   ]
 }
