@@ -96,7 +96,8 @@ class UserAgent:
                 questions.append({
                     "id": idx + 1,
                     "question": row.get('question', ''),
-                    "category": self._categorize_question(row.get('question', ''))
+                    "category": self._categorize_question(row.get('question', '')),
+                    "platform": row.get('generate_source', '') if pd.notna(row.get('generate_source')) else ''
                 })
 
             # 保存mock_questions.json
@@ -414,7 +415,13 @@ class UserAgent:
     def _get_fallback_question(self, state: ConversationState) -> str:
         """获取备用问题"""
         if state.question_pool:
-            return random.choice([q['question'] for q in state.question_pool])
+            selected = random.choice(state.question_pool)
+            # 从备用问题中获取 platform
+            question_platform = selected.get('platform', '')
+            if question_platform:
+                state.platform = question_platform
+                logger.info(f"=== [AGENT] 从备用问题设置 platform: {question_platform} ===")
+            return selected['question']
         else:
             return "请介绍一下VERTU手机的主要特点"
 
@@ -427,11 +434,18 @@ class UserAgent:
         if config:
             filtered_questions = [q for q in questions if q.get('category', '') in config.preferred_categories]
             if filtered_questions:
-                selected_question = random.choice(filtered_questions)['question']
+                selected = random.choice(filtered_questions)
             else:
-                selected_question = random.choice(questions)['question']
+                selected = random.choice(questions)
         else:
-            selected_question = random.choice(questions)['question']
+            selected = random.choice(questions)
+        
+        selected_question = selected['question']
+        # 从问题中获取 platform 并设置到 state
+        question_platform = selected.get('platform', '')
+        if question_platform:
+            state.platform = question_platform
+            logger.info(f"=== [AGENT] 从问题池设置 platform: {question_platform} ===")
 
         # 使用大模型改写问题
         try:

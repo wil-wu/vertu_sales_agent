@@ -84,6 +84,8 @@ from app.services.react_agent.agent import ReActAgent
 from app.services.react_agent.shared import chat_model as react_chat_model
 from app.services.react_agent.tools import TOOLS
 from app.services.react_agent.prompts import REACT_AGENT_SYSTEM_PROMPT
+from app.services.react_agent.utils import MarkdownHelper
+from langchain_core.messages import AIMessage, ToolMessage
 
 # 配置日志
 logging.basicConfig(
@@ -102,10 +104,52 @@ class DirectReactAgentAdapter:
     
     def __init__(self, agent: ReActAgent):
         self.agent = agent
+        self.current_platform = "simulation"
         
-    async def chat(self, message: str, thread_id: str) -> dict:
+    async def chat(self, message: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> dict:
+        """调用 ReActAgent，将 platform 等信息追加到消息中（支持流式输出和链接提取）"""
         try:
-            response = await self.agent.arun(message, thread_id)
+            # 保存当前 platform，供工具使用
+            self.current_platform = platform
+            
+            # 将 platform 等信息追加到消息中，与 HTTP API 保持一致
+            # 在消息开头明确声明用户平台，让 LLM 更清楚地知道
+            enhanced_message = f"【用户来源平台：{platform}】\n{message}\n\n严格遵循用户输入的语种进行回复！！！\n用户id：{user_id}\n平台：{platform}\n地区：{region}\n\n重要提示：当需要调用发送微信通知工具时，platform 参数必须使用 '{platform}'，不要自行编造其他值。"
+            
+            # 使用流式输出并提取 graph_query 链接（与 HTTP API 保持一致）
+            agent_content = ""
+            graph_query_links = []
+            
+            async for event in self.agent.astream(enhanced_message, thread_id, stream_mode="updates"):
+                if "agent" in event:
+                    msgs = event["agent"].get("messages", [])
+                    if msgs:
+                        last_msg = msgs[-1]
+                        if isinstance(last_msg, AIMessage) and last_msg.content:
+                            content = (
+                                last_msg.content
+                                if isinstance(last_msg.content, str)
+                                else str(last_msg.content)
+                            )
+                            agent_content = MarkdownHelper.remove_markdown_links(content)
+                
+                if "tools" in event:
+                    msgs = event["tools"].get("messages", [])
+                    for msg in msgs:
+                        if isinstance(msg, ToolMessage) and getattr(msg, "name", None) == "graph_query":
+                            content = msg.content
+                            if isinstance(content, list):
+                                content = "\n".join(str(item) for item in content)
+                            else:
+                                content = content if isinstance(content, str) else str(content)
+                            graph_query_links.extend(MarkdownHelper.extract_markdown_links(content))
+            
+            # 如果有 graph_query 链接，追加到消息中
+            if graph_query_links:
+                response = f"{agent_content}\n\n" + "\n".join(graph_query_links)
+            else:
+                response = agent_content
+            
             return {
                 "message": response,
                 "status": "success",
@@ -133,10 +177,11 @@ class DirectUserAgent(UserAgent):
         return await super()._generate_next_question(state, bot_answer, last_question)
     
     @retry_async(tries=3, delay=1, backoff=2, logger=logger)
-    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation") -> any:
+    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> any:
         """直接调用 ReActAgent 而不是 HTTP API（带重试）"""
         try:
-            response = await self.direct_react_agent.chat(question, thread_id)
+            # 传递 platform 参数给 ReAct Agent
+            response = await self.direct_react_agent.chat(question, thread_id, user_id, platform, region)
             return response
         except Exception as e:
             logger.error(f"ReAct Agent 调用失败: {e}")
