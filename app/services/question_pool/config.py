@@ -70,12 +70,4 @@ PLATFORM_CONFIG = {
     }
 }
 
-# 数据分配比例
-DISTRIBUTION_RATIO = {
-    "faq": 0.3,
-    "price": 0.3,
-    "graph": 0.2,
-    "combined": 0.2
-}
-
 question_pool_settings = QuestionPoolSettings()
