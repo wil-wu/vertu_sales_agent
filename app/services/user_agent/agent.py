@@ -70,7 +70,7 @@ class UserAgent:
         self.human_escalation_keywords = ["转人工", "人工客服", "人工帮助", "人工", "客服", "投诉"]
         self.invalid_response_keywords = ["无法回答", "不知道", "不清楚", "我不懂", "无法找到", "没有找到"]
 
-    async def _fetch_faq(self, query: str, collection_name: str = "domestic", top_k: int = 5) -> List[dict]:
+    async def _fetch_faq(self, query: str, collection_name: str = "domestic_e_commerce", top_k: int = 5) -> List[dict]:
         """获取 FAQ 数据"""
         async with httpx.AsyncClient() as client:
             response = await client.post(
