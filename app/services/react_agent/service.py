@@ -49,8 +49,8 @@ class ReactAgentService:
 
     @staticmethod
     @_retry
-    async def send_wechat_notification(content: str) -> Any:
-        """发送微信通知。"""
+    async def send_human_notification(content: str) -> Any:
+        """发送人工服务通知。"""
         url = react_agent_settings.wechat_push_url
         headers = {
             "Authorization": f"Bearer {react_agent_settings.wechat_push_token}",
@@ -62,7 +62,7 @@ class ReactAgentService:
         await httpx_async_client.post(
             url, json=payload, headers=headers, params=params
         )
-        return "微信通知发送成功。"
+        return "人工服务通知发送成功。"
 
     @staticmethod
     @_retry
@@ -71,5 +71,6 @@ class ReactAgentService:
         response = await httpx_async_client.post(
             react_agent_settings.product_info_url,
             json={"query": query, "index_name": index_name},
+            timeout=10,
         )
         return response.json()
