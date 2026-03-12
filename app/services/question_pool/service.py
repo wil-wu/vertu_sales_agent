@@ -278,6 +278,16 @@ class QuestionPoolService:
         )
         all_questions = faq_pool + price_pool + graph_pool + combined_pool
 
+         # 去重：相同 question 只保留一个
+        seen = set()
+        unique = []
+        for qa in all_questions:
+            q = qa["question"].lower().strip()
+            if q and q not in seen:
+                seen.add(q)
+                unique.append(qa)
+        all_questions = unique
+
         # 生成 CSV 文件
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"question_pool_{product_name.replace(' ', '_')}_{platform}_{timestamp}_{count}.csv"
@@ -322,8 +332,32 @@ class QuestionPoolService:
             "faq_price_graph": []
         }
 
+        # 对 FAQ 去重（忽略大小写）
+        seen_faq = set()
+        unique_faq = []
+        for item in faq_data:
+            q = item.get("question", "").lower().strip()
+            if q and q not in seen_faq:
+                seen_faq.add(q)
+                unique_faq.append(item)
+        faq_data = unique_faq
+
         # FAQ × 价格
+        seen_questions = set()
         for i in range(min(each_count, len(faq_data))):
+            for j in range(min(3, len(price_data))):
+                if len(pools["faq_price"]) >= each_count:
+                    break
+                qa = await self._generate_faq_price_qa(faq_data[i], price_data[j])
+                q = qa.get("question", "").lower().strip()
+                if q and q not in seen_questions:
+                    seen_questions.add(q)
+                    pools["faq_price"].append({
+                        "question": qa.get("question", ""),
+                        "answer": qa.get("answer", ""),
+                        "platform": platform,
+                        "channel": "faq_price"
+                    })
             for j in range(min(3, len(price_data))):
                 if len(pools["faq_price"]) >= each_count:
                     break
