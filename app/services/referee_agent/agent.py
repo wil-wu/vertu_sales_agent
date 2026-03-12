@@ -611,7 +611,13 @@ class RefereeAgent:
                 # 5. 用户体验
                 self.user_experience = "good"
                 
-                # 6. 详细指标（新增）
+                # 6. 传统话术质量
+                self.traditional_script_quality = "good"
+                
+                # 7. 语言一致性
+                self.language_consistency = "consistent"
+                
+                # 8. 详细指标
                 self.detailed_metrics: Optional[DetailedMetrics] = None
                 
                 # 终止条件
