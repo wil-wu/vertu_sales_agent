@@ -249,15 +249,15 @@ USER_PERSONAS: Dict[str, PersonaConfig] = {
 # platform -> {faq_collection, price_index}
 PLATFORM_API_CONFIG = {
     "domestic_jd": {
-        "faq_collection": "domestic",
+        "faq_collection": "domestic_e_commerce",
         "price_index": "jd_product"
     },
     "domestic_tm": {
-        "faq_collection": "domestic",
+        "faq_collection": "domestic_e_commerce",
         "price_index": "tm_product"
     },
     "overseas": {
-        "faq_collection": "overseas",
+        "faq_collection": "oversea_private",
         "price_index": "overseas_product"
     }
 }
