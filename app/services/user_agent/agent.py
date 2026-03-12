@@ -420,7 +420,7 @@ class UserAgent:
         prompt = self._build_agent_prompt(state)
 
         # 获取系统提示词
-        system_prompt = self._get_system_prompt(state.persona)
+        system_prompt = self._get_system_prompt(state)
 
         # 构建会话历史
         conversation_history = "\n".join([
@@ -461,26 +461,41 @@ class UserAgent:
     def _build_agent_prompt(self, state: ConversationState) -> str:
         """构建代理提示词"""
         config = get_persona_config(state.persona)
-        if config:
-            return config.agent_prompt_template + f"\n\n{state.preset_prompt}"
-        else:
-            return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}"
-        if state.language == "en":
-            return "Can you tell me about the main features of VERTU phones?"
 
-    def _get_system_prompt(self, persona: str) -> str:
+        # 语言规则提示
+        language_hint = f"""
+【平台与语言】
+当前平台: {state.platform or 'domestic_jd'}
+语言要求: {'英文' if state.platform == 'overseas' else '中文'}
+请确保你的回复使用 {'English' if state.platform == 'overseas' else '中文'}。"""
+
+        if config:
+            return config.agent_prompt_template + f"\n\n{state.preset_prompt}" + language_hint
+        else:
+            return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}" + language_hint
+    def _get_system_prompt(self, state: ConversationState) -> str:
         """获取系统提示词"""
-        config = get_persona_config(persona)
-        if config:
-            return config.system_prompt_template + """
+        config = get_persona_config(state.persona)
 
-            重要提醒：
-            - 这是一个真实的线上客服对话场景
-            - 保持自然真实的对话风格，不要表演化
-            - 根据你的真实需求提出问题，不要过度纠缠细节
-            - 如果信息足够，及时结束对话表示感谢"""
+        # 语言规则
+        language_rule = f"""
+
+【语言规则】
+- 当前平台: {state.platform or 'domestic_jd'}
+- 如果平台是 "overseas"，所有回复必须使用英文
+- 如果平台是 "domestic_jd" 或 "domestic_tm"，使用中文
+- 保持人格特征不变，仅切换语言"""
+
+        if config:
+            return config.system_prompt_template + language_rule + """
+
+重要提醒：
+- 这是一个真实的线上客服对话场景
+- 保持自然真实的对话风格，不要表演化
+- 根据你的真实需求提出问题，不要过度纠缠细节
+- 如果信息足够，及时结束对话表示感谢"""
         else:
-            return "你是Vertu手机的用户，正在进行真实的客服对话。"
+            return "你是Vertu手机的用户，正在进行真实的客服对话。" + language_rule
 
     def _get_fallback_question(self, state: ConversationState) -> str:
         """获取备用问题"""
@@ -519,7 +534,7 @@ class UserAgent:
 
     async def _generate_scenario_question(self, reference_question: str, persona: str, scenario: str, config=None, state: ConversationState = None) -> str:
         """根据场景生成符合的初始问题"""
-        
+
         # 场景提示词映射
         scenario_prompts = {
             "咨询": "你是咨询场景的客户，想了解VERTU手机的产品信息、功能配置。请基于参考问题，生成一个自然、口语化的咨询问题。",
@@ -528,16 +543,22 @@ class UserAgent:
             "竞品对比": "你正在对比VERTU和其他品牌手机（如华为、三星、苹果），想了解VERTU的优势差异。请基于参考问题，生成一个对比咨询问题。",
             "闲聊": "你与客服闲聊，语气轻松随意，可能顺便问问VERTU手机的情况。请基于参考问题，生成一个自然、随意的闲聊问题。"
         }
-        
+
         scenario_desc = scenario_prompts.get(scenario, scenario_prompts["咨询"])
         persona_desc = config.description if config else "普通客户"
-        
+
+        # 根据平台确定语言
+        platform = state.platform if state else None
+        language_req = "English" if platform == "overseas" else "中文"
+
         prompt = f"""{scenario_desc}
 
 你的人格特征：{persona_desc}
 
 参考问题（仅作为灵感参考，不要直接复制）：
 {reference_question}
+
+语言要求：请使用{language_req}生成问题
 
 要求：
 1. 必须符合"{scenario}"场景的特征
