@@ -194,8 +194,8 @@ class UserAgent:
         # 加载问题池
         state.question_pool = await self.load_question_pool()
 
-        # 选择并改写初始问题
-        initial_question = await self._select_initial_question(persona, state.question_pool, state)
+        # 选择并改写初始问题（根据场景生成）
+        initial_question = await self._select_initial_question(persona, scenario, state.question_pool, state)
         state.initial_question = initial_question
 
         # 根据平台确定查询参数
@@ -485,8 +485,8 @@ class UserAgent:
         else:
             return "请介绍一下VERTU手机的主要特点"
 
-    async def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]], state: ConversationState) -> str:
-        """根据人格选择并改写初始问题"""
+    async def _select_initial_question(self, persona: str, scenario: str, questions: List[Dict[str, Any]], state: ConversationState) -> str:
+        """根据人格和场景选择并生成初始问题"""
         if not questions:
             return self._get_fallback_question(ConversationState())
 
@@ -502,11 +502,53 @@ class UserAgent:
 
         # 使用大模型改写问题
         try:
-            rewritten_question = await self._rewrite_question_with_llm(selected_question, config, state)
-            return rewritten_question
+            generated_question = await self._generate_scenario_question(selected_question, persona, scenario, config, state)
+            return generated_question
         except Exception as e:
-            logger.warning(f"问题改写失败，使用原问题: {e}")
-            return selected_question
+            logger.warning(f"场景问题生成失败，使用改写后问题: {e}")
+            return await self._rewrite_question_with_llm(selected_question, config, state)
+
+    async def _generate_scenario_question(self, reference_question: str, persona: str, scenario: str, config=None, state: ConversationState = None) -> str:
+        """根据场景生成符合的初始问题"""
+        
+        # 场景提示词映射
+        scenario_prompts = {
+            "咨询": "你是咨询场景的客户，想了解VERTU手机的产品信息、功能配置。请基于参考问题，生成一个自然、口语化的咨询问题。",
+            "售后": "你是已购买VERTU手机的客户，手机出现了问题或使用上有疑问，需要售后支持。请基于参考问题，生成一个自然、口语化的售后咨询问题。",
+            "犹豫": "你对VERTU手机感兴趣但还在犹豫是否购买，关心价格、性价比、优惠活动。请基于参考问题，生成一个试探性的询问问题。",
+            "竞品对比": "你正在对比VERTU和其他品牌手机（如华为、三星、苹果），想了解VERTU的优势差异。请基于参考问题，生成一个对比咨询问题。",
+            "闲聊": "你与客服闲聊，语气轻松随意，可能顺便问问VERTU手机的情况。请基于参考问题，生成一个自然、随意的闲聊问题。"
+        }
+        
+        scenario_desc = scenario_prompts.get(scenario, scenario_prompts["咨询"])
+        persona_desc = config.description if config else "普通客户"
+        
+        prompt = f"""{scenario_desc}
+
+你的人格特征：{persona_desc}
+
+参考问题（仅作为灵感参考，不要直接复制）：
+{reference_question}
+
+要求：
+1. 必须符合"{scenario}"场景的特征
+2. 必须使用具体产品名称（如"VERTU Agent Q"），禁止使用"这款手机""它"等代词
+3. 语气要符合你的人格特征
+4. 问题要口语化、自然，像真实客户会问的
+5. 只输出问题本身，不要任何解释
+
+生成的问题："""
+
+        messages = [{"role": "user", "content": prompt}]
+        
+        start_time = time.time()
+        response = await self.chat_model.ainvoke(messages)
+        duration = time.time() - start_time
+        
+        if state:
+            self._record_llm_call(state, "scenario_question", duration, f"场景[{scenario}]生成问题")
+        
+        return response.content.strip().strip('"')
 
     async def _rewrite_question_with_llm(self, original_question: str, config=None, state: ConversationState = None) -> str:
         """使用LLM改写问题"""
@@ -540,6 +582,7 @@ class UserAgent:
             "finish_reason": state.finish_reason,
             "finish_reason_description": state.finish_reason_description,
             "persona": state.persona,
+            "platform": state.platform,
             "llm_call_stats": {
                 "total_calls": state.llm_call_stats["total_calls"],
                 "total_duration": round(state.llm_call_stats["total_duration"], 3),
