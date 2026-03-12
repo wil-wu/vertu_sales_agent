@@ -25,7 +25,11 @@ class ReActAgent:
         return cls._instance
 
     def __init__(
-        self, chat_model: BaseChatModel, tools: list[Tool], system_prompt: str, backup_chat_model: BaseChatModel
+        self, 
+        chat_model: BaseChatModel, 
+        tools: list[Tool], 
+        system_prompt: str, 
+        backup_chat_model: BaseChatModel = None,
     ):
         if self._initialized:
             return
@@ -34,7 +38,7 @@ class ReActAgent:
         self._backup_chat_model = backup_chat_model
         self._tools = tools
         self._chat_model_with_tools = chat_model.bind_tools(tools)
-        self._backup_chat_model_with_tools = backup_chat_model.bind_tools(tools)
+        self._backup_chat_model_with_tools = backup_chat_model.bind_tools(tools) if backup_chat_model else None
         self._system_prompt = system_prompt
         self._graph = self._build()
 
@@ -80,8 +84,13 @@ class ReActAgent:
         try:
             response = await self._chat_model_with_tools.ainvoke(messages)
         except Exception as e:
-            logger.error(f"Error invoking chat model: {e}")
-            response = await self._backup_chat_model_with_tools.ainvoke(messages)
+            logger.error(f"Primary chat model invocation failed: {e}")
+            if self._backup_chat_model_with_tools:
+                logger.warning("Falling back to backup chat model")
+                response = await self._backup_chat_model_with_tools.ainvoke(messages)
+            else:
+                logger.error("No backup chat model available, re-raising")
+                raise e
         return {"messages": [response]}
 
     def _should_continue(self, state: MessagesState) -> str:
