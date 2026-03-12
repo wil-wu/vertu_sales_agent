@@ -28,6 +28,7 @@ class ConversationState(BaseModel):
     max_turns: int = Field(default=20)
     conversation_history: List[Dict[str, str]] = Field(default_factory=list)
     persona: str = Field(default="neutral")
+    scenario: Optional[str] = Field(default=None)
     question_pool: List[Dict[str, Any]] = Field(default_factory=list)
     invalid_response_count: int = Field(default=0)
     finish_reason: Optional[str] = Field(default=None)
@@ -187,6 +188,7 @@ class UserAgent:
             session_id=str(uuid.uuid4()),
             max_turns=max_turns,
             persona=persona,
+            scenario=scenario,
             platform=platform,
             preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}"
         )
@@ -583,6 +585,7 @@ class UserAgent:
             "finish_reason_description": state.finish_reason_description,
             "persona": state.persona,
             "platform": state.platform,
+            "scenario": state.scenario,
             "llm_call_stats": {
                 "total_calls": state.llm_call_stats["total_calls"],
                 "total_duration": round(state.llm_call_stats["total_duration"], 3),
