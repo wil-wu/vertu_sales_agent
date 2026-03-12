@@ -21,6 +21,16 @@ class ReactAgentSettings(BaseSettings):
     openai_base_url: str = Field(
         default="https://api.moonshot.cn/v1", description="OpenAI API 基础 URL"
     )
+    # 备用模型配置
+    backup_llm_model: str = Field(default="", description="备用 LLM 模型")
+    backup_openai_base_url: str = Field(
+        default="", description="备用 OpenAI API 基础 URL"
+    )
+    backup_openai_api_key: str = Field(
+        default="",
+        description="备用 OpenAI API 密钥",
+    )
+
     temperature: float = Field(default=0.01, description="温度")
 
     faq_url: str = Field(

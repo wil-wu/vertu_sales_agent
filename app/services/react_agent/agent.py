@@ -1,3 +1,4 @@
+import logging
 from typing import Self, Generator, AsyncGenerator
 from datetime import datetime
 
@@ -8,6 +9,8 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.tools import Tool
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.base import BaseCheckpointSaver
+
+logger = logging.getLogger(__name__)
 
 
 class ReActAgent:
@@ -22,14 +25,16 @@ class ReActAgent:
         return cls._instance
 
     def __init__(
-        self, chat_model: BaseChatModel, tools: list[Tool], system_prompt: str
+        self, chat_model: BaseChatModel, tools: list[Tool], system_prompt: str, backup_chat_model: BaseChatModel
     ):
         if self._initialized:
             return
         self._initialized = True
         self._chat_model = chat_model
+        self._backup_chat_model = backup_chat_model
         self._tools = tools
         self._chat_model_with_tools = chat_model.bind_tools(tools)
+        self._backup_chat_model_with_tools = backup_chat_model.bind_tools(tools)
         self._system_prompt = system_prompt
         self._graph = self._build()
 
@@ -72,7 +77,11 @@ class ReActAgent:
             *state["messages"],
         ]
 
-        response = await self._chat_model_with_tools.ainvoke(messages)
+        try:
+            response = await self._chat_model_with_tools.ainvoke(messages)
+        except Exception as e:
+            logger.error(f"Error invoking chat model: {e}")
+            response = await self._backup_chat_model_with_tools.ainvoke(messages)
         return {"messages": [response]}
 
     def _should_continue(self, state: MessagesState) -> str:
