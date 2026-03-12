@@ -421,9 +421,9 @@ class BatchTestRunner:
         base_scenarios = [
             f"咨询VERTU手机的产品特性和价格",
             f"了解VERTU售后服务和保修政策",
-            f"询问VERTU手机的技术规格和功能",
-            f"比较不同VERTU手机型号的差异",
-            f"咨询VERTU手机的安全和隐私功能",
+            f"犹豫是否购买VERTU手机，需要更多购买建议",
+            f"将VERTU手机与其他品牌竞品进行对比",
+            f"与客服闲聊，了解VERTU品牌故事和高端服务",
         ]
         
         tasks = []

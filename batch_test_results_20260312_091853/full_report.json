@@ -1,0 +1,282 @@
+{
+  "_report_description": "Vertu Sales Agent 批量测试报告 - 包含多人格对话生成与评估结果",
+  "_note": "详细对话数据保存在同目录下的 {persona}_detailed.json 文件中",
+  "report_info": {
+    "generated_at": "2026-03-12T09:53:30.110541",
+    "total_sessions": 7,
+    "successful_evaluations": 7,
+    "failed_evaluations": 0,
+    "success_rate": 100.0,
+    "tested_personas": [
+      "business_elite",
+      "tech_geek",
+      "price_comparer",
+      "impulse_buyer",
+      "efficient_buyer",
+      "brand_loyalist",
+      "disappointed_customer"
+    ],
+    "total_duration_seconds": 2076.19
+  },
+  "_dimension_score_comments": {
+    "anthropomorphism_score": "拟人化体验：语言自然度、人设一致性、温度感",
+    "purchase_intent_score": "购买意愿驱动：需求挖掘率、推荐精准度",
+    "problem_solving_score": "问题解决能力：首次解决率、意图识别准确率、兜底率",
+    "sales_script_score": "销售话术质量：FAB完整度、异议处理、交叉销售、合规性",
+    "user_experience_score": "用户体验：CSAT评分、负面反馈触发",
+    "traditional_script_score": "传统话术质量：专业名词通俗化解释能力",
+    "language_consistency_score": "语言一致性：用户-sales_agent问答语言一致性"
+  },
+  "overall_first_contact_resolution_stats": {
+    "首次解决率": 42.86
+  },
+  "overall_dimension_scores": {
+    "拟人化体验": 77.93,
+    "购买意愿驱动": 43.0,
+    "问题解决能力": 67.87,
+    "销售话术质量": 60.89,
+    "用户体验": 77.27,
+    "传统话术质量": 82.08,
+    "语言一致性": 100.0
+  },
+  "persona_summaries": [
+    {
+      "persona": "business_elite",
+      "description": "传统商务型/务实大佬",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 80.67,
+        "购买意愿驱动": 38.33,
+        "问题解决能力": 65.0,
+        "销售话术质量": 58.0,
+        "用户体验": 86.67,
+        "传统话术质量": 81.67,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 1
+      },
+      "avg_turns": 3.0,
+      "total_duration": 155.08,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 0,
+        "首次解决率": 0.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "tech_geek",
+      "description": "数码极客/价值博弈型",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 77.0,
+        "购买意愿驱动": 45.0,
+        "问题解决能力": 60.78,
+        "销售话术质量": 60.44,
+        "用户体验": 77.22,
+        "传统话术质量": 86.11,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 1
+      },
+      "avg_turns": 9.0,
+      "total_duration": 571.46,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 0,
+        "首次解决率": 0.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "price_comparer",
+      "description": "极致比价/犹豫摇摆型",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 76.67,
+        "购买意愿驱动": 60.22,
+        "问题解决能力": 64.33,
+        "销售话术质量": 67.56,
+        "用户体验": 78.67,
+        "传统话术质量": 93.89,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "max_turns": 1
+      },
+      "avg_turns": 10.0,
+      "total_duration": 685.06,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 0,
+        "首次解决率": 0.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "impulse_buyer",
+      "description": "冲动消费/圈层跟风型",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 80.67,
+        "购买意愿驱动": 58.67,
+        "问题解决能力": 76.0,
+        "销售话术质量": 76.0,
+        "用户体验": 88.33,
+        "传统话术质量": 86.67,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_rejection": 1
+      },
+      "avg_turns": 4.0,
+      "total_duration": 215.66,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 1,
+        "首次解决率": 100.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "efficient_buyer",
+      "description": "目标明确/高效采购型",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 79.0,
+        "购买意愿驱动": 42.5,
+        "问题解决能力": 73.25,
+        "销售话术质量": 56.5,
+        "用户体验": 85.0,
+        "传统话术质量": 86.25,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 1
+      },
+      "avg_turns": 4.0,
+      "total_duration": 160.88,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 1,
+        "首次解决率": 100.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "brand_loyalist",
+      "description": "品牌死忠/收藏家",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 73.0,
+        "购买意愿驱动": 35.0,
+        "问题解决能力": 79.0,
+        "销售话术质量": 57.5,
+        "用户体验": 60.0,
+        "传统话术质量": 77.5,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_satisfied": 1
+      },
+      "avg_turns": 3.0,
+      "total_duration": 168.14,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 1,
+        "首次解决率": 100.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    },
+    {
+      "persona": "disappointed_customer",
+      "description": "失望受挫型老客",
+      "total_sessions": 1,
+      "successful_evaluations": 1,
+      "failed_evaluations": 0,
+      "avg_dimension_scores": {
+        "拟人化体验": 78.5,
+        "购买意愿驱动": 21.25,
+        "问题解决能力": 56.75,
+        "销售话术质量": 50.25,
+        "用户体验": 65.0,
+        "传统话术质量": 62.5,
+        "语言一致性": 100.0
+      },
+      "finish_reason_distribution": {
+        "user_rejection": 1
+      },
+      "avg_turns": 4.0,
+      "total_duration": 119.91,
+      "first_contact_resolution_stats": {
+        "总会话数": 1,
+        "有预期答案的会话": 1,
+        "首次解决成功": 0,
+        "首次解决率": 0.0,
+        "无预期答案的会话": 0
+      },
+      "language_consistency_stats": {
+        "总会话数": 1,
+        "语言一致": 0,
+        "语言不一致": 0,
+        "语言一致性得分": 0.0
+      }
+    }
+  ]
+}
