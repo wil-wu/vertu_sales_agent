@@ -10,7 +10,14 @@ from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_ex
 
 from app.core.shared import httpx_async_client
 from .config import question_pool_settings, PLATFORM_CONFIG, DISTRIBUTION_RATIO
-from .prompts import GRAPH_QA_GENERATION_PROMPT, COMBINED_QA_GENERATION_PROMPT
+from .prompts import (
+    GRAPH_QA_GENERATION_PROMPT,
+    PRICE_QUESTION_REWRITE_PROMPT,
+    FAQ_PRICE_COMBINED_PROMPT,
+    FAQ_GRAPH_COMBINED_PROMPT,
+    PRICE_GRAPH_COMBINED_PROMPT,
+    TRIPLE_COMBINED_PROMPT
+)
 from .shared import chat_model
 
 logger = logging.getLogger(__name__)
@@ -112,37 +119,75 @@ class QuestionPoolService:
             qa_pairs = [qa_pairs]
         return qa_pairs if isinstance(qa_pairs, list) else []
 
-    async def _generate_combined_qa(
-        self,
-        faq_item: dict,
-        price_item: dict,
-        graph_summary: str
-    ) -> dict:
-        """使用 LLM 生成综合问答对"""
-        prompt = COMBINED_QA_GENERATION_PROMPT.format(
+    async def _rewrite_price_question(self, product_name: str, price: float) -> str:
+        """使用 LLM 将商品名称改写为用户价格询问问题"""
+        prompt = PRICE_QUESTION_REWRITE_PROMPT.format(product_name=product_name, price=price)
+
+        messages = [{"role": "user", "content": prompt}]
+        response = await chat_model.ainvoke(messages)
+        return response.content.strip().strip('"')
+
+    async def _generate_faq_price_qa(self, faq_item: dict, price_item: dict) -> dict:
+        """生成 FAQ × 价格 组合问答对"""
+        prompt = FAQ_PRICE_COMBINED_PROMPT.format(
+            faq_question=faq_item.get("question", ""),
+            faq_answer=faq_item.get("answer", ""),
+            price_name=price_item.get("name", ""),
+            price_value=price_item.get("price", 0)
+        )
+        messages = [{"role": "user", "content": prompt}]
+        response = await chat_model.ainvoke(messages)
+        content = self._clean_json_response(response.content)
+        return json.loads(content)
+
+    async def _generate_faq_graph_qa(self, faq_item: dict, graph_qa: dict) -> dict:
+        """生成 FAQ × 图谱 组合问答对"""
+        prompt = FAQ_GRAPH_COMBINED_PROMPT.format(
+            faq_question=faq_item.get("question", ""),
+            faq_answer=faq_item.get("answer", ""),
+            graph_info=f"{graph_qa.get('question', '')}: {graph_qa.get('answer', '')}"
+        )
+        messages = [{"role": "user", "content": prompt}]
+        response = await chat_model.ainvoke(messages)
+        content = self._clean_json_response(response.content)
+        return json.loads(content)
+
+    async def _generate_price_graph_qa(self, price_item: dict, graph_qa: dict) -> dict:
+        """生成 价格 × 图谱 组合问答对"""
+        prompt = PRICE_GRAPH_COMBINED_PROMPT.format(
+            price_name=price_item.get("name", ""),
+            price_value=price_item.get("price", 0),
+            graph_info=f"{graph_qa.get('question', '')}: {graph_qa.get('answer', '')}"
+        )
+        messages = [{"role": "user", "content": prompt}]
+        response = await chat_model.ainvoke(messages)
+        content = self._clean_json_response(response.content)
+        return json.loads(content)
+
+    async def _generate_triple_qa(self, faq_item: dict, price_item: dict, graph_qa: dict) -> dict:
+        """生成 FAQ × 价格 × 图谱 三者组合问答对"""
+        prompt = TRIPLE_COMBINED_PROMPT.format(
             faq_question=faq_item.get("question", ""),
             faq_answer=faq_item.get("answer", ""),
             price_name=price_item.get("name", ""),
             price_value=price_item.get("price", 0),
-            graph_info=graph_summary
+            graph_info=f"{graph_qa.get('question', '')}: {graph_qa.get('answer', '')}"
         )
-
-        messages = [{"role": "system", "content": "你是一个专业的问答对生成专家。"}]
-        messages.append({"role": "user", "content": prompt})
-
+        messages = [{"role": "user", "content": prompt}]
         response = await chat_model.ainvoke(messages)
-        content = response.content.strip()
+        content = self._clean_json_response(response.content)
+        return json.loads(content)
 
-        # 清理 markdown 代码块标记
+    def _clean_json_response(self, content: str) -> str:
+        """清理 LLM 返回的 JSON 响应"""
+        content = content.strip()
         if content.startswith("```json"):
             content = content[7:]
         if content.startswith("```"):
             content = content[3:]
         if content.endswith("```"):
             content = content[:-3]
-        content = content.strip()
-
-        return json.loads(content)
+        return content.strip()
 
     def _generate_graph_summary(self, graph_data: dict) -> str:
         """从图谱数据生成摘要文本用于综合问答"""
@@ -169,11 +214,11 @@ class QuestionPoolService:
 
         config = PLATFORM_CONFIG.get(platform)
 
-        # 计算各渠道需要的数量（1.5倍冗余以应对可能的不足）
-        faq_target = int(count * DISTRIBUTION_RATIO["faq"])
-        price_target = int(count * DISTRIBUTION_RATIO["price"])
-        graph_target = int(count * DISTRIBUTION_RATIO["graph"])
-        combined_target = int(count * DISTRIBUTION_RATIO["combined"])
+        # 新比例：FAQ 0.5, 价格 0.1, 图谱 0.2, 多源组合平分 0.3
+        faq_target = int(count * 0.5)
+        price_target = int(count * 0.1)
+        graph_target = int(count * 0.2)
+        combined_each = int(count * 0.075)  # 四种组合各 0.075
 
         # 并发获取三个渠道的数据
         faq_data = await self._fetch_faq(
@@ -197,41 +242,51 @@ class QuestionPoolService:
 
         # 转换 FAQ 数据
         faq_pool = [
-            {"question": item["question"], "answer": item["answer"], "platform": platform}
+            {"question": item["question"], "answer": item["answer"], "platform": platform, "channel": "faq"}
             for item in faq_data[:faq_target]
         ]
 
-        # 转换价格数据
-        price_pool = [
-            {"question": item["name"], "answer": f"{item['price']}元", "platform": platform}
-            for item in price_data[:price_target]
-        ]
+        # 转换价格数据（使用 LLM 改写问题）
+        price_pool = []
+        for item in price_data[:price_target]:
+            rewritten_question = await self._rewrite_price_question(item["name"], item["price"])
+            price_pool.append({
+                "question": rewritten_question,
+                "answer": f"{item['price']}元",
+                "platform": platform,
+                "channel": "price"
+            })
 
         # 生成图谱问答对
         graph_qa_list = await self._generate_graph_qa(graph_data)
         graph_pool = [
-            {"question": qa["question"], "answer": qa["answer"], "platform": platform}
+            {"question": qa["question"], "answer": qa["answer"], "platform": platform, "channel": "graph"}
             for qa in graph_qa_list[:graph_target]
         ]
 
-        # 兜底策略：如果某个渠道数据不足，用其他渠道补足
-        combined_pool = await self._generate_combined_pool(
-            faq_data, price_data, graph_data,
-            combined_target, platform
+        # 生成多源组合（FAQ×价格、FAQ×图谱、价格×图谱、FAQ×价格×图谱）
+        combined_pools = await self._generate_all_combined_pools(
+            faq_data, price_data, graph_qa_list, combined_each, platform
         )
 
         # 合并所有数据
+        combined_pool = (
+            combined_pools["faq_price"] +
+            combined_pools["faq_graph"] +
+            combined_pools["price_graph"] +
+            combined_pools["faq_price_graph"]
+        )
         all_questions = faq_pool + price_pool + graph_pool + combined_pool
 
-        # 兜底：如果总量不足，循环填充
-        while len(all_questions) < count:
-            for source in [faq_pool, price_pool, graph_pool, combined_pool]:
-                if source and len(all_questions) < count:
-                    idx = len(all_questions) % len(source)
-                    all_questions.append(source[idx])
-
-        # 截取所需数量
-        all_questions = all_questions[:count]
+         # 去重：相同 question 只保留一个
+        seen = set()
+        unique = []
+        for qa in all_questions:
+            q = qa["question"].lower().strip()
+            if q and q not in seen:
+                seen.add(q)
+                unique.append(qa)
+        all_questions = unique
 
         # 生成 CSV 文件
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -239,7 +294,7 @@ class QuestionPoolService:
         file_path = self.output_dir / filename
 
         with open(file_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["question", "answer", "platform"])
+            writer = csv.DictWriter(f, fieldnames=["question", "answer", "platform", "channel"])
             writer.writeheader()
             writer.writerows(all_questions)
 
@@ -252,37 +307,106 @@ class QuestionPoolService:
                 "faq": len(faq_pool),
                 "price": len(price_pool),
                 "graph": len(graph_pool),
-                "combined": len(combined_pool)
+                "faq_price": len(combined_pools["faq_price"]),
+                "faq_graph": len(combined_pools["faq_graph"]),
+                "price_graph": len(combined_pools["price_graph"]),
+                "faq_price_graph": len(combined_pools["faq_price_graph"]),
+                "combined_total": len(combined_pool)
             },
             "sources": source_stats
         }
 
-    async def _generate_combined_pool(
+    async def _generate_all_combined_pools(
         self,
         faq_data: List[dict],
         price_data: List[dict],
-        graph_data: dict,
-        target_count: int,
+        graph_qa_list: List[dict],
+        each_count: int,
         platform: str
-    ) -> List[dict]:
-        """生成综合问答池"""
-        combined_pool = []
+    ) -> dict:
+        """生成所有多源组合：FAQ×价格、FAQ×图谱、价格×图谱、FAQ×价格×图谱"""
+        pools = {
+            "faq_price": [],
+            "faq_graph": [],
+            "price_graph": [],
+            "faq_price_graph": []
+        }
 
-        if not faq_data or not price_data:
-            return combined_pool
+        # 对 FAQ 去重（忽略大小写）
+        seen_faq = set()
+        unique_faq = []
+        for item in faq_data:
+            q = item.get("question", "").lower().strip()
+            if q and q not in seen_faq:
+                seen_faq.add(q)
+                unique_faq.append(item)
+        faq_data = unique_faq
 
-        graph_summary = self._generate_graph_summary(graph_data)
+        # FAQ × 价格
+        seen_questions = set()
+        for i in range(min(each_count, len(faq_data))):
+            for j in range(min(3, len(price_data))):
+                if len(pools["faq_price"]) >= each_count:
+                    break
+                qa = await self._generate_faq_price_qa(faq_data[i], price_data[j])
+                q = qa.get("question", "").lower().strip()
+                if q and q not in seen_questions:
+                    seen_questions.add(q)
+                    pools["faq_price"].append({
+                        "question": qa.get("question", ""),
+                        "answer": qa.get("answer", ""),
+                        "platform": platform,
+                        "channel": "faq_price"
+                    })
+            for j in range(min(3, len(price_data))):
+                if len(pools["faq_price"]) >= each_count:
+                    break
+                qa = await self._generate_faq_price_qa(faq_data[i], price_data[j])
+                pools["faq_price"].append({
+                    "question": qa.get("question", ""),
+                    "answer": qa.get("answer", ""),
+                    "platform": platform,
+                    "channel": "faq_price"
+                })
 
-        # 生成组合（简单的笛卡尔积，取前 target_count 个）
-        for i in range(min(target_count, len(faq_data))):
-            faq_item = faq_data[i]
-            price_item = price_data[i % len(price_data)]
+        # FAQ × 图谱
+        for i in range(min(each_count, len(faq_data))):
+            for j in range(min(3, len(graph_qa_list))):
+                if len(pools["faq_graph"]) >= each_count:
+                    break
+                qa = await self._generate_faq_graph_qa(faq_data[i], graph_qa_list[j])
+                pools["faq_graph"].append({
+                    "question": qa.get("question", ""),
+                    "answer": qa.get("answer", ""),
+                    "platform": platform,
+                    "channel": "faq_graph"
+                })
 
-            qa = await self._generate_combined_qa(faq_item, price_item, graph_summary)
-            combined_pool.append({
-                "question": qa.get("question", ""),
-                "answer": qa.get("answer", ""),
-                "platform": platform
-            })
+        # 价格 × 图谱
+        for i in range(min(each_count, len(price_data))):
+            for j in range(min(3, len(graph_qa_list))):
+                if len(pools["price_graph"]) >= each_count:
+                    break
+                qa = await self._generate_price_graph_qa(price_data[i], graph_qa_list[j])
+                pools["price_graph"].append({
+                    "question": qa.get("question", ""),
+                    "answer": qa.get("answer", ""),
+                    "platform": platform,
+                    "channel": "price_graph"
+                })
 
-        return combined_pool
+        # FAQ × 价格 × 图谱（笛卡尔积）
+        for i in range(min(each_count, len(faq_data))):
+            for j in range(min(2, len(price_data))):
+                for k in range(min(2, len(graph_qa_list))):
+                    if len(pools["faq_price_graph"]) >= each_count:
+                        break
+                    qa = await self._generate_triple_qa(faq_data[i], price_data[j], graph_qa_list[k])
+                    pools["faq_price_graph"].append({
+                        "question": qa.get("question", ""),
+                        "answer": qa.get("answer", ""),
+                        "platform": platform,
+                        "channel": "faq_price_graph"
+                    })
+
+        return pools

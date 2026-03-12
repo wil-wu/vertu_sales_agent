@@ -28,6 +28,7 @@ class ConversationState(BaseModel):
     max_turns: int = Field(default=20)
     conversation_history: List[Dict[str, str]] = Field(default_factory=list)
     persona: str = Field(default="neutral")
+    scenario: Optional[str] = Field(default=None)
     question_pool: List[Dict[str, Any]] = Field(default_factory=list)
     invalid_response_count: int = Field(default=0)
     finish_reason: Optional[str] = Field(default=None)
@@ -47,7 +48,8 @@ class ConversationState(BaseModel):
         "max_duration": 0.0
     })
     initial_question: str = Field(default="")
-    initial_query_results: Dict[str, Any] = Field(default_factory=dict)
+    original_question: str = Field(default="")  # 从问题池选择的原始问题
+    original_query_results: Dict[str, Any] = Field(default_factory=dict)  # 使用原始问题查询的结果
 
 class UserAgent:
     """仿真测试用户代理智能体"""
@@ -188,6 +190,7 @@ class UserAgent:
             session_id=str(uuid.uuid4()),
             max_turns=max_turns,
             persona=persona,
+            scenario=scenario,
             platform=platform,
             preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}"
         )
@@ -195,8 +198,8 @@ class UserAgent:
         # 加载问题池
         state.question_pool = await self.load_question_pool()
 
-        # 选择并改写初始问题
-        initial_question = await self._select_initial_question(persona, state.question_pool, state)
+        # 选择并改写初始问题（根据场景生成）
+        initial_question = await self._select_initial_question(persona, scenario, state.question_pool, state)
         state.initial_question = initial_question
 
         # 根据平台确定查询参数
@@ -204,12 +207,13 @@ class UserAgent:
         faq_collection = platform_config["faq_collection"]
         price_index = platform_config["price_index"]
 
-        # 查询 FAQ 和价格 API
-        logger.info(f"=== [AGENT] 查询初始问题的 FAQ 和价格数据 - 问题: {initial_question[:50]}... ===")
-        faq_results = await self._fetch_faq(initial_question, faq_collection, top_k=5)
-        price_results = await self._fetch_price(initial_question, price_index, hits_per_page=5)
+        # 使用原始问题查询 FAQ 和价格 API（而不是改写后的问题）
+        query_for_search = state.original_question if state.original_question else initial_question
+        logger.info(f"=== [AGENT] 使用原始问题查询 FAQ 和价格数据 - 问题: {query_for_search[:50]}... ===")
+        faq_results = await self._fetch_faq(query_for_search, faq_collection, top_k=5)
+        price_results = await self._fetch_price(query_for_search, price_index, hits_per_page=5)
 
-        state.initial_query_results = {
+        state.original_query_results = {
             "faq": faq_results,
             "price": price_results,
             "query_time": datetime.now().isoformat()
@@ -417,7 +421,7 @@ class UserAgent:
         prompt = self._build_agent_prompt(state)
 
         # 获取系统提示词
-        system_prompt = self._get_system_prompt(state.persona)
+        system_prompt = self._get_system_prompt(state)
 
         # 构建会话历史
         conversation_history = "\n".join([
@@ -458,26 +462,41 @@ class UserAgent:
     def _build_agent_prompt(self, state: ConversationState) -> str:
         """构建代理提示词"""
         config = get_persona_config(state.persona)
-        if config:
-            return config.agent_prompt_template + f"\n\n{state.preset_prompt}"
-        else:
-            return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}"
-        if state.language == "en":
-            return "Can you tell me about the main features of VERTU phones?"
 
-    def _get_system_prompt(self, persona: str) -> str:
+        # 语言规则提示
+        language_hint = f"""
+【平台与语言】
+当前平台: {state.platform or 'domestic_jd'}
+语言要求: {'英文' if state.platform == 'overseas' else '中文'}
+请确保你的回复使用 {'English' if state.platform == 'overseas' else '中文'}。"""
+
+        if config:
+            return config.agent_prompt_template + f"\n\n{state.preset_prompt}" + language_hint
+        else:
+            return f"你正在模拟一个电商客户。\n\n{state.preset_prompt}" + language_hint
+    def _get_system_prompt(self, state: ConversationState) -> str:
         """获取系统提示词"""
-        config = get_persona_config(persona)
-        if config:
-            return config.system_prompt_template + """
+        config = get_persona_config(state.persona)
 
-            重要提醒：
-            - 这是一个真实的线上客服对话场景
-            - 保持自然真实的对话风格，不要表演化
-            - 根据你的真实需求提出问题，不要过度纠缠细节
-            - 如果信息足够，及时结束对话表示感谢"""
+        # 语言规则
+        language_rule = f"""
+
+【语言规则】
+- 当前平台: {state.platform or 'domestic_jd'}
+- 如果平台是 "overseas"，所有回复必须使用英文
+- 如果平台是 "domestic_jd" 或 "domestic_tm"，使用中文
+- 保持人格特征不变，仅切换语言"""
+
+        if config:
+            return config.system_prompt_template + language_rule + """
+
+重要提醒：
+- 这是一个真实的线上客服对话场景
+- 保持自然真实的对话风格，不要表演化
+- 根据你的真实需求提出问题，不要过度纠缠细节
+- 如果信息足够，及时结束对话表示感谢"""
         else:
-            return "你是Vertu手机的用户，正在进行真实的客服对话。"
+            return "你是Vertu手机的用户，正在进行真实的客服对话。" + language_rule
 
     def _get_fallback_question(self, state: ConversationState) -> str:
         """获取备用问题"""
@@ -492,8 +511,8 @@ class UserAgent:
         else:
             return "请介绍一下VERTU手机的主要特点"
 
-    async def _select_initial_question(self, persona: str, questions: List[Dict[str, Any]], state: ConversationState) -> str:
-        """根据人格选择并改写初始问题"""
+    async def _select_initial_question(self, persona: str, scenario: str, questions: List[Dict[str, Any]], state: ConversationState) -> str:
+        """根据人格和场景选择并生成初始问题"""
         if not questions:
             return self._get_fallback_question(ConversationState())
 
@@ -514,13 +533,66 @@ class UserAgent:
             state.platform = question_platform
             logger.info(f"=== [AGENT] 从问题池设置 platform: {question_platform} ===")
 
+        # 保存原始问题到状态
+        state.original_question = selected_question
+        logger.info(f"=== [AGENT] 从问题池选择原始问题: {selected_question[:50]}... ===")
+
         # 使用大模型改写问题
         try:
-            rewritten_question = await self._rewrite_question_with_llm(selected_question, config, state)
-            return rewritten_question
+            generated_question = await self._generate_scenario_question(selected_question, persona, scenario, config, state)
+            logger.info(f"=== [AGENT] 改写后的问题: {generated_question[:50]}... ===")
+            return generated_question
         except Exception as e:
-            logger.warning(f"问题改写失败，使用原问题: {e}")
-            return selected_question
+            logger.warning(f"场景问题生成失败，使用改写后问题: {e}")
+            return await self._rewrite_question_with_llm(selected_question, config, state)
+
+    async def _generate_scenario_question(self, reference_question: str, persona: str, scenario: str, config=None, state: ConversationState = None) -> str:
+        """根据场景生成符合的初始问题"""
+
+        # 场景提示词映射
+        scenario_prompts = {
+            "咨询": "你是咨询场景的客户，想了解VERTU手机的产品信息、功能配置。请基于参考问题，生成一个自然、口语化的咨询问题。",
+            "售后": "你是已购买VERTU手机的客户，手机出现了问题或使用上有疑问，需要售后支持。请基于参考问题，生成一个自然、口语化的售后咨询问题。",
+            "犹豫": "你对VERTU手机感兴趣但还在犹豫是否购买，关心价格、性价比、优惠活动。请基于参考问题，生成一个试探性的询问问题。",
+            "竞品对比": "你正在对比VERTU和其他品牌手机（如华为、三星、苹果），想了解VERTU的优势差异。请基于参考问题，生成一个对比咨询问题。",
+            "闲聊": "你与客服闲聊，语气轻松随意，可能顺便问问VERTU手机的情况。请基于参考问题，生成一个自然、随意的闲聊问题。"
+        }
+
+        scenario_desc = scenario_prompts.get(scenario, scenario_prompts["咨询"])
+        persona_desc = config.description if config else "普通客户"
+
+        # 根据平台确定语言
+        platform = state.platform if state else None
+        language_req = "English" if platform == "overseas" else "中文"
+
+        prompt = f"""{scenario_desc}
+
+你的人格特征：{persona_desc}
+
+参考问题（仅作为灵感参考，不要直接复制）：
+{reference_question}
+
+语言要求：请使用{language_req}生成问题
+
+要求：
+1. 必须符合"{scenario}"场景的特征
+2. 必须使用具体产品名称（如"VERTU Agent Q"），禁止使用"这款手机""它"等代词
+3. 语气要符合你的人格特征
+4. 问题要口语化、自然，像真实客户会问的
+5. 只输出问题本身，不要任何解释
+
+生成的问题："""
+
+        messages = [{"role": "user", "content": prompt}]
+        
+        start_time = time.time()
+        response = await self.chat_model.ainvoke(messages)
+        duration = time.time() - start_time
+        
+        if state:
+            self._record_llm_call(state, "scenario_question", duration, f"场景[{scenario}]生成问题")
+        
+        return response.content.strip().strip('"')
 
     async def _rewrite_question_with_llm(self, original_question: str, config=None, state: ConversationState = None) -> str:
         """使用LLM改写问题"""
@@ -554,6 +626,8 @@ class UserAgent:
             "finish_reason": state.finish_reason,
             "finish_reason_description": state.finish_reason_description,
             "persona": state.persona,
+            "platform": state.platform,
+            "scenario": state.scenario,
             "llm_call_stats": {
                 "total_calls": state.llm_call_stats["total_calls"],
                 "total_duration": round(state.llm_call_stats["total_duration"], 3),
@@ -575,8 +649,9 @@ class UserAgent:
                 }
                 for msg in state.conversation_history
             ],
-            "initial_question": state.initial_question,
-            "initial_query_results": state.initial_query_results
+            "original_question": state.original_question,  # 从问题池选择的原始问题
+            "initial_question": state.initial_question,  # LLM改写后实际使用的问题
+            "original_query_results": state.original_query_results  # 使用原始问题查询的结果
         }
 
         sessions_dir = Path("mock_sessions")
