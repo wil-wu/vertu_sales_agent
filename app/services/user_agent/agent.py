@@ -48,7 +48,8 @@ class ConversationState(BaseModel):
         "max_duration": 0.0
     })
     initial_question: str = Field(default="")
-    initial_query_results: Dict[str, Any] = Field(default_factory=dict)
+    original_question: str = Field(default="")  # 从问题池选择的原始问题
+    original_query_results: Dict[str, Any] = Field(default_factory=dict)  # 使用原始问题查询的结果
 
 class UserAgent:
     """仿真测试用户代理智能体"""
@@ -205,12 +206,13 @@ class UserAgent:
         faq_collection = platform_config["faq_collection"]
         price_index = platform_config["price_index"]
 
-        # 查询 FAQ 和价格 API
-        logger.info(f"=== [AGENT] 查询初始问题的 FAQ 和价格数据 - 问题: {initial_question[:50]}... ===")
-        faq_results = await self._fetch_faq(initial_question, faq_collection, top_k=5)
-        price_results = await self._fetch_price(initial_question, price_index, hits_per_page=5)
+        # 使用原始问题查询 FAQ 和价格 API（而不是改写后的问题）
+        query_for_search = state.original_question if state.original_question else initial_question
+        logger.info(f"=== [AGENT] 使用原始问题查询 FAQ 和价格数据 - 问题: {query_for_search[:50]}... ===")
+        faq_results = await self._fetch_faq(query_for_search, faq_collection, top_k=5)
+        price_results = await self._fetch_price(query_for_search, price_index, hits_per_page=5)
 
-        state.initial_query_results = {
+        state.original_query_results = {
             "faq": faq_results,
             "price": price_results,
             "query_time": datetime.now().isoformat()
@@ -502,9 +504,14 @@ class UserAgent:
         else:
             selected_question = random.choice(questions)['question']
 
+        # 保存原始问题到状态
+        state.original_question = selected_question
+        logger.info(f"=== [AGENT] 从问题池选择原始问题: {selected_question[:50]}... ===")
+
         # 使用大模型改写问题
         try:
             generated_question = await self._generate_scenario_question(selected_question, persona, scenario, config, state)
+            logger.info(f"=== [AGENT] 改写后的问题: {generated_question[:50]}... ===")
             return generated_question
         except Exception as e:
             logger.warning(f"场景问题生成失败，使用改写后问题: {e}")
@@ -607,8 +614,9 @@ class UserAgent:
                 }
                 for msg in state.conversation_history
             ],
-            "initial_question": state.initial_question,
-            "initial_query_results": state.initial_query_results
+            "original_question": state.original_question,  # 从问题池选择的原始问题
+            "initial_question": state.initial_question,  # LLM改写后实际使用的问题
+            "original_query_results": state.original_query_results  # 使用原始问题查询的结果
         }
 
         sessions_dir = Path("mock_sessions")
