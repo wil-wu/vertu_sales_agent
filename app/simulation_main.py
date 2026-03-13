@@ -23,12 +23,14 @@
 
 import random
 
+from app.simulation_util import SearchUtil
 
 class SimulationMain:
     def __init__(self, config: dict, excute_config: dict):
         self.config = config
         self.excute_config = excute_config
-
+        self.search_util = SearchUtil(config=self.config)
+        
     def run(self):
         # 根据输入参数 执行检索管道知识检索 检索结果形成知识子集
         knowledge_subset = self.search_knowledge()
@@ -42,9 +44,9 @@ class SimulationMain:
         pass
 
     def search_knowledge(self):
-        faq_results = self.search_faq()
-        price_results = self.search_price()
-        graph_results = self.search_graph()
+        faq_results = self.search_util.search_faq()
+        price_results = self.search_util.search_price()
+        graph_results = self.search_util.search_graph()
         return {"faq": faq_results, "price": price_results, "graph": graph_results}
 
     def generate_session_knowledge_pool(self, knowledge_subset):
