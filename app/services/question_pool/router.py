@@ -21,15 +21,13 @@ async def generate_question_pool(
     """
     生成问题池
 
-    基于产品名称和渠道参数生成问题池 CSV 文件。
-    该接口会根据产品名称从 FAQ、价格 API、图谱等多数据源获取信息，
-    生成指定数量的问答对，保存为 CSV 文件供后续仿真测试使用。
+    从 FAQ、价格 API、图谱等多数据源获取与屏幕相关的信息，
+    使用屏幕相关关键词（屏幕、分辨率、AMOLED、刷新率等）查询数据，
+    生成指定数量的屏幕相关问答对，保存为 CSV 文件供后续仿真测试使用。
 
     Args:
 
         request: 包含以下字段：
-
-            - product_name: 产品名称，例如 "VERTU AGENT Q"
 
             - platform: 目标平台，支持 domestic_jd(京东)、domestic_tm(天猫)、overseas(海外)
 
@@ -37,13 +35,12 @@ async def generate_question_pool(
 
 
     Returns:
-    
-        包含生成的文件路径、数量统计和数据源统计信息
+
+        包含生成的文件路径、数量统计和各渠道统计信息
     """
     try:
         service = QuestionPoolService()
         result = await service.generate_pool(
-            product_name=request.product_name,
             platform=request.platform,
             count=request.count
         )

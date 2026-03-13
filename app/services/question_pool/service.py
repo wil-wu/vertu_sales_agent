@@ -1,3 +1,4 @@
+import asyncio
 import csv
 import json
 import logging
@@ -12,8 +13,7 @@ from app.core.shared import httpx_async_client
 from .config import question_pool_settings, PLATFORM_CONFIG
 from .prompts import (
     GRAPH_QA_GENERATION_PROMPT,
-    PRICE_QUESTION_REWRITE_PROMPT,
-    SCREEN_CONTENT_FILTER_PROMPT
+    PRICE_QUESTION_REWRITE_PROMPT
 )
 from .shared import chat_model
 
@@ -30,52 +30,77 @@ class QuestionPoolService:
         self.output_dir = Path(question_pool_settings.output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
+    async def _fetch_faq(self, query: str, collection_name: str, top_k: int = 1000) -> List[dict]:
+        """获取 FAQ 数据 - 带重试机制"""
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = await httpx_async_client.post(
+                    self.faq_url,
+                    json={"query": query, "collection_names": [collection_name], "top_k": top_k},
+                    timeout=30.0
+                )
+                response.raise_for_status()
+                data = response.json()
+
+                items = []
+                for category in data.get("categories", []):
+                    for item in category.get("items", []):
+                        items.append({
+                            "question": item.get("question", ""),
+                            "answer": item.get("answer", "")
+                        })
+                return items
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) * 2  # 2s, 4s, 6s
+                    logger.warning(f"FAQ查询失败(尝试{attempt+1}/{max_retries}): {e}, {wait_time}秒后重试")
+                    await asyncio.sleep(wait_time)
+                else:
+                    logger.error(f"FAQ查询最终失败: {e}")
+                    return []  # 失败时返回空列表
+
     @retry(
         stop=stop_after_attempt(2),
         wait=wait_exponential(multiplier=0.5, max=5),
         retry=retry_if_exception_type(httpx.RequestError)
     )
-    async def _fetch_faq(self, query: str, collection_name: str, top_k: int) -> List[dict]:
-        """获取 FAQ 数据"""
-        response = await httpx_async_client.post(
-            self.faq_url,
-            json={"query": query, "collection_names": [collection_name], "top_k": top_k},
-            timeout=15.0
-        )
-        response.raise_for_status()
-        data = response.json()
+    async def _fetch_price(self, query: str, index_name: str, hits_per_page: int = 1000) -> List[dict]:
+        """获取价格数据 - 全量查询"""
+        all_items = []
+        page = 1
 
-        items = []
-        for category in data.get("categories", []):
-            for item in category.get("items", []):
-                items.append({
-                    "question": item.get("question", ""),
-                    "answer": item.get("answer", "")
+        while True:
+            response = await httpx_async_client.post(
+                self.price_url,
+                json={"query": query, "index_name": index_name, "hits_per_page": hits_per_page, "page": page},
+                timeout=30.0
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            hits = data.get("hits", [])
+            if not hits:
+                break
+
+            for hit in hits:
+                all_items.append({
+                    "name": hit.get("name", ""),
+                    "price": hit.get("price", 0)
                 })
-        return items
 
-    @retry(
-        stop=stop_after_attempt(2),
-        wait=wait_exponential(multiplier=0.5, max=5),
-        retry=retry_if_exception_type(httpx.RequestError)
-    )
-    async def _fetch_price(self, query: str, index_name: str, hits_per_page: int) -> List[dict]:
-        """获取价格数据"""
-        response = await httpx_async_client.post(
-            self.price_url,
-            json={"query": query, "index_name": index_name, "hits_per_page": hits_per_page, "page": 1},
-            timeout=15.0
-        )
-        response.raise_for_status()
-        data = response.json()
+            # 如果返回的数据少于每页数量，说明已经获取完所有数据
+            if len(hits) < hits_per_page:
+                break
 
-        items = []
-        for hit in data.get("hits", []):
-            items.append({
-                "name": hit.get("name", ""),
-                "price": hit.get("price", 0)
-            })
-        return items
+            page += 1
+
+            # 安全限制：最多获取 10 页
+            if page > 10:
+                break
+
+        logger.info(f"价格全量查询完成: {len(all_items)} 条")
+        return all_items
 
     @retry(
         stop=stop_after_attempt(2),
@@ -143,65 +168,6 @@ class QuestionPoolService:
             logger.warning(f"[价格问题改写] LLM 调用失败: {e}")
             return f"{product_name}多少钱？"  # 失败时返回默认问题
 
-    async def _filter_screen_related(self, data_type: str, data_content: str) -> bool:
-        """使用 LLM 筛选与屏幕相关的内容"""
-        prompt = SCREEN_CONTENT_FILTER_PROMPT.format(
-            data_type=data_type,
-            data_content=data_content
-        )
-
-        messages = [{"role": "user", "content": prompt}]
-        content = ""
-        try:
-            response = await chat_model.ainvoke(messages)
-            content = response.content.strip()
-
-            # 清理 markdown 代码块
-            if content.startswith("```json"):
-                content = content[7:]
-            if content.startswith("```"):
-                content = content[3:]
-            if content.endswith("```"):
-                content = content[:-3]
-            content = content.strip()
-
-            # 处理可能的单引号包裹
-            if content.startswith("'") and content.endswith("'"):
-                content = content[1:-1]
-
-            # 处理双重引号包裹（如 '"{...}"'）
-            if content.startswith('"') and content.endswith('"'):
-                try:
-                    # 尝试先解析外层引号
-                    content = json.loads(content)
-                except:
-                    pass
-
-            result = json.loads(content)
-            
-            # 处理可能的引号包裹的 key
-            is_related = result.get("is_screen_related", None)
-            if is_related is None:
-                is_related = result.get('"is_screen_related"', False)
-            if is_related is None:
-                is_related = result.get("'is_screen_related'", False)
-            
-            reason = result.get("reason", "")
-            if not reason:
-                reason = result.get('"reason"', "")
-            if not reason:
-                reason = result.get("'reason'", "")
-
-            if is_related:
-                logger.debug(f"[屏幕过滤] 保留 {data_type}: {reason}")
-            else:
-                logger.debug(f"[屏幕过滤] 过滤 {data_type}: {reason}")
-
-            return is_related
-        except Exception as e:
-            logger.warning(f"[屏幕过滤] LLM 筛选失败，默认保留: {e}, content: {repr(content)}")
-            return True  # 失败时默认保留
-
     def _generate_graph_summary(self, graph_data: dict) -> str:
         """从图谱数据生成摘要文本用于综合问答"""
         summary_parts = []
@@ -218,99 +184,126 @@ class QuestionPoolService:
 
     async def generate_pool(
         self,
-        product_name: str,
         platform: str,
         count: int
     ) -> dict:
-        """生成问题池 CSV 文件"""
-        logger.info(f"开始生成问题池: product={product_name}, platform={platform}, count={count}")
+        """生成问题池 CSV 文件 - 只包含屏幕相关内容"""
+        logger.info(f"开始生成问题池: platform={platform}, count={count}")
 
         config = PLATFORM_CONFIG.get(platform)
         if not config:
             raise ValueError(f"不支持的平台: {platform}")
 
-        # 简化比例：FAQ 0.5, 价格 0.3, 图谱 0.2
-        faq_target = int(count * 0.5)
-        price_target = int(count * 0.3)
-        graph_target = int(count * 0.2)
+        # 并发获取三个渠道的数据（直接查询屏幕相关内容）
+        logger.info("开始查询屏幕相关数据...")
 
-        # 并发获取三个渠道的数据
-        faq_data = await self._fetch_faq(
-            product_name,
-            config["faq_collection"],
-            max(faq_target * 4, 20)  # 获取更多数据用于过滤
-        )
-        price_data = await self._fetch_price(
-            product_name,
-            config["price_index"],
-            max(price_target * 4, 20)  # 获取更多数据用于过滤
-        )
+        # FAQ: 使用屏幕相关关键词查询
+        screen_keywords = ["屏幕", "分辨率", "刷新率", "英寸", "尺寸"]
+        faq_screen_related = []
+        for i, keyword in enumerate(screen_keywords):
+            data = await self._fetch_faq(keyword, config["faq_collection"], top_k=10)
+            faq_screen_related.extend(data)
+            # 添加延迟避免请求过快
+            if i < len(screen_keywords) - 1:
+                await asyncio.sleep(0.5)
+        # 去重
+        seen = set()
+        unique = []
+        for item in faq_screen_related:
+            key = item.get("question", "")
+            if key and key not in seen:
+                seen.add(key)
+                unique.append(item)
+        faq_screen_related = unique
+        logger.info(f"FAQ 屏幕相关查询完成: {len(faq_screen_related)} 条")
+
+        # Price: 使用屏幕相关关键词查询
+        price_screen_related = []
+        for keyword in screen_keywords:
+            data = await self._fetch_price(keyword, config["price_index"], hits_per_page=10)
+            price_screen_related.extend(data)
+        # 去重
+        seen = set()
+        unique = []
+        for item in price_screen_related:
+            key = item.get("name", "")
+            if key and key not in seen:
+                seen.add(key)
+                unique.append(item)
+        price_screen_related = unique
+        logger.info(f"价格屏幕相关查询完成: {len(price_screen_related)} 条")
+
+        # Graph: 使用标准产品列表查询图谱
         is_oversea = platform == "overseas"
-        graph_data = await self._fetch_graph(product_name, is_oversea)
 
-        # 使用 LLM 过滤屏幕相关内容
-        logger.info("开始筛选屏幕相关内容...")
-
-        # 过滤 FAQ 数据
-        faq_data_filtered = []
-        for item in faq_data:
-            content = f"问题: {item.get('question', '')}\n答案: {item.get('answer', '')}"
-            if await self._filter_screen_related("FAQ", content):
-                faq_data_filtered.append(item)
-            if len(faq_data_filtered) >= faq_target * 2:  # 获取足够数量后停止
-                break
-
-        # 过滤价格数据
-        price_data_filtered = []
-        for item in price_data:
-            content = f"商品名称: {item.get('name', '')}"
-            if await self._filter_screen_related("价格", content):
-                price_data_filtered.append(item)
-            if len(price_data_filtered) >= price_target * 2:
-                break
-
-        # 统计原始数据
-        graph_results = graph_data.get("data", {}).get("result", []) if isinstance(graph_data, dict) else []
-        source_stats = {
-            "faq_hits": len(faq_data),
-            "price_hits": len(price_data),
-            "graph_nodes": len(graph_results)
-        }
-
-        # 转换 FAQ 数据
-        faq_pool = [
-            {"question": item["question"], "answer": item["answer"], "platform": platform, "channel": "faq"}
-            for item in faq_data_filtered[:faq_target]
+        # 标准产品列表
+        product_names = [
+            "IVERTU",
+            "METAVERTU",
+            "METAVERTU 2",
+            "Signature 4G",
+            "Signature S",
+            "VERTU AGENT Q",
+            "VERTU AGENT IRONFLIP",
+            "VERTU QUANTUM"
         ]
 
-        # 转换价格数据（使用 LLM 改写问题）
-        price_pool = []
-        for item in price_data_filtered[:price_target]:
+        logger.info(f"使用标准产品列表查询图谱: {product_names}")
+
+        # 查询每个产品的图谱数据
+        graph_screen_related = []
+        for product_name in product_names:
+            try:
+                graph_data = await self._fetch_graph(product_name, is_oversea)
+                graph_results = graph_data.get("data", {}).get("result", []) if isinstance(graph_data, dict) else []
+
+                # 筛选包含屏幕属性的节点
+                for item in graph_results:
+                    if "p" in item:
+                        p = item["p"]
+                        if any(key in p for key in ["ScreenType", "ScreenSize", "Resolution"]):
+                            graph_screen_related.append(item)
+            except Exception as e:
+                logger.warning(f"查询 {product_name} 图谱失败: {e}")
+
+        logger.info(f"图谱屏幕相关筛选完成: {len(graph_screen_related)} 条")
+
+        # 第二步：用筛选后的数据生成问答对
+        logger.info("开始生成问答对...")
+
+        all_questions = []
+
+        # 从 FAQ 生成问答对
+        for item in faq_screen_related:
+            all_questions.append({
+                "question": item["question"],
+                "answer": item["answer"],
+                "platform": platform,
+                "channel": "faq"
+            })
+
+        # 从价格数据生成问答对（改写问题）
+        for item in price_screen_related:
             rewritten_question = await self._rewrite_price_question(item["name"], item["price"])
-            price_pool.append({
+            all_questions.append({
                 "question": rewritten_question,
                 "answer": f"{item['price']}元",
                 "platform": platform,
                 "channel": "price"
             })
 
-        # 生成图谱问答对并过滤屏幕相关内容
-        graph_qa_list = await self._generate_graph_qa(graph_data)
-        graph_pool = []
-        for qa in graph_qa_list:
-            content = f"问题: {qa.get('question', '')}\n答案: {qa.get('answer', '')}"
-            if await self._filter_screen_related("图谱", content):
-                graph_pool.append({
+        # 从图谱数据生成问答对
+        if graph_screen_related:
+            graph_qa_list = await self._generate_graph_qa({"data": {"result": graph_screen_related}})
+            for qa in graph_qa_list:
+                all_questions.append({
                     "question": qa["question"],
                     "answer": qa["answer"],
                     "platform": platform,
                     "channel": "graph"
                 })
-            if len(graph_pool) >= graph_target:
-                break
 
-        # 合并所有数据
-        all_questions = faq_pool + price_pool + graph_pool
+        logger.info(f"问答对生成完成: {len(all_questions)} 条")
 
         # 去重：相同 question 只保留一个
         seen = set()
@@ -321,10 +314,17 @@ class QuestionPoolService:
                 seen.add(q)
                 unique.append(qa)
         all_questions = unique
+        logger.info(f"去重后: {len(all_questions)} 条")
+
+        # 如果总数超过 count，随机选择
+        if len(all_questions) > count:
+            import random
+            all_questions = random.sample(all_questions, count)
+            logger.info(f"随机抽样后: {len(all_questions)} 条")
 
         # 生成 CSV 文件
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"question_pool_{product_name.replace(' ', '_')}_{platform}_{timestamp}_{count}.csv"
+        filename = f"question_pool_{platform}_{timestamp}_{count}.csv"
         file_path = self.output_dir / filename
 
         with open(file_path, "w", newline="", encoding="utf-8") as f:
@@ -332,15 +332,17 @@ class QuestionPoolService:
             writer.writeheader()
             writer.writerows(all_questions)
 
-        logger.info(f"问题池已生成: {file_path}")
+        logger.info(f"问题池已生成: {file_path}, 共 {len(all_questions)} 条")
+
+        # 统计各渠道数量
+        breakdown = {
+            "faq": sum(1 for q in all_questions if q["channel"] == "faq"),
+            "price": sum(1 for q in all_questions if q["channel"] == "price"),
+            "graph": sum(1 for q in all_questions if q["channel"] == "graph")
+        }
 
         return {
             "file_path": str(file_path),
             "total_generated": len(all_questions),
-            "breakdown": {
-                "faq": len(faq_pool),
-                "price": len(price_pool),
-                "graph": len(graph_pool)
-            },
-            "sources": source_stats
+            "breakdown": breakdown
         }

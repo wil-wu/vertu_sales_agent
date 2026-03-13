@@ -771,42 +771,56 @@ class RefereeAgent:
         first_turn_qa = {}
         
         for turn in turns:
-            # 为首轮对话查找预期答案（使用 calls 中的原问题）
+            # 为首轮对话查找预期答案（优先从 conversation 中提取，其次从 CSV 查找）
             expected_answer = None
             if turn["turn_number"] == 1:
-                # 优先使用 calls 中的原问题，如果没有则使用 conversation 中的问题
-                original_question = original_questions.get(1, turn["question"])
-                if hasattr(self, 'qa_mapping'):
-                    # 首先尝试精确匹配
-                    expected_answer = self.qa_mapping.get(original_question.strip())
-                    
-                    # 如果精确匹配失败，尝试前缀匹配（处理截断的情况）
-                    if not expected_answer:
-                        for qa_question, qa_answer in self.qa_mapping.items():
-                            # 检查 CSV 中的问题是否以提取的问题开头（去除可能的...）
-                            clean_original = original_question.strip().rstrip('.').rstrip('...')
-                            if qa_question.startswith(clean_original):
-                                expected_answer = qa_answer
-                                print(f"[RefereeAgent] 使用前缀匹配找到预期答案")
-                                break
-                            # 或者反过来，检查提取的问题是否以 CSV 中的问题开头
-                            if clean_original.startswith(qa_question[:50]):
-                                expected_answer = qa_answer
-                                print(f"[RefereeAgent] 使用反向前缀匹配找到预期答案")
-                                break
+                # 首先从 conversation 中提取预期答案（由 user_agent 生成）
+                for msg in conversation:
+                    if msg.get("role") == "user_agent":
+                        expected_answer = msg.get("expected_answer")
+                        knowledge_used = msg.get("knowledge_used", [])
+                        if expected_answer:
+                            print(f"[RefereeAgent] 从 conversation 提取到预期答案: {expected_answer[:50]}...")
+                        break
+                
+                # 如果从 conversation 中没有找到，尝试从 CSV 的 qa_mapping 查找
+                if not expected_answer:
+                    original_question = original_questions.get(1, turn["question"])
+                    if hasattr(self, 'qa_mapping'):
+                        # 首先尝试精确匹配
+                        expected_answer = self.qa_mapping.get(original_question.strip())
+                        
+                        # 如果精确匹配失败，尝试前缀匹配（处理截断的情况）
+                        if not expected_answer:
+                            for qa_question, qa_answer in self.qa_mapping.items():
+                                # 检查 CSV 中的问题是否以提取的问题开头（去除可能的...）
+                                clean_original = original_question.strip().rstrip('.').rstrip('...')
+                                if qa_question.startswith(clean_original):
+                                    expected_answer = qa_answer
+                                    print(f"[RefereeAgent] 使用前缀匹配从 CSV 找到预期答案")
+                                    break
+                                # 或者反过来，检查提取的问题是否以 CSV 中的问题开头
+                                if clean_original.startswith(qa_question[:50]):
+                                    expected_answer = qa_answer
+                                    print(f"[RefereeAgent] 使用反向前缀匹配从 CSV 找到预期答案")
+                                    break
+                        
+                        if expected_answer:
+                            print(f"[RefereeAgent] 从 CSV 找到预期答案，原问题: {original_question[:50]}...")
                 
                 # 无论是否找到预期答案，都记录问答对比
                 first_turn_qa = {
-                    "question": original_question,
+                    "question": turn["question"],
                     "conversation_question": turn["question"],
                     "expected_answer": expected_answer if expected_answer else "",
-                    "actual_answer": turn["answer"]
+                    "actual_answer": turn["answer"],
+                    "knowledge_used": knowledge_used if 'knowledge_used' in locals() else []
                 }
                 
                 if expected_answer:
-                    print(f"[RefereeAgent] 首轮对话找到预期答案，原问题: {original_question[:50]}...")
+                    print(f"[RefereeAgent] 首轮对话预期答案已获取: {expected_answer[:50]}...")
                 else:
-                    print(f"[RefereeAgent] 首轮对话未找到预期答案，原问题: {original_question[:50]}...")
+                    print(f"[RefereeAgent] 首轮对话未找到预期答案，问题: {turn['question'][:50]}...")
             
             assessment = await self.assess_turn(
                 turn_number=turn["turn_number"],
