@@ -2,6 +2,7 @@ import csv
 import json
 import logging
 from datetime import datetime
+from enum import Enum
 from pathlib import Path
 from typing import Any, List
 
@@ -20,6 +21,18 @@ from .shared import chat_model
 logger = logging.getLogger(__name__)
 
 
+class ProductType(Enum):
+    """产品类型"""
+    IVERTU = "IVERTU"
+    METAVERTU = "METAVERTU"
+    METAVERTU_2 = "METAVERTU 2"
+    SIGNATURE_4G = "Signature 4G"
+    SIGNATURE_S = "Signature S"
+    VERTU_AGENT_Q = "VERTU AGENT Q"
+    VERTU_AGENT_IRONFLIP = "VERTU AGENT IRONFLIP"
+    VERTU_QUANTUM = "VERTU QUANTUM"
+
+
 class QuestionPoolService:
     """问题池生成服务"""
 
@@ -35,12 +48,12 @@ class QuestionPoolService:
         wait=wait_exponential(multiplier=0.5, max=5),
         retry=retry_if_exception_type(httpx.RequestError)
     )
-    async def _fetch_faq(self, query: str, collection_name: str, top_k: int) -> List[dict]:
-        """获取 FAQ 数据"""
+    async def _fetch_faq(self, query: str, collection_name: str, top_k: int = 1000) -> List[dict]:
+        """获取 FAQ 数据 - 全量查询"""
         response = await httpx_async_client.post(
             self.faq_url,
             json={"query": query, "collection_names": [collection_name], "top_k": top_k},
-            timeout=15.0
+            timeout=30.0
         )
         response.raise_for_status()
         data = response.json()
@@ -52,6 +65,7 @@ class QuestionPoolService:
                     "question": item.get("question", ""),
                     "answer": item.get("answer", "")
                 })
+        logger.info(f"FAQ 全量查询完成: {len(items)} 条")
         return items
 
     @retry(
@@ -59,23 +73,42 @@ class QuestionPoolService:
         wait=wait_exponential(multiplier=0.5, max=5),
         retry=retry_if_exception_type(httpx.RequestError)
     )
-    async def _fetch_price(self, query: str, index_name: str, hits_per_page: int) -> List[dict]:
-        """获取价格数据"""
-        response = await httpx_async_client.post(
-            self.price_url,
-            json={"query": query, "index_name": index_name, "hits_per_page": hits_per_page, "page": 1},
-            timeout=15.0
-        )
-        response.raise_for_status()
-        data = response.json()
+    async def _fetch_price(self, query: str, index_name: str, hits_per_page: int = 1000) -> List[dict]:
+        """获取价格数据 - 全量查询"""
+        all_items = []
+        page = 1
 
-        items = []
-        for hit in data.get("hits", []):
-            items.append({
-                "name": hit.get("name", ""),
-                "price": hit.get("price", 0)
-            })
-        return items
+        while True:
+            response = await httpx_async_client.post(
+                self.price_url,
+                json={"query": query, "index_name": index_name, "hits_per_page": hits_per_page, "page": page},
+                timeout=30.0
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            hits = data.get("hits", [])
+            if not hits:
+                break
+
+            for hit in hits:
+                all_items.append({
+                    "name": hit.get("name", ""),
+                    "price": hit.get("price", 0)
+                })
+
+            # 如果返回的数据少于每页数量，说明已经获取完所有数据
+            if len(hits) < hits_per_page:
+                break
+
+            page += 1
+
+            # 安全限制：最多获取 10 页
+            if page > 10:
+                break
+
+        logger.info(f"价格全量查询完成: {len(all_items)} 条")
+        return all_items
 
     @retry(
         stop=stop_after_attempt(2),
@@ -216,101 +249,121 @@ class QuestionPoolService:
 
         return "; ".join(summary_parts) if summary_parts else "暂无图谱信息"
 
-    async def generate_pool(
+    async def _generate_pool_for_product(
         self,
         product_name: str,
-        platform: str,
-        count: int
-    ) -> dict:
-        """生成问题池 CSV 文件"""
-        logger.info(f"开始生成问题池: product={product_name}, platform={platform}, count={count}")
+        platform: str
+    ) -> List[dict]:
+        """为单个产品生成问答对 - 只包含屏幕相关内容"""
+        logger.info(f"开始处理产品: {product_name}")
 
         config = PLATFORM_CONFIG.get(platform)
         if not config:
             raise ValueError(f"不支持的平台: {platform}")
 
-        # 简化比例：FAQ 0.5, 价格 0.3, 图谱 0.2
-        faq_target = int(count * 0.5)
-        price_target = int(count * 0.3)
-        graph_target = int(count * 0.2)
-
-        # 并发获取三个渠道的数据
-        faq_data = await self._fetch_faq(
-            product_name,
-            config["faq_collection"],
-            max(faq_target * 4, 20)  # 获取更多数据用于过滤
-        )
-        price_data = await self._fetch_price(
-            product_name,
-            config["price_index"],
-            max(price_target * 4, 20)  # 获取更多数据用于过滤
-        )
+        # 并发获取三个渠道的数据（全量查询）
+        faq_data = await self._fetch_faq(product_name, config["faq_collection"])
+        price_data = await self._fetch_price(product_name, config["price_index"])
         is_oversea = platform == "overseas"
         graph_data = await self._fetch_graph(product_name, is_oversea)
 
-        # 使用 LLM 过滤屏幕相关内容
-        logger.info("开始筛选屏幕相关内容...")
+        # 统计原始数据
+        graph_results = graph_data.get("data", {}).get("result", []) if isinstance(graph_data, dict) else []
 
-        # 过滤 FAQ 数据
-        faq_data_filtered = []
+        # 第一步：筛选屏幕相关内容
+        logger.info(f"[{product_name}] 开始筛选屏幕相关内容...")
+
+        # 筛选 FAQ 中与屏幕相关的内容
+        faq_screen_related = []
         for item in faq_data:
             content = f"问题: {item.get('question', '')}\n答案: {item.get('answer', '')}"
             if await self._filter_screen_related("FAQ", content):
-                faq_data_filtered.append(item)
-            if len(faq_data_filtered) >= faq_target * 2:  # 获取足够数量后停止
-                break
+                faq_screen_related.append(item)
+        logger.info(f"[{product_name}] FAQ 筛选完成: {len(faq_screen_related)}/{len(faq_data)} 条与屏幕相关")
 
-        # 过滤价格数据
-        price_data_filtered = []
+        # 筛选价格中与屏幕相关的内容
+        price_screen_related = []
         for item in price_data:
             content = f"商品名称: {item.get('name', '')}"
             if await self._filter_screen_related("价格", content):
-                price_data_filtered.append(item)
-            if len(price_data_filtered) >= price_target * 2:
-                break
+                price_screen_related.append(item)
+        logger.info(f"[{product_name}] 价格筛选完成: {len(price_screen_related)}/{len(price_data)} 条与屏幕相关")
 
-        # 统计原始数据
-        graph_results = graph_data.get("data", {}).get("result", []) if isinstance(graph_data, dict) else []
-        source_stats = {
-            "faq_hits": len(faq_data),
-            "price_hits": len(price_data),
-            "graph_nodes": len(graph_results)
-        }
+        # 筛选图谱中与屏幕相关的内容
+        graph_screen_related = []
+        for item in graph_results:
+            # 构建图谱内容描述
+            content_parts = []
+            if "p" in item:
+                p = item["p"]
+                if "ScreenType" in p:
+                    content_parts.append(f"屏幕类型: {p['ScreenType']}")
+                if "ScreenSize" in p:
+                    content_parts.append(f"屏幕尺寸: {p['ScreenSize']}")
+                if "Resolution" in p:
+                    content_parts.append(f"分辨率: {p['Resolution']}")
+            content = "; ".join(content_parts) if content_parts else "无屏幕信息"
+            if await self._filter_screen_related("图谱", content):
+                graph_screen_related.append(item)
+        logger.info(f"[{product_name}] 图谱筛选完成: {len(graph_screen_related)}/{len(graph_results)} 条与屏幕相关")
 
-        # 转换 FAQ 数据
-        faq_pool = [
-            {"question": item["question"], "answer": item["answer"], "platform": platform, "channel": "faq"}
-            for item in faq_data_filtered[:faq_target]
-        ]
+        # 第二步：用筛选后的数据生成问答对
+        logger.info(f"[{product_name}] 开始生成问答对...")
 
-        # 转换价格数据（使用 LLM 改写问题）
-        price_pool = []
-        for item in price_data_filtered[:price_target]:
+        all_questions = []
+
+        # 从 FAQ 生成问答对
+        for item in faq_screen_related:
+            all_questions.append({
+                "question": item["question"],
+                "answer": item["answer"],
+                "platform": platform,
+                "channel": "faq",
+                "product": product_name
+            })
+
+        # 从价格数据生成问答对（改写问题）
+        for item in price_screen_related:
             rewritten_question = await self._rewrite_price_question(item["name"], item["price"])
-            price_pool.append({
+            all_questions.append({
                 "question": rewritten_question,
                 "answer": f"{item['price']}元",
                 "platform": platform,
-                "channel": "price"
+                "channel": "price",
+                "product": product_name
             })
 
-        # 生成图谱问答对并过滤屏幕相关内容
-        graph_qa_list = await self._generate_graph_qa(graph_data)
-        graph_pool = []
-        for qa in graph_qa_list:
-            content = f"问题: {qa.get('question', '')}\n答案: {qa.get('answer', '')}"
-            if await self._filter_screen_related("图谱", content):
-                graph_pool.append({
+        # 从图谱数据生成问答对
+        if graph_screen_related:
+            graph_qa_list = await self._generate_graph_qa({"data": {"result": graph_screen_related}})
+            for qa in graph_qa_list:
+                all_questions.append({
                     "question": qa["question"],
                     "answer": qa["answer"],
                     "platform": platform,
-                    "channel": "graph"
+                    "channel": "graph",
+                    "product": product_name
                 })
-            if len(graph_pool) >= graph_target:
-                break
 
-        # 合并所有数据
-        all_questions = faq_pool + price_pool + graph_pool
+        logger.info(f"[{product_name}] 生成完成: {len(all_questions)} 条问答对")
+        return all_questions
+
+    async def generate_pool(
+        self,
+        platform: str,
+        count: int
+    ) -> dict:
+        """生成问题池 CSV 文件 - 遍历所有产品，只包含屏幕相关内容"""
+        logger.info(f"开始生成问题池: platform={platform}, count={count}")
+        logger.info(f"将遍历以下产品: {[p.value for p in ProductType]}")
+
+        # 遍历所有产品类型
+        all_questions = []
+        for product_type in ProductType:
+            product_questions = await self._generate_pool_for_product(product_type.value, platform)
+            all_questions.extend(product_questions)
+
+        logger.info(f"所有产品处理完成，共 {len(all_questions)} 条问答对")
 
         # 去重：相同 question 只保留一个
         seen = set()
@@ -321,26 +374,42 @@ class QuestionPoolService:
                 seen.add(q)
                 unique.append(qa)
         all_questions = unique
+        logger.info(f"去重后: {len(all_questions)} 条")
+
+        # 如果总数超过 count，随机选择
+        if len(all_questions) > count:
+            import random
+            all_questions = random.sample(all_questions, count)
+            logger.info(f"随机抽样后: {len(all_questions)} 条")
 
         # 生成 CSV 文件
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"question_pool_{product_name.replace(' ', '_')}_{platform}_{timestamp}_{count}.csv"
+        filename = f"question_pool_all_products_{platform}_{timestamp}_{count}.csv"
         file_path = self.output_dir / filename
 
         with open(file_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["question", "answer", "platform", "channel"])
+            writer = csv.DictWriter(f, fieldnames=["question", "answer", "platform", "channel", "product"])
             writer.writeheader()
             writer.writerows(all_questions)
 
-        logger.info(f"问题池已生成: {file_path}")
+        logger.info(f"问题池已生成: {file_path}, 共 {len(all_questions)} 条")
+
+        # 统计各渠道数量
+        breakdown = {
+            "faq": sum(1 for q in all_questions if q["channel"] == "faq"),
+            "price": sum(1 for q in all_questions if q["channel"] == "price"),
+            "graph": sum(1 for q in all_questions if q["channel"] == "graph")
+        }
+
+        # 统计各产品数量
+        product_breakdown = {}
+        for q in all_questions:
+            product = q.get("product", "unknown")
+            product_breakdown[product] = product_breakdown.get(product, 0) + 1
 
         return {
             "file_path": str(file_path),
             "total_generated": len(all_questions),
-            "breakdown": {
-                "faq": len(faq_pool),
-                "price": len(price_pool),
-                "graph": len(graph_pool)
-            },
-            "sources": source_stats
+            "breakdown": breakdown,
+            "product_breakdown": product_breakdown
         }
