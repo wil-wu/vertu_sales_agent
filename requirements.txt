@@ -11,3 +11,5 @@ pytest>=9.0.2
 ruff>=0.14.13
 aiofiles>=25.1.0
 pandas>=3.0.1
+fasttext
+apscheduler
