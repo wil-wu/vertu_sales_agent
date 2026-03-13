@@ -21,10 +21,9 @@ async def generate_question_pool(
     """
     生成问题池
 
-    自动遍历所有产品类型（IVERTU、METAVERTU、METAVERTU 2、Signature 4G、
-    Signature S、VERTU AGENT Q、VERTU AGENT IRONFLIP、VERTU QUANTUM），
     从 FAQ、价格 API、图谱等多数据源获取与屏幕相关的信息，
-    生成指定数量的问答对，保存为 CSV 文件供后续仿真测试使用。
+    使用屏幕相关关键词（屏幕、分辨率、AMOLED、刷新率等）查询数据，
+    生成指定数量的屏幕相关问答对，保存为 CSV 文件供后续仿真测试使用。
 
     Args:
 
@@ -37,7 +36,7 @@ async def generate_question_pool(
 
     Returns:
 
-        包含生成的文件路径、数量统计和各产品统计信息
+        包含生成的文件路径、数量统计和各渠道统计信息
     """
     try:
         service = QuestionPoolService()

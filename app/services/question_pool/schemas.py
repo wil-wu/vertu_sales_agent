@@ -23,7 +23,6 @@ class QuestionPoolGenerateResponse(BaseModel):
     file_path: str = Field(..., description="生成的 CSV 文件路径")
     total_generated: int = Field(..., description="实际生成的总数量")
     breakdown: dict = Field(..., description="各渠道生成数量统计")
-    product_breakdown: dict = Field(..., description="各产品生成数量统计")
 
 
 class QuestionAnswerPair(BaseModel):
