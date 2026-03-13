@@ -16,9 +16,9 @@ class GlobalSettings(BaseSettings):
     )
 
     # 应用信息
-    app_name: str = Field(default="algorithm-service", description="应用名称")
+    app_name: str = Field(default="Vertu Sales Agent", description="应用名称")
     app_version: str = Field(default="1.0.0", description="应用版本")
-    app_description: str = Field(default="算法服务API", description="应用描述")
+    app_description: str = Field(default="Vertu Sales Agent API", description="应用描述")
 
     debug: bool = Field(default=True, description="调试模式")
     log_level: str = Field(default="INFO", description="日志级别")
@@ -28,7 +28,7 @@ class GlobalSettings(BaseSettings):
     # 服务器配置
     host: str = Field(default="0.0.0.0", description="API 主机")
     port: int = Field(default=8000, description="API 端口")
-    workers: int = Field(default=2, description="Worker 数量")
+    workers: int = Field(default=1, description="Worker 数量")
 
     # 安全配置
     secret_key: str = Field(default=secrets.token_hex(32), description="密钥")

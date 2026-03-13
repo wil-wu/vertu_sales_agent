@@ -28,12 +28,12 @@ class ReactAgentService:
 
     @staticmethod
     @_retry
-    async def faq_query(query: str) -> Any:
+    async def faq_query(collection_names: list, query: str, top_k: int = react_agent_settings.faq_top_n) -> Any:
         """查询 FAQ 知识库。"""
         response = await httpx_async_client.post(
-            react_agent_settings.faq_url, json={"query": query}
+            react_agent_settings.faq_url, json={"collection_names": collection_names, "query": query, "top_k": top_k}
         )
-        items = response.json()["categories"][0]["items"][: react_agent_settings.faq_top_n]
+        items = response.json()["categories"][0]["items"]
         return [{"question": item["question"], "answer": item["answer"]} for item in items]
 
     @staticmethod
@@ -42,15 +42,15 @@ class ReactAgentService:
         """查询图谱素材。"""    
         response = await httpx_async_client.post(
             react_agent_settings.graph_url,
-            json={"query": query},
+            params={"query": query},
             timeout=20,
         )
         return response.json()["data"]["full_context"]
 
     @staticmethod
     @_retry
-    async def send_wechat_notification(content: str) -> Any:
-        """发送微信通知。"""
+    async def send_human_notification(content: str) -> Any:
+        """发送人工服务通知。"""
         url = react_agent_settings.wechat_push_url
         headers = {
             "Authorization": f"Bearer {react_agent_settings.wechat_push_token}",
@@ -62,7 +62,7 @@ class ReactAgentService:
         await httpx_async_client.post(
             url, json=payload, headers=headers, params=params
         )
-        return "微信通知发送成功。"
+        return "人工服务通知发送成功。"
 
     @staticmethod
     @_retry
@@ -71,5 +71,6 @@ class ReactAgentService:
         response = await httpx_async_client.post(
             react_agent_settings.product_info_url,
             json={"query": query, "index_name": index_name},
+            timeout=10,
         )
         return response.json()

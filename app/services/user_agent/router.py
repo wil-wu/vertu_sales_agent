@@ -22,7 +22,51 @@ async def start_simulation(
     request: UserSimulationRequest,
     user_agent: UserAgent = Depends(get_user_agent)
 ) -> UserSimulationResponse:
-    """启动仿真测试 - Mock用户与目标机器人的多轮对话"""
+    """
+    启动仿真测试
+
+    启动 Mock 用户与目标机器人的多轮对话仿真测试。
+    该接口会创建一个具备特定人格特征的虚拟用户，与目标客服机器人进行多轮对话，
+    模拟真实客户咨询场景，用于评估客服机器人的应答能力。
+
+    Args:
+
+        request: 仿真测试请求参数，包含：
+
+            - persona: 用户人格类型
+
+                - business_elite: 商务精英/务实大佬
+
+                - tech_geek: 数码极客/价值博弈型
+
+                - price_comparer: 极致比价/犹豫摇摆型
+
+                - impulse_buyer: 冲动消费/圈层跟风型
+
+                - efficient_buyer: 目标明确/高效采购型
+
+                - brand_loyalist: 品牌死忠/收藏家
+
+                - disappointed_customer: 失望受挫型老客
+
+            - scenario: 测试场景，可选: "咨询"、"售后"、"犹豫"、"竞品对比"、"闲聊"
+
+            - max_turns: 最大对话轮数，默认 20 轮
+
+            - platform: 用户来源平台
+
+                - domestic_jd: 京东平台
+
+                - domestic_tm: 天猫平台
+
+                - overseas: 海外平台（使用英文对话）
+
+            - thread_id: 会话 ID，不传则自动生成
+
+    Returns:
+    
+        包含会话ID、结束原因、对话记录、LLM调用统计和元数据
+    """
     try:
         # 启动仿真
         result = await user_agent.start_simulation(

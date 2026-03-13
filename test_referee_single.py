@@ -45,7 +45,7 @@ class DirectReactAgentAdapter:
     def __init__(self, agent: ReActAgent):
         self.agent = agent
         
-    async def chat(self, message: str, thread_id: str) -> dict:
+    async def chat(self, message: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> dict:
         """模拟 API 响应格式"""
         try:
             response = await self.agent.arun(message, thread_id)
@@ -73,12 +73,12 @@ class DirectUserAgent(UserAgent):
         super().__init__(chat_model, system_prompt, "")
         self.direct_react_agent = react_agent
         
-    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation") -> any:
+    async def _call_target_bot(self, client, question: str, thread_id: str, user_id: str = "simulation_user", platform: str = "simulation", region: str = "国内") -> any:
         """重写方法：直接调用 ReActAgent 而不是 HTTP API"""
         print(f"  🤖 [ReAct Agent] 正在处理...")
         
         try:
-            response = await self.direct_react_agent.chat(question, thread_id)
+            response = await self.direct_react_agent.chat(question, thread_id, user_id, platform, region)
             
             # 打印简要回复预览
             answer_preview = response.get("message", "")[:100]
@@ -315,7 +315,8 @@ def main():
         epilog="""
 示例:
   python test_referee_single.py
-  python test_referee_single.py --persona confrontational --max-turns 5
+  python test_referee_single.py --persona disappointed_customer --max-turns 5
+  python test_referee_single.py --persona tech_geek --max-turns 8
   python test_referee_single.py --file mock_sessions/xxx.json
         """
     )
@@ -323,9 +324,9 @@ def main():
     parser.add_argument(
         '--persona', 
         type=str, 
-        default='professional',
-        choices=['professional', 'novice', 'anxious', 'confrontational', 'bilingual'],
-        help='用户人格类型 (默认: professional)'
+        default='business_elite',
+        choices=['business_elite', 'tech_geek', 'price_comparer', 'impulse_buyer', 'efficient_buyer', 'brand_loyalist', 'disappointed_customer'],
+        help='用户人格类型 (默认: business_elite)'
     )
     parser.add_argument(
         '--scenario', 
