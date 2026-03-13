@@ -50,6 +50,7 @@ class ConversationState(BaseModel):
     initial_question: str = Field(default="")
     original_question: str = Field(default="")  # 从问题池选择的原始问题
     original_query_results: Dict[str, Any] = Field(default_factory=dict)  # 使用原始问题查询的结果
+    knowledge_pool: Dict[str, Any] = Field(default_factory=dict)  # 知识池: {"faq": [...], "price": [...], "graph": [...]}
 
 class UserAgent:
     """仿真测试用户代理智能体"""
@@ -181,8 +182,23 @@ class UserAgent:
         else:
             return "一般"
 
-    async def start_simulation(self, persona: str, scenario: str, max_turns: int = 20, platform: Optional[str] = None) -> Dict[str, Any]:
-        """启动仿真测试"""
+    async def start_simulation(
+        self,
+        persona: str,
+        scenario: str,
+        max_turns: int = 20,
+        platform: Optional[str] = None,
+        knowledge_pool: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """启动仿真测试
+
+        Args:
+            persona: 用户人格类型
+            scenario: 测试场景描述
+            max_turns: 最大对话轮数
+            platform: 用户来源平台
+            knowledge_pool: 知识池数据 {"faq": [...], "price": [...], "graph": [...]}
+        """
         logger.info(f"=== [AGENT] 启动仿真测试 - 人格: {persona}, 场景: {scenario} ===")
 
         # 初始化状态
@@ -192,36 +208,67 @@ class UserAgent:
             persona=persona,
             scenario=scenario,
             platform=platform,
-            preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}"
+            preset_prompt=f"模拟{self._get_persona_description(persona)}用户{scenario}",
+            knowledge_pool=knowledge_pool or {}
         )
 
-        # 加载问题池
-        state.question_pool = await self.load_question_pool()
+        # 如果传入了知识池，从知识池生成初始问题；否则从CSV问题池加载
+        initial_expected_answer = None
+        initial_knowledge_used = None
+        if knowledge_pool and (knowledge_pool.get("faq") or knowledge_pool.get("price") or knowledge_pool.get("graph")):
+            logger.info(f"=== [AGENT] 从知识池生成初始问题 ===")
+            qa_result = await self._generate_initial_question_from_knowledge_pool(state)
+            initial_question = qa_result["question"]
+            initial_expected_answer = qa_result["expected_answer"]
+            initial_knowledge_used = qa_result["knowledge_used"]
+            state.initial_question = initial_question
+            # 使用知识池作为查询结果
+            state.original_query_results = {
+                "faq": knowledge_pool.get("faq", []),
+                "price": knowledge_pool.get("price", []),
+                "graph": knowledge_pool.get("graph", []),
+                "query_time": datetime.now().isoformat(),
+                "source": "knowledge_pool",
+                "expected_answer": initial_expected_answer,
+                "knowledge_used": initial_knowledge_used
+            }
+            faq_count = len(knowledge_pool.get("faq", []))
+            price_count = len(knowledge_pool.get("price", []))
+            graph_count = len(knowledge_pool.get("graph", []))
+            logger.info(f"=== [AGENT] 使用知识池 - FAQ: {faq_count}条, 价格: {price_count}条, 图谱: {graph_count}条 ===")
+        else:
+            # 加载CSV问题池
+            state.question_pool = await self.load_question_pool()
+            # 选择并改写初始问题（根据场景生成）
+            initial_question = await self._select_initial_question(persona, scenario, state.question_pool, state)
+            state.initial_question = initial_question
 
-        # 选择并改写初始问题（根据场景生成）
-        initial_question = await self._select_initial_question(persona, scenario, state.question_pool, state)
-        state.initial_question = initial_question
+            # 根据平台确定查询参数
+            platform_config = PLATFORM_API_CONFIG.get(platform, PLATFORM_API_CONFIG["domestic_jd"])
+            faq_collection = platform_config["faq_collection"]
+            price_index = platform_config["price_index"]
 
-        # 根据平台确定查询参数
-        platform_config = PLATFORM_API_CONFIG.get(platform, PLATFORM_API_CONFIG["domestic_jd"])
-        faq_collection = platform_config["faq_collection"]
-        price_index = platform_config["price_index"]
+            # 使用原始问题查询 FAQ 和价格 API
+            query_for_search = state.original_question if state.original_question else initial_question
+            logger.info(f"=== [AGENT] 使用原始问题查询 FAQ 和价格数据 - 问题: {query_for_search[:50]}... ===")
+            faq_results = await self._fetch_faq(query_for_search, faq_collection, top_k=5)
+            price_results = await self._fetch_price(query_for_search, price_index, hits_per_page=5)
 
-        # 使用原始问题查询 FAQ 和价格 API（而不是改写后的问题）
-        query_for_search = state.original_question if state.original_question else initial_question
-        logger.info(f"=== [AGENT] 使用原始问题查询 FAQ 和价格数据 - 问题: {query_for_search[:50]}... ===")
-        faq_results = await self._fetch_faq(query_for_search, faq_collection, top_k=5)
-        price_results = await self._fetch_price(query_for_search, price_index, hits_per_page=5)
-
-        state.original_query_results = {
-            "faq": faq_results,
-            "price": price_results,
-            "query_time": datetime.now().isoformat()
-        }
-        logger.info(f"=== [AGENT] FAQ 查询到 {len(faq_results)} 条，价格查询到 {len(price_results)} 条 ===")
+            state.original_query_results = {
+                "faq": faq_results,
+                "price": price_results,
+                "query_time": datetime.now().isoformat(),
+                "source": "api_query"
+            }
+            logger.info(f"=== [AGENT] FAQ 查询到 {len(faq_results)} 条，价格查询到 {len(price_results)} 条 ===")
 
         # 开始多轮对话
-        await self._run_conversation_loop(state, initial_question)
+        await self._run_conversation_loop(
+            state,
+            initial_question,
+            initial_expected_answer=initial_expected_answer,
+            initial_knowledge_used=initial_knowledge_used
+        )
 
         # 保存会话数据
         return await self._save_session_data(state)
@@ -231,11 +278,26 @@ class UserAgent:
         config = get_persona_config(persona)
         return config.description if config else "中性"
 
-    async def _run_conversation_loop(self, state: ConversationState, initial_question: str):
-        """运行多轮对话循环"""
+    async def _run_conversation_loop(
+        self,
+        state: ConversationState,
+        initial_question: str,
+        initial_expected_answer: Optional[str] = None,
+        initial_knowledge_used: Optional[List[str]] = None
+    ):
+        """运行多轮对话循环
+
+        Args:
+            state: 对话状态
+            initial_question: 初始问题
+            initial_expected_answer: 初始问题的预期答案
+            initial_knowledge_used: 初始问题使用的知识
+        """
         logger.info(f"=== [AGENT] 开始多轮对话 - 会话ID: {state.session_id} ===")
 
         current_question = initial_question
+        current_expected_answer = initial_expected_answer
+        current_knowledge_used = initial_knowledge_used
 
         # 创建客户端
         async with httpx.AsyncClient() as client:
@@ -249,12 +311,18 @@ class UserAgent:
                     response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, platform_info, state.region)
                     bot_answer = response["message"]
 
-                    # 记录对话历史
-                    state.conversation_history.append({
+                    # 记录对话历史（包含预期答案）
+                    user_message = {
                         "role": "user_agent",
                         "content": current_question,
                         "timestamp": datetime.now().isoformat()
-                    })
+                    }
+                    if current_expected_answer:
+                        user_message["expected_answer"] = current_expected_answer
+                    if current_knowledge_used:
+                        user_message["knowledge_used"] = current_knowledge_used
+
+                    state.conversation_history.append(user_message)
                     state.conversation_history.append({
                         "role": "target_bot",
                         "content": bot_answer,
@@ -270,9 +338,12 @@ class UserAgent:
 
                     # 根据推理行动策略生成下一轮问题
                     if state.turn_count < state.max_turns:
-                        current_question = await self._generate_next_question(
+                        qa_result = await self._generate_next_question_with_answer(
                             state, bot_answer, current_question
                         )
+                        current_question = qa_result["question"]
+                        current_expected_answer = qa_result.get("expected_answer")
+                        current_knowledge_used = qa_result.get("knowledge_used")
 
                     await asyncio.sleep(0.5)  # 避免过快请求
 
@@ -413,8 +484,195 @@ class UserAgent:
 
         return None
 
+    def _format_knowledge_pool(self, knowledge_pool: Dict[str, Any]) -> str:
+        """格式化知识池为提示词文本"""
+        if not knowledge_pool:
+            return ""
+
+        sections = []
+
+        # FAQ 知识
+        faq_items = knowledge_pool.get("faq", [])
+        if faq_items:
+            faq_text = "\n".join([
+                f"- Q: {item.get('question', '')}\n  A: {item.get('answer', '')[:100]}..."
+                for item in faq_items[:5]  # 最多显示5条
+            ])
+            sections.append(f"### FAQ 知识\n{faq_text}")
+
+        # 价格信息
+        price_items = knowledge_pool.get("price", [])
+        if price_items:
+            price_text = "\n".join([
+                f"- {item.get('name', '')}: {item.get('price', 'N/A')}"
+                for item in price_items[:5]
+            ])
+            sections.append(f"### 价格信息\n{price_text}")
+
+        # 图谱知识
+        graph_items = knowledge_pool.get("graph", [])
+        if graph_items:
+            graph_text = "\n".join([
+                f"- {item.get('subject', '')} -> {item.get('predicate', '')} -> {item.get('object', '')}"
+                for item in graph_items[:5]
+            ])
+            sections.append(f"### 图谱知识\n{graph_text}")
+
+        if not sections:
+            return ""
+
+        return "\n\n".join([
+            "## 参考知识池",
+            "你在生成问题时可以参考以下知识（但不要直接复制）：",
+            "",
+            *sections,
+            "",
+            "### 使用说明",
+            "- 以上知识仅供参考，帮助你生成更真实、准确的用户问题",
+            "- 基于这些知识提出相关问题，但用自己的话表达",
+            "- 保持自然真实的对话风格"
+        ])
+
+    async def _generate_initial_question_from_knowledge_pool(self, state: ConversationState) -> Dict[str, Any]:
+        """从知识池生成初始问题和预期答案
+
+        基于知识池内容、用户画像和场景，生成第一个问题及其预期答案
+
+        Returns:
+            Dict包含:
+            - question: 生成的用户问题
+            - expected_answer: 基于知识池的预期答案
+            - knowledge_used: 使用的知识项
+        """
+        logger.info(f"=== [AGENT] 基于知识池生成初始问题和预期答案 (人格: {state.persona}, 场景: {state.scenario}) ===")
+
+        config = get_persona_config(state.persona)
+        knowledge_pool = state.knowledge_pool
+
+        # 格式化知识池
+        knowledge_context = self._format_knowledge_pool(knowledge_pool)
+
+        # 获取系统提示词
+        system_prompt = self._get_system_prompt(state)
+
+        # 构建用户提示词
+        scenario_desc = state.scenario or "咨询"
+        persona_desc = config.description if config else "普通客户"
+
+        # 根据平台确定语言
+        language_req = "English" if state.platform == "overseas" else "中文"
+
+        user_prompt = f"""## 你的任务
+你正在扮演一个{persona_desc}，准备咨询VERTU手机的{scenario_desc}相关问题。
+
+## 参考知识池
+{knowledge_context}
+
+## 场景描述
+场景：{scenario_desc}
+人格：{persona_desc}
+
+## 生成要求
+1. 从知识池中选择1-2个感兴趣的信息点
+2. 基于这些信息生成一个自然、口语化的{scenario_desc}问题
+3. 同时生成这个问题的预期答案（基于知识池中的信息）
+4. 问题必须符合你的{state.persona}人格特征
+5. 使用具体产品名称，禁止使用"这款手机""它"等代词
+6. 语言要求：使用{language_req}
+
+## 输出格式
+请严格按照以下JSON格式输出，不要添加任何其他内容：
+{{
+    "question": "生成的用户问题",
+    "expected_answer": "基于知识池生成的预期答案",
+    "knowledge_used": ["使用的知识项1", "使用的知识项2"]
+}}"""
+
+        messages = [
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=user_prompt)
+        ]
+
+        try:
+            start_time = time.time()
+            response = await self.chat_model.ainvoke(messages)
+            duration = time.time() - start_time
+
+            self._record_llm_call(state, "initial_question_from_knowledge", duration, f"从知识池生成初始问题和预期答案")
+
+            # 解析JSON响应
+            result_text = response.content.strip()
+            # 清理可能的markdown代码块
+            if result_text.startswith("```json"):
+                result_text = result_text[7:]
+            if result_text.endswith("```"):
+                result_text = result_text[:-3]
+            result_text = result_text.strip()
+
+            result = json.loads(result_text)
+            question = result.get("question", "").strip().strip('"').strip("'")
+            expected_answer = result.get("expected_answer", "").strip()
+            knowledge_used = result.get("knowledge_used", [])
+
+            logger.info(f"=== [AGENT] 从知识池生成的初始问题: {question[:60]}... ===")
+            logger.info(f"=== [AGENT] 预期答案: {expected_answer[:60]}... ===")
+
+            return {
+                "question": question,
+                "expected_answer": expected_answer,
+                "knowledge_used": knowledge_used
+            }
+        except Exception as e:
+            logger.error(f"=== [AGENT] 从知识池生成初始问题失败: {e} ===")
+            # 如果生成失败，从知识池中找一个FAQ问题作为备选
+            faq_items = knowledge_pool.get("faq", [])
+            if faq_items:
+                fallback = random.choice(faq_items)
+                question = fallback.get("question", "请介绍一下VERTU手机")
+                expected_answer = fallback.get("answer", "")
+                logger.info(f"=== [AGENT] 使用知识池中的FAQ作为备选: {question[:50]}... ===")
+                return {
+                    "question": question,
+                    "expected_answer": expected_answer,
+                    "knowledge_used": ["faq_fallback"]
+                }
+            return {
+                "question": "请介绍一下VERTU手机的主要特点",
+                "expected_answer": "VERTU手机采用高端材质，提供私人管家服务...",
+                "knowledge_used": []
+            }
+
+    def _format_conversation_context(self, state: ConversationState, bot_answer: str) -> str:
+        """格式化对话上下文"""
+        if not state.conversation_history:
+            return f"这是对话的第一轮，客服刚刚回复：{bot_answer}"
+
+        # 构建完整的对话历史
+        history_lines = []
+        for i, msg in enumerate(state.conversation_history[-6:], 1):  # 保留最后3轮（6条消息）
+            role = "你" if msg['role'] == 'user_agent' else "客服"
+            history_lines.append(f"{role}: {msg['content']}")
+
+        context = "\n".join(history_lines)
+
+        return f"""### 对话上下文（最近{len(state.conversation_history[-6:])}条消息）
+{context}
+
+### 客服最新回复
+{bot_answer}
+
+### 上下文理解要点
+- 仔细阅读上述对话历史，理解当前讨论的主题和进展
+- 注意客服已经回答了什么，还有哪些问题没有解决
+- 基于上下文逻辑，决定是追问、转换话题还是结束对话"""
+
     async def _generate_next_question(self, state: ConversationState, bot_answer: str, last_question: str) -> str:
-        """根据推理行动策略生成下一个问题"""
+        """根据推理行动策略生成下一个问题
+
+        生成问题时同时参考：
+        1. 对话上下文 - 确保问题与当前对话主题连贯
+        2. 知识池 - 提供背景知识支持，生成更准确的问题
+        """
         logger.info(f"=== [AGENT] 生成第 {state.turn_count + 1} 轮问题 (人格: {state.persona}) ===")
 
         # 构建提示词
@@ -423,28 +681,66 @@ class UserAgent:
         # 获取系统提示词
         system_prompt = self._get_system_prompt(state)
 
-        # 构建会话历史
-        conversation_history = "\n".join([
-            f"用户: {msg['content']}" if msg['role'] == 'user_agent' else f"客服: {msg['content']}"
-            for msg in state.conversation_history[-6:]  # 保留最后3轮
+        # 构建知识池上下文
+        knowledge_context = self._format_knowledge_pool(state.knowledge_pool)
+
+        # 构建对话上下文
+        conversation_context = self._format_conversation_context(state, bot_answer)
+
+        # 组合完整的用户提示
+        user_prompt_parts = [
+            "## 你的任务",
+            prompt,
+            "",
+            "## 参考信息",
+        ]
+
+        # 添加对话上下文
+        user_prompt_parts.extend([
+            conversation_context,
+            ""
+        ])
+
+        # 添加知识池（如果有）
+        if knowledge_context:
+            user_prompt_parts.extend([
+                knowledge_context,
+                ""
+            ])
+
+        user_prompt_parts.extend([
+            "## 决策指引",
+            "基于上述【对话上下文】和【知识池】，请决定下一步：",
+            "",
+            "### 选项A：结束对话",
+            "- 如果你的问题已经得到满意解答",
+            "- 如果客服提供了足够的信息帮助你做出决定",
+            '- 回复格式：直接说"谢谢"或"好的，了解了"等结束语',
+            "",
+            "### 选项B：继续提问",
+            "- 如果还有疑问需要澄清",
+            "- 如果想深入了解某个方面",
+            "- 可以基于对话上下文进行追问",
+            "- 可以参考知识池中的信息提出更深入的问题",
+            "- 保持问题的连贯性和逻辑性",
+            "",
+            "### 选项C：转换话题",
+            "- 如果想询问与当前话题相关但不同的方面",
+            "- 确保转换自然，不要突兀",
+            "",
+            "## 生成要求",
+            "1. 必须结合对话上下文，保持话题连贯",
+            "2. 可以参考知识池中的信息，但不要直接复制",
+            "3. 符合你的用户画像特征，语言风格一致",
+            "4. 保持口语化、自然的表达方式",
+            "5. 单轮回复简洁，符合人设的字数限制",
+            "",
+            "请直接生成你的回复（结束语或新问题）："
         ])
 
         messages = [
             SystemMessage(content=system_prompt),
-            HumanMessage(content=f"""
-                {prompt}
-
-                会话历史:
-                {conversation_history}
-
-                上一轮客服回答: {bot_answer}
-
-                基于上述对话，请决定下一步行动：
-                1. 如果你的主要疑问已经得到满意解答，礼貌地结束对话
-                2. 如果还需要了解更多信息，提出一个相关的新问题
-                3. 保持自然真实的对话节奏，不要过度追问细枝末节
-                4. 符合你的{state.persona}人格特征，但不要表演化
-            """)
+            HumanMessage(content="\n".join(user_prompt_parts))
         ]
 
         try:
@@ -454,10 +750,177 @@ class UserAgent:
 
             self._record_llm_call(state, "generate_question", duration, f"生成第{state.turn_count + 1}轮问题")
 
-            return response.content.strip()
+            generated_text = response.content.strip()
+
+            # 检查是否是结束语
+            ending_keywords = ["谢谢", "了解了", "再见", "好的", "没问题", "end", "thanks", "bye"]
+            is_ending = any(keyword in generated_text for keyword in ending_keywords) and len(generated_text) < 30
+
+            if is_ending:
+                logger.info(f"=== [AGENT] 用户选择结束对话: {generated_text} ===")
+
+            return generated_text
         except Exception as e:
             logger.error(f"=== [AGENT] 生成问题失败: {e} ===")
             return self._get_fallback_question(state)
+
+    async def _generate_next_question_with_answer(
+        self,
+        state: ConversationState,
+        bot_answer: str,
+        last_question: str
+    ) -> Dict[str, Any]:
+        """生成下一个问题及其预期答案
+
+        生成问题时同时参考：
+        1. 对话上下文 - 确保问题与当前对话主题连贯
+        2. 知识池 - 提供背景知识支持，生成更准确的问题和预期答案
+
+        Returns:
+            Dict包含:
+            - question: 生成的用户问题（或结束语）
+            - expected_answer: 基于知识池的预期答案
+            - knowledge_used: 使用的知识项列表
+        """
+        logger.info(f"=== [AGENT] 生成第 {state.turn_count + 1} 轮问题及预期答案 (人格: {state.persona}) ===")
+
+        # 构建提示词
+        prompt = self._build_agent_prompt(state)
+
+        # 获取系统提示词
+        system_prompt = self._get_system_prompt(state)
+
+        # 构建知识池上下文
+        knowledge_context = self._format_knowledge_pool(state.knowledge_pool)
+
+        # 构建对话上下文
+        conversation_context = self._format_conversation_context(state, bot_answer)
+
+        # 组合完整的用户提示
+        user_prompt_parts = [
+            "## 你的任务",
+            prompt,
+            "",
+            "## 参考信息",
+        ]
+
+        # 添加对话上下文
+        user_prompt_parts.extend([
+            conversation_context,
+            ""
+        ])
+
+        # 添加知识池（如果有）
+        if knowledge_context:
+            user_prompt_parts.extend([
+                knowledge_context,
+                ""
+            ])
+
+        user_prompt_parts.extend([
+            "## 决策指引",
+            "基于上述【对话上下文】和【知识池】，请决定下一步：",
+            "",
+            "### 选项A：结束对话",
+            "- 如果你的问题已经得到满意解答",
+            "- 如果客服提供了足够的信息帮助你做出决定",
+            "- 回复格式：直接说\"谢谢\"或\"好的，了解了\"等结束语",
+            "- 此时 expected_answer 设为 null",
+            "",
+            "### 选项B：继续提问",
+            "- 如果还有疑问需要澄清",
+            "- 如果想深入了解某个方面",
+            "- 可以基于对话上下文进行追问",
+            "- 可以参考知识池中的信息提出更深入的问题",
+            "- 同时生成这个问题的预期答案（基于知识池）",
+            "",
+            "### 选项C：转换话题",
+            "- 如果想询问与当前话题相关但不同的方面",
+            "- 确保转换自然，不要突兀",
+            "- 同时生成新话题的预期答案",
+            "",
+            "## 生成要求",
+            "1. 必须结合对话上下文，保持话题连贯",
+            "2. 可以参考知识池中的信息，但不要直接复制",
+            "3. 符合你的用户画像特征，语言风格一致",
+            "4. 保持口语化、自然的表达方式",
+            "5. 单轮回复简洁，符合人设的字数限制",
+            "",
+            "## 输出格式",
+            "请严格按照以下JSON格式输出：",
+            "{",
+            '    "question": "生成的用户问题或结束语",',
+            '    "expected_answer": "基于知识池生成的预期答案（结束对话时为null）",',
+            '    "knowledge_used": ["使用的知识项1", "使用的知识项2"]',
+            "}",
+            "",
+            "请生成："
+        ])
+
+        messages = [
+            SystemMessage(content=system_prompt),
+            HumanMessage(content="\n".join(user_prompt_parts))
+        ]
+
+        try:
+            start_time = time.time()
+            response = await self.chat_model.ainvoke(messages)
+            duration = time.time() - start_time
+
+            self._record_llm_call(state, "generate_question_with_answer", duration, f"生成第{state.turn_count + 1}轮问题及预期答案")
+
+            # 解析JSON响应
+            result_text = response.content.strip()
+            # 清理可能的markdown代码块
+            if result_text.startswith("```json"):
+                result_text = result_text[7:]
+            if result_text.endswith("```"):
+                result_text = result_text[:-3]
+            result_text = result_text.strip()
+
+            result = json.loads(result_text)
+            question = result.get("question", "").strip()
+            expected_answer = result.get("expected_answer")
+            knowledge_used = result.get("knowledge_used", [])
+
+            # 检查是否是结束语
+            ending_keywords = ["谢谢", "了解了", "再见", "好的", "没问题", "end", "thanks", "bye"]
+            is_ending = any(keyword in question for keyword in ending_keywords) and len(question) < 30
+
+            if is_ending:
+                logger.info(f"=== [AGENT] 用户选择结束对话: {question} ===")
+                return {
+                    "question": question,
+                    "expected_answer": None,
+                    "knowledge_used": []
+                }
+
+            logger.info(f"=== [AGENT] 生成的问题: {question[:60]}... ===")
+            
+            # 确保 expected_answer 和 knowledge_used 都有值
+            if not expected_answer:
+                logger.warning(f"=== [AGENT] 警告: LLM 返回的 expected_answer 为空，使用默认值 ===")
+                expected_answer = ""
+            if not knowledge_used:
+                knowledge_used = []
+                
+            logger.info(f"=== [AGENT] 预期答案: {expected_answer[:60] if expected_answer else '(空)'}... ===")
+            logger.info(f"=== [AGENT] 使用知识: {knowledge_used} ===")
+
+            return {
+                "question": question,
+                "expected_answer": expected_answer,
+                "knowledge_used": knowledge_used
+            }
+        except Exception as e:
+            logger.error(f"=== [AGENT] 生成问题及预期答案失败: {e} ===")
+            # 使用备用问题
+            fallback_question = self._get_fallback_question(state)
+            return {
+                "question": fallback_question,
+                "expected_answer": None,
+                "knowledge_used": ["fallback"]
+            }
 
     def _build_agent_prompt(self, state: ConversationState) -> str:
         """构建代理提示词"""
@@ -645,7 +1108,9 @@ class UserAgent:
                 {
                     "role": msg["role"],
                     "content": msg["content"].replace('\n', ' ').replace('\r', ' ').strip(),
-                    "timestamp": msg["timestamp"]
+                    "timestamp": msg["timestamp"],
+                    **({"expected_answer": msg["expected_answer"]} if "expected_answer" in msg else {}),
+                    **({"knowledge_used": msg["knowledge_used"]} if "knowledge_used" in msg else {})
                 }
                 for msg in state.conversation_history
             ],

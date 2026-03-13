@@ -7,6 +7,13 @@ from pydantic import BaseModel, Field
 from .user_config import get_all_persona_names
 
 
+class KnowledgePoolItem(BaseModel):
+    """知识池单项数据"""
+    faq: List[Dict[str, Any]] = Field(default_factory=list, description="FAQ知识列表")
+    price: List[Dict[str, Any]] = Field(default_factory=list, description="价格信息列表")
+    graph: List[Dict[str, Any]] = Field(default_factory=list, description="图谱知识列表")
+
+
 class UserSimulationRequest(BaseModel):
     """仿真测试请求模型"""
 
@@ -18,6 +25,10 @@ class UserSimulationRequest(BaseModel):
         default_factory=lambda: str(uuid.uuid4()),
         description="会话 ID，用于跟踪对话上下文"
     )
+    knowledge_pool: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="知识池数据，格式: {'faq': [...], 'price': [...], 'graph': [...]}"
+    )
 
 
 class ConversationMessage(BaseModel):
@@ -25,6 +36,8 @@ class ConversationMessage(BaseModel):
     role: str = Field(..., description="消息角色：user_agent 或 target_bot")
     content: str = Field(..., description="消息内容")
     timestamp: str = Field(..., description="时间戳")
+    expected_answer: Optional[str] = Field(None, description="预期答案（仅user_agent消息有）")
+    knowledge_used: Optional[Dict[str, Any]] = Field(None, description="生成问题时使用的知识")
 
 
 class SessionMetadata(BaseModel):

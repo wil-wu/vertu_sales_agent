@@ -266,6 +266,93 @@ class BatchTestRunner:
         self.react_adapter = DirectReactAgentAdapter(agent)
         logger.info("ReAct Agent 初始化完成")
     
+    def _generate_mock_knowledge_pool(self, scenario: str) -> Dict[str, Any]:
+        """生成 Mock 知识池数据
+        
+        Args:
+            scenario: 测试场景描述
+        
+        Returns:
+            知识池数据 {"faq": [...], "price": [...], "graph": [...]}
+        """
+        # 根据场景选择相关的 FAQ
+        faq_data = {
+            "咨询VERTU手机的产品特性和价格": [
+                {"question": "VERTU手机有什么特别之处？", "answer": "VERTU手机采用顶级材质，如蓝宝石屏幕、钛合金机身、小牛皮背板，每部手机都是手工打造，并提供24小时私人管家服务。"},
+                {"question": "VERTU手机的价格是多少？", "answer": "VERTU手机价格从几万元到几十万元不等，具体取决于型号和材质配置。经典款约3-5万，限量款可达20万以上。"},
+                {"question": "VERTU手机支持5G吗？", "answer": "是的，最新款VERTU手机支持5G网络，同时也支持4G/3G/2G网络。"},
+            ],
+            "了解VERTU售后服务和保修政策": [
+                {"question": "VERTU手机的保修期是多久？", "answer": "VERTU手机提供2年全球联保服务，包括免费维修和更换配件。"},
+                {"question": "VERTU有上门维修服务吗？", "answer": "是的，VERTU提供VIP上门维修服务，您可以通过私人管家预约。"},
+                {"question": "VERTU手机维修需要多长时间？", "answer": "一般维修需要7-15个工作日，紧急维修可加快处理。"},
+            ],
+            "犹豫是否购买VERTU手机，需要更多购买建议": [
+                {"question": "VERTU手机适合什么样的人使用？", "answer": "VERTU手机适合追求品质生活、注重隐私安全、需要高端商务服务的成功人士。"},
+                {"question": "VERTU和其他奢侈手机品牌有什么区别？", "answer": "VERTU的独特之处在于24小时私人管家服务、手工打造工艺、以及顶级材质的使用。"},
+                {"question": "购买VERTU手机有哪些支付方式？", "answer": "支持银行转账、信用卡、支付宝、微信支付等多种支付方式，也支持分期付款。"},
+            ],
+            "将VERTU手机与其他品牌竞品进行对比": [
+                {"question": "VERTU和iPhone有什么区别？", "answer": "VERTU主打奢侈定位和私人服务，iPhone主打科技创新。VERTU使用顶级材质和手工打造，提供24小时管家服务。"},
+                {"question": "VERTU和华为保时捷设计版哪个更好？", "answer": "两者都是高端定位，VERTU更注重奢华材质和私人服务，华为保时捷设计版更注重科技创新。选择取决于您的个人偏好。"},
+            ],
+            "与客服闲聊，了解VERTU品牌故事和高端服务": [
+                {"question": "VERTU品牌的历史是什么？", "answer": "VERTU成立于1998年，总部位于英国，是全球首个奢侈手机品牌，以手工打造和顶级材质闻名。"},
+                {"question": "VERTU的私人管家服务包括什么？", "answer": "私人管家服务包括24小时多语言支持、餐厅预订、机票酒店预订、紧急救援等高端生活服务。"},
+                {"question": "VERTU手机是哪里生产的？", "answer": "VERTU手机在英国设计，由经验丰富的工匠手工组装，每部手机都经过严格的质量检测。"},
+            ],
+        }
+        
+        # 默认 FAQ
+        default_faq = [
+            {"question": "VERTU手机有什么特别之处？", "answer": "VERTU手机采用顶级材质，如蓝宝石屏幕、钛合金机身、小牛皮背板，每部手机都是手工打造，并提供24小时私人管家服务。"},
+            {"question": "VERTU手机的价格是多少？", "answer": "VERTU手机价格从几万元到几十万元不等，具体取决于型号和材质配置。"},
+        ]
+        
+        # 价格数据
+        price_data = [
+            {"name": "VERTU SIGNATURE V", "price": 298000},
+            {"name": "VERTU ASTER P", "price": 88000},
+            {"name": "VERTU VISION", "price": 128000},
+            {"name": "VERTU iVERTU", "price": 45800},
+        ]
+        
+        # 图谱数据
+        graph_data = [
+            {
+                "entity": "VERTU SIGNATURE",
+                "properties": {
+                    "material": "蓝宝石屏幕、钛合金机身",
+                    "service": "24小时私人管家",
+                    "origin": "英国手工打造"
+                }
+            },
+            {
+                "entity": "VERTU 私人管家服务",
+                "properties": {
+                    "availability": "24/7全天候",
+                    "languages": "多语言支持",
+                    "services": "餐厅预订、机票酒店、紧急救援"
+                }
+            },
+        ]
+        
+        # 获取对应场景的 FAQ，如果没有则使用默认
+        faq_results = faq_data.get(scenario, default_faq)
+        
+        knowledge_pool = {
+            "faq": faq_results,
+            "price": price_data,
+            "graph": graph_data,
+            "metadata": {
+                "scenario": scenario,
+                "generated_at": datetime.now().isoformat()
+            }
+        }
+        
+        logger.info(f"[MOCK] 生成知识池 - 场景: {scenario}, FAQ: {len(faq_results)}条, 价格: {len(price_data)}条, 图谱: {len(graph_data)}条")
+        return knowledge_pool
+    
     @retry_async(tries=3, delay=1, backoff=2, logger=logger)
     async def _call_referee_with_retry(self, session_data: Dict[str, Any]) -> Dict[str, Any]:
         """调用 Referee Agent 评估会话（带重试）"""
@@ -292,12 +379,38 @@ class BatchTestRunner:
                 react_agent=self.react_adapter
             )
             
-            # 运行仿真
+            # 生成 mock 知识池
+            knowledge_pool = self._generate_mock_knowledge_pool(scenario)
+            
+            # 运行仿真（传入知识池）
             session_data = await user_agent.start_simulation(
                 persona=persona,
                 scenario=scenario,
-                max_turns=max_turns
+                max_turns=max_turns,
+                knowledge_pool=knowledge_pool
             )
+            
+            # 从对话记录中提取首轮预期答案
+            conversation = session_data.get('conversation', [])
+            first_user_message = None
+            first_bot_message = None
+            for msg in conversation:
+                if msg.get('role') == 'user_agent' and not first_user_message:
+                    first_user_message = msg
+                elif msg.get('role') == 'target_bot' and not first_bot_message:
+                    first_bot_message = msg
+                    break
+            
+            # 提取首轮问题和预期答案
+            first_question = first_user_message.get('content', '') if first_user_message else ''
+            first_expected_answer = first_user_message.get('expected_answer', '') if first_user_message else ''
+            first_knowledge_used = first_user_message.get('knowledge_used', []) if first_user_message else []
+            first_actual_answer = first_bot_message.get('content', '') if first_bot_message else ''
+            
+            logger.info(f"[{session_id}] 从对话记录提取首轮信息:")
+            logger.info(f"[{session_id}] 问题: {first_question[:50]}...")
+            logger.info(f"[{session_id}] 预期答案: {first_expected_answer[:50] if first_expected_answer else '无'}...")
+            logger.info(f"[{session_id}] 使用知识: {first_knowledge_used}")
             
             # 评估会话（带重试）
             summary = await self._call_referee_with_retry(session_data)
@@ -305,22 +418,29 @@ class BatchTestRunner:
             # 计算耗时
             duration = (datetime.now() - start_time).total_seconds()
             
-            # 提取首轮问答对比信息
+            # 提取首轮问答对比信息（优先使用对话记录中的数据）
             turn_assessments = summary.get('turn_assessments', [])
             first_turn_qa = None
+            
+            # 从评估结果中获取 first_contact_resolution
+            first_contact_resolution = False
             if turn_assessments and len(turn_assessments) > 0:
                 first_turn = turn_assessments[0]
-                if first_turn.get('qa_comparison'):
-                    first_turn_qa = {
-                        "question": first_turn['qa_comparison'].get('question', ''),
-                        "conversation_question": first_turn['qa_comparison'].get('conversation_question', ''),
-                        "expected_answer": first_turn['qa_comparison'].get('expected_answer', ''),
-                        "actual_answer": first_turn['qa_comparison'].get('actual_answer', ''),
-                        "first_contact_resolution": first_turn.get('first_contact_resolution', False)
-                    }
-                    logger.info(f"[{session_id}] 首轮问答对比 - 问题: {first_turn_qa['question'][:50]}...")
-                    logger.info(f"[{session_id}] 预期答案: {first_turn_qa['expected_answer'][:50] if first_turn_qa['expected_answer'] else '无'}...")
-                    logger.info(f"[{session_id}] first_contact_resolution: {first_turn_qa['first_contact_resolution']}")
+                first_contact_resolution = first_turn.get('first_contact_resolution', False)
+            
+            # 构建首轮问答对比（使用对话记录中的预期答案）
+            first_turn_qa = {
+                "question": first_question,
+                "conversation_question": first_question,
+                "expected_answer": first_expected_answer,
+                "actual_answer": first_actual_answer,
+                "first_contact_resolution": first_contact_resolution,
+                "knowledge_used": first_knowledge_used
+            }
+            
+            if first_expected_answer:
+                logger.info(f"[{session_id}] 首轮问答对比 - 预期答案来源: 对话记录")
+                logger.info(f"[{session_id}] first_contact_resolution: {first_contact_resolution}")
             
             # 构建结果
             detailed = summary.get('detailed_summary', {})

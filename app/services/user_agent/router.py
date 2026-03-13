@@ -63,8 +63,12 @@ async def start_simulation(
 
             - thread_id: 会话 ID，不传则自动生成
 
+            - knowledge_pool: 知识池数据（可选），格式: {"faq": [...], "price": [...], "graph": [...]}
+
+                传入后，user_agent 在生成问题时会参考这些知识
+
     Returns:
-    
+
         包含会话ID、结束原因、对话记录、LLM调用统计和元数据
     """
     try:
@@ -73,7 +77,8 @@ async def start_simulation(
             persona=request.persona,
             scenario=request.scenario,
             max_turns=request.max_turns,
-            platform=request.platform
+            platform=request.platform,
+            knowledge_pool=request.knowledge_pool
         )
 
         return UserSimulationResponse(
