@@ -54,17 +54,17 @@ class QuestionPoolSettings(BaseSettings):
 # 渠道映射配置
 PLATFORM_CONFIG = {
     "domestic_jd": {
-        "faq_collection": "domestic",
+        "faq_collection": "domestic_e_commerce",
         "price_index": "jd_product",
         "platform_label": "京东"
     },
     "domestic_tm": {
-        "faq_collection": "domestic",
+        "faq_collection": "domestic_e_commerce",
         "price_index": "tm_product",
         "platform_label": "天猫"
     },
     "overseas": {
-        "faq_collection": "overseas",
+        "faq_collection": "oversea_private",
         "price_index": "overseas_product",
         "platform_label": "海外"
     }

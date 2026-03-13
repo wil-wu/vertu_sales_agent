@@ -1,7 +1,12 @@
-from fastapi import APIRouter
+import logging
+import traceback
+
+from fastapi import APIRouter, HTTPException
 
 from .schemas import QuestionPoolGenerateRequest, QuestionPoolGenerateResponse
 from .service import QuestionPoolService
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/api/v1/question-pool",
@@ -35,10 +40,15 @@ async def generate_question_pool(
     
         包含生成的文件路径、数量统计和数据源统计信息
     """
-    service = QuestionPoolService()
-    result = await service.generate_pool(
-        product_name=request.product_name,
-        platform=request.platform,
-        count=request.count
-    )
-    return QuestionPoolGenerateResponse(**result)
+    try:
+        service = QuestionPoolService()
+        result = await service.generate_pool(
+            product_name=request.product_name,
+            platform=request.platform,
+            count=request.count
+        )
+        return QuestionPoolGenerateResponse(**result)
+    except Exception as e:
+        error_msg = f"生成问题池失败: {str(e)}\n{traceback.format_exc()}"
+        logger.error(error_msg)
+        raise HTTPException(status_code=500, detail=str(e))

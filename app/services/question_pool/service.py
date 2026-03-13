@@ -12,7 +12,8 @@ from app.core.shared import httpx_async_client
 from .config import question_pool_settings, PLATFORM_CONFIG
 from .prompts import (
     GRAPH_QA_GENERATION_PROMPT,
-    PRICE_QUESTION_REWRITE_PROMPT
+    PRICE_QUESTION_REWRITE_PROMPT,
+    SCREEN_CONTENT_FILTER_PROMPT
 )
 from .shared import chat_model
 
@@ -81,11 +82,11 @@ class QuestionPoolService:
         wait=wait_exponential(multiplier=0.5, max=5),
         retry=retry_if_exception_type(httpx.RequestError)
     )
-    async def _fetch_graph(self, product_name: str) -> dict:
+    async def _fetch_graph(self, product_name: str, is_oversea: bool = False) -> dict:
         """获取图谱数据"""
         response = await httpx_async_client.post(
             self.graph_url,
-            params={"product_name": product_name, "path_len": 2, "is_oversea": "false"},
+            json={"product_name": product_name, "path_len": 2, "is_oversea": is_oversea},
             timeout=20.0
         )
         response.raise_for_status()
@@ -98,30 +99,108 @@ class QuestionPoolService:
         messages = [{"role": "system", "content": "你是一个专业的知识图谱问答对生成专家。"}]
         messages.append({"role": "user", "content": prompt})
 
-        response = await chat_model.ainvoke(messages)
-        content = response.content.strip()
+        try:
+            response = await chat_model.ainvoke(messages)
+            content = response.content.strip()
 
-        # 清理 markdown 代码块标记
-        if content.startswith("```json"):
-            content = content[7:]
-        if content.startswith("```"):
-            content = content[3:]
-        if content.endswith("```"):
-            content = content[:-3]
-        content = content.strip()
+            # 清理 markdown 代码块标记
+            if content.startswith("```json"):
+                content = content[7:]
+            if content.startswith("```"):
+                content = content[3:]
+            if content.endswith("```"):
+                content = content[:-3]
+            content = content.strip()
 
-        qa_pairs = json.loads(content)
-        if isinstance(qa_pairs, dict):
-            qa_pairs = [qa_pairs]
-        return qa_pairs if isinstance(qa_pairs, list) else []
+            # 处理可能的单引号包裹
+            if content.startswith("'") and content.endswith("'"):
+                content = content[1:-1]
+
+            # 处理双重引号包裹
+            if content.startswith('"') and content.endswith('"'):
+                try:
+                    content = json.loads(content)
+                except:
+                    pass
+
+            qa_pairs = json.loads(content)
+            if isinstance(qa_pairs, dict):
+                qa_pairs = [qa_pairs]
+            return qa_pairs if isinstance(qa_pairs, list) else []
+        except Exception as e:
+            logger.warning(f"[图谱QA生成] LLM 生成失败: {e}")
+            return []  # 失败时返回空列表
 
     async def _rewrite_price_question(self, product_name: str, price: float) -> str:
         """使用 LLM 将商品名称改写为用户价格询问问题"""
         prompt = PRICE_QUESTION_REWRITE_PROMPT.format(product_name=product_name, price=price)
 
         messages = [{"role": "user", "content": prompt}]
-        response = await chat_model.ainvoke(messages)
-        return response.content.strip().strip('"')
+        try:
+            response = await chat_model.ainvoke(messages)
+            return response.content.strip().strip('"')
+        except Exception as e:
+            logger.warning(f"[价格问题改写] LLM 调用失败: {e}")
+            return f"{product_name}多少钱？"  # 失败时返回默认问题
+
+    async def _filter_screen_related(self, data_type: str, data_content: str) -> bool:
+        """使用 LLM 筛选与屏幕相关的内容"""
+        prompt = SCREEN_CONTENT_FILTER_PROMPT.format(
+            data_type=data_type,
+            data_content=data_content
+        )
+
+        messages = [{"role": "user", "content": prompt}]
+        content = ""
+        try:
+            response = await chat_model.ainvoke(messages)
+            content = response.content.strip()
+
+            # 清理 markdown 代码块
+            if content.startswith("```json"):
+                content = content[7:]
+            if content.startswith("```"):
+                content = content[3:]
+            if content.endswith("```"):
+                content = content[:-3]
+            content = content.strip()
+
+            # 处理可能的单引号包裹
+            if content.startswith("'") and content.endswith("'"):
+                content = content[1:-1]
+
+            # 处理双重引号包裹（如 '"{...}"'）
+            if content.startswith('"') and content.endswith('"'):
+                try:
+                    # 尝试先解析外层引号
+                    content = json.loads(content)
+                except:
+                    pass
+
+            result = json.loads(content)
+            
+            # 处理可能的引号包裹的 key
+            is_related = result.get("is_screen_related", None)
+            if is_related is None:
+                is_related = result.get('"is_screen_related"', False)
+            if is_related is None:
+                is_related = result.get("'is_screen_related'", False)
+            
+            reason = result.get("reason", "")
+            if not reason:
+                reason = result.get('"reason"', "")
+            if not reason:
+                reason = result.get("'reason'", "")
+
+            if is_related:
+                logger.debug(f"[屏幕过滤] 保留 {data_type}: {reason}")
+            else:
+                logger.debug(f"[屏幕过滤] 过滤 {data_type}: {reason}")
+
+            return is_related
+        except Exception as e:
+            logger.warning(f"[屏幕过滤] LLM 筛选失败，默认保留: {e}, content: {repr(content)}")
+            return True  # 失败时默认保留
 
     def _generate_graph_summary(self, graph_data: dict) -> str:
         """从图谱数据生成摘要文本用于综合问答"""
@@ -159,31 +238,54 @@ class QuestionPoolService:
         faq_data = await self._fetch_faq(
             product_name,
             config["faq_collection"],
-            max(faq_target * 2, 10)
+            max(faq_target * 4, 20)  # 获取更多数据用于过滤
         )
         price_data = await self._fetch_price(
             product_name,
             config["price_index"],
-            max(price_target * 2, 10)
+            max(price_target * 4, 20)  # 获取更多数据用于过滤
         )
-        graph_data = await self._fetch_graph(product_name)
+        is_oversea = platform == "overseas"
+        graph_data = await self._fetch_graph(product_name, is_oversea)
+
+        # 使用 LLM 过滤屏幕相关内容
+        logger.info("开始筛选屏幕相关内容...")
+
+        # 过滤 FAQ 数据
+        faq_data_filtered = []
+        for item in faq_data:
+            content = f"问题: {item.get('question', '')}\n答案: {item.get('answer', '')}"
+            if await self._filter_screen_related("FAQ", content):
+                faq_data_filtered.append(item)
+            if len(faq_data_filtered) >= faq_target * 2:  # 获取足够数量后停止
+                break
+
+        # 过滤价格数据
+        price_data_filtered = []
+        for item in price_data:
+            content = f"商品名称: {item.get('name', '')}"
+            if await self._filter_screen_related("价格", content):
+                price_data_filtered.append(item)
+            if len(price_data_filtered) >= price_target * 2:
+                break
 
         # 统计原始数据
+        graph_results = graph_data.get("data", {}).get("result", []) if isinstance(graph_data, dict) else []
         source_stats = {
             "faq_hits": len(faq_data),
             "price_hits": len(price_data),
-            "graph_nodes": len(graph_data.get("results", [])) if isinstance(graph_data, dict) else 0
+            "graph_nodes": len(graph_results)
         }
 
         # 转换 FAQ 数据
         faq_pool = [
             {"question": item["question"], "answer": item["answer"], "platform": platform, "channel": "faq"}
-            for item in faq_data[:faq_target]
+            for item in faq_data_filtered[:faq_target]
         ]
 
         # 转换价格数据（使用 LLM 改写问题）
         price_pool = []
-        for item in price_data[:price_target]:
+        for item in price_data_filtered[:price_target]:
             rewritten_question = await self._rewrite_price_question(item["name"], item["price"])
             price_pool.append({
                 "question": rewritten_question,
@@ -192,12 +294,20 @@ class QuestionPoolService:
                 "channel": "price"
             })
 
-        # 生成图谱问答对
+        # 生成图谱问答对并过滤屏幕相关内容
         graph_qa_list = await self._generate_graph_qa(graph_data)
-        graph_pool = [
-            {"question": qa["question"], "answer": qa["answer"], "platform": platform, "channel": "graph"}
-            for qa in graph_qa_list[:graph_target]
-        ]
+        graph_pool = []
+        for qa in graph_qa_list:
+            content = f"问题: {qa.get('question', '')}\n答案: {qa.get('answer', '')}"
+            if await self._filter_screen_related("图谱", content):
+                graph_pool.append({
+                    "question": qa["question"],
+                    "answer": qa["answer"],
+                    "platform": platform,
+                    "channel": "graph"
+                })
+            if len(graph_pool) >= graph_target:
+                break
 
         # 合并所有数据
         all_questions = faq_pool + price_pool + graph_pool
