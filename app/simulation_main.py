@@ -68,6 +68,10 @@ class SimulationMain:
         return knowledge_pool
 
     def generate_session_simulation(self, session_knowledge_pool):
+        # 保持单session 
+        # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
+        # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
+        # 组合上下文 一起调用 referee Agent -> 保存到输出目录
         pass
 
 if __name__ == "__main__":
