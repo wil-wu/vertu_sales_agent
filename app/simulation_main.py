@@ -32,7 +32,7 @@ from app.services.user_agent.user_config import get_all_persona_names
 from app.services.user_agent.agent import UserAgent
 from app.services.referee_agent.agent import RefereeAgent, load_qa_csv
 from app.services.referee_agent.schemas import RefereeRequest
-
+from app.simulation_util import SearchUtil
 
 class SimulationMain:
     # 七个人格类型
@@ -58,6 +58,8 @@ class SimulationMain:
     def __init__(self, config: dict, excute_config: dict):
         self.config = config
         self.excute_config = excute_config
+        self.search_util = SearchUtil(config=self.config)
+        
         self.user_agent = UserAgent()
         self.referee_agent = RefereeAgent()
 
@@ -472,6 +474,38 @@ class SimulationMain:
                     })
 
         return assessments
+        pass
+
+    def search_knowledge(self):
+        faq_results = self.search_util.search_faq()
+        price_results = self.search_util.search_price()
+        graph_results = self.search_util.search_graph()
+        return {"faq": faq_results, "price": price_results, "graph": graph_results}
+
+    def generate_session_knowledge_pool(self, knowledge_subset):
+        """
+        根据知识子集 随机组合20份知识 形成知识池, 数据结构与父集一致, 即:
+        [{"faq": faq_results', "price": price_results', "graph": graph_results'}, ...]
+        - 子集总量<20份知识 即返回的每个元素中对应的key 取到的值长度不超过20 
+        - session_count 为知识池中元素的总数, 即返回的列表长度
+        todo:
+            随机取值优先保障单子集管道取到的值不重复
+        """
+        knowledge_pool = []
+        for _ in range(self.excute_config["session_count"]):
+            knowledge_pool.append({
+                "faq": random.sample(knowledge_subset["faq"], min(20, len(knowledge_subset["faq"]))),
+                "price": random.sample(knowledge_subset["price"], min(20, len(knowledge_subset["price"]))),
+                "graph": random.sample(knowledge_subset["graph"], min(20, len(knowledge_subset["graph"]))),
+            })
+        return knowledge_pool
+
+    def generate_session_simulation(self, session_knowledge_pool):
+        # 保持单session 
+        # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
+        # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
+        # 组合上下文 一起调用 referee Agent -> 保存到输出目录
+        pass
 
 if __name__ == "__main__":
     config = {
