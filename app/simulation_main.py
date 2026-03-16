@@ -101,9 +101,21 @@ class SimulationMain:
         """保存单个session的结果到文件"""
         session_id = session_result.get("session_id", "")
         assessments = session_result.get("assessments", [])
+        conversation = session_result.get("conversation", [])
 
         # 计算该session各指标的平均分
         session_averages = self._calculate_session_averages(assessments)
+
+        # 提取所有预期答案
+        expected_answers = []
+        for msg in conversation:
+            if msg.get("role") == "user_agent" and msg.get("expected_answer"):
+                expected_answers.append({
+                    "turn": len(expected_answers) + 1,
+                    "question": msg.get("content", ""),
+                    "expected_answer": msg.get("expected_answer", ""),
+                    "knowledge_used": msg.get("knowledge_used", [])
+                })
 
         # 构建session文件内容
         session_data = {
@@ -113,8 +125,9 @@ class SimulationMain:
             "finish_reason": session_result.get("finish_reason"),
             "total_turns": session_result.get("total_turns"),
             "average_scores": session_averages,
+            "expected_answers": expected_answers,
             "assessments": assessments,
-            "conversation": session_result.get("conversation", []),
+            "conversation": conversation,
             "metadata": session_result.get("metadata", {})
         }
 
@@ -123,48 +136,132 @@ class SimulationMain:
         with open(session_file, "w", encoding="utf-8") as f:
             json.dump(session_data, f, ensure_ascii=False, indent=2)
 
-    def _calculate_session_averages(self, assessments: List[Dict[str, Any]]) -> Dict[str, float]:
-        """计算session各指标的平均分"""
+    def _calculate_session_averages(self, assessments: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """计算session各指标的平均分 - 包含7大维度综合评分和详细子指标"""
         if not assessments:
             return {}
 
-        # 基础指标
-        basic_metrics = ["overall_score", "relevance", "helpfulness", "empathy"]
-        averages = {}
-
-        for metric in basic_metrics:
-            values = [a.get(metric) for a in assessments if a.get(metric) is not None]
-            if values:
-                averages[metric] = round(sum(values) / len(values), 4)
-
-        # 详细指标（如果有）
+        # 收集详细指标
         detailed_metrics_all = []
         for a in assessments:
             dm = a.get("detailed_metrics")
             if dm and isinstance(dm, dict):
                 detailed_metrics_all.append(dm)
 
-        if detailed_metrics_all:
-            # 计算7大维度的平均分
-            dimension_scores = {
-                "anthropomorphism_score": [],
-                "purchase_intent_score": [],
-                "problem_solving_score": [],
-                "sales_script_score": [],
-                "user_experience_score": [],
-                "traditional_script_score": [],
-                "language_consistency_score": []
-            }
+        if not detailed_metrics_all:
+            return {}
 
-            for dm in detailed_metrics_all:
-                for key in dimension_scores:
-                    value = dm.get(key)
-                    if value is not None:
-                        dimension_scores[key].append(value)
+        averages = {}
 
-            for key, values in dimension_scores.items():
-                if values:
-                    averages[key] = round(sum(values) / len(values), 4)
+        # 1. 计算7大维度综合评分
+        dimension_scores = {
+            "anthropomorphism_score": [],
+            "purchase_intent_score": [],
+            "problem_solving_score": [],
+            "sales_script_score": [],
+            "user_experience_score": [],
+            "traditional_script_score": [],
+            "language_consistency_score": []
+        }
+
+        for dm in detailed_metrics_all:
+            for key in dimension_scores:
+                value = dm.get(key)
+                if value is not None:
+                    dimension_scores[key].append(value)
+
+        for key, values in dimension_scores.items():
+            if values:
+                averages[key] = round(sum(values) / len(values), 4)
+
+        # 2. 计算各维度下的详细子指标
+        # user_anthropomorphism 子指标
+        user_anthro_metrics = ["language_naturalness", "personality_deviation_count", "humor_warmth", "rhythm_pacing"]
+        user_anthro_scores = {}
+        for metric in user_anthro_metrics:
+            values = [dm.get("user_anthropomorphism", {}).get(metric) for dm in detailed_metrics_all if dm.get("user_anthropomorphism")]
+            values = [v for v in values if v is not None]
+            if values:
+                user_anthro_scores[metric] = round(sum(values) / len(values), 4)
+        if user_anthro_scores:
+            averages["user_anthropomorphism"] = user_anthro_scores
+
+        # agent_anthropomorphism 子指标
+        agent_anthro_metrics = ["language_naturalness", "personality_deviation_count", "humor_warmth", "rhythm_pacing"]
+        agent_anthro_scores = {}
+        for metric in agent_anthro_metrics:
+            values = [dm.get("agent_anthropomorphism", {}).get(metric) for dm in detailed_metrics_all if dm.get("agent_anthropomorphism")]
+            values = [v for v in values if v is not None]
+            if values:
+                agent_anthro_scores[metric] = round(sum(values) / len(values), 4)
+        if agent_anthro_scores:
+            averages["agent_anthropomorphism"] = agent_anthro_scores
+
+        # purchase_intent 子指标
+        purchase_metrics = ["needs_discovery_rate", "product_recommendation_accuracy"]
+        purchase_scores = {}
+        for metric in purchase_metrics:
+            values = [dm.get("purchase_intent", {}).get(metric) for dm in detailed_metrics_all if dm.get("purchase_intent")]
+            values = [v for v in values if v is not None]
+            if values:
+                purchase_scores[metric] = round(sum(values) / len(values), 4)
+        if purchase_scores:
+            averages["purchase_intent"] = purchase_scores
+
+        # problem_solving 子指标
+        problem_metrics = ["first_contact_resolution", "intent_recognition_accuracy", "fallback_rate"]
+        problem_scores = {}
+        for metric in problem_metrics:
+            values = [dm.get("problem_solving", {}).get(metric) for dm in detailed_metrics_all if dm.get("problem_solving")]
+            values = [v for v in values if v is not None]
+            if values:
+                problem_scores[metric] = round(sum(values) / len(values), 4)
+        if problem_scores:
+            averages["problem_solving"] = problem_scores
+
+        # sales_script 子指标
+        sales_metrics = ["fab_completeness", "objection_handling_score", "script_compliance", "personalization_rate"]
+        sales_scores = {}
+        for metric in sales_metrics:
+            values = [dm.get("sales_script", {}).get(metric) for dm in detailed_metrics_all if dm.get("sales_script")]
+            values = [v for v in values if v is not None]
+            if values:
+                sales_scores[metric] = round(sum(values) / len(values), 4)
+        if sales_scores:
+            averages["sales_script"] = sales_scores
+
+        # user_experience 子指标
+        ux_metrics = ["csat_score"]
+        ux_scores = {}
+        for metric in ux_metrics:
+            values = [dm.get("user_experience", {}).get(metric) for dm in detailed_metrics_all if dm.get("user_experience")]
+            values = [v for v in values if v is not None]
+            if values:
+                ux_scores[metric] = round(sum(values) / len(values), 4)
+        if ux_scores:
+            averages["user_experience"] = ux_scores
+
+        # traditional_script 子指标
+        traditional_metrics = ["technical_term_simplification"]
+        traditional_scores = {}
+        for metric in traditional_metrics:
+            values = [dm.get("traditional_script", {}).get(metric) for dm in detailed_metrics_all if dm.get("traditional_script")]
+            values = [v for v in values if v is not None]
+            if values:
+                traditional_scores[metric] = round(sum(values) / len(values), 4)
+        if traditional_scores:
+            averages["traditional_script"] = traditional_scores
+
+        # language_consistency 子指标
+        lang_metrics = ["language_match"]
+        lang_scores = {}
+        for metric in lang_metrics:
+            values = [dm.get("language_consistency", {}).get(metric) for dm in detailed_metrics_all if dm.get("language_consistency")]
+            values = [v for v in values if v is not None]
+            if values:
+                lang_scores[metric] = round(sum(values) / len(values), 4)
+        if lang_scores:
+            averages["language_consistency"] = lang_scores
 
         return averages
 
@@ -353,10 +450,6 @@ class SimulationMain:
                             "turn_id": response.assessment.turn_id,
                             "user_message": user_message,
                             "agent_response": agent_response,
-                            "overall_score": response.assessment.overall_score,
-                            "relevance": response.assessment.relevance,
-                            "helpfulness": response.assessment.helpfulness,
-                            "empathy": response.assessment.empathy,
                             "detailed_metrics": response.assessment.detailed_metrics.dict() if response.assessment.detailed_metrics else None,
                             "feedback": response.assessment.feedback
                         })
