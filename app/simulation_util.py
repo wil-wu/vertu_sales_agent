@@ -2,6 +2,7 @@
 提供仿真过程补充检索管道
 """
 
+import json
 import os
 from pandas._config.config import F
 import requests
@@ -66,7 +67,7 @@ class SearchUtil:
                     results.append(response.json())
         return results
 
-if __name__ == "__main__":
+def middle_gen():
     config = {
         "collection_names": ["domestic_e_commerce","domestic_general","oversea_private","preceding_questions"],
         "query_list": ["屏幕分辨率", "屏幕尺寸", "屏幕类型"],
@@ -75,6 +76,11 @@ if __name__ == "__main__":
         "session_count": 800, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
     }
     search_util = SearchUtil(config)
-    # print(search_util.search_faq())
-    # print(search_util.search_graph())
-    print(search_util.search_price())
+    faq = search_util.search_faq()
+    graph = search_util.search_graph()
+    price = search_util.search_price()
+    with open("middle_gen.json", "w", encoding="utf-8") as f:
+        f.write(json.dumps({"faq": faq, "graph": graph, "price": price}, ensure_ascii=False, indent=4))
+
+if __name__ == "__main__":
+    middle_gen()
