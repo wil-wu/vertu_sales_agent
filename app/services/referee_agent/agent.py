@@ -88,16 +88,19 @@ class RefereeAgent:
             request.conversation_history
         )
         
-        # 调用LLM进行评估
+        # 调用LLM进行评估（添加超时保护）
         try:
-            llm_response = await self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": self._system_prompt()},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.3,
-                max_tokens=500
+            llm_response = await asyncio.wait_for(
+                self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": self._system_prompt()},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.3,
+                    max_tokens=500
+                ),
+                timeout=60  # 1分钟超时
             )
             
             evaluation = llm_response.choices[0].message.content
@@ -135,8 +138,14 @@ class RefereeAgent:
                 termination_reason=termination_reason
             )
             
+        except asyncio.TimeoutError:
+            # 超时处理
+            logging.error(f"[RefereeAgent] 评估超时（1分钟），session_id: {request.session_id}")
+            return self._create_error_response("评估超时（1分钟）")
+            
         except Exception as e:
             # 错误处理
+            logging.error(f"[RefereeAgent] 评估失败: {str(e)}, session_id: {request.session_id}")
             return self._create_error_response(str(e))
     
     def _build_evaluation_prompt(
@@ -633,18 +642,21 @@ class RefereeAgent:
             if expected_answer:
                 print(f"[RefereeAgent] 首轮对话找到预期答案，问题: {question[:50]}...")
         
-        # 构建评估提示词并调用LLM
+        # 构建评估提示词并调用LLM（添加超时保护）
         prompt = self._build_evaluation_prompt(question, answer, conversation_history, expected_answer, is_first_turn)
         
         try:
-            llm_response = await self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": self._system_prompt()},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.3,
-                max_tokens=2000  # 增加token以容纳详细指标
+            llm_response = await asyncio.wait_for(
+                self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": self._system_prompt()},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.3,
+                    max_tokens=2000
+                ),
+                timeout=120  # 2分钟超时
             )
             
             evaluation_text = llm_response.choices[0].message.content
@@ -668,8 +680,15 @@ class RefereeAgent:
             result.detailed_metrics = assessment_data.get('detailed_metrics')
             result.feedback = assessment_data['feedback']
             
+        except asyncio.TimeoutError:
+            # LLM调用超时，使用默认值
+            logging.error(f"[RefereeAgent] 第{turn_number}轮评估超时（2分钟），使用默认评分")
+            result = AssessmentResult()
+            result.feedback = f"LLM评估超时（2分钟），使用默认评分"
+            
         except Exception as e:
             # LLM调用失败时使用默认值
+            logging.error(f"[RefereeAgent] 第{turn_number}轮评估失败: {str(e)}")
             result = AssessmentResult()
             result.feedback = f"LLM评估失败，使用默认评分: {str(e)}"
         
@@ -732,6 +751,36 @@ class RefereeAgent:
 
     async def generate_session_summary(self, session_data: dict) -> dict:
         """生成会话摘要 - 包含6大维度37项详细指标汇总 (供router使用)"""
+        try:
+            return await asyncio.wait_for(
+                self._generate_session_summary_impl(session_data),
+                timeout=300  # 5分钟超时
+            )
+        except asyncio.TimeoutError:
+            logging.error(f"[RefereeAgent] 会话摘要生成超时（5分钟），返回空结果")
+            return {
+                "session_id": session_data.get("session_id", ""),
+                "persona": session_data.get("persona", "unknown"),
+                "finish_reason": session_data.get("finish_reason", "timeout"),
+                "total_turns": 0,
+                "detailed_summary": {},
+                "turn_assessments": [],
+                "error": "会话摘要生成超时（5分钟）"
+            }
+        except Exception as e:
+            logging.error(f"[RefereeAgent] 会话摘要生成失败: {str(e)}")
+            return {
+                "session_id": session_data.get("session_id", ""),
+                "persona": session_data.get("persona", "unknown"),
+                "finish_reason": session_data.get("finish_reason", "error"),
+                "total_turns": 0,
+                "detailed_summary": {},
+                "turn_assessments": [],
+                "error": str(e)
+            }
+    
+    async def _generate_session_summary_impl(self, session_data: dict) -> dict:
+        """会话摘要生成的实际实现"""
         conversation = session_data.get("conversation", [])
         session_id = session_data.get("session_id", "")
         

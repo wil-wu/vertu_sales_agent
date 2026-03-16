@@ -1,0 +1,38 @@
+{
+  "report_type": "Token 使用统计报告",
+  "generated_at": "2026-03-16T14:33:09.740211",
+  "log_file": "batch_test_20260316_134723.log",
+  "total_sessions": 7,
+  "summary": {
+    "总输入 Token": 0,
+    "总输出 Token": 0,
+    "总 Token": 0,
+    "API 调用次数": 0,
+    "有 usage 数据的调用": 0,
+    "无 usage 数据的调用": 0
+  },
+  "averages_per_call": {
+    "平均输入 Token (每次调用)": 0,
+    "平均输出 Token (每次调用)": 0,
+    "平均总 Token (每次调用)": 0
+  },
+  "averages_per_session": {
+    "平均输入 Token (每个 Session)": 0,
+    "平均输出 Token (每个 Session)": 0,
+    "平均总 Token (每个 Session)": 0
+  },
+  "raw_stats": {
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_tokens": 0,
+    "api_calls": 0,
+    "calls_with_usage": 0,
+    "calls_without_usage": 0,
+    "avg_input_tokens_per_call": 0,
+    "avg_output_tokens_per_call": 0,
+    "avg_total_tokens_per_call": 0,
+    "avg_input_tokens_per_session": 0,
+    "avg_output_tokens_per_session": 0,
+    "avg_total_tokens_per_session": 0
+  }
+}

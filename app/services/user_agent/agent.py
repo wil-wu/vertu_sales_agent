@@ -307,9 +307,12 @@ class UserAgent:
                 logger.info(f"=== [AGENT] 第 {state.turn_count} 轮对话 ===")
 
                 try:
-                    # 调用Target Bot API
+                    # 调用Target Bot API（添加超时保护）
                     platform_info = state.platform if state.platform else "任意平台"
-                    response = await self._call_target_bot(client, current_question, state.session_id, state.user_id, platform_info, state.region)
+                    response = await asyncio.wait_for(
+                        self._call_target_bot(client, current_question, state.session_id, state.user_id, platform_info, state.region),
+                        timeout=180  # 3分钟超时
+                    )
                     bot_answer = response["message"]
 
                     # 记录对话历史（包含预期答案）
@@ -330,17 +333,23 @@ class UserAgent:
                         "timestamp": datetime.now().isoformat()
                     })
 
-                    # 检查终止条件
-                    reason = await self._check_termination_conditions(state, bot_answer)
+                    # 检查终止条件（添加超时保护）
+                    reason = await asyncio.wait_for(
+                        self._check_termination_conditions(state, bot_answer),
+                        timeout=60  # 1分钟超时
+                    )
                     if reason:
                         state.finish_reason = reason
                         logger.info(f"=== [AGENT] 对话结束 - 原因: {reason} ===")
                         break
 
-                    # 根据推理行动策略生成下一轮问题
+                    # 根据推理行动策略生成下一轮问题（添加超时保护）
                     if state.turn_count < state.max_turns:
-                        qa_result = await self._generate_next_question_with_answer(
-                            state, bot_answer, current_question
+                        qa_result = await asyncio.wait_for(
+                            self._generate_next_question_with_answer(
+                                state, bot_answer, current_question
+                            ),
+                            timeout=120  # 2分钟超时
                         )
                         current_question = qa_result["question"]
                         current_expected_answer = qa_result.get("expected_answer")
@@ -348,6 +357,11 @@ class UserAgent:
 
                     await asyncio.sleep(0.5)  # 避免过快请求
 
+                except asyncio.TimeoutError:
+                    logger.error(f"=== [AGENT] 第 {state.turn_count} 轮对话超时 ===")
+                    state.finish_reason = "timeout"
+                    state.finish_reason_description = f"第{state.turn_count}轮对话超时"
+                    break
                 except Exception as e:
                     logger.error(f"=== [AGENT] 第 {state.turn_count} 轮对话失败: {e} ===")
                     state.finish_reason = f"error_{e}"
@@ -514,7 +528,13 @@ class UserAgent:
         return faq_items
 
     def _format_knowledge_pool(self, knowledge_pool: Dict[str, Any]) -> str:
-        """格式化知识池为提示词文本"""
+        """格式化知识池为提示词文本
+        
+        适配 middle_gen.json 的实际格式：
+        - FAQ: [{"search_info": ..., "categories": [{"items": [{"question": ..., "answer": ...}]}]}]
+        - 图谱: [{"code": ..., "data": {"result": [{"p": {...}, "关系类型": ..., "n": {...}}]}}]
+        - 价格: {"hits": [...], "page": ..., "total_hits": ...}
+        """
         if not knowledge_pool:
             return ""
 
@@ -532,39 +552,87 @@ class UserAgent:
             ])
             sections.append(f"### FAQ 知识\n{faq_text}")
 
-        # 价格信息 - 支持两种格式
-        price_data = knowledge_pool.get("price", [])
+        # 价格信息 - 支持 hits 格式
+        price_data = knowledge_pool.get("price", {})
         price_items = []
         if isinstance(price_data, dict) and "hits" in price_data:
-            # 新格式：包含 hits 的字典
             price_items = price_data.get("hits", [])
         elif isinstance(price_data, list):
-            # 旧格式：直接是列表
             price_items = price_data
         
         if price_items:
             price_text = "\n".join([
-                f"- {item.get('name', '')}: {item.get('price', 'N/A')}"
+                f"- {item.get('name', item.get('SKU', '未知产品'))}: {item.get('price', item.get('Price', '价格面议'))}"
                 for item in price_items[:5]
             ])
             sections.append(f"### 价格信息\n{price_text}")
 
-        # 图谱知识 - 支持两种格式
+        # 图谱知识 - 适配实际格式 [{"data": {"result": [{"p": {...}, "n": {...}}]}}]
         graph_data = knowledge_pool.get("graph", [])
-        graph_items = []
-        if isinstance(graph_data, dict) and "hits" in graph_data:
-            # 新格式：包含 hits 的字典
-            graph_items = graph_data.get("hits", [])
-        elif isinstance(graph_data, list):
-            # 旧格式：直接是列表
-            graph_items = graph_data
+        graph_lines = []
         
-        if graph_items:
-            graph_text = "\n".join([
-                f"- {item.get('subject', '')} -> {item.get('predicate', '')} -> {item.get('object', '')}"
-                for item in graph_items[:5]
-            ])
-            sections.append(f"### 图谱知识\n{graph_text}")
+        if isinstance(graph_data, list):
+            for graph_entry in graph_data[:3]:  # 最多处理3个graph条目
+                if isinstance(graph_entry, dict) and "data" in graph_entry:
+                    data = graph_entry.get("data", {})
+                    results = data.get("result", [])
+                    
+                    for result in results[:5]:  # 每个graph最多5条结果
+                        if isinstance(result, dict):
+                            # 提取主节点(p)信息
+                            p_data = result.get("p", {})
+                            # 提取关系类型
+                            relation = result.get("关系类型", "")
+                            # 提取相邻节点(n)信息
+                            n_data = result.get("n", {})
+                            
+                            # 格式化输出
+                            if p_data:
+                                model_name = p_data.get("ModelName", "")
+                                if model_name:
+                                    line_parts = [f"- {model_name}"]
+                                    
+                                    # 添加关键属性
+                                    attrs = []
+                                    if "ScreenSize" in p_data:
+                                        attrs.append(f"屏幕:{p_data['ScreenSize']}")
+                                    if "ScreenType" in p_data:
+                                        attrs.append(f"屏幕类型:{p_data['ScreenType']}")
+                                    if "BatteryCapacity" in p_data:
+                                        attrs.append(f"电池:{p_data['BatteryCapacity']}")
+                                    if "OperatingSystem" in p_data:
+                                        attrs.append(f"系统:{p_data['OperatingSystem']}")
+                                    
+                                    if attrs:
+                                        line_parts.append(" | ".join(attrs))
+                                    
+                                    # 添加变体信息(n)
+                                    if n_data and isinstance(n_data, dict):
+                                        variant_parts = []
+                                        if "FrameColor" in n_data:
+                                            variant_parts.append(f"边框:{n_data['FrameColor']}")
+                                        if "CoverColor" in n_data:
+                                            variant_parts.append(f"背盖:{n_data['CoverColor']}")
+                                        if "Storage" in n_data:
+                                            variant_parts.append(f"存储:{n_data['Storage']}")
+                                        if "Ram" in n_data:
+                                            variant_parts.append(f"内存:{n_data['Ram']}")
+                                        if "SKU" in n_data:
+                                            sku = n_data['SKU']
+                                            if len(sku) > 30:
+                                                sku = sku[:30] + "..."
+                                            variant_parts.append(f"SKU:{sku}")
+                                        
+                                        if variant_parts:
+                                            line_parts.append(f"[变体: {' | '.join(variant_parts)}]")
+                                    
+                                    graph_lines.append(" ".join(line_parts))
+        
+        if graph_lines:
+            # 去重并限制数量
+            unique_lines = list(dict.fromkeys(graph_lines))[:10]
+            graph_text = "\n".join(unique_lines)
+            sections.append(f"### 产品图谱\n{graph_text}")
 
         if not sections:
             return ""

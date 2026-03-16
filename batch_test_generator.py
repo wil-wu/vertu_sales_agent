@@ -28,13 +28,12 @@ import asyncio
 import sys
 import argparse
 import logging
-import re
+import traceback
 from pathlib import Path 
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, asdict
 from concurrent.futures import ThreadPoolExecutor
-import traceback
 import functools
 
 # 异步函数专用的 retry 装饰器
@@ -245,6 +244,12 @@ class PersonaSummary:
     
     # 语言一致性统计
     language_consistency_stats: Dict[str, Any] = None
+    
+    # 评估状态分布（新增）
+    evaluation_status: Dict[str, int] = None
+    
+    # 评估失败的 session 信息（新增）
+    failed_sessions: List[Dict[str, Any]] = None
 
 
 class BatchTestRunner:
@@ -317,15 +322,15 @@ class BatchTestRunner:
             logger.error(f"加载知识池文件失败: {e}")
             return {}
     
-    def _generate_mock_knowledge_pool(self, persona: str, scenario: str) -> Dict[str, Any]:
-        """生成 Mock 知识池数据，根据人格和场景筛选相关内容
+    def _generate_knowledge_pool(self, persona: str, scenario: str) -> Dict[str, Any]:
+        """根据人格和场景筛选知识池内容
         
         Args:
             persona: 人格名称
             scenario: 测试场景描述
         
         Returns:
-            知识池数据 {"faq": [...], "price": [...], "graph": [...]}
+            筛选后的知识池数据 {"faq": [...], "price": [...], "graph": [...]}
         """
         # 获取人格配置
         persona_config = get_persona_config(persona)
@@ -343,7 +348,7 @@ class BatchTestRunner:
         # 获取当前场景对应的意图类别
         scenario_intents = scenario_to_intent.get(scenario, [])
         
-        # 如果已加载外部知识池文件，根据人格和场景筛选
+        # 使用外部知识池文件，根据人格和场景筛选
         if self._knowledge_pool_cache:
             logger.info(f"使用外部知识池文件: {self.knowledge_pool_file}, 人格: {persona}, 场景: {scenario}")
             return self._filter_knowledge_pool_by_persona_and_scenario(
@@ -354,85 +359,20 @@ class BatchTestRunner:
                 scenario_intents
             )
         
-        # 根据场景选择相关的 FAQ (Mock 数据)
-        faq_data = {
-            "咨询VERTU手机的产品特性和价格": [
-                {"question": "VERTU手机有什么特别之处？", "answer": "VERTU手机采用顶级材质，如蓝宝石屏幕、钛合金机身、小牛皮背板，每部手机都是手工打造，并提供24小时私人管家服务。"},
-                {"question": "VERTU手机的价格是多少？", "answer": "VERTU手机价格从几万元到几十万元不等，具体取决于型号和材质配置。经典款约3-5万，限量款可达20万以上。"},
-                {"question": "VERTU手机支持5G吗？", "answer": "是的，最新款VERTU手机支持5G网络，同时也支持4G/3G/2G网络。"},
-            ],
-            "了解VERTU售后服务和保修政策": [
-                {"question": "VERTU手机的保修期是多久？", "answer": "VERTU手机提供2年全球联保服务，包括免费维修和更换配件。"},
-                {"question": "VERTU有上门维修服务吗？", "answer": "是的，VERTU提供VIP上门维修服务，您可以通过私人管家预约。"},
-                {"question": "VERTU手机维修需要多长时间？", "answer": "一般维修需要7-15个工作日，紧急维修可加快处理。"},
-            ],
-            "犹豫是否购买VERTU手机，需要更多购买建议": [
-                {"question": "VERTU手机适合什么样的人使用？", "answer": "VERTU手机适合追求品质生活、注重隐私安全、需要高端商务服务的成功人士。"},
-                {"question": "VERTU和其他奢侈手机品牌有什么区别？", "answer": "VERTU的独特之处在于24小时私人管家服务、手工打造工艺、以及顶级材质的使用。"},
-                {"question": "购买VERTU手机有哪些支付方式？", "answer": "支持银行转账、信用卡、支付宝、微信支付等多种支付方式，也支持分期付款。"},
-            ],
-            "将VERTU手机与其他品牌竞品进行对比": [
-                {"question": "VERTU和iPhone有什么区别？", "answer": "VERTU主打奢侈定位和私人服务，iPhone主打科技创新。VERTU使用顶级材质和手工打造，提供24小时管家服务。"},
-                {"question": "VERTU和华为保时捷设计版哪个更好？", "answer": "两者都是高端定位，VERTU更注重奢华材质和私人服务，华为保时捷设计版更注重科技创新。选择取决于您的个人偏好。"},
-            ],
-            "与客服闲聊，了解VERTU品牌故事和高端服务": [
-                {"question": "VERTU品牌的历史是什么？", "answer": "VERTU成立于1998年，总部位于英国，是全球首个奢侈手机品牌，以手工打造和顶级材质闻名。"},
-                {"question": "VERTU的私人管家服务包括什么？", "answer": "私人管家服务包括24小时多语言支持、餐厅预订、机票酒店预订、紧急救援等高端生活服务。"},
-                {"question": "VERTU手机是哪里生产的？", "answer": "VERTU手机在英国设计，由经验丰富的工匠手工组装，每部手机都经过严格的质量检测。"},
-            ],
-        }
-        
-        # 默认 FAQ
-        default_faq = [
-            {"question": "VERTU手机有什么特别之处？", "answer": "VERTU手机采用顶级材质，如蓝宝石屏幕、钛合金机身、小牛皮背板，每部手机都是手工打造，并提供24小时私人管家服务。"},
-            {"question": "VERTU手机的价格是多少？", "answer": "VERTU手机价格从几万元到几十万元不等，具体取决于型号和材质配置。"},
-        ]
-        
-        # 价格数据
-        price_data = [
-            {"name": "VERTU SIGNATURE V", "price": 298000},
-            {"name": "VERTU ASTER P", "price": 88000},
-            {"name": "VERTU VISION", "price": 128000},
-            {"name": "VERTU iVERTU", "price": 45800},
-        ]
-        
-        # 图谱数据
-        graph_data = [
-            {
-                "entity": "VERTU SIGNATURE",
-                "properties": {
-                    "material": "蓝宝石屏幕、钛合金机身",
-                    "service": "24小时私人管家",
-                    "origin": "英国手工打造"
-                }
-            },
-            {
-                "entity": "VERTU 私人管家服务",
-                "properties": {
-                    "availability": "24/7全天候",
-                    "languages": "多语言支持",
-                    "services": "餐厅预订、机票酒店、紧急救援"
-                }
-            },
-        ]
-        
-        # 获取对应场景的 FAQ，如果没有则使用默认
-        faq_results = faq_data.get(scenario, default_faq)
-        
-        knowledge_pool = {
-            "faq": faq_results,
-            "price": price_data,
-            "graph": graph_data,
+        # 如果没有加载知识池文件，返回空知识池（需要用户提供知识池文件）
+        logger.error(f"未加载知识池文件，无法生成知识池。请使用 --knowledge-pool 参数提供知识池文件")
+        return {
+            "faq": [],
+            "price": [],
+            "graph": [],
             "metadata": {
                 "scenario": scenario,
                 "persona": persona,
                 "preferred_categories": preferred_categories,
+                "error": "未加载知识池文件",
                 "generated_at": datetime.now().isoformat()
             }
         }
-        
-        logger.info(f"[MOCK] 生成知识池 - 人格: {persona}, 场景: {scenario}, FAQ: {len(faq_results)}条, 价格: {len(price_data)}条, 图谱: {len(graph_data)}条")
-        return knowledge_pool
     
     def _filter_knowledge_pool_by_persona_and_scenario(
         self, 
@@ -504,10 +444,17 @@ class BatchTestRunner:
         logger.info(f"筛选后知识池 - 人格: {persona}, 场景: {scenario}, FAQ: {faq_count}条, 价格: {price_count}条, 图谱: {graph_count}条")
         return filtered_pool
     
-    @retry_async(tries=3, delay=1, backoff=2, logger=logger)
+    @retry_async(tries=2, delay=0.5, backoff=1.5, logger=logger)
     async def _call_referee_with_retry(self, session_data: Dict[str, Any]) -> Dict[str, Any]:
-        """调用 Referee Agent 评估会话（带重试）"""
-        return await self.referee.generate_session_summary(session_data)
+        """调用 Referee Agent 评估会话（带重试和超时）"""
+        try:
+            return await asyncio.wait_for(
+                self.referee.generate_session_summary(session_data),
+                timeout=300  # 5分钟超时
+            )
+        except asyncio.TimeoutError:
+            logger.error(f"Referee Agent 评估超时（5分钟）")
+            raise
         
     async def run_single_session(
         self, 
@@ -531,7 +478,7 @@ class BatchTestRunner:
             )
             
             # 生成 mock 知识池（根据人格和场景筛选）
-            knowledge_pool = self._generate_mock_knowledge_pool(persona, scenario)
+            knowledge_pool = self._generate_knowledge_pool(persona, scenario)
             
             # 运行仿真（传入知识池）
             session_data = await user_agent.start_simulation(
@@ -652,9 +599,55 @@ class BatchTestRunner:
             logger.info(f"[{session_id}] 完成 - 轮数: {result.total_turns}, 耗时: {duration:.1f}s")
             return result
             
+        except asyncio.CancelledError:
+            duration = (datetime.now() - start_time).total_seconds()
+            logger.error(f"[{session_id}] 任务被取消（超时）")
+            return TestResult(
+                session_id=session_id,
+                persona=persona,
+                scenario=scenario,
+                finish_reason="cancelled",
+                total_turns=0,
+                duration_seconds=duration,
+                dimension_scores={},
+                user_anthropomorphism={},
+                agent_anthropomorphism={},
+                purchase_intent={},
+                problem_solving={},
+                sales_script={},
+                user_experience={},
+                traditional_script={},
+                language_consistency={},
+                turn_assessments=[],
+                error="任务被取消（超时）"
+            )
+        except asyncio.TimeoutError:
+            duration = (datetime.now() - start_time).total_seconds()
+            logger.error(f"[{session_id}] 超时: {e}")
+            return TestResult(
+                session_id=session_id,
+                persona=persona,
+                scenario=scenario,
+                finish_reason="timeout",
+                total_turns=0,
+                duration_seconds=duration,
+                dimension_scores={},
+                user_anthropomorphism={},
+                agent_anthropomorphism={},
+                purchase_intent={},
+                problem_solving={},
+                sales_script={},
+                user_experience={},
+                traditional_script={},
+                language_consistency={},
+                turn_assessments=[],
+                error=str(e) if e else "超时"
+            )
         except Exception as e:
             duration = (datetime.now() - start_time).total_seconds()
             logger.error(f"[{session_id}] 失败: {e}")
+            logger.error(f"[{session_id}] 异常类型: {type(e).__name__}")
+            logger.error(f"[{session_id}] 异常详情: {traceback.format_exc()}")
             
             return TestResult(
                 session_id=session_id,
@@ -673,7 +666,7 @@ class BatchTestRunner:
                 traditional_script={},
                 language_consistency={},
                 turn_assessments=[],
-                error=str(e)
+                error=str(e) if e else "未知错误"
             )
     
     async def run_persona_batch(
@@ -682,7 +675,7 @@ class BatchTestRunner:
         num_sessions: int, 
         max_turns: int
     ) -> List[TestResult]:
-        """运行单个人格的批量测试"""
+        """运行单个人格的批量测试（添加超时和异常处理，每个session完成后立即写入）"""
         logger.info(f"\n{'='*60}")
         logger.info(f"开始测试人格: {persona} ({get_persona_config(persona).description})")
         logger.info(f"计划生成对话数: {num_sessions}")
@@ -697,6 +690,9 @@ class BatchTestRunner:
             f"与客服闲聊，了解VERTU品牌故事和高端服务",
         ]
         
+        # 初始化该人格的结果文件
+        self._init_persona_results_file(Path(self.output_dir), persona)
+        
         tasks = []
         for i in range(num_sessions):
             scenario = base_scenarios[i % len(base_scenarios)]
@@ -706,15 +702,81 @@ class BatchTestRunner:
         # 使用信号量控制并发数
         semaphore = asyncio.Semaphore(self.max_parallel)
         
-        async def run_with_semaphore(task):
+        async def run_with_semaphore(task, index):
             async with semaphore:
-                return await task
+                try:
+                    result = await task
+                    # 每个session完成后立即写入文件
+                    if result is not None:
+                        self._append_persona_result(Path(self.output_dir), persona, result)
+                        logger.info(f"[{persona}] 进度: {index + 1}/{num_sessions} - Session {result.session_id} 已保存")
+                    return result
+                except asyncio.CancelledError:
+                    logger.error(f"任务被取消（超时）")
+                    return None
+                except Exception as e:
+                    logger.error(f"任务执行失败: {e}")
+                    return None
         
-        # 并发执行所有任务
-        results = await asyncio.gather(*[run_with_semaphore(t) for t in tasks])
+        # 并发执行所有任务（添加超时和异常处理）
+        try:
+            results = await asyncio.wait_for(
+                asyncio.gather(*[run_with_semaphore(t, i) for i, t in enumerate(tasks)], return_exceptions=True),
+                timeout=3600  # 1小时超时
+            )
+        except asyncio.TimeoutError:
+            logger.error(f"人格 {persona} 测试超时（1小时），部分任务未完成")
+            # 取消所有未完成的任务
+            for task in tasks:
+                if not task.done():
+                    task.cancel()
+            # 只收集已完成的结果
+            results = [t.result() if t.done() else None for t in tasks]
         
-        logger.info(f"人格 {persona} 测试完成: {len(results)} 条对话")
-        return results
+        # 过滤掉失败的结果和异常
+        valid_results = []
+        for result in results:
+            if isinstance(result, Exception):
+                logger.error(f"任务异常: {result}")
+            elif result is not None:
+                valid_results.append(result)
+        
+        logger.info(f"人格 {persona} 测试完成: {len(valid_results)} 条对话成功")
+        return valid_results
+    
+    def _init_persona_results_file(self, output_dir: Path, persona: str):
+        """初始化人格结果文件（如果不存在则创建）"""
+        output_dir.mkdir(parents=True, exist_ok=True)
+        persona_file = output_dir / f"{persona}_detailed.json"
+        
+        if not persona_file.exists():
+            data = {
+                "persona": persona,
+                "description": get_persona_config(persona).description if get_persona_config(persona) else "",
+                "generated_at": datetime.now().isoformat(),
+                "total_sessions": 0,
+                "sessions": []
+            }
+            with open(persona_file, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            logger.info(f"[{persona}] 初始化结果文件: {persona_file}")
+    
+    def _append_persona_result(self, output_dir: Path, persona: str, result: TestResult):
+        """追加单个session的结果到人格结果文件"""
+        persona_file = output_dir / f"{persona}_detailed.json"
+        
+        # 读取现有数据
+        with open(persona_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # 追加新结果
+        data["sessions"].append(asdict(result))
+        data["total_sessions"] = len(data["sessions"])
+        data["updated_at"] = datetime.now().isoformat()
+        
+        # 保存
+        with open(persona_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
     
     def calculate_persona_summary(self, results: List[TestResult]) -> PersonaSummary:
         """计算单个人格的汇总统计"""
@@ -724,17 +786,19 @@ class BatchTestRunner:
         persona = results[0].persona
         config = get_persona_config(persona)
         
-        successful = [r for r in results if r.error is None]
-        failed = [r for r in results if r.error is not None]
+        # 成功的定义：没有 error 且 dimension_scores 不为空（有评估结果）
+        successful = [r for r in results if r.error is None and r.dimension_scores]
+        # 失败的定义：有 error 或 dimension_scores 为空（评估失败）
+        failed = [r for r in results if r.error is not None or not r.dimension_scores]
         
-        # 计算平均维度评分
+        # 计算平均维度评分（只包含有评估结果的 session）
         avg_scores = {}
         if successful:
             all_scores = [r.dimension_scores for r in successful if r.dimension_scores]
             if all_scores:
                 score_keys = all_scores[0].keys()
                 for key in score_keys:
-                    values = [s.get(key, 0) for s in all_scores if key in s]
+                    values = [s.get(key, 0) for s in all_scores if key in s and s.get(key, 0) > 0]
                     avg_scores[key] = round(sum(values) / len(values), 2) if values else 0
         
         # 将维度评分转换为中文
@@ -746,13 +810,19 @@ class BatchTestRunner:
             reason = r.finish_reason
             finish_reasons[reason] = finish_reasons.get(reason, 0) + 1
         
-        # 平均轮数
+        # 添加评估状态分布
+        evaluation_status = {
+            "评估成功": len(successful),
+            "评估失败": len(failed)
+        }
+        
+        # 平均轮数（只统计成功的 session）
         avg_turns = sum(r.total_turns for r in successful) / len(successful) if successful else 0
         
         # 总耗时
         total_duration = sum(r.duration_seconds for r in results)
         
-        # 计算首次解决率统计
+        # 计算首次解决率统计（只统计成功的 session）
         fcr_stats = None
         if successful:
             # 统计有预期答案的session数量
@@ -771,7 +841,7 @@ class BatchTestRunner:
                 "无预期答案的会话": len(successful) - total_with_expected
             }
         
-        # 计算语言一致性统计
+        # 计算语言一致性统计（只统计成功的 session）
         lc_stats = None
         if successful:
             # 统计语言一致的session数量
@@ -792,6 +862,16 @@ class BatchTestRunner:
                 "语言一致性得分": lc_score
             }
         
+        # 记录评估失败的 session 信息
+        failed_sessions_info = []
+        for r in failed:
+            failed_sessions_info.append({
+                "session_id": r.session_id,
+                "finish_reason": r.finish_reason,
+                "total_turns": r.total_turns,
+                "error": r.error or "评估结果为空"
+            })
+        
         return PersonaSummary(
             persona=persona,
             description=config.description if config else "",
@@ -803,7 +883,9 @@ class BatchTestRunner:
             avg_turns=round(avg_turns, 2),
             total_duration=round(total_duration, 2),
             first_contact_resolution_stats=fcr_stats,
-            language_consistency_stats=lc_stats
+            language_consistency_stats=lc_stats,
+            evaluation_status=evaluation_status,
+            failed_sessions=failed_sessions_info if failed_sessions_info else None
         )
     
     async def run_all_tests(
@@ -831,22 +913,52 @@ class BatchTestRunner:
         
         # 为每个人格运行测试
         for persona in personas:
-            results = await self.run_persona_batch(
-                persona, 
-                sessions_per_persona, 
-                max_turns
-            )
-            all_results.extend(results)
-            
-            # 计算该人格的汇总
-            summary = self.calculate_persona_summary(results)
-            all_summaries.append(summary)
-            
-            # 保存单个人格的详细结果
-            self.save_persona_results(Path(self.output_dir), persona, results)
-            
-            # 保存中间结果
-            self.save_intermediate_results(all_results, all_summaries, Path(self.output_dir))
+            try:
+                results = await self.run_persona_batch(
+                        persona, 
+                        sessions_per_persona, 
+                        max_turns
+                )
+                all_results.extend(results)
+                
+                # 计算该人格的汇总
+                summary = self.calculate_persona_summary(results)
+                all_summaries.append(summary)
+                
+                # 保存中间结果（详细结果已在run_persona_batch中实时写入）
+                self.save_intermediate_results(all_results, all_summaries, Path(self.output_dir))
+            except Exception as e:
+                # 检测到 API key 余额不足等严重错误
+                error_msg = str(e).lower()
+                if "insufficient balance" in error_msg or "exceeded_current_quota" in error_msg or "error code: 429" in error_msg:
+                    logger.error(f"检测到 API key 余额不足或其他严重错误: {e}")
+                    logger.info(f"已生成 {len(all_results)} 个 session，正在生成最终报告...")
+                    
+                    # 基于已生成的数据生成最终报告
+                    report = self.generate_final_report(all_results, all_summaries)
+                    
+                    # 添加错误信息到报告
+                    report["_interrupted"] = {
+                        "reason": "API key 余额不足或严重错误",
+                        "error": str(e),
+                        "completed_sessions": len(all_results),
+                        "completed_personas": len(all_summaries)
+                    }
+                    
+                    # 保存最终报告
+                    output_file = Path(self.output_dir) / "full_report.json"
+                    with open(output_file, 'w', encoding='utf-8') as f:
+                        json.dump(report, f, ensure_ascii=False, indent=2)
+                    
+                    logger.info(f"最终报告已保存: {output_file}")
+                    logger.info(f"已完成的 session 数: {len(all_results)}")
+                    logger.info(f"已完成的人格数: {len(all_summaries)}")
+                    
+                    return report
+                else:
+                    # 其他错误，继续尝试下一个人格
+                    logger.error(f"人格 {persona} 运行失败: {e}")
+                    continue
         
         # 生成最终报告
         return self.generate_final_report(all_results, all_summaries)
@@ -891,7 +1003,52 @@ class BatchTestRunner:
         results: List[TestResult], 
         summaries: List[PersonaSummary]
     ) -> Dict[str, Any]:
-        """生成最终报告"""
+        """生成最终报告（从各人格详细文件读取数据）"""
+        
+        # 从文件读取各人格的详细数据
+        all_results_from_files = []
+        all_summaries_from_files = []
+        
+        output_dir = Path(self.output_dir)
+        personas = get_all_persona_names()
+        
+        logger.info("正在从各人格详细文件读取数据生成最终报告...")
+        
+        for persona in personas:
+            persona_file = output_dir / f"{persona}_detailed.json"
+            if persona_file.exists():
+                try:
+                    with open(persona_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # 读取该人格的所有 session
+                    sessions = data.get("sessions", [])
+                    
+                    # 转换为 TestResult 对象
+                    for session_data in sessions:
+                        result = TestResult(**session_data)
+                        all_results_from_files.append(result)
+                    
+                    # 计算该人格的汇总
+                    if sessions:
+                        summary = self.calculate_persona_summary_from_data(persona, sessions)
+                        if summary:
+                            all_summaries_from_files.append(summary)
+                    
+                    logger.info(f"[{persona}] 从文件读取了 {len(sessions)} 个 session")
+                    
+                except Exception as e:
+                    logger.error(f"[{persona}] 读取详细文件失败: {e}")
+            else:
+                logger.warning(f"[{persona}] 详细文件不存在: {persona_file}")
+        
+        # 使用从文件读取的数据（如果没有则从内存获取）
+        if all_results_from_files:
+            results = all_results_from_files
+            summaries = all_summaries_from_files
+            logger.info(f"最终报告使用文件数据: {len(results)} 个 session")
+        else:
+            logger.warning("未从文件读取到数据，使用内存数据")
         
         # 计算总体统计
         total_sessions = len(results)
@@ -952,6 +1109,110 @@ class BatchTestRunner:
         }
         
         return report
+    
+    def calculate_persona_summary_from_data(self, persona: str, sessions: List[Dict]) -> Optional[PersonaSummary]:
+        """从文件数据计算单个人格的汇总统计"""
+        if not sessions:
+            return None
+        
+        config = get_persona_config(persona)
+        
+        # 区分成功和失败的 session
+        # 成功的定义：没有 error 且 dimension_scores 不为空（有评估结果）
+        successful = [s for s in sessions if not s.get("error") and s.get("dimension_scores")]
+        # 失败的定义：有 error 或 dimension_scores 为空（评估失败）
+        failed = [s for s in sessions if s.get("error") or not s.get("dimension_scores")]
+        
+        # 计算平均维度评分（只包含有评估结果的 session）
+        avg_scores = {}
+        if successful:
+            all_scores = [s.get("dimension_scores", {}) for s in successful]
+            if all_scores and all_scores[0]:
+                score_keys = all_scores[0].keys()
+                for key in score_keys:
+                    values = [s.get(key, 0) for s in all_scores if key in s and s.get(key, 0) > 0]
+                    avg_scores[key] = round(sum(values) / len(values), 2) if values else 0
+        
+        # 将维度评分转换为中文
+        avg_scores_chinese = convert_scores_to_chinese(avg_scores)
+        
+        # 结束原因分布
+        finish_reasons = {}
+        for s in sessions:
+            reason = s.get("finish_reason", "unknown")
+            finish_reasons[reason] = finish_reasons.get(reason, 0) + 1
+        
+        # 添加评估状态分布
+        evaluation_status = {
+            "评估成功": len(successful),
+            "评估失败": len(failed)
+        }
+        
+        # 平均轮数（只统计成功的 session）
+        avg_turns = sum(s.get("total_turns", 0) for s in successful) / len(successful) if successful else 0
+        
+        # 总耗时
+        total_duration = sum(s.get("duration_seconds", 0) for s in sessions)
+        
+        # 计算首次解决率统计（只统计成功的 session）
+        fcr_stats = None
+        if successful:
+            sessions_with_expected = [s for s in successful if s.get("first_turn_qa_comparison", {}).get("expected_answer")]
+            sessions_fcr_true = [s for s in successful if s.get("first_turn_qa_comparison", {}).get("first_contact_resolution") == True]
+            
+            total_with_expected = len(sessions_with_expected)
+            total_fcr_true = len(sessions_fcr_true)
+            
+            fcr_stats = {
+                "总会话数": len(successful),
+                "有预期答案的会话": total_with_expected,
+                "首次解决成功": total_fcr_true,
+                "首次解决率": round(total_fcr_true / total_with_expected * 100, 2) if total_with_expected > 0 else 0.0,
+                "无预期答案的会话": len(successful) - total_with_expected
+            }
+        
+        # 计算语言一致性统计（只统计成功的 session）
+        lc_stats = None
+        if successful:
+            sessions_language_match = [s for s in successful if s.get("language_consistency", {}).get("language_match") == True]
+            sessions_language_mismatch = [s for s in successful if s.get("language_consistency", {}).get("language_match") == False]
+            
+            total_match = len(sessions_language_match)
+            total_mismatch = len(sessions_language_mismatch)
+            lc_score = round(total_match / len(successful) * 100, 2) if successful else 0.0
+            
+            lc_stats = {
+                "总会话数": len(successful),
+                "语言一致": total_match,
+                "语言不一致": total_mismatch,
+                "语言一致性得分": lc_score
+            }
+        
+        # 记录评估失败的 session 信息
+        failed_sessions_info = []
+        for s in failed:
+            failed_sessions_info.append({
+                "session_id": s.get("session_id", ""),
+                "finish_reason": s.get("finish_reason", "unknown"),
+                "total_turns": s.get("total_turns", 0),
+                "error": s.get("error") or "评估结果为空"
+            })
+        
+        return PersonaSummary(
+            persona=persona,
+            description=config.description if config else "",
+            total_sessions=len(sessions),
+            successful_evaluations=len(successful),
+            failed_evaluations=len(failed),
+            avg_dimension_scores=avg_scores_chinese,
+            finish_reason_distribution=finish_reasons,
+            avg_turns=round(avg_turns, 2),
+            total_duration=round(total_duration, 2),
+            first_contact_resolution_stats=fcr_stats,
+            language_consistency_stats=lc_stats,
+            evaluation_status=evaluation_status,
+            failed_sessions=failed_sessions_info if failed_sessions_info else None
+        )
 
 
 def convert_scores_to_chinese(scores: Dict[str, float]) -> Dict[str, float]:
