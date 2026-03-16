@@ -21,16 +21,22 @@
 """
 
 
+import sys
+from pathlib import Path
+
+# 添加项目根目录到 Python 路径
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import random
 import asyncio
 from typing import List, Dict, Any
-from pathlib import Path
 from datetime import datetime
 import json
 
 from app.services.user_agent.user_config import get_all_persona_names
 from app.services.user_agent.agent import UserAgent
-from app.services.referee_agent.agent import RefereeAgent, load_qa_csv
+from app.services.referee_agent.agent import RefereeAgent
 from app.services.referee_agent.schemas import RefereeRequest
 from app.simulation_util import SearchUtil
 
@@ -67,11 +73,8 @@ class SimulationMain:
         # 根据输入参数 执行检索管道知识检索 检索结果形成知识子集
         knowledge_subset = self.search_knowledge()
 
-        # 根据知识子集 随机组合20份知识 形成知识池
-        knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
-
         # 根据知识池 用户维度画像(1/7维) 用户意图场景(1/5维) 组合知识池 增量上下文 生产用户问题 + 预期答案 调用AI sales Agent 保持后续流程一致
-        session_results = self.generate_session_simulation(knowledge_pool)
+        session_results = self.generate_session_simulation(knowledge_subset)
 
         # 保存仿真结果
         self._save_results(session_results)
@@ -321,7 +324,7 @@ class SimulationMain:
 
     # 注意: search_knowledge() 和 generate_session_knowledge_pool() 方法从远程分支合并
 
-    def generate_session_simulation(self, session_knowledge_pool: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         单个session仿真
         - 从七个人格中随机选择一个
@@ -334,10 +337,17 @@ class SimulationMain:
 
         Returns:
             仿真结果列表，包含每个session的对话记录和评估结果
+
+        # 保持单session 
+        # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
+        # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
+        # 组合上下文 一起调用 referee Agent -> 保存到输出目录
         """
         results = []
+        session_count = self.config.get("session_count", 1)
 
-        for session_idx, knowledge_pool in enumerate(session_knowledge_pool):
+        for session_idx in range(session_count):
+            knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
             # 随机选择人格和场景
             persona = random.choice(self.PERSONAS)
             scenario = random.choice(self.SCENARIOS)
@@ -500,18 +510,18 @@ class SimulationMain:
             })
         return knowledge_pool
 
-    def generate_session_simulation(self, session_knowledge_pool):
-        # 保持单session 
-        # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
-        # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
-        # 组合上下文 一起调用 referee Agent -> 保存到输出目录
-        pass
-
 if __name__ == "__main__":
+    # config = {
+    #     "channel": "国内",
+    #     "dimensions": ["维度1", "维度2", "维度3"],
+    #     "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+    # }
     config = {
-        "channel": "国内",
-        "dimensions": ["维度1", "维度2", "维度3"],
-        "session_count": 800, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+        "collection_names": ["domestic_e_commerce","domestic_general","oversea_private","preceding_questions"],
+        "query_list": ["屏幕分辨率", "屏幕尺寸", "屏幕类型"],
+        "product_names": ["VERTU AGENT Q"],
+        "max_path_len": 2,
+        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
     }
     excute_config = {
         "max-turns": 10, # 每轮对话最大轮数
