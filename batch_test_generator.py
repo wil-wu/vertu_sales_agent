@@ -15,10 +15,12 @@
     --max-turns: 每轮对话最大轮数 (默认: 10)
     --output-dir: 输出文件夹路径 (默认: batch_test_results_YYYYMMDD_HHMMSS/)
     --parallel: 并行执行的对话数 (默认: 3)
+    --knowledge-pool: 知识池 JSON 文件路径 (可选，用于替代 mock 数据)
 
 示例:
     python batch_test_generator.py --sessions-per-persona 50 --max-turns 8
     python batch_test_generator.py --parallel 5 --output-dir my_results
+    python batch_test_generator.py --knowledge-pool knowledge_pool.json
 """
 
 import json
@@ -248,12 +250,14 @@ class PersonaSummary:
 class BatchTestRunner:
     """批量测试运行器"""
     
-    def __init__(self, max_parallel: int = 3, output_dir: str = ""):
+    def __init__(self, max_parallel: int = 3, output_dir: str = "", knowledge_pool_file: str = ""):
         self.max_parallel = max_parallel
         self.output_dir = output_dir
+        self.knowledge_pool_file = knowledge_pool_file
         self.react_adapter = None
         self.referee = referee_agent
         self.results: List[TestResult] = []
+        self._knowledge_pool_cache: Optional[Dict[str, Any]] = None
         
     def initialize_agents(self):
         """初始化 Agent"""
@@ -265,17 +269,92 @@ class BatchTestRunner:
         )
         self.react_adapter = DirectReactAgentAdapter(agent)
         logger.info("ReAct Agent 初始化完成")
+        
+        # 如果指定了知识池文件，加载它
+        if self.knowledge_pool_file:
+            self._load_knowledge_pool()
     
-    def _generate_mock_knowledge_pool(self, scenario: str) -> Dict[str, Any]:
-        """生成 Mock 知识池数据
+    def _load_knowledge_pool(self) -> Dict[str, Any]:
+        """从 JSON 文件加载知识池
+        
+        Returns:
+            知识池数据 {"faq": [...], "price": [...], "graph": [...]}
+        """
+        if self._knowledge_pool_cache is not None:
+            return self._knowledge_pool_cache
+            
+        if not self.knowledge_pool_file:
+            logger.warning("未指定知识池文件，将使用 mock 数据")
+            return {}
+            
+        try:
+            file_path = Path(self.knowledge_pool_file)
+            if not file_path.exists():
+                logger.error(f"知识池文件不存在: {self.knowledge_pool_file}")
+                return {}
+                
+            with open(file_path, 'r', encoding='utf-8') as f:
+                knowledge_pool = json.load(f)
+                
+            # 验证知识池结构
+            if not isinstance(knowledge_pool, dict):
+                logger.error("知识池文件格式错误，应该是一个 JSON 对象")
+                return {}
+                
+            faq_count = len(knowledge_pool.get('faq', []))
+            price_count = len(knowledge_pool.get('price', []))
+            graph_count = len(knowledge_pool.get('graph', []))
+            
+            logger.info(f"成功加载知识池 - FAQ: {faq_count}条, 价格: {price_count}条, 图谱: {graph_count}条")
+            
+            self._knowledge_pool_cache = knowledge_pool
+            return knowledge_pool
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"知识池文件 JSON 解析错误: {e}")
+            return {}
+        except Exception as e:
+            logger.error(f"加载知识池文件失败: {e}")
+            return {}
+    
+    def _generate_mock_knowledge_pool(self, persona: str, scenario: str) -> Dict[str, Any]:
+        """生成 Mock 知识池数据，根据人格和场景筛选相关内容
         
         Args:
+            persona: 人格名称
             scenario: 测试场景描述
         
         Returns:
             知识池数据 {"faq": [...], "price": [...], "graph": [...]}
         """
-        # 根据场景选择相关的 FAQ
+        # 获取人格配置
+        persona_config = get_persona_config(persona)
+        preferred_categories = persona_config.preferred_categories if persona_config else []
+        
+        # 场景到意图类别的映射（使用知识池中实际存在的 intent 值）
+        scenario_to_intent = {
+            "咨询VERTU手机的产品特性和价格": ["产品&功能咨询", "Product & Feature Inquiry"],
+            "了解VERTU售后服务和保修政策": ["After-sales & Warranty Inquiry", "产品&功能咨询"],
+            "犹豫是否购买VERTU手机，需要更多购买建议": ["产品&功能咨询", "使用&配件咨询"],
+            "将VERTU手机与其他品牌竞品进行对比": ["产品&功能咨询", "Product & Category Inquiry"],
+            "与客服闲聊，了解VERTU品牌故事和高端服务": ["使用&配件咨询", "Usage & Accessories Inquiry"],
+        }
+        
+        # 获取当前场景对应的意图类别
+        scenario_intents = scenario_to_intent.get(scenario, [])
+        
+        # 如果已加载外部知识池文件，根据人格和场景筛选
+        if self._knowledge_pool_cache:
+            logger.info(f"使用外部知识池文件: {self.knowledge_pool_file}, 人格: {persona}, 场景: {scenario}")
+            return self._filter_knowledge_pool_by_persona_and_scenario(
+                self._knowledge_pool_cache, 
+                persona, 
+                scenario,
+                preferred_categories,
+                scenario_intents
+            )
+        
+        # 根据场景选择相关的 FAQ (Mock 数据)
         faq_data = {
             "咨询VERTU手机的产品特性和价格": [
                 {"question": "VERTU手机有什么特别之处？", "answer": "VERTU手机采用顶级材质，如蓝宝石屏幕、钛合金机身、小牛皮背板，每部手机都是手工打造，并提供24小时私人管家服务。"},
@@ -346,12 +425,84 @@ class BatchTestRunner:
             "graph": graph_data,
             "metadata": {
                 "scenario": scenario,
+                "persona": persona,
+                "preferred_categories": preferred_categories,
                 "generated_at": datetime.now().isoformat()
             }
         }
         
-        logger.info(f"[MOCK] 生成知识池 - 场景: {scenario}, FAQ: {len(faq_results)}条, 价格: {len(price_data)}条, 图谱: {len(graph_data)}条")
+        logger.info(f"[MOCK] 生成知识池 - 人格: {persona}, 场景: {scenario}, FAQ: {len(faq_results)}条, 价格: {len(price_data)}条, 图谱: {len(graph_data)}条")
         return knowledge_pool
+    
+    def _filter_knowledge_pool_by_persona_and_scenario(
+        self, 
+        knowledge_pool: Dict[str, Any], 
+        persona: str, 
+        scenario: str,
+        preferred_categories: List[str],
+        scenario_intents: List[str]
+    ) -> Dict[str, Any]:
+        """根据人格和场景筛选知识池内容
+        
+        Args:
+            knowledge_pool: 原始知识池
+            persona: 人格名称
+            scenario: 场景描述
+            preferred_categories: 人格偏好的类别
+            scenario_intents: 场景对应的意图类别
+        
+        Returns:
+            筛选后的知识池
+        """
+        filtered_pool = {
+            "faq": [],
+            "price": knowledge_pool.get("price", []),
+            "graph": knowledge_pool.get("graph", []),
+            "metadata": {
+                "scenario": scenario,
+                "persona": persona,
+                "preferred_categories": preferred_categories,
+                "scenario_intents": scenario_intents,
+                "filtered": True,
+                "generated_at": datetime.now().isoformat()
+            }
+        }
+        
+        # 筛选 FAQ - 根据 intent 匹配
+        faq_data = knowledge_pool.get("faq", [])
+        for faq_entry in faq_data:
+            if not isinstance(faq_entry, dict):
+                continue
+                
+            categories = faq_entry.get("categories", [])
+            for category in categories:
+                items = category.get("items", [])
+                category_name = category.get("category_name", "")
+                
+                # 检查类别是否匹配场景意图或人格偏好
+                is_match = (
+                    category_name in scenario_intents or
+                    category_name in preferred_categories or
+                    any(intent in category_name for intent in scenario_intents)
+                )
+                
+                if is_match:
+                    filtered_pool["faq"].append(faq_entry)
+                    break
+        
+        # 如果没有匹配到任何内容，返回原始 FAQ 的前10条作为保底
+        if not filtered_pool["faq"]:
+            logger.warning(f"人格 {persona} + 场景 {scenario} 没有匹配到相关内容，使用默认内容")
+            for faq_entry in faq_data[:10]:
+                if isinstance(faq_entry, dict):
+                    filtered_pool["faq"].append(faq_entry)
+        
+        faq_count = len(filtered_pool["faq"])
+        price_count = len(filtered_pool["price"])
+        graph_count = len(filtered_pool["graph"])
+        
+        logger.info(f"筛选后知识池 - 人格: {persona}, 场景: {scenario}, FAQ: {faq_count}条, 价格: {price_count}条, 图谱: {graph_count}条")
+        return filtered_pool
     
     @retry_async(tries=3, delay=1, backoff=2, logger=logger)
     async def _call_referee_with_retry(self, session_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -379,8 +530,8 @@ class BatchTestRunner:
                 react_agent=self.react_adapter
             )
             
-            # 生成 mock 知识池
-            knowledge_pool = self._generate_mock_knowledge_pool(scenario)
+            # 生成 mock 知识池（根据人格和场景筛选）
+            knowledge_pool = self._generate_mock_knowledge_pool(persona, scenario)
             
             # 运行仿真（传入知识池）
             session_data = await user_agent.start_simulation(
@@ -702,6 +853,9 @@ class BatchTestRunner:
     
     def save_persona_results(self, output_dir: Path, persona: str, results: List[TestResult]):
         """保存单个人格的详细结果"""
+        # 确保输出目录存在
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
         persona_file = output_dir / f"{persona}_detailed.json"
         
         data = {
@@ -1006,6 +1160,7 @@ def main():
   python batch_test_generator.py
   python batch_test_generator.py --sessions-per-persona 50 --max-turns 8
   python batch_test_generator.py --parallel 5 --output-dir my_results
+  python batch_test_generator.py --knowledge-pool knowledge_pool.json
         """
     )
     
@@ -1033,6 +1188,12 @@ def main():
         default=3,
         help='并行执行的对话数 (默认: 3)'
     )
+    parser.add_argument(
+        '--knowledge-pool',
+        type=str,
+        default=None,
+        help='知识池 JSON 文件路径 (可选，用于替代 mock 数据)'
+    )
     
     args = parser.parse_args()
     
@@ -1057,12 +1218,18 @@ def main():
     print(f"  - 并行数: {args.parallel}")
     print(f"  - 输出目录: {args.output_dir}")
     print(f"  - 预计总会话数: {args.sessions_per_persona * 5}")
+    if args.knowledge_pool:
+        print(f"  - 知识池文件: {args.knowledge_pool}")
     print("="*70)
     print()
     
     try:
         # 创建运行器
-        runner = BatchTestRunner(max_parallel=args.parallel, output_dir=args.output_dir)
+        runner = BatchTestRunner(
+            max_parallel=args.parallel, 
+            output_dir=args.output_dir,
+            knowledge_pool_file=args.knowledge_pool
+        )
         
         # 运行所有测试
         report = asyncio.run(runner.run_all_tests(

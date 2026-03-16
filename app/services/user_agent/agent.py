@@ -232,7 +232,8 @@ class UserAgent:
                 "expected_answer": initial_expected_answer,
                 "knowledge_used": initial_knowledge_used
             }
-            faq_count = len(knowledge_pool.get("faq", []))
+            faq_items = self._extract_faq_items(knowledge_pool)
+            faq_count = len(faq_items)
             price_count = len(knowledge_pool.get("price", []))
             graph_count = len(knowledge_pool.get("graph", []))
             logger.info(f"=== [AGENT] 使用知识池 - FAQ: {faq_count}条, 价格: {price_count}条, 图谱: {graph_count}条 ===")
@@ -484,6 +485,34 @@ class UserAgent:
 
         return None
 
+    def _extract_faq_items(self, knowledge_pool: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """从知识池中提取 FAQ items，支持新旧两种格式
+        
+        新格式: {"faq": [{"search_info": ..., "categories": [{"items": [...]}]}]}
+        旧格式: {"faq": [{"question": ..., "answer": ...}]}
+        
+        Returns:
+            List[Dict]: FAQ items 列表
+        """
+        faq_data = knowledge_pool.get("faq", []) if knowledge_pool else []
+        faq_items = []
+        
+        if not faq_data or not isinstance(faq_data, list):
+            return faq_items
+        
+        # 新格式：包含 search_info 和 categories
+        if len(faq_data) > 0 and isinstance(faq_data[0], dict) and "categories" in faq_data[0]:
+            for faq_entry in faq_data:
+                categories = faq_entry.get("categories", [])
+                for category in categories:
+                    items = category.get("items", [])
+                    faq_items.extend(items)
+        # 旧格式：直接是 items 列表
+        else:
+            faq_items = faq_data
+        
+        return faq_items
+
     def _format_knowledge_pool(self, knowledge_pool: Dict[str, Any]) -> str:
         """格式化知识池为提示词文本"""
         if not knowledge_pool:
@@ -491,17 +520,28 @@ class UserAgent:
 
         sections = []
 
-        # FAQ 知识
-        faq_items = knowledge_pool.get("faq", [])
+        # FAQ 知识 - 使用辅助方法提取
+        faq_items = self._extract_faq_items(knowledge_pool)
+        
         if faq_items:
+            # 随机打乱顺序，确保每次选择不同
+            random.shuffle(faq_items)
             faq_text = "\n".join([
                 f"- Q: {item.get('question', '')}\n  A: {item.get('answer', '')[:100]}..."
                 for item in faq_items[:5]  # 最多显示5条
             ])
             sections.append(f"### FAQ 知识\n{faq_text}")
 
-        # 价格信息
-        price_items = knowledge_pool.get("price", [])
+        # 价格信息 - 支持两种格式
+        price_data = knowledge_pool.get("price", [])
+        price_items = []
+        if isinstance(price_data, dict) and "hits" in price_data:
+            # 新格式：包含 hits 的字典
+            price_items = price_data.get("hits", [])
+        elif isinstance(price_data, list):
+            # 旧格式：直接是列表
+            price_items = price_data
+        
         if price_items:
             price_text = "\n".join([
                 f"- {item.get('name', '')}: {item.get('price', 'N/A')}"
@@ -509,8 +549,16 @@ class UserAgent:
             ])
             sections.append(f"### 价格信息\n{price_text}")
 
-        # 图谱知识
-        graph_items = knowledge_pool.get("graph", [])
+        # 图谱知识 - 支持两种格式
+        graph_data = knowledge_pool.get("graph", [])
+        graph_items = []
+        if isinstance(graph_data, dict) and "hits" in graph_data:
+            # 新格式：包含 hits 的字典
+            graph_items = graph_data.get("hits", [])
+        elif isinstance(graph_data, list):
+            # 旧格式：直接是列表
+            graph_items = graph_data
+        
         if graph_items:
             graph_text = "\n".join([
                 f"- {item.get('subject', '')} -> {item.get('predicate', '')} -> {item.get('object', '')}"
@@ -625,7 +673,8 @@ class UserAgent:
         except Exception as e:
             logger.error(f"=== [AGENT] 从知识池生成初始问题失败: {e} ===")
             # 如果生成失败，从知识池中找一个FAQ问题作为备选
-            faq_items = knowledge_pool.get("faq", [])
+            faq_items = self._extract_faq_items(knowledge_pool)
+            
             if faq_items:
                 fallback = random.choice(faq_items)
                 question = fallback.get("question", "请介绍一下VERTU手机")
@@ -693,24 +742,23 @@ class UserAgent:
             prompt,
             "",
             "## 参考信息",
-        ]
-
-        # 添加对话上下文
-        user_prompt_parts.extend([
+            "",
+            "### 对话上下文",
             conversation_context,
-            ""
-        ])
+            "",
+        ]
 
         # 添加知识池（如果有）
         if knowledge_context:
             user_prompt_parts.extend([
+                "### 知识池",
                 knowledge_context,
-                ""
+                "",
             ])
 
         user_prompt_parts.extend([
             "## 决策指引",
-            "基于上述【对话上下文】和【知识池】，请决定下一步：",
+            "基于上述【对话上下文】和【知识池】的内容，请决定下一步：",
             "",
             "### 选项A：结束对话",
             "- 如果你的问题已经得到满意解答",
@@ -826,18 +874,21 @@ class UserAgent:
             "- 如果客服提供了足够的信息帮助你做出决定",
             "- 回复格式：直接说\"谢谢\"或\"好的，了解了\"等结束语",
             "- 此时 expected_answer 设为 null",
+            "- knowledge_used 设为 []",
             "",
             "### 选项B：继续提问",
             "- 如果还有疑问需要澄清",
             "- 如果想深入了解某个方面",
             "- 可以基于对话上下文进行追问",
             "- 可以参考知识池中的信息提出更深入的问题",
-            "- 同时生成这个问题的预期答案（基于知识池）",
+            "- 必须生成这个问题的预期答案（基于知识池，不能为空字符串）",
+            "- 必须列出使用的知识项",
             "",
             "### 选项C：转换话题",
             "- 如果想询问与当前话题相关但不同的方面",
             "- 确保转换自然，不要突兀",
-            "- 同时生成新话题的预期答案",
+            "- 必须生成新话题的预期答案（基于知识池，不能为空字符串）",
+            "- 必须列出使用的知识项",
             "",
             "## 生成要求",
             "1. 必须结合对话上下文，保持话题连贯",
@@ -845,12 +896,14 @@ class UserAgent:
             "3. 符合你的用户画像特征，语言风格一致",
             "4. 保持口语化、自然的表达方式",
             "5. 单轮回复简洁，符合人设的字数限制",
+            "6. 除非选择结束对话，否则 expected_answer 必须有具体内容，不能为null或空字符串",
+            "7. 如果知识池中没有相关信息，基于常识生成合理的预期答案",
             "",
             "## 输出格式",
             "请严格按照以下JSON格式输出：",
             "{",
             '    "question": "生成的用户问题或结束语",',
-            '    "expected_answer": "基于知识池生成的预期答案（结束对话时为null）",',
+            '    "expected_answer": "基于知识池生成的预期答案（结束对话时为null，否则必须有内容）",',
             '    "knowledge_used": ["使用的知识项1", "使用的知识项2"]',
             "}",
             "",
@@ -899,13 +952,41 @@ class UserAgent:
             
             # 确保 expected_answer 和 knowledge_used 都有值
             if not expected_answer:
-                logger.warning(f"=== [AGENT] 警告: LLM 返回的 expected_answer 为空，使用默认值 ===")
-                expected_answer = ""
+                logger.warning(f"=== [AGENT] 警告: LLM 返回的 expected_answer 为空，尝试从知识池获取 ===")
+                # 尝试从知识池找一个相关的答案
+                faq_items = self._extract_faq_items(state.knowledge_pool)
+                if faq_items:
+                    # 找与问题最相关的 FAQ（简单匹配：问题包含关键词）
+                    question_keywords = set(question.lower().split())
+                    best_match = None
+                    best_score = 0
+                    for item in faq_items:
+                        faq_question = item.get("question", "").lower()
+                        faq_answer = item.get("answer", "")
+                        if faq_answer:
+                            score = len(question_keywords & set(faq_question.split()))
+                            if score > best_score:
+                                best_score = score
+                                best_match = item
+                    
+                    if best_match:
+                        expected_answer = best_match.get("answer", "")
+                        knowledge_used = [best_match.get("question", "")]
+                        logger.info(f"=== [AGENT] 从知识池找到匹配答案: {expected_answer[:60]}... ===")
+                    else:
+                        # 随机选一个
+                        fallback = random.choice(faq_items)
+                        expected_answer = fallback.get("answer", "")
+                        knowledge_used = [fallback.get("question", "")]
+                        logger.info(f"=== [AGENT] 从知识池随机选择答案: {expected_answer[:60]}... ===")
+                else:
+                    expected_answer = ""
+                    logger.warning(f"=== [AGENT] 知识池为空，使用空答案 ===")
+            
             if not knowledge_used:
                 knowledge_used = []
                 
             logger.info(f"=== [AGENT] 预期答案: {expected_answer[:60] if expected_answer else '(空)'}... ===")
-            logger.info(f"=== [AGENT] 使用知识: {knowledge_used} ===")
 
             return {
                 "question": question,
@@ -1109,14 +1190,10 @@ class UserAgent:
                     "role": msg["role"],
                     "content": msg["content"].replace('\n', ' ').replace('\r', ' ').strip(),
                     "timestamp": msg["timestamp"],
-                    **({"expected_answer": msg["expected_answer"]} if "expected_answer" in msg else {}),
-                    **({"knowledge_used": msg["knowledge_used"]} if "knowledge_used" in msg else {})
+                    **({"expected_answer": msg["expected_answer"]} if "expected_answer" in msg else {})
                 }
                 for msg in state.conversation_history
-            ],
-            "original_question": state.original_question,  # 从问题池选择的原始问题
-            "initial_question": state.initial_question,  # LLM改写后实际使用的问题
-            "original_query_results": state.original_query_results  # 使用原始问题查询的结果
+            ]
         }
 
         sessions_dir = Path("mock_sessions")
