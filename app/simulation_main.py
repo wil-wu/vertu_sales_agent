@@ -322,7 +322,6 @@ class SimulationMain:
             "session_files": [f"session_{r.get('session_id')}.json" for r in results]
         }
 
-    # 注意: search_knowledge() 和 generate_session_knowledge_pool() 方法从远程分支合并
 
     def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -331,6 +330,7 @@ class SimulationMain:
         - 从五个场景中随机选择一个
         - 结合知识池与对话上下文与react_agent进行问答
         - 调用referee进行评估
+        - 每完成一个session立即保存文件
 
         Args:
             session_knowledge_pool: 知识池列表，每个元素包含faq/price/graph知识
@@ -338,13 +338,17 @@ class SimulationMain:
         Returns:
             仿真结果列表，包含每个session的对话记录和评估结果
 
-        # 保持单session 
+        # 保持单session
         # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
         # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
         # 组合上下文 一起调用 referee Agent -> 保存到输出目录
         """
         results = []
         session_count = self.config.get("session_count", 1)
+
+        # 确保输出目录存在
+        output_dir = Path(self.excute_config.get("output-dir", "output"))
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         for session_idx in range(session_count):
             knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
@@ -359,6 +363,10 @@ class SimulationMain:
                 self._run_single_session(knowledge_pool, persona, scenario)
             )
             results.append(session_result)
+
+            # 每完成一个session立即保存文件
+            self._save_session_file(session_result, output_dir)
+            print(f"[Session {session_idx + 1}] 结果已保存")
 
         return results
 
