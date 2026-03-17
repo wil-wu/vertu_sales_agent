@@ -47,6 +47,8 @@ logging.basicConfig(
 import random
 import asyncio
 from typing import List, Dict, Any
+
+from tqdm import tqdm
 from datetime import datetime
 import json
 
@@ -96,16 +98,57 @@ class SimulationMain:
         knowledge_subset = self.search_knowledge()
 
         # 根据知识池 用户维度画像(1/7维) 用户意图场景(1/5维) 组合知识池 增量上下文 生产用户问题 + 预期答案 调用AI sales Agent 保持后续流程一致
+        # 使用 async_generate_session_simulation 并发执行，提升吞吐量
+        session_results = asyncio.run(self.async_generate_session_simulation(knowledge_subset))
         session_results = await self.generate_session_simulation(knowledge_subset)
 
         # 保存仿真结果
-        self._save_results(session_results)
+        # self._save_results(session_results)
+        for scenario in self.excute_config.get("statistic_scenarios", []):
+            for persona in self.excute_config.get("statistic_personas", []):
+                self.statistic_for_exist_sessions(scenario=scenario, persona=persona)
 
-        return session_results
 
-    def run(self):
-        """同步入口，内部调用异步方法"""
-        return asyncio.run(self.run_async())
+    def statistic_for_exist_sessions(self, scenario: str=None, persona: str=None):
+        """统计已存在的session结果"""
+        if persona not in self.PERSONAS:
+            random_persona = random.choice(self.PERSONAS)
+            logging.info(f"{persona} 不在 PERSONAS:\n {self.PERSONAS} 中, 随机选择人格: {random_persona}")
+            persona = random_persona
+        if scenario not in self.SCENARIOS:
+            random_scenario = random.choice(self.SCENARIOS)
+            logging.info(f"{scenario} 不在 SCENARIOS:\n {self.SCENARIOS} 中, 随机选择场景: {random_scenario}")
+            scenario = random_scenario
+        output_dir = Path(self.excute_config.get("output-dir", "output"))
+        session_files = output_dir.glob("session_*.json")
+        statistic_data = []
+        for session_file in session_files:
+            with open(session_file, "r", encoding="utf-8") as f:
+                session_result = json.load(f)
+                if session_result.get("persona") == persona and session_result.get("scenario") == scenario:
+                    statistic_data.append(session_result)
+        # 统计
+        # statistic_result = self.statistic_main(statistic_data)
+        statistic_result = self._get_statistic_result(statistic_data)
+        # 写入output_dir/scenario_persona_statistic.json
+        statistic_file = "output_dir_final" / f"{scenario}_{persona}_statistic.json"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        with open(statistic_file, "w", encoding="utf-8") as f:
+            json.dump(statistic_result, f, ensure_ascii=False, indent=2)
+        return statistic_result
+        
+    def statistic_main(self, statistic_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """统计已存在的session结果"""
+        total = len(statistic_data)
+        total_turns = sum([session_result.get("total_turns") for session_result in statistic_data])
+        total_duration = sum([session_result.get("duration_seconds") for session_result in statistic_data])
+        total_turns_per_session = total_turns / total
+        statistic_result = {
+            "total_sessions": len(statistic_data),
+            "total_turns": sum([session_result.get("total_turns") for session_result in statistic_data]),
+            "total_duration": sum([session_result.get("duration_seconds") for session_result in statistic_data]),
+        }
+        return statistic_result
 
     def _save_results(self, results: List[Dict[str, Any]]):
         """保存仿真结果到输出目录
@@ -373,67 +416,66 @@ class SimulationMain:
             knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
             persona = random.choice(self.PERSONAS)
             scenario = random.choice(self.SCENARIOS)
-            session_configs.append({
-                "session_idx": session_idx,
-                "knowledge_pool": knowledge_pool,
-                "persona": persona,
-                "scenario": scenario
-            })
 
-        print(f"[Simulation] 共 {session_count} 个session待执行，最大并发数: {session_parallel}")
+            print(f"[Session {session_idx + 1}] 人格: {persona}, 场景: {scenario}")
+            # 运行单个session仿真
+            session_result = asyncio.run(
+                self._run_single_session(knowledge_pool, persona, scenario)
+            )
+            results.append(session_result)
 
-        # 使用信号量控制session级别并发
-        session_semaphore = asyncio.Semaphore(session_parallel)
+        return results
 
-        async def run_single_session_with_semaphore(config: dict) -> Dict[str, Any]:
-            """使用信号量限制的session执行"""
-            async with session_semaphore:
-                session_idx = config["session_idx"]
-                knowledge_pool = config["knowledge_pool"]
-                persona = config["persona"]
-                scenario = config["scenario"]
+    async def async_generate_session_simulation(
+        self, knowledge_subset: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        异步并发执行单个 session 仿真
 
-                print(f"[Session {session_idx + 1}/{session_count}] 开始执行 - 人格: {persona}, 场景: {scenario}")
+        使用并发任务池（Semaphore 控制并发数），并行执行多个 session 仿真，
+        相比 generate_session_simulation 的顺序执行可显著提升吞吐量。
 
+        Args:
+            knowledge_subset: 知识子集（与 generate_session_simulation 相同）
+
+        Returns:
+            仿真结果列表，与 generate_session_simulation 返回格式一致
+        """
+        session_count = self.excute_config.get("session_count", 1)
+        max_parallel = self.excute_config.get("parallel", 10)
+
+        # 预先生成所有 session 的参数（知识池、人格、场景）
+        session_tasks = []
+        for session_idx in range(session_count):
+            knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
+            persona = random.choice(self.PERSONAS)
+            scenario = random.choice(self.SCENARIOS)
+            session_tasks.append((knowledge_pool, persona, scenario))
+
+        semaphore = asyncio.Semaphore(max_parallel)
+        pbar = tqdm(total=session_count, desc="Session", unit="个") if tqdm else None
+
+        async def run_with_semaphore(session_idx: int, task_args):
+            knowledge_pool, persona, scenario = task_args
+            async with semaphore:
+                logging.info(f"[Session {session_idx + 1}] 人格: {persona}, 场景: {scenario}")
                 try:
-                    # 运行单个session仿真
-                    session_result = await self._run_single_session(knowledge_pool, persona, scenario)
+                    # result = await asyncio.sleep(random.randint(1, 10)) # todo 模拟异步执行
+                    result = await self._run_single_session(knowledge_pool, persona, scenario)
+                    return result
+                finally:
+                    if pbar:
+                        pbar.update(1)
+                        pbar.set_postfix_str(f"{persona}/{scenario}")
 
-                    # 每完成一个session立即保存文件
-                    self._save_session_file(session_result, output_dir)
-                    print(f"[Session {session_idx + 1}/{session_count}] 完成并保存")
-
-                    return session_result
-                except Exception as e:
-                    print(f"[Session {session_idx + 1}/{session_count}] 执行失败: {e}")
-                    return {
-                        "session_id": f"error_{session_idx}",
-                        "persona": persona,
-                        "scenario": scenario,
-                        "error": str(e),
-                        "conversation": [],
-                        "assessments": [],
-                        "finish_reason": "error",
-                        "total_turns": 0,
-                        "metadata": {}
-                    }
-
-        # 并发执行所有session
-        results = await asyncio.gather(
-            *[run_single_session_with_semaphore(config) for config in session_configs],
-            return_exceptions=True
-        )
-
-        # 处理可能的异常
-        valid_results = []
-        for result in results:
-            if isinstance(result, Exception):
-                print(f"[Simulation] 某session发生异常: {result}")
-                continue
-            valid_results.append(result)
-
-        print(f"[Simulation] 所有session执行完成: 成功 {len(valid_results)}/{session_count}")
-        return valid_results
+        try:
+            results = await asyncio.gather(
+                *[run_with_semaphore(i, task) for i, task in enumerate(session_tasks)]
+            )
+        finally:
+            if pbar:
+                pbar.close()
+        return list(results)
 
     async def _run_single_session(
         self,
@@ -672,11 +714,12 @@ if __name__ == "__main__":
         "max_path_len": 2,
     }
     excute_config = {
-        "max-turns": 20,          # 每轮对话最大轮数
-        "output-dir": "output",   # 输出文件夹路径
-        "session_count": 1,       # 总session数量
-        "session-parallel": 1,    # session级别并发数（同时执行3个session）
-        "referee-concurrent": 2,  # referee评估并发数（每个session内评估并发）
+        "max-turns": 10, # 每轮对话最大轮数
+        "output-dir": "output", # 输出文件夹路径
+        "parallel": 2, # 并行执行的对话数
+        "session_count": 800, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+        "statistic_scenarios": ["闲聊"],
+        "statistic_personas": ["business_elite"],
     }
     simulation_main = SimulationMain(config, excute_config)
     simulation_main.run()

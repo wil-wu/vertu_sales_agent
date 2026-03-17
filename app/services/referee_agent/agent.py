@@ -72,7 +72,7 @@ class RefereeAgent:
         self.model = referee_agent_settings.llm_model
         self._initialized = True
         # 加载 QA 数据
-        self.qa_mapping = load_qa_csv()
+        # self.qa_mapping = load_qa_csv()
     
     async def evaluate_turn(self, request: RefereeRequest) -> RefereeResponse:
         """评估对话回合"""
