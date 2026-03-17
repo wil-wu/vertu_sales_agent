@@ -12,7 +12,13 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from app.config import settings
 from app.scanner import JobScanner, RouterScanner
 from app.core.middlewares import RequestLoggingMiddleware
-from app.core.shared import httpx_async_client, httpx_sync_client, scheduler
+from app.core.shared import (
+    httpx_async_client,
+    httpx_sync_client,
+    scheduler,
+    postgres_async_pool,
+    postgres_checkpointer,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +38,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     if scheduled_jobs:
         scheduler.start()
 
+    await postgres_async_pool.open()
+    await postgres_checkpointer.setup()
+
     logger.info("Application startup completed")
 
     yield
@@ -41,6 +50,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
     await httpx_async_client.aclose()
     httpx_sync_client.close()
+
+    await postgres_async_pool.close()
 
     if scheduler.running:
         scheduler.shutdown()

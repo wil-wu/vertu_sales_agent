@@ -114,3 +114,12 @@ class ReActAgent:
         graph.add_edge("tools", "agent")
 
         return graph.compile(checkpointer=self._get_checkpointer())
+
+
+class AISalesAgent(ReActAgent):
+    """销售场景 ReAct Agent：会话持久化使用 PostgreSQL checkpointer。"""
+    
+    def _get_checkpointer(self) -> BaseCheckpointSaver:
+        """Postgres checkpointer 做会话持久化。"""
+        from app.core.shared import postgres_checkpointer
+        return postgres_checkpointer

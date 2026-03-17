@@ -43,6 +43,20 @@ class GlobalSettings(BaseSettings):
     enable_metrics: bool = Field(default=True, description="是否启用指标监控")
     metrics_path: str = Field(default="/metrics", description="指标路径")
 
+    # PostgreSQL 连接配置
+    postgres_host: str = Field(default="localhost", description="PostgreSQL 主机")
+    postgres_port: int = Field(default=5432, description="PostgreSQL 端口")
+    postgres_user: str = Field(default="postgres", description="PostgreSQL 用户")
+    postgres_password: str = Field(default="", description="PostgreSQL 密码")
+    postgres_db: str = Field(default="postgres", description="PostgreSQL 数据库名")
+    postgres_sslmode: str = Field(default="disable", description="PostgreSQL SSL 模式")
+
+    @property
+    def postgres_url(self) -> str:
+        """PostgreSQL 连接 URL，供全局连接池使用。"""
+        auth = f"{self.postgres_user}:{self.postgres_password}" if self.postgres_password else self.postgres_user
+        return f"postgres://{auth}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}?sslmode={self.postgres_sslmode}"
+
     # 服务模块
     services_module: str = Field(default="app.services", description="服务模块")
 

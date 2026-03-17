@@ -1,11 +1,11 @@
-from .agent import ReActAgent
+from .agent import ReActAgent, AISalesAgent
 from .shared import chat_model, backup_chat_model
 from .tools import TOOLS
 from .prompts import REACT_AGENT_SYSTEM_PROMPT
 
 
 def get_react_agent() -> ReActAgent:
-    return ReActAgent(
+    return AISalesAgent(
         chat_model=chat_model,
         tools=TOOLS,
         system_prompt=REACT_AGENT_SYSTEM_PROMPT,
