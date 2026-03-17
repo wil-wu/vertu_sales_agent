@@ -3,7 +3,7 @@
         {
             "search_info": {
                 "query": "屏幕分辨率",
-                "timestamp": "2026-03-13T10:16:10.133227",
+                "timestamp": "2026-03-16T12:05:47.506783",
                 "total_results": 10
             },
             "categories": [
@@ -11,84 +11,84 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464879935262576026,
-                            "similarity_score": 69.11,
+                            "id": "e55f6ec4-4ecb-4b91-a520-9a0d2b67a924",
+                            "similarity_score": 0.6911,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q 旗舰新品的屏幕分辨率是多少？",
                             "answer": "视听盛宴：2K+超感内屏配合DTS:X Ultra影院级音效，是您的私人IMAX影院。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576703,
-                            "similarity_score": 62.99,
+                            "id": "31c996f3-71f0-40f1-ab8f-e5b667fa572b",
+                            "similarity_score": 0.6299,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q手机屏幕是4K屏幕吗？",
                             "answer": "VERTU Agent Q搭载6.02英寸120Hz柔性AMOLED屏，不支持4K分辨率。其屏幕在色彩、对比度、响应速度方面达到行业标杆水平，与三星W系手机屏幕材质相同，具备高画质与护眼特性。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576269,
-                            "similarity_score": 62.01,
+                            "id": "ed108d82-25c0-461c-9d8c-60757ab439cf",
+                            "similarity_score": 0.6201,
                             "intent": "产品&功能咨询",
                             "question": "VERTU METAVERTU手机的屏幕参数是什么？",
                             "answer": "6.67寸FHD+的AMOLED曲面屏（1080*2400），支持144hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576522,
-                            "similarity_score": 61.99,
+                            "id": "30542274-0669-4795-8096-69f39bd2979b",
+                            "similarity_score": 0.6199,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q旗舰手机的屏幕参数是什么?",
                             "answer": "6.02英寸120Hz柔性AMOLED屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262575954,
-                            "similarity_score": 61.73,
+                            "id": "9cba0ddd-1b69-4d18-a201-1fc315dd0f79",
+                            "similarity_score": 0.6173,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q的屏幕参数是什么？",
                             "answer": "6.02英寸120Hz柔性AMOLED屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576531,
-                            "similarity_score": 61.68,
+                            "id": "6e69400c-b48c-4a2d-861c-120152dbf0bd",
+                            "similarity_score": 0.6168,
                             "intent": "产品&功能咨询",
                             "question": "VERTU META系列-METAVERTU1手机的屏幕尺寸和刷新率是多少？",
                             "answer": "屏幕为6.67英寸FHD+ AMOLED曲面屏，支持144Hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576170,
-                            "similarity_score": 61.32,
+                            "id": "9cf13911-997a-4054-9114-45949c54982e",
+                            "similarity_score": 0.6132,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q智能手机的影像系统是否清晰？",
                             "answer": "主摄5000万像素（可变光圈+OIS），长焦6400万像素（微距），超广角5000万像素，覆盖13mm-140mm全焦段；支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576335,
-                            "similarity_score": 61.04,
+                            "id": "194ec91b-6383-42e7-8663-a5b23dd258b3",
+                            "similarity_score": 0.6104,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q手机屏幕支持哪些特性？",
                             "answer": "搭载6.02英寸120Hz柔性AMOLED屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576273,
-                            "similarity_score": 60.93,
+                            "id": "5bfc77be-5a7a-4bff-86e5-c2fedc371e7c",
+                            "similarity_score": 0.6093,
                             "intent": "产品&功能咨询",
                             "question": "VERTU QUANTUM量子折叠屏手机屏幕参数是什么？",
                             "answer": "6.02英寸120Hz柔性AMOLED屏",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576699,
-                            "similarity_score": 60.54,
+                            "id": "db3bd62c-d14c-4127-ad3a-12d36cc8fc24",
+                            "similarity_score": 0.6054,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q 旗舰新品有屏幕吗？",
                             "answer": "有的哦，展示的是背部。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -97,7 +97,7 @@
         {
             "search_info": {
                 "query": "屏幕分辨率",
-                "timestamp": "2026-03-13T10:16:10.263614",
+                "timestamp": "2026-03-16T12:06:02.873358",
                 "total_results": 10
             },
             "categories": [
@@ -105,76 +105,81 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464859990403851143,
-                            "similarity_score": 49.84,
+                            "id": "f8944936-15ed-43bd-9211-40bf78c25219",
+                            "similarity_score": 0.6975,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的VEB A5芯片的真随机数发生器速率是多少？",
-                            "answer": "4Mbps",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "2048*1080。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851148,
-                            "similarity_score": 49.36,
+                            "id": "0f467fc2-ab78-49b9-afa9-593a81e1adf5",
+                            "similarity_score": 0.6975,
                             "intent": "产品&功能咨询",
-                            "question": "VEB A5芯片在META1、META2、Quantum及AgentQ产品中实现的真随机数发生器每秒能输出多少比特？",
-                            "answer": "4Mbps",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "1.5K",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851160,
-                            "similarity_score": 48.93,
+                            "id": "b833f711-df79-42c4-84ed-18aed7b3c022",
+                            "similarity_score": 0.6881,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum与AgentQ所采用的VEB A5芯片是否支持高等级物理安全防护，具体达到什么标准？",
-                            "answer": "军工级主动物理防护机制",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU SIG S+ 的屏幕分辨率是多少？",
+                            "answer": "240*320",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:32:59"
+                            }
                         },
                         {
-                            "id": 464859990403851139,
-                            "similarity_score": 48.33,
+                            "id": "236e45ff-6e79-468a-80a7-57f9691f576c",
+                            "similarity_score": 0.6166,
                             "intent": "产品&功能咨询",
-                            "question": "VEB A5芯片在META1、META2、Quantum及AgentQ产品中是否满足金融级移动支付的技术规范要求？",
-                            "answer": "符合金融级移动支付与资产存储规范。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 1 的屏幕刷新率是多少？",
+                            "answer": "144Hz。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T08:59:43"
+                            }
                         },
                         {
-                            "id": 464859990403851155,
-                            "similarity_score": 47.71,
+                            "id": "b67151d4-c0d7-4984-ad98-1a08cc298cfe",
+                            "similarity_score": 0.5931,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的VEB A5 芯片是否符合金融级移动支付规范？",
-                            "answer": "符合金融级移动支付与资产存储规范。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "Vertu手机屏幕升级为何种类型？",
+                            "answer": "触摸屏。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:34"
+                            }
                         },
                         {
-                            "id": 464859990403851147,
-                            "similarity_score": 47.65,
+                            "id": "352d48d5-09b8-453a-be0e-5da9864e03c0",
+                            "similarity_score": 0.5844,
                             "intent": "产品&功能咨询",
-                            "question": "VEB A5加密芯片在META1、META2、Quantum及AgentQ产品中的安全防护级别具体达到什么标准？",
-                            "answer": "银行级",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "主屏幕状态栏中哪些图标表示网络连接状态？",
+                            "answer": "WLAN、移动数据、4G、3G、2G、HSPA+、卫星信号、载波聚合网络",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:40:24"
+                            }
                         },
                         {
-                            "id": 464859990403851214,
-                            "similarity_score": 47.26,
+                            "id": "cc3df55c-978d-483c-9f14-5a95531d0b86",
+                            "similarity_score": 0.5806,
                             "intent": "产品&功能咨询",
-                            "question": "在META1、META2、Quantum与AgentQ支持的一机三系统配置下，主系统采用哪种操作系统？",
-                            "answer": "搭载 VPS 企业级 AI 操作大脑。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851128,
-                            "similarity_score": 47.13,
-                            "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ设备中使用的VEB A5加密芯片符合哪些安全认证等级？",
-                            "answer": "银行级",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851125,
-                            "similarity_score": 47.11,
-                            "intent": "产品&功能咨询",
-                            "question": "搭载于META1、META2、Quantum与AgentQ的VEB A5加密芯片是否通过了通用准则（Common Criteria）或其他国际安全等级认证？",
-                            "answer": "银行级",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "Vertu Signature S+的屏幕类型是什么？",
+                            "answer": "升级触摸屏。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:45"
+                            }
                         }
                     ]
                 },
@@ -182,12 +187,42 @@
                     "category_name": "使用&配件咨询",
                     "items": [
                         {
-                            "id": 464859990403851174,
-                            "similarity_score": 49.58,
+                            "id": "8e532994-dfc7-40a6-ba33-6032abcf7186",
+                            "similarity_score": 0.6278,
                             "intent": "使用&配件咨询",
-                            "question": "使用META1、META2、Quantum或AgentQ的AI数字分身时，有哪些操作限制或注意事项？",
-                            "answer": "可代用户进行基础社交互动。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "如何调整VERTU手机屏幕亮度？",
+                            "answer": "通过左右按键滑动亮度条调整。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:40:30"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "category_name": "尺寸&佩戴咨询",
+                    "items": [
+                        {
+                            "id": "a952bf69-096c-4bec-8cfb-f605280e897e",
+                            "similarity_score": 0.5953,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU META 2的屏幕尺寸是多少？",
+                            "answer": "6.78英寸。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
+                        },
+                        {
+                            "id": "ef3fe6b9-4824-4eaf-b886-2d5effa409d1",
+                            "similarity_score": 0.5831,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU SIGV的屏幕尺寸是多少？",
+                            "answer": "1.98英寸",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:35:00"
+                            }
                         }
                     ]
                 }
@@ -196,7 +231,7 @@
         {
             "search_info": {
                 "query": "屏幕分辨率",
-                "timestamp": "2026-03-13T10:16:10.455931",
+                "timestamp": "2026-03-16T12:06:08.222517",
                 "total_results": 10
             },
             "categories": [
@@ -204,60 +239,60 @@
                     "category_name": "Product & Feature Inquiry",
                     "items": [
                         {
-                            "id": 464859990403847937,
-                            "similarity_score": 56.41,
+                            "id": "ffcedbbf-2193-4076-9af1-810b93b36684",
+                            "similarity_score": 0.5641,
                             "intent": "Product & Feature Inquiry",
                             "question": "Why does the official Vertu Vietnam website (vertuvietnam.vn) display the screen size of the Vertu Agent Q as 6.67 inches when the correct size is 6.02 inches?",
                             "answer": "The Vertu Agent Q has a screen size of 6.02 inches; the display of 6.67 inches on vertuvietnam.vn appears to be an error that needs correction.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848158,
-                            "similarity_score": 55.56,
+                            "id": "647c6b84-d26b-4b13-b1ed-31adadada9b7",
+                            "similarity_score": 0.5556,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the Vertu Agent Q support screen touch?",
                             "answer": "Yes, it supports screen touch.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847955,
-                            "similarity_score": 54.93,
+                            "id": "8a3b916c-5cf5-41aa-b21e-67d448f3178f",
+                            "similarity_score": 0.5493,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Metavertu 2 Max?",
                             "answer": "6.02 inch screen.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847936,
-                            "similarity_score": 54.88,
+                            "id": "078872a2-a158-46cb-b321-68e4432f30c9",
+                            "similarity_score": 0.5488,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Agent Q?",
                             "answer": "6.02 inches.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848208,
-                            "similarity_score": 50.63,
+                            "id": "ecc7bc60-a5eb-47f6-8e46-e49d2d3409ec",
+                            "similarity_score": 0.5063,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the IVERTU brown calfskin leather phone support Chinese character display?",
                             "answer": "Yes, due to version limitations, the IVERTU phone sometimes displays Chinese characters.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848105,
-                            "similarity_score": 50.6,
+                            "id": "b0a88fc7-5fad-423d-a7b5-ffdc5080d5c8",
+                            "similarity_score": 0.506,
                             "intent": "Product & Feature Inquiry",
                             "question": "Is the screen of the VERTU Agent Q fully made of sapphire crystal and will it crack?",
                             "answer": "The screen core of the VERTU Agent Q is made of third-generation sapphire crystals and AMOLED panels. The protective layer is made of third-generation sapphire crystal with a Mohs hardness of 9.2 and a 40% increase in drop resistance compared to the previous generation. It is a high-end protective material suitable for luxury mobile phones.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847991,
-                            "similarity_score": 50.5,
+                            "id": "cd428262-d1ac-4ca9-a460-57f1e66286ea",
+                            "similarity_score": 0.505,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Quantum Flip compared to the Vertu Agent Q?",
                             "answer": "The Vertu Quantum Flip has a 6.9\" main folding OLED screen and a 3\" external display; the Vertu Agent Q has a 6.02\" single AMOLED screen. When unfolded, the Quantum Flip offers significantly more viewing area for multimedia and productivity tasks.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -265,12 +300,12 @@
                     "category_name": "Product & Category Inquiry",
                     "items": [
                         {
-                            "id": 464859990403847922,
-                            "similarity_score": 51.0,
+                            "id": "bd07eaa6-aa6d-4327-968e-75e68a37827a",
+                            "similarity_score": 0.51,
                             "intent": "Product & Category Inquiry",
                             "question": "Which models of MetaVertu have a sapphire screen?",
                             "answer": "MetaVertu 2 Max, Quantum Flip, and Agent Q.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -278,12 +313,12 @@
                     "category_name": "Usage & Accessories Inquiry",
                     "items": [
                         {
-                            "id": 464859990403848261,
-                            "similarity_score": 50.95,
+                            "id": "c0bae9b0-7761-4857-8c15-3fbb7a3b4b5e",
+                            "similarity_score": 0.5095,
                             "intent": "Usage & Accessories Inquiry",
                             "question": "What color do you like for the METAVERTU phone?",
                             "answer": "The agent asked about color preference, and the customer confirmed a specific model via video link.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -291,12 +326,12 @@
                     "category_name": "After-sales & Warranty Inquiry",
                     "items": [
                         {
-                            "id": 464859990403848235,
-                            "similarity_score": 50.39,
+                            "id": "043b6aef-b191-48a9-8c2c-b93cad0ff703",
+                            "similarity_score": 0.5039,
                             "intent": "After-sales & Warranty Inquiry",
                             "question": "Why is the browser on the ivertu 5G phone displaying in Chinese despite the system language being set to English (United Kingdom)?",
                             "answer": "The browser may be using a default regional language profile. To resolve, go to Settings > System > Languages & input > Languages, and ensure 'English (United Kingdom)' is set as the primary language. Also, clear the browser cache and data under Settings > Apps > Browser > Storage.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -305,7 +340,7 @@
         {
             "search_info": {
                 "query": "屏幕分辨率",
-                "timestamp": "2026-03-13T10:16:10.611267",
+                "timestamp": "2026-03-16T12:06:08.692568",
                 "total_results": 10
             },
             "categories": [
@@ -313,12 +348,12 @@
                     "category_name": "使用&配件咨询",
                     "items": [
                         {
-                            "id": 464861016684504776,
-                            "similarity_score": 51.9,
+                            "id": "5407f825-2d97-4082-8a60-a345ec10a11a",
+                            "similarity_score": 0.519,
                             "intent": "使用&配件咨询",
                             "question": "AGENT Q手机屏幕曲率特殊，导致市面上的钢化膜无法贴合，有没有适配AGENT Q的专用贴膜方案？",
                             "answer": "老板您好，这种异形屏幕设计恰恰是VERTU对奢品工艺的极致追求：首先，它的屏幕边缘经过特殊打磨，和机身钛合金边框完美融合，摸上去浑然一体，这种质感是普通贴膜手机根本达不到的；其次，咱们的屏幕本身就采用了顶级耐磨材质，日常使用中轻微剐蹭完全不用担心，而且屏幕涂层自带疏油、防指纹的效果，打理起来特别方便。您想想，买咱们VERTU的老板，追求的就是“不妥协的奢华体验”，要是贴个膜，反而把这独一无二的屏幕质感给掩盖了，岂不是可惜？咱们这款手机的屏幕，就像高级腕表的表盘，不需要额外“保护层”，它本身就经得起时间和品质的考验，这也是咱们奢品手机和普通机型的核心区别之一",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -326,76 +361,76 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464861016684504765,
-                            "similarity_score": 48.45,
+                            "id": "c459f9a0-bab2-41de-ad9d-32f8fa7915ba",
+                            "similarity_score": 0.4845,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 的处理器具体是哪一款？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504757,
-                            "similarity_score": 48.25,
+                            "id": "c7cc2073-7247-400a-85b5-97749bafb069",
+                            "similarity_score": 0.4825,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 所使用的相机硬件型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504768,
-                            "similarity_score": 48.15,
+                            "id": "9aeebacf-65b3-48a7-b125-d4963d364135",
+                            "similarity_score": 0.4815,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 采用的是什么类型的处理器？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504771,
-                            "similarity_score": 47.72,
+                            "id": "65886c8b-e566-4026-8bcd-03cd766f7b83",
+                            "similarity_score": 0.4772,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 搭载的处理器型号是什么？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504762,
-                            "similarity_score": 45.33,
+                            "id": "fa963af0-ab28-43ce-b30c-b826d18fe8e1",
+                            "similarity_score": 0.4533,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 配备的相机具体型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504760,
-                            "similarity_score": 45.3,
+                            "id": "e77f1763-13e8-478d-9000-1fe296f3d886",
+                            "similarity_score": 0.453,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 使用的相机型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504769,
-                            "similarity_score": 43.77,
+                            "id": "a855ebf8-8924-40cd-8214-4d9974402c4b",
+                            "similarity_score": 0.4377,
                             "intent": "产品&功能咨询",
                             "question": "在高负载场景下，如何调整 AGENT Q 的设置以优化任务调度效率？",
                             "answer": "VERTU Agent Q是全球首款AI Agent手机。搭载3nm骁龙8 Elite至尊版，16GB+1TB存储搭配10TB分布式存储。6.02英寸120Hz柔性AMOLED屏，影像系统为5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13mm-140mm全焦段。内置5565mAh硅基电池+65W快充，支持双卫星双向通话。配备A5加密芯片+一机三系统，端到端加密保障安全。瑞表级工艺机身搭配珍稀皮革与红宝石按键，还有200+AI智能体与7x24真人管家，兼顾实用与奢华。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504770,
-                            "similarity_score": 43.26,
+                            "id": "d907a946-5cec-4eb4-9477-70c5fc867607",
+                            "similarity_score": 0.4326,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q的加密通信功能是否支持行业标准的加密算法与协议？",
                             "answer": "专属A5硬件加密芯片+一机三系统+10TB分布式存储，从硬件到软件全方位防护。端到端加密聊天+MPC加密钱包，隐私数据不泄露，相比普通旗舰的单一加密方式，安全等级更高，适合商务人士存储敏感信息。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504772,
-                            "similarity_score": 41.68,
+                            "id": "7bedaae0-4735-45c8-9398-82b9208bf18c",
+                            "similarity_score": 0.4168,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q的材质是否符合特定安全或环保标准？",
                             "answer": "瑞表级机械铰链、316L精钢、红宝石按键+珍稀皮革材质，开合有清脆“咔哒”声，工艺远超普通金属玻璃机身。搭配7x24真人管家，不仅是手机更是专属身份标识，稀缺性无可替代。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -404,7 +439,7 @@
         {
             "search_info": {
                 "query": "屏幕尺寸",
-                "timestamp": "2026-03-13T10:16:10.745593",
+                "timestamp": "2026-03-16T12:06:08.810714",
                 "total_results": 10
             },
             "categories": [
@@ -412,84 +447,84 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464879935262576467,
-                            "similarity_score": 67.6,
+                            "id": "a1b408b2-63f0-4b58-9091-b58398986a06",
+                            "similarity_score": 0.676,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q手机屏幕多大？",
                             "answer": "屏幕尺寸6.02英寸",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576531,
-                            "similarity_score": 66.71,
+                            "id": "6e69400c-b48c-4a2d-861c-120152dbf0bd",
+                            "similarity_score": 0.6671,
                             "intent": "产品&功能咨询",
                             "question": "VERTU META系列-METAVERTU1手机的屏幕尺寸和刷新率是多少？",
                             "answer": "屏幕为6.67英寸FHD+ AMOLED曲面屏，支持144Hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576729,
-                            "similarity_score": 66.67,
+                            "id": "e172ade0-3b9b-421c-ae9c-9a31e266cf00",
+                            "similarity_score": 0.6667,
                             "intent": "产品&功能咨询",
                             "question": "VERTU QUANTUM新品量子AI智能体小折叠屏手机的屏幕尺寸是多少？",
                             "answer": "量子折叠屏采用双屏折叠设计：\n超大3英寸682*422外屏，阳光下亦可清晰可见\n超感6.9英寸巨幕OLED内屏，大型游戏满帧运行",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576402,
-                            "similarity_score": 65.54,
+                            "id": "b2374e5d-f87a-4a2f-8589-a8ee13a6cfa2",
+                            "similarity_score": 0.6554,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q直面屏手机最大屏幕几寸？",
                             "answer": "配备AMOLED直面屏，尺寸为6.02英寸，分辨率为1080x2340，支持120Hz高刷新率，视觉清晰流畅。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576269,
-                            "similarity_score": 65.42,
+                            "id": "ed108d82-25c0-461c-9d8c-60757ab439cf",
+                            "similarity_score": 0.6542,
                             "intent": "产品&功能咨询",
                             "question": "VERTU METAVERTU手机的屏幕参数是什么？",
                             "answer": "6.67寸FHD+的AMOLED曲面屏（1080*2400），支持144hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262575985,
-                            "similarity_score": 65.22,
+                            "id": "7cb08276-55f7-489a-865b-131a9ba3677d",
+                            "similarity_score": 0.6522,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q手机的屏幕规格是什么？",
                             "answer": "120Hz高刷AMOLED屏幕。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576110,
-                            "similarity_score": 65.12,
+                            "id": "47e13674-3e5f-4d57-b00e-34dc470f52be",
+                            "similarity_score": 0.6512,
                             "intent": "产品&功能咨询",
                             "question": "MetaVertu的屏幕尺寸和规格是什么？",
                             "answer": "6.67英寸FHD+ AMOLED曲面屏，分辨率为1080*2400，支持144Hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576273,
-                            "similarity_score": 64.23,
+                            "id": "5bfc77be-5a7a-4bff-86e5-c2fedc371e7c",
+                            "similarity_score": 0.6423,
                             "intent": "产品&功能咨询",
                             "question": "VERTU QUANTUM量子折叠屏手机屏幕参数是什么？",
                             "answer": "6.02英寸120Hz柔性AMOLED屏",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576510,
-                            "similarity_score": 63.77,
+                            "id": "49d77a89-ce6a-48e3-a12d-f6610e94d6ab",
+                            "similarity_score": 0.6377,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Signature S 智能手机的屏幕尺寸和操作系统是什么？",
                             "answer": "屏幕尺寸为1.98英寸高清LCD触摸屏，操作系统为Android 14。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576026,
-                            "similarity_score": 63.38,
+                            "id": "e55f6ec4-4ecb-4b91-a520-9a0d2b67a924",
+                            "similarity_score": 0.6338,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q 旗舰新品的屏幕分辨率是多少？",
                             "answer": "视听盛宴：2K+超感内屏配合DTS:X Ultra影院级音效，是您的私人IMAX影院。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -498,84 +533,116 @@
         {
             "search_info": {
                 "query": "屏幕尺寸",
-                "timestamp": "2026-03-13T10:16:10.878342",
+                "timestamp": "2026-03-16T12:06:08.934826",
                 "total_results": 10
             },
             "categories": [
                 {
+                    "category_name": "尺寸&佩戴咨询",
+                    "items": [
+                        {
+                            "id": "a952bf69-096c-4bec-8cfb-f605280e897e",
+                            "similarity_score": 0.6787,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU META 2的屏幕尺寸是多少？",
+                            "answer": "6.78英寸。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
+                        },
+                        {
+                            "id": "ef3fe6b9-4824-4eaf-b886-2d5effa409d1",
+                            "similarity_score": 0.6672,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU SIGV的屏幕尺寸是多少？",
+                            "answer": "1.98英寸",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:35:00"
+                            }
+                        },
+                        {
+                            "id": "4ebb7a22-896b-4243-bb00-319c74fdcc70",
+                            "similarity_score": 0.619,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "Rabbit R1屏幕尺寸和类型是什么？",
+                            "answer": "1.98英寸LCD触摸屏",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:31"
+                            }
+                        },
+                        {
+                            "id": "039754c6-0706-4fda-8b4a-10c847e81a3b",
+                            "similarity_score": 0.6106,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU SIG S+ 的屏幕类型和尺寸是什么？",
+                            "answer": "1.98英寸LCD触摸屏",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:33:01"
+                            }
+                        }
+                    ]
+                },
+                {
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464859990403851168,
-                            "similarity_score": 50.44,
+                            "id": "0f467fc2-ab78-49b9-afa9-593a81e1adf5",
+                            "similarity_score": 0.6498,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的军工加密功能支持的最大存储空间是多少？",
-                            "answer": "高达10TB的超大空间。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "1.5K",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851169,
-                            "similarity_score": 48.06,
+                            "id": "f8944936-15ed-43bd-9211-40bf78c25219",
+                            "similarity_score": 0.6498,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ设备的军工级加密功能最多支持多大的存储容量？",
-                            "answer": "高达10TB的超大空间。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "2048*1080。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851210,
-                            "similarity_score": 46.74,
+                            "id": "b833f711-df79-42c4-84ed-18aed7b3c022",
+                            "similarity_score": 0.6242,
                             "intent": "产品&功能咨询",
-                            "question": "在 META1、META2、Quantum 以及 AgentQ 平台中，加密会客室是否支持超过特定人数的实时多人会议？具体容量是多少？",
-                            "answer": "最多16人。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU SIG S+ 的屏幕分辨率是多少？",
+                            "answer": "240*320",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:32:59"
+                            }
                         },
                         {
-                            "id": 464859990403851139,
-                            "similarity_score": 46.4,
+                            "id": "236e45ff-6e79-468a-80a7-57f9691f576c",
+                            "similarity_score": 0.5962,
                             "intent": "产品&功能咨询",
-                            "question": "VEB A5芯片在META1、META2、Quantum及AgentQ产品中是否满足金融级移动支付的技术规范要求？",
-                            "answer": "符合金融级移动支付与资产存储规范。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 1 的屏幕刷新率是多少？",
+                            "answer": "144Hz。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T08:59:43"
+                            }
                         },
                         {
-                            "id": 464859990403851155,
-                            "similarity_score": 46.23,
+                            "id": "8b569550-542b-42a7-96e1-aaac8bd5bb41",
+                            "similarity_score": 0.5935,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的VEB A5 芯片是否符合金融级移动支付规范？",
-                            "answer": "符合金融级移动支付与资产存储规范。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851160,
-                            "similarity_score": 45.86,
-                            "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum与AgentQ所采用的VEB A5芯片是否支持高等级物理安全防护，具体达到什么标准？",
-                            "answer": "军工级主动物理防护机制",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851143,
-                            "similarity_score": 45.85,
-                            "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的VEB A5芯片的真随机数发生器速率是多少？",
-                            "answer": "4Mbps",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851133,
-                            "similarity_score": 45.31,
-                            "intent": "产品&功能咨询",
-                            "question": "在标准工作条件下，META1、META2、Quantum及AgentQ型号的32-pin QFN封装加密芯片各自的工作电流值是多少？",
-                            "answer": "≤55mA",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
-                        {
-                            "id": 464859990403851214,
-                            "similarity_score": 45.23,
-                            "intent": "产品&功能咨询",
-                            "question": "在META1、META2、Quantum与AgentQ支持的一机三系统配置下，主系统采用哪种操作系统？",
-                            "answer": "搭载 VPS 企业级 AI 操作大脑。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕排列方式是什么？",
+                            "answer": "蓝钻排列",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         }
                     ]
                 },
@@ -583,12 +650,15 @@
                     "category_name": "使用&配件咨询",
                     "items": [
                         {
-                            "id": 464859990403851174,
-                            "similarity_score": 47.22,
+                            "id": "8e532994-dfc7-40a6-ba33-6032abcf7186",
+                            "similarity_score": 0.5913,
                             "intent": "使用&配件咨询",
-                            "question": "使用META1、META2、Quantum或AgentQ的AI数字分身时，有哪些操作限制或注意事项？",
-                            "answer": "可代用户进行基础社交互动。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "如何调整VERTU手机屏幕亮度？",
+                            "answer": "通过左右按键滑动亮度条调整。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:40:30"
+                            }
                         }
                     ]
                 }
@@ -597,7 +667,7 @@
         {
             "search_info": {
                 "query": "屏幕尺寸",
-                "timestamp": "2026-03-13T10:16:11.005592",
+                "timestamp": "2026-03-16T12:06:09.220485",
                 "total_results": 10
             },
             "categories": [
@@ -605,76 +675,76 @@
                     "category_name": "Product & Feature Inquiry",
                     "items": [
                         {
-                            "id": 464859990403847937,
-                            "similarity_score": 63.45,
+                            "id": "ffcedbbf-2193-4076-9af1-810b93b36684",
+                            "similarity_score": 0.6345,
                             "intent": "Product & Feature Inquiry",
                             "question": "Why does the official Vertu Vietnam website (vertuvietnam.vn) display the screen size of the Vertu Agent Q as 6.67 inches when the correct size is 6.02 inches?",
                             "answer": "The Vertu Agent Q has a screen size of 6.02 inches; the display of 6.67 inches on vertuvietnam.vn appears to be an error that needs correction.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847936,
-                            "similarity_score": 63.37,
+                            "id": "078872a2-a158-46cb-b321-68e4432f30c9",
+                            "similarity_score": 0.6337,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Agent Q?",
                             "answer": "6.02 inches.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847955,
-                            "similarity_score": 62.77,
+                            "id": "8a3b916c-5cf5-41aa-b21e-67d448f3178f",
+                            "similarity_score": 0.6277,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Metavertu 2 Max?",
                             "answer": "6.02 inch screen.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847991,
-                            "similarity_score": 57.79,
+                            "id": "cd428262-d1ac-4ca9-a460-57f1e66286ea",
+                            "similarity_score": 0.5779,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Quantum Flip compared to the Vertu Agent Q?",
                             "answer": "The Vertu Quantum Flip has a 6.9\" main folding OLED screen and a 3\" external display; the Vertu Agent Q has a 6.02\" single AMOLED screen. When unfolded, the Quantum Flip offers significantly more viewing area for multimedia and productivity tasks.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848158,
-                            "similarity_score": 55.55,
+                            "id": "647c6b84-d26b-4b13-b1ed-31adadada9b7",
+                            "similarity_score": 0.5555,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the Vertu Agent Q support screen touch?",
                             "answer": "Yes, it supports screen touch.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848208,
-                            "similarity_score": 53.05,
+                            "id": "ecc7bc60-a5eb-47f6-8e46-e49d2d3409ec",
+                            "similarity_score": 0.5305,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the IVERTU brown calfskin leather phone support Chinese character display?",
                             "answer": "Yes, due to version limitations, the IVERTU phone sometimes displays Chinese characters.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848346,
-                            "similarity_score": 52.69,
+                            "id": "ff1cb101-cbdd-43f4-aa66-9c3f2c2ee1e5",
+                            "similarity_score": 0.5269,
                             "intent": "Product & Feature Inquiry",
                             "question": "What does the front and side view of the VERTU Metavertu phone look like?",
                             "answer": "The front and side views show a curved-screen design with slightly curved sides on the sides.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848037,
-                            "similarity_score": 51.89,
+                            "id": "bf234688-e317-42e9-ab9b-6953fd23ca00",
+                            "similarity_score": 0.5189,
                             "intent": "Product & Feature Inquiry",
                             "question": "What are the benefits of the signature series button phones for children in terms of social perception and screen time management?",
                             "answer": "Symbol of status: made with sapphire and calfskin, resembling art or jewelry; physical disconnection: retains basic communication but isolates children from short-video platforms like TikTok, helping them regain focus.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848322,
-                            "similarity_score": 51.48,
+                            "id": "85e6ba38-e597-447a-969c-7c8e2fdc2842",
+                            "similarity_score": 0.5148,
                             "intent": "Product & Feature Inquiry",
                             "question": "Is the camera lens on the METAVERTU phone flush with the back panel?",
                             "answer": "Yes, the camera lens on the METAVERTU phone is built-in without bumps, providing better protection.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -682,12 +752,12 @@
                     "category_name": "Usage & Accessories Inquiry",
                     "items": [
                         {
-                            "id": 464859990403848261,
-                            "similarity_score": 53.98,
+                            "id": "c0bae9b0-7761-4857-8c15-3fbb7a3b4b5e",
+                            "similarity_score": 0.5398,
                             "intent": "Usage & Accessories Inquiry",
                             "question": "What color do you like for the METAVERTU phone?",
                             "answer": "The agent asked about color preference, and the customer confirmed a specific model via video link.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -696,7 +766,7 @@
         {
             "search_info": {
                 "query": "屏幕尺寸",
-                "timestamp": "2026-03-13T10:16:11.165539",
+                "timestamp": "2026-03-16T12:06:09.363944",
                 "total_results": 10
             },
             "categories": [
@@ -704,12 +774,12 @@
                     "category_name": "使用&配件咨询",
                     "items": [
                         {
-                            "id": 464861016684504776,
-                            "similarity_score": 50.44,
+                            "id": "5407f825-2d97-4082-8a60-a345ec10a11a",
+                            "similarity_score": 0.5044,
                             "intent": "使用&配件咨询",
                             "question": "AGENT Q手机屏幕曲率特殊，导致市面上的钢化膜无法贴合，有没有适配AGENT Q的专用贴膜方案？",
                             "answer": "老板您好，这种异形屏幕设计恰恰是VERTU对奢品工艺的极致追求：首先，它的屏幕边缘经过特殊打磨，和机身钛合金边框完美融合，摸上去浑然一体，这种质感是普通贴膜手机根本达不到的；其次，咱们的屏幕本身就采用了顶级耐磨材质，日常使用中轻微剐蹭完全不用担心，而且屏幕涂层自带疏油、防指纹的效果，打理起来特别方便。您想想，买咱们VERTU的老板，追求的就是“不妥协的奢华体验”，要是贴个膜，反而把这独一无二的屏幕质感给掩盖了，岂不是可惜？咱们这款手机的屏幕，就像高级腕表的表盘，不需要额外“保护层”，它本身就经得起时间和品质的考验，这也是咱们奢品手机和普通机型的核心区别之一",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -717,76 +787,76 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464861016684504757,
-                            "similarity_score": 45.87,
+                            "id": "c7cc2073-7247-400a-85b5-97749bafb069",
+                            "similarity_score": 0.4587,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 所使用的相机硬件型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504771,
-                            "similarity_score": 44.95,
+                            "id": "65886c8b-e566-4026-8bcd-03cd766f7b83",
+                            "similarity_score": 0.4495,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 搭载的处理器型号是什么？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504768,
-                            "similarity_score": 44.69,
+                            "id": "9aeebacf-65b3-48a7-b125-d4963d364135",
+                            "similarity_score": 0.4469,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 采用的是什么类型的处理器？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504765,
-                            "similarity_score": 44.23,
+                            "id": "c459f9a0-bab2-41de-ad9d-32f8fa7915ba",
+                            "similarity_score": 0.4423,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 的处理器具体是哪一款？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504760,
-                            "similarity_score": 43.77,
+                            "id": "e77f1763-13e8-478d-9000-1fe296f3d886",
+                            "similarity_score": 0.4377,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 使用的相机型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504762,
-                            "similarity_score": 43.54,
+                            "id": "fa963af0-ab28-43ce-b30c-b826d18fe8e1",
+                            "similarity_score": 0.4354,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 配备的相机具体型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504772,
-                            "similarity_score": 42.55,
+                            "id": "7bedaae0-4735-45c8-9398-82b9208bf18c",
+                            "similarity_score": 0.4255,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q的材质是否符合特定安全或环保标准？",
                             "answer": "瑞表级机械铰链、316L精钢、红宝石按键+珍稀皮革材质，开合有清脆“咔哒”声，工艺远超普通金属玻璃机身。搭配7x24真人管家，不仅是手机更是专属身份标识，稀缺性无可替代。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504763,
-                            "similarity_score": 42.23,
+                            "id": "8467f43c-13c3-4940-a3c6-ed901dce8422",
+                            "similarity_score": 0.4223,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q的外壳和内部组件分别使用什么材质？",
                             "answer": "瑞表级机械铰链、316L精钢、红宝石按键+珍稀皮革材质，开合有清脆“咔哒”声，工艺远超普通金属玻璃机身。搭配7x24真人管家，不仅是手机更是专属身份标识，稀缺性无可替代。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504769,
-                            "similarity_score": 41.2,
+                            "id": "a855ebf8-8924-40cd-8214-4d9974402c4b",
+                            "similarity_score": 0.412,
                             "intent": "产品&功能咨询",
                             "question": "在高负载场景下，如何调整 AGENT Q 的设置以优化任务调度效率？",
                             "answer": "VERTU Agent Q是全球首款AI Agent手机。搭载3nm骁龙8 Elite至尊版，16GB+1TB存储搭配10TB分布式存储。6.02英寸120Hz柔性AMOLED屏，影像系统为5000万主摄（可变光圈+OIS）+6400万长焦（微距）+5000万超广角，覆盖13mm-140mm全焦段。内置5565mAh硅基电池+65W快充，支持双卫星双向通话。配备A5加密芯片+一机三系统，端到端加密保障安全。瑞表级工艺机身搭配珍稀皮革与红宝石按键，还有200+AI智能体与7x24真人管家，兼顾实用与奢华。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -795,7 +865,7 @@
         {
             "search_info": {
                 "query": "屏幕类型",
-                "timestamp": "2026-03-13T10:16:11.307207",
+                "timestamp": "2026-03-16T12:06:09.511652",
                 "total_results": 10
             },
             "categories": [
@@ -803,84 +873,84 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464879935262576242,
-                            "similarity_score": 65.45,
+                            "id": "e91fd098-bfd8-4355-bfeb-8675360b1636",
+                            "similarity_score": 0.6545,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Quantumflip量子折叠屏手机的屏幕类型是什么？",
                             "answer": "量子折叠屏采用双屏折叠设计，超感6.9英寸巨幕OLED内屏，大型游戏满帧运行",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576699,
-                            "similarity_score": 62.22,
+                            "id": "db3bd62c-d14c-4127-ad3a-12d36cc8fc24",
+                            "similarity_score": 0.6222,
                             "intent": "产品&功能咨询",
                             "question": "VERTU AGENT Q 旗舰新品有屏幕吗？",
                             "answer": "有的哦，展示的是背部。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576564,
-                            "similarity_score": 61.38,
+                            "id": "fa00d748-e2f5-4d7a-acd9-f34ca5a8246a",
+                            "similarity_score": 0.6138,
                             "intent": "产品&功能咨询",
                             "question": "METAVERTU手机的屏幕材质是什么?",
                             "answer": "采用柔性OLED材质弯曲成型，具备沉浸式观感、光线反射优化和美学价值。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576549,
-                            "similarity_score": 61.13,
+                            "id": "c1d3ef0b-0716-489f-8f64-3b37396de151",
+                            "similarity_score": 0.6113,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Signature S卫星总裁手机有LCD屏幕吗？",
                             "answer": "有，该手机配备1.98英寸高清LCD触摸屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576722,
-                            "similarity_score": 60.98,
+                            "id": "7a1d4d24-7a49-4a20-94cd-5f1f3e0a2465",
+                            "similarity_score": 0.6098,
                             "intent": "产品&功能咨询",
                             "question": "VERTU META系列-METAVERTU1的屏幕参数是什么？",
                             "answer": "6.67英寸FHD+ AMOLED曲面屏，分辨率为1080*2400，支持144Hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576213,
-                            "similarity_score": 60.13,
+                            "id": "92fea2d3-9eb5-487b-884c-60c09b856248",
+                            "similarity_score": 0.6013,
                             "intent": "产品&功能咨询",
                             "question": "VERTU METAVERTU2手机是直屏吗?",
                             "answer": "是的，VERTU METAVERTU2手机采用6.78英寸超视网膜级AMOLED全面屏，属于直屏设计。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576335,
-                            "similarity_score": 60.01,
+                            "id": "194ec91b-6383-42e7-8663-a5b23dd258b3",
+                            "similarity_score": 0.6001,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q手机屏幕支持哪些特性？",
                             "answer": "搭载6.02英寸120Hz柔性AMOLED屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576269,
-                            "similarity_score": 59.97,
+                            "id": "ed108d82-25c0-461c-9d8c-60757ab439cf",
+                            "similarity_score": 0.5997,
                             "intent": "产品&功能咨询",
                             "question": "VERTU METAVERTU手机的屏幕参数是什么？",
                             "answer": "6.67寸FHD+的AMOLED曲面屏（1080*2400），支持144hz高刷新率。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262575954,
-                            "similarity_score": 59.95,
+                            "id": "9cba0ddd-1b69-4d18-a201-1fc315dd0f79",
+                            "similarity_score": 0.5995,
                             "intent": "产品&功能咨询",
                             "question": "VERTU Agent Q的屏幕参数是什么？",
                             "answer": "6.02英寸120Hz柔性AMOLED屏。",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464879935262576273,
-                            "similarity_score": 59.55,
+                            "id": "5bfc77be-5a7a-4bff-86e5-c2fedc371e7c",
+                            "similarity_score": 0.5955,
                             "intent": "产品&功能咨询",
                             "question": "VERTU QUANTUM量子折叠屏手机屏幕参数是什么？",
                             "answer": "6.02英寸120Hz柔性AMOLED屏",
-                            "metadata": "{'source': '天猫_京东.json', 'datetime': '2026-02-28 15:12:32'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -889,7 +959,7 @@
         {
             "search_info": {
                 "query": "屏幕类型",
-                "timestamp": "2026-03-13T10:16:11.466289",
+                "timestamp": "2026-03-16T12:06:09.701758",
                 "total_results": 10
             },
             "categories": [
@@ -897,84 +967,119 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464859990403851121,
-                            "similarity_score": 52.46,
+                            "id": "b67151d4-c0d7-4984-ad98-1a08cc298cfe",
+                            "similarity_score": 0.6723,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的VEB A5芯片的TRNG是什么类型？",
-                            "answer": "硬件级真随机数生成引擎",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "Vertu手机屏幕升级为何种类型？",
+                            "answer": "触摸屏。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:34"
+                            }
                         },
                         {
-                            "id": 464859990403851120,
-                            "similarity_score": 51.88,
+                            "id": "cc3df55c-978d-483c-9f14-5a95531d0b86",
+                            "similarity_score": 0.6554,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ所使用的VEB A5（ET300）芯片属于哪一类芯片？",
-                            "answer": "32位多用途微控制器（MCU）。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "Vertu Signature S+的屏幕类型是什么？",
+                            "answer": "升级触摸屏。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:45"
+                            }
                         },
                         {
-                            "id": 464859990403851197,
-                            "similarity_score": 50.42,
+                            "id": "1544ab87-20bd-4314-8ccc-5ad75cef2f8b",
+                            "similarity_score": 0.6554,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ的Key Box属于什么类型的硬件设备？",
-                            "answer": "是手机内部的独立硬件钱包。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "Vertu Signature S+的屏幕类型是什么？",
+                            "answer": "灵动触控屏幕。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:30:50"
+                            }
                         },
                         {
-                            "id": 464859990403851200,
-                            "similarity_score": 49.08,
+                            "id": "8b569550-542b-42a7-96e1-aaac8bd5bb41",
+                            "similarity_score": 0.6201,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的Key Box是什么类型的设备？",
-                            "answer": "是手机内部的独立硬件钱包。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕排列方式是什么？",
+                            "answer": "蓝钻排列",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851214,
-                            "similarity_score": 49.06,
+                            "id": "9232920f-d0d6-422b-81cc-95f9fa5391fa",
+                            "similarity_score": 0.597,
                             "intent": "产品&功能咨询",
-                            "question": "在META1、META2、Quantum与AgentQ支持的一机三系统配置下，主系统采用哪种操作系统？",
-                            "answer": "搭载 VPS 企业级 AI 操作大脑。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕采用什么材质？",
+                            "answer": "类蓝宝石的吉光玻璃",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851195,
-                            "similarity_score": 48.89,
+                            "id": "153275ee-b437-4750-a600-0ef4ba5d8396",
+                            "similarity_score": 0.597,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum及AgentQ机型的主系统在一机三系统方案中使用什么操作系统？",
-                            "answer": "搭载 VPS 企业级 AI 操作大脑。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕采用什么材质？",
+                            "answer": "类蓝宝石的吉光玻璃。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851193,
-                            "similarity_score": 48.46,
+                            "id": "f8944936-15ed-43bd-9211-40bf78c25219",
+                            "similarity_score": 0.5959,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的一机三系统中主系统搭载什么操作系统？",
-                            "answer": "搭载 VPS 企业级 AI 操作大脑。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "2048*1080。",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851144,
-                            "similarity_score": 48.34,
+                            "id": "0f467fc2-ab78-49b9-afa9-593a81e1adf5",
+                            "similarity_score": 0.5959,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ设备中VEB A5芯片的真随机数生成器（TRNG）采用的是哪种技术类型？",
-                            "answer": "硬件级真随机数生成引擎",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "question": "VERTU META 2屏幕分辨率是多少？",
+                            "answer": "1.5K",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:17:11"
+                            }
                         },
                         {
-                            "id": 464859990403851225,
-                            "similarity_score": 47.89,
+                            "id": "b833f711-df79-42c4-84ed-18aed7b3c022",
+                            "similarity_score": 0.5918,
                             "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum、AgentQ的加密会客室的音视频流通过什么芯片加密？",
-                            "answer": "A5芯片。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
-                        },
+                            "question": "VERTU SIG S+ 的屏幕分辨率是多少？",
+                            "answer": "240*320",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:32:59"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "category_name": "尺寸&佩戴咨询",
+                    "items": [
                         {
-                            "id": 464859990403851224,
-                            "similarity_score": 47.68,
-                            "intent": "产品&功能咨询",
-                            "question": "META1、META2、Quantum和AgentQ的加密会客室音视频流采用哪种芯片进行加密？",
-                            "answer": "A5芯片。",
-                            "metadata": "{\"source\": \"《加密芯片、Web3与一机三系统》产品介绍说明 (2).txt\"}"
+                            "id": "039754c6-0706-4fda-8b4a-10c847e81a3b",
+                            "similarity_score": 0.6159,
+                            "intent": "尺寸&佩戴咨询",
+                            "question": "VERTU SIG S+ 的屏幕类型和尺寸是什么？",
+                            "answer": "1.98英寸LCD触摸屏",
+                            "metadata": {
+                                "source": "domestic_general",
+                                "datetime": "2026-03-15T09:33:01"
+                            }
                         }
                     ]
                 }
@@ -983,7 +1088,7 @@
         {
             "search_info": {
                 "query": "屏幕类型",
-                "timestamp": "2026-03-13T10:16:11.607507",
+                "timestamp": "2026-03-16T12:06:09.857824",
                 "total_results": 10
             },
             "categories": [
@@ -991,12 +1096,12 @@
                     "category_name": "Product & Category Inquiry",
                     "items": [
                         {
-                            "id": 464859990403847922,
-                            "similarity_score": 57.13,
+                            "id": "bd07eaa6-aa6d-4327-968e-75e68a37827a",
+                            "similarity_score": 0.5713,
                             "intent": "Product & Category Inquiry",
                             "question": "Which models of MetaVertu have a sapphire screen?",
                             "answer": "MetaVertu 2 Max, Quantum Flip, and Agent Q.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -1004,76 +1109,76 @@
                     "category_name": "Product & Feature Inquiry",
                     "items": [
                         {
-                            "id": 464859990403848158,
-                            "similarity_score": 56.84,
+                            "id": "647c6b84-d26b-4b13-b1ed-31adadada9b7",
+                            "similarity_score": 0.5684,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the Vertu Agent Q support screen touch?",
                             "answer": "Yes, it supports screen touch.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847936,
-                            "similarity_score": 53.88,
+                            "id": "078872a2-a158-46cb-b321-68e4432f30c9",
+                            "similarity_score": 0.5388,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Agent Q?",
                             "answer": "6.02 inches.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847955,
-                            "similarity_score": 53.83,
+                            "id": "8a3b916c-5cf5-41aa-b21e-67d448f3178f",
+                            "similarity_score": 0.5383,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Metavertu 2 Max?",
                             "answer": "6.02 inch screen.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848346,
-                            "similarity_score": 53.06,
+                            "id": "ff1cb101-cbdd-43f4-aa66-9c3f2c2ee1e5",
+                            "similarity_score": 0.5306,
                             "intent": "Product & Feature Inquiry",
                             "question": "What does the front and side view of the VERTU Metavertu phone look like?",
                             "answer": "The front and side views show a curved-screen design with slightly curved sides on the sides.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847921,
-                            "similarity_score": 52.63,
+                            "id": "dbe390ab-6aac-4d30-beb0-a84b98328fbb",
+                            "similarity_score": 0.5263,
                             "intent": "Product & Feature Inquiry",
                             "question": "Does the MetaVertu 1 Curve have a sapphire screen?",
                             "answer": "No, only the sapphire camera.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403847991,
-                            "similarity_score": 52.03,
+                            "id": "cd428262-d1ac-4ca9-a460-57f1e66286ea",
+                            "similarity_score": 0.5203,
                             "intent": "Product & Feature Inquiry",
                             "question": "What is the screen size of the Vertu Quantum Flip compared to the Vertu Agent Q?",
                             "answer": "The Vertu Quantum Flip has a 6.9\" main folding OLED screen and a 3\" external display; the Vertu Agent Q has a 6.02\" single AMOLED screen. When unfolded, the Quantum Flip offers significantly more viewing area for multimedia and productivity tasks.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848336,
-                            "similarity_score": 51.47,
+                            "id": "7f83e055-c181-43ae-8d8d-65749bb22848",
+                            "similarity_score": 0.5147,
                             "intent": "Product & Feature Inquiry",
                             "question": "Is the metal frame and screen for the MetaVertu sold together?",
                             "answer": "Yes, they are integrated and will be shipped together via Jonny.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848037,
-                            "similarity_score": 51.21,
+                            "id": "bf234688-e317-42e9-ab9b-6953fd23ca00",
+                            "similarity_score": 0.5121,
                             "intent": "Product & Feature Inquiry",
                             "question": "What are the benefits of the signature series button phones for children in terms of social perception and screen time management?",
                             "answer": "Symbol of status: made with sapphire and calfskin, resembling art or jewelry; physical disconnection: retains basic communication but isolates children from short-video platforms like TikTok, helping them regain focus.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         },
                         {
-                            "id": 464859990403848105,
-                            "similarity_score": 50.97,
+                            "id": "b0a88fc7-5fad-423d-a7b5-ffdc5080d5c8",
+                            "similarity_score": 0.5097,
                             "intent": "Product & Feature Inquiry",
                             "question": "Is the screen of the VERTU Agent Q fully made of sapphire crystal and will it crack?",
                             "answer": "The screen core of the VERTU Agent Q is made of third-generation sapphire crystals and AMOLED panels. The protective layer is made of third-generation sapphire crystal with a Mohs hardness of 9.2 and a 40% increase in drop resistance compared to the previous generation. It is a high-end protective material suitable for luxury mobile phones.",
-                            "metadata": "{'source': 'whatsapp.json', 'datetime': '2026-03-09 16:44:05'}"
+                            "metadata": {}
                         }
                     ]
                 }
@@ -1082,7 +1187,7 @@
         {
             "search_info": {
                 "query": "屏幕类型",
-                "timestamp": "2026-03-13T10:16:11.885988",
+                "timestamp": "2026-03-16T12:06:09.976110",
                 "total_results": 10
             },
             "categories": [
@@ -1090,28 +1195,28 @@
                     "category_name": "使用&配件咨询",
                     "items": [
                         {
-                            "id": 464861016684504776,
-                            "similarity_score": 50.42,
+                            "id": "5407f825-2d97-4082-8a60-a345ec10a11a",
+                            "similarity_score": 0.5042,
                             "intent": "使用&配件咨询",
                             "question": "AGENT Q手机屏幕曲率特殊，导致市面上的钢化膜无法贴合，有没有适配AGENT Q的专用贴膜方案？",
                             "answer": "老板您好，这种异形屏幕设计恰恰是VERTU对奢品工艺的极致追求：首先，它的屏幕边缘经过特殊打磨，和机身钛合金边框完美融合，摸上去浑然一体，这种质感是普通贴膜手机根本达不到的；其次，咱们的屏幕本身就采用了顶级耐磨材质，日常使用中轻微剐蹭完全不用担心，而且屏幕涂层自带疏油、防指纹的效果，打理起来特别方便。您想想，买咱们VERTU的老板，追求的就是“不妥协的奢华体验”，要是贴个膜，反而把这独一无二的屏幕质感给掩盖了，岂不是可惜？咱们这款手机的屏幕，就像高级腕表的表盘，不需要额外“保护层”，它本身就经得起时间和品质的考验，这也是咱们奢品手机和普通机型的核心区别之一",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504773,
-                            "similarity_score": 46.81,
+                            "id": "45fd2a38-e1b7-46dc-a036-b92cd30c6898",
+                            "similarity_score": 0.4681,
                             "intent": "使用&配件咨询",
                             "question": "AGENT Q 使用的电池类型是什么？",
                             "answer": "5565mAh超大硅基电池，容量远超iPhone 17 Pro Max（5088mAh）和三星Z Fold 7（4400mAh），搭配65W快充，续航更持久、回血更快。独家双卫星双向语音通话，无人区也能通信，户外出行更安心。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504767,
-                            "similarity_score": 45.08,
+                            "id": "e4ad340c-698d-4bd5-9a3f-dfe112dbed87",
+                            "similarity_score": 0.4508,
                             "intent": "使用&配件咨询",
                             "question": "AGENT Q 使用的电池是锂离子、镍氢还是其他类型？",
                             "answer": "5565mAh超大硅基电池，容量远超iPhone 17 Pro Max（5088mAh）和三星Z Fold 7（4400mAh），搭配65W快充，续航更持久、回血更快。独家双卫星双向语音通话，无人区也能通信，户外出行更安心。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 },
@@ -1119,60 +1224,60 @@
                     "category_name": "产品&功能咨询",
                     "items": [
                         {
-                            "id": 464861016684504771,
-                            "similarity_score": 48.83,
+                            "id": "65886c8b-e566-4026-8bcd-03cd766f7b83",
+                            "similarity_score": 0.4883,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 搭载的处理器型号是什么？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504768,
-                            "similarity_score": 48.82,
+                            "id": "9aeebacf-65b3-48a7-b125-d4963d364135",
+                            "similarity_score": 0.4882,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 采用的是什么类型的处理器？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504757,
-                            "similarity_score": 48.82,
+                            "id": "c7cc2073-7247-400a-85b5-97749bafb069",
+                            "similarity_score": 0.4882,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 所使用的相机硬件型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504765,
-                            "similarity_score": 47.87,
+                            "id": "c459f9a0-bab2-41de-ad9d-32f8fa7915ba",
+                            "similarity_score": 0.4787,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 的处理器具体是哪一款？",
                             "answer": "搭载3nm高通骁龙8 Elite至尊版，主频高达4.32GHz，性能跃升30%且功耗降低20%，搭配16GB大内存，无论大型应用还是复杂AI任务都流畅无压力。超6000mm? VC均热板散热，长时间高负载使用也不卡顿，算力领先主流旗舰。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504760,
-                            "similarity_score": 46.7,
+                            "id": "e77f1763-13e8-478d-9000-1fe296f3d886",
+                            "similarity_score": 0.467,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 使用的相机型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504762,
-                            "similarity_score": 46.7,
+                            "id": "fa963af0-ab28-43ce-b30c-b826d18fe8e1",
+                            "similarity_score": 0.467,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 配备的相机具体型号是什么？",
                             "answer": "全球首款可变光圈手机，主摄5000万像素+长焦6400万像素+超广角5000万像素的全高像素组合，覆盖13mm-140mm全焦段。支持机械变焦和人眼仿生镜头，暗光进光量多18%，夜景高光抑制提升23%，微距、长焦、夜景表现全面超越同级。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         },
                         {
-                            "id": 464861016684504758,
-                            "similarity_score": 45.39,
+                            "id": "f47ca660-54c8-4538-876a-cd89f8e367bc",
+                            "similarity_score": 0.4539,
                             "intent": "产品&功能咨询",
                             "question": "AGENT Q 采用哪种类型的电池？",
                             "answer": "5565mAh超大硅基电池，容量远超iPhone 17 Pro Max（5088mAh）和三星Z Fold 7（4400mAh），搭配65W快充，续航更持久、回血更快。独家双卫星双向语音通话，无人区也能通信，户外出行更安心。",
-                            "metadata": "keyword_generation"
+                            "metadata": {}
                         }
                     ]
                 }

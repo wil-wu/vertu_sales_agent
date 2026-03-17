@@ -181,6 +181,92 @@ async def health_check() -> Dict[str, str]:
     return {"status": "healthy", "service": "referee_agent"}
 
 
+@router.post("/evaluate-mock-sessions")
+async def evaluate_mock_sessions(
+    save_results: bool = True,
+    referee_agent: RefereeAgent = Depends(get_referee_agent),
+) -> Dict[str, Any]:
+    """批量评估所有 mock_sessions 文件
+    
+    Args:
+        save_results: 是否将评估结果保存回文件，默认为 True
+        
+    Returns:
+        评估结果汇总
+    """
+    try:
+        logger.info("=== [REFEREE] 开始批量评估 mock_sessions ===")
+        
+        results = await referee_agent.evaluate_all_mock_sessions(
+            sessions_dir=PROJECT_ROOT / "mock_sessions",
+            save_results=save_results
+        )
+        
+        # 统计成功和失败的数量
+        success_count = sum(1 for r in results if "error" not in r)
+        error_count = len(results) - success_count
+        
+        logger.info(f"=== [REFEREE] 批量评估完成: 成功 {success_count}, 失败 {error_count} ===")
+        
+        return {
+            "total": len(results),
+            "success_count": success_count,
+            "error_count": error_count,
+            "save_results": save_results,
+            "results": results,
+        }
+        
+    except Exception as e:
+        logger.error(f"=== [REFEREE] 批量评估失败: {e} ===")
+        raise HTTPException(status_code=500, detail=f"批量评估失败: {str(e)}")
+
+
+@router.post("/evaluate-mock-session/{session_id}")
+async def evaluate_single_mock_session(
+    session_id: str,
+    save_result: bool = True,
+    referee_agent: RefereeAgent = Depends(get_referee_agent),
+) -> Dict[str, Any]:
+    """评估单个 mock_session 文件
+    
+    Args:
+        session_id: 会话 ID
+        save_result: 是否将评估结果保存回文件，默认为 True
+        
+    Returns:
+        评估结果
+    """
+    try:
+        logger.info(f"=== [REFEREE] 评估单个会话: {session_id} ===")
+        
+        # 查找会话文件
+        sessions_dir = PROJECT_ROOT / "mock_sessions"
+        matching_files = list(sessions_dir.glob(f"{session_id}*.json"))
+        
+        if not matching_files:
+            raise HTTPException(status_code=404, detail=f"会话不存在: {session_id}")
+        
+        # 使用最新的文件
+        file_path = max(matching_files, key=lambda f: f.stat().st_mtime)
+        
+        result = await referee_agent.evaluate_mock_session_file(
+            file_path=file_path,
+            save_result=save_result
+        )
+        
+        if "error" in result:
+            raise HTTPException(status_code=500, detail=result["error"])
+        
+        logger.info(f"=== [REFEREE] 会话评估完成: {session_id} ===")
+        return result
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"=== [REFEREE] 评估失败: {e} ===")
+        raise HTTPException(status_code=500, detail=f"评估失败: {str(e)}")
+
+
 async def _load_session_data(session_id: str) -> Dict[str, Any] | None:
     """加载会话数据"""
     sessions_dir = PROJECT_ROOT / "mock_sessions"

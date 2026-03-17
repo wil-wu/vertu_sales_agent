@@ -1,0 +1,81 @@
+{
+  "total_sessions": 1,
+  "timestamp": "2026-03-17T15:43:03.593075",
+  "config": {
+    "collection_names": [
+      "domestic_e_commerce",
+      "domestic_general",
+      "oversea_private",
+      "preceding_questions"
+    ],
+    "query_list": [
+      "屏幕分辨率",
+      "屏幕尺寸",
+      "屏幕类型"
+    ],
+    "product_names": [
+      "VERTU AGENT Q"
+    ],
+    "max_path_len": 2
+  },
+  "excute_config": {
+    "max-turns": 20,
+    "output-dir": "output",
+    "session_count": 1,
+    "session-parallel": 1,
+    "referee-concurrent": 2
+  },
+  "metric_averages": {
+    "anthropomorphism_score": {
+      "average": 80.75,
+      "min": 80.75,
+      "max": 80.75,
+      "count": 1
+    },
+    "language_consistency_score": {
+      "average": 100.0,
+      "min": 100.0,
+      "max": 100.0,
+      "count": 1
+    },
+    "sales_script_score": {
+      "average": 87.0,
+      "min": 87.0,
+      "max": 87.0,
+      "count": 1
+    },
+    "traditional_script_score": {
+      "average": 80.0,
+      "min": 80.0,
+      "max": 80.0,
+      "count": 1
+    },
+    "purchase_intent_score": {
+      "average": 65.5,
+      "min": 65.5,
+      "max": 65.5,
+      "count": 1
+    },
+    "user_experience_score": {
+      "average": 80.0,
+      "min": 80.0,
+      "max": 80.0,
+      "count": 1
+    },
+    "problem_solving_score": {
+      "average": 64.0,
+      "min": 64.0,
+      "max": 64.0,
+      "count": 1
+    }
+  },
+  "persona_distribution": {
+    "price_comparer": 1
+  },
+  "scenario_distribution": {
+    "售后": 1
+  },
+  "session_files": [
+    "session_f8a27d09-7285-457e-bfae-21452fe064a4.json"
+  ]
+}

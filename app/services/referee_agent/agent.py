@@ -100,7 +100,7 @@ class RefereeAgent:
                     temperature=0.3,
                     max_tokens=500
                 ),
-                timeout=60  # 1分钟超时
+                timeout=180  
             )
             
             evaluation = llm_response.choices[0].message.content
@@ -111,11 +111,22 @@ class RefereeAgent:
                 output_tokens = llm_response.usage.completion_tokens
                 logging.info(f"[RefereeAgent] Token 使用 - 输入: {input_tokens}, 输出: {output_tokens}, 总计: {input_tokens + output_tokens}")
             
-            assessment = self._parse_evaluation_response(evaluation)
-            assessment.turn_id = str(uuid.uuid4())
+            # 解析评估结果（返回字典）
+            assessment_data = self._parse_evaluation_response(evaluation, request.user_message, request.agent_response)
             
-            # 计算综合评分
-            assessment.overall_score = self._calculate_overall_score(assessment)
+            # 创建 TurnAssessment 对象
+            assessment = TurnAssessment(
+                turn_id=str(uuid.uuid4()),
+                user_message=request.user_message,
+                agent_response=request.agent_response,
+                relevance=0.8,  # 默认值
+                helpfulness=0.8,
+                empathy=0.8,
+                overall_score=assessment_data.get("agent_anthropomorphism_score", 0.5) * 100,
+                detailed_metrics=assessment_data.get("detailed_metrics"),
+                feedback=assessment_data.get("feedback", ""),
+                flags={}
+            )
             
             # 添加回合到会话
             session.add_turn(assessment)
@@ -191,6 +202,19 @@ class RefereeAgent:
     def _parse_evaluation_response(self, response: str, user_message: str = "", agent_response: str = "") -> Dict[str, Any]:
         """解析LLM评估响应 - 包含详细6大维度指标"""
         try:
+            # 检查 response 是否为 None 或空
+            if not response or not isinstance(response, str):
+                return {
+                    "agent_anthropomorphism_score": 0.5,
+                    "user_anthropomorphism_score": 0.5,
+                    "purchase_intent_change": 'unchanged',
+                    "problem_resolved": False,
+                    "sales_script_quality": 'good',
+                    "user_experience": 'good',
+                    "detailed_metrics": None,
+                    "feedback": f'评估响应无效: {response}',
+                }
+            
             # 尝试提取JSON - 使用更精确的正则表达式
             # 先尝试提取完整的JSON对象
             json_match = re.search(r'\{[\s\S]*\}', response.strip())
@@ -749,11 +773,16 @@ class RefereeAgent:
             result.should_terminate = True
             result.termination_reason = "unresolved_and_poor_service"
 
-    async def generate_session_summary(self, session_data: dict) -> dict:
-        """生成会话摘要 - 包含6大维度37项详细指标汇总 (供router使用)"""
+    async def generate_session_summary(self, session_data: dict, max_concurrent: int = 5) -> dict:
+        """生成会话摘要 - 包含6大维度37项详细指标汇总 (供router使用)
+        
+        Args:
+            session_data: 会话数据
+            max_concurrent: 最大并发数，默认5
+        """
         try:
             return await asyncio.wait_for(
-                self._generate_session_summary_impl(session_data),
+                self._generate_session_summary_impl(session_data, max_concurrent),
                 timeout=300  # 5分钟超时
             )
         except asyncio.TimeoutError:
@@ -779,8 +808,13 @@ class RefereeAgent:
                 "error": str(e)
             }
     
-    async def _generate_session_summary_impl(self, session_data: dict) -> dict:
-        """会话摘要生成的实际实现"""
+    async def _generate_session_summary_impl(self, session_data: dict, max_concurrent: int = 5) -> dict:
+        """会话摘要生成的实际实现 - 支持轮次并发评估
+        
+        Args:
+            session_data: 会话数据
+            max_concurrent: 最大并发数，默认5
+        """
         conversation = session_data.get("conversation", [])
         session_id = session_data.get("session_id", "")
         
@@ -812,96 +846,124 @@ class RefereeAgent:
                     "answer": answer
                 })
         
-        # 对每一轮进行详细评估
-        turn_assessments = []
-        detailed_metrics_list = []
-        
-        # 记录首轮对话的预期回答和实际回答（用于 first_contact_resolution 评估）
+        # 为首轮对话查找预期答案（在并发前准备好）
         first_turn_qa = {}
+        expected_answer = None
+        knowledge_used = []
         
-        for turn in turns:
-            # 为首轮对话查找预期答案（优先从 conversation 中提取，其次从 CSV 查找）
-            expected_answer = None
-            if turn["turn_number"] == 1:
-                # 首先从 conversation 中提取预期答案（由 user_agent 生成）
-                for msg in conversation:
-                    if msg.get("role") == "user_agent":
-                        expected_answer = msg.get("expected_answer")
-                        knowledge_used = msg.get("knowledge_used", [])
-                        if expected_answer:
-                            print(f"[RefereeAgent] 从 conversation 提取到预期答案: {expected_answer[:50]}...")
-                        break
+        if turns:
+            first_turn = turns[0]
+            # 首先从 conversation 中提取预期答案（由 user_agent 生成）
+            for msg in conversation:
+                if msg.get("role") == "user_agent":
+                    expected_answer = msg.get("expected_answer")
+                    knowledge_used = msg.get("knowledge_used", [])
+                    if expected_answer:
+                        print(f"[RefereeAgent] 从 conversation 提取到预期答案: {expected_answer[:50]}...")
+                    break
+            
+            # 如果从 conversation 中没有找到，尝试从 CSV 的 qa_mapping 查找
+            if not expected_answer and hasattr(self, 'qa_mapping'):
+                original_question = original_questions.get(1, first_turn["question"])
+                # 首先尝试精确匹配
+                expected_answer = self.qa_mapping.get(original_question.strip())
                 
-                # 如果从 conversation 中没有找到，尝试从 CSV 的 qa_mapping 查找
+                # 如果精确匹配失败，尝试前缀匹配（处理截断的情况）
                 if not expected_answer:
-                    original_question = original_questions.get(1, turn["question"])
-                    if hasattr(self, 'qa_mapping'):
-                        # 首先尝试精确匹配
-                        expected_answer = self.qa_mapping.get(original_question.strip())
-                        
-                        # 如果精确匹配失败，尝试前缀匹配（处理截断的情况）
-                        if not expected_answer:
-                            for qa_question, qa_answer in self.qa_mapping.items():
-                                # 检查 CSV 中的问题是否以提取的问题开头（去除可能的...）
-                                clean_original = original_question.strip().rstrip('.').rstrip('...')
-                                if qa_question.startswith(clean_original):
-                                    expected_answer = qa_answer
-                                    print(f"[RefereeAgent] 使用前缀匹配从 CSV 找到预期答案")
-                                    break
-                                # 或者反过来，检查提取的问题是否以 CSV 中的问题开头
-                                if clean_original.startswith(qa_question[:50]):
-                                    expected_answer = qa_answer
-                                    print(f"[RefereeAgent] 使用反向前缀匹配从 CSV 找到预期答案")
-                                    break
-                        
-                        if expected_answer:
-                            print(f"[RefereeAgent] 从 CSV 找到预期答案，原问题: {original_question[:50]}...")
-                
-                # 无论是否找到预期答案，都记录问答对比
-                first_turn_qa = {
-                    "question": turn["question"],
-                    "conversation_question": turn["question"],
-                    "expected_answer": expected_answer if expected_answer else "",
-                    "actual_answer": turn["answer"],
-                    "knowledge_used": knowledge_used if 'knowledge_used' in locals() else []
-                }
+                    for qa_question, qa_answer in self.qa_mapping.items():
+                        # 检查 CSV 中的问题是否以提取的问题开头（去除可能的...）
+                        clean_original = original_question.strip().rstrip('.').rstrip('...')
+                        if qa_question.startswith(clean_original):
+                            expected_answer = qa_answer
+                            print(f"[RefereeAgent] 使用前缀匹配从 CSV 找到预期答案")
+                            break
+                        # 或者反过来，检查提取的问题是否以 CSV 中的问题开头
+                        if clean_original.startswith(qa_question[:50]):
+                            expected_answer = qa_answer
+                            print(f"[RefereeAgent] 使用反向前缀匹配从 CSV 找到预期答案")
+                            break
                 
                 if expected_answer:
-                    print(f"[RefereeAgent] 首轮对话预期答案已获取: {expected_answer[:50]}...")
-                else:
-                    print(f"[RefereeAgent] 首轮对话未找到预期答案，问题: {turn['question'][:50]}...")
+                    print(f"[RefereeAgent] 从 CSV 找到预期答案，原问题: {original_question[:50]}...")
             
-            assessment = await self.assess_turn(
-                turn_number=turn["turn_number"],
-                question=turn["question"],
-                answer=turn["answer"],
-                conversation_history=[]
-            )
-            
-            assessment_dict = {
-                "turn_number": assessment.turn_number,
-                "agent_anthropomorphism_score": assessment.agent_anthropomorphism_score,
-                "user_anthropomorphism_score": assessment.user_anthropomorphism_score,
-                "feedback": assessment.feedback,
+            # 记录首轮问答对比
+            first_turn_qa = {
+                "question": first_turn["question"],
+                "conversation_question": first_turn["question"],
+                "expected_answer": expected_answer if expected_answer else "",
+                "actual_answer": first_turn["answer"],
+                "knowledge_used": knowledge_used
             }
             
-            # 添加详细指标（如果存在）
-            if assessment.detailed_metrics:
-                assessment_dict["detailed_metrics"] = assessment.detailed_metrics.model_dump()
-                detailed_metrics_list.append(assessment.detailed_metrics)
+            if expected_answer:
+                print(f"[RefereeAgent] 首轮对话预期答案已获取: {expected_answer[:50]}...")
+            else:
+                print(f"[RefereeAgent] 首轮对话未找到预期答案，问题: {first_turn['question'][:50]}...")
+        
+        # 使用信号量控制并发数
+        semaphore = asyncio.Semaphore(max_concurrent)
+        
+        async def evaluate_turn_with_semaphore(turn: dict) -> dict:
+            """使用信号量限制的轮次评估"""
+            async with semaphore:
+                turn_number = turn["turn_number"]
+                print(f"[RefereeAgent] 开始评估第 {turn_number} 轮")
                 
-                # 为首轮对话添加 first_contact_resolution
-                if turn["turn_number"] == 1:
-                    assessment_dict["first_contact_resolution"] = assessment.detailed_metrics.problem_solving.first_contact_resolution
-            
-            # 为首轮对话添加问答对比（无论 detailed_metrics 是否存在）
-            if turn["turn_number"] == 1 and first_turn_qa:
-                assessment_dict["qa_comparison"] = first_turn_qa
-            
-            turn_assessments.append(assessment_dict)
+                assessment = await self.assess_turn(
+                    turn_number=turn_number,
+                    question=turn["question"],
+                    answer=turn["answer"],
+                    conversation_history=[]
+                )
+                
+                assessment_dict = {
+                    "turn_number": assessment.turn_number,
+                    "agent_anthropomorphism_score": assessment.agent_anthropomorphism_score,
+                    "user_anthropomorphism_score": assessment.user_anthropomorphism_score,
+                    "feedback": assessment.feedback,
+                }
+                
+                # 添加详细指标（如果存在）
+                if assessment.detailed_metrics:
+                    assessment_dict["detailed_metrics"] = assessment.detailed_metrics.model_dump()
+                    
+                    # 为首轮对话添加 first_contact_resolution
+                    if turn_number == 1:
+                        assessment_dict["first_contact_resolution"] = assessment.detailed_metrics.problem_solving.first_contact_resolution
+                
+                # 为首轮对话添加问答对比
+                if turn_number == 1 and first_turn_qa:
+                    assessment_dict["qa_comparison"] = first_turn_qa
+                
+                print(f"[RefereeAgent] 第 {turn_number} 轮评估完成")
+                return assessment_dict
+        
+        # 并发评估所有轮次
+        print(f"[RefereeAgent] 开始并发评估 {len(turns)} 轮对话 (最大并发: {max_concurrent})")
+        turn_assessments = await asyncio.gather(
+            *[evaluate_turn_with_semaphore(turn) for turn in turns],
+            return_exceptions=True
+        )
+        
+        # 处理可能的异常并提取详细指标
+        valid_assessments = []
+        detailed_metrics_list = []
+        
+        for result in turn_assessments:
+            if isinstance(result, Exception):
+                print(f"[RefereeAgent] 某轮评估失败: {result}")
+                continue
+            valid_assessments.append(result)
+            if result.get("detailed_metrics"):
+                detailed_metrics_list.append(DetailedMetrics(**result["detailed_metrics"]))
+        
+        # 按轮次排序
+        valid_assessments.sort(key=lambda x: x["turn_number"])
+        
+        print(f"[RefereeAgent] 并发评估完成: 成功 {len(valid_assessments)}/{len(turns)} 轮")
         
         # ========== 详细指标汇总 ==========
-        detailed_summary = self._calculate_detailed_summary(detailed_metrics_list, turn_assessments) if detailed_metrics_list else {}
+        detailed_summary = self._calculate_detailed_summary(detailed_metrics_list, valid_assessments) if detailed_metrics_list else {}
 
         return {
             "session_id": session_id,
@@ -911,7 +973,7 @@ class RefereeAgent:
             # 详细指标汇总
             "detailed_summary": detailed_summary,
             # 每轮详细评估
-            "turn_assessments": turn_assessments
+            "turn_assessments": valid_assessments
         }
     
     def _calculate_detailed_summary(self, metrics_list: List[DetailedMetrics], turn_assessments: List[Dict] = None) -> dict:
@@ -1010,6 +1072,100 @@ class RefereeAgent:
             "sales_script": sales,
             "user_experience": ux,
         }
+
+    async def evaluate_mock_session_file(
+        self,
+        file_path: Path,
+        save_result: bool = True,
+        max_concurrent: int = 5
+    ) -> Dict[str, Any]:
+        """评估单个 mock_sessions 文件
+        
+        Args:
+            file_path: mock_sessions JSON 文件路径
+            save_result: 是否将评估结果保存回文件
+            max_concurrent: 评估轮次的最大并发数，默认5
+            
+        Returns:
+            评估结果字典
+        """
+        try:
+            # 读取文件
+            with open(file_path, "r", encoding="utf-8") as f:
+                session_data = json.load(f)
+            
+            session_id = session_data.get("session_id", file_path.stem)
+            print(f"[RefereeAgent] 开始评估会话: {session_id} (并发数: {max_concurrent})")
+            
+            # 生成会话摘要（包含详细评估）
+            summary = await self.generate_session_summary(session_data, max_concurrent)
+            
+            # 构建评估结果
+            evaluation_result = {
+                "session_id": session_id,
+                "file_name": file_path.name,
+                "evaluation_timestamp": datetime.now().isoformat(),
+                "persona": session_data.get("persona", "unknown"),
+                "scenario": session_data.get("scenario", "unknown"),
+                "finish_reason": session_data.get("finish_reason", "unknown"),
+                "total_turns": summary.get("total_turns", 0),
+                "detailed_summary": summary.get("detailed_summary", {}),
+                "turn_assessments": summary.get("turn_assessments", []),
+            }
+            
+            # 如果需要，将评估结果保存回文件
+            if save_result:
+                session_data["referee_evaluation"] = evaluation_result
+                with open(file_path, "w", encoding="utf-8") as f:
+                    json.dump(session_data, f, ensure_ascii=False, indent=2)
+                print(f"[RefereeAgent] 评估结果已保存到文件: {file_path}")
+            
+            print(f"[RefereeAgent] 会话评估完成: {session_id}")
+            return evaluation_result
+            
+        except Exception as e:
+            print(f"[RefereeAgent] 评估文件失败 {file_path}: {e}")
+            return {
+                "file_name": file_path.name,
+                "error": str(e),
+                "evaluation_timestamp": datetime.now().isoformat(),
+            }
+    
+    async def evaluate_all_mock_sessions(
+        self,
+        sessions_dir: Optional[Path] = None,
+        save_results: bool = True,
+        max_concurrent: int = 5
+    ) -> List[Dict[str, Any]]:
+        """批量评估所有 mock_sessions 文件
+        
+        Args:
+            sessions_dir: mock_sessions 目录路径，默认为项目根目录下的 mock_sessions
+            save_results: 是否将评估结果保存回文件
+            max_concurrent: 评估轮次的最大并发数，默认5
+            
+        Returns:
+            所有会话的评估结果列表
+        """
+        if sessions_dir is None:
+            sessions_dir = Path(__file__).parent.parent.parent.parent / "mock_sessions"
+        
+        if not sessions_dir.exists():
+            print(f"[RefereeAgent] 目录不存在: {sessions_dir}")
+            return []
+        
+        # 获取所有 JSON 文件
+        json_files = list(sessions_dir.glob("*.json"))
+        print(f"[RefereeAgent] 找到 {len(json_files)} 个会话文件待评估 (轮次并发数: {max_concurrent})")
+        
+        results = []
+        for i, file_path in enumerate(json_files, 1):
+            print(f"[RefereeAgent] 正在评估第 {i}/{len(json_files)} 个文件: {file_path.name}")
+            result = await self.evaluate_mock_session_file(file_path, save_results, max_concurrent)
+            results.append(result)
+        
+        print(f"[RefereeAgent] 批量评估完成，共评估 {len(results)} 个会话")
+        return results
 
 
 # 全局实例

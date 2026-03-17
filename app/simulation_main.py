@@ -22,12 +22,18 @@
 
 
 import sys
-import logging
+import os
 from pathlib import Path
 
 # 添加项目根目录到 Python 路径
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+
+# 加载 .env 文件（必须在导入 simulation_util 之前）
+from dotenv import load_dotenv
+load_dotenv(project_root / ".env")
+
+import logging
 
 # 配置日志 - 确保 agent 等模块的 INFO 日志输出到控制台
 # force=True：即使其他模块已配置过 root logger 也强制应用此配置
@@ -76,32 +82,37 @@ class SimulationMain:
         self.excute_config = excute_config
         self.search_util = SearchUtil(config=self.config)
         
-        self.user_agent = UserAgent(target_bot_url="http://192.168.151.84:8020/api/v1/react/chat") # todo 获取env 中的值 /react/chat
+        # 从环境变量获取 target_bot_url
+        target_bot_url = os.environ.get("REACT_AGENT_TARGET_BOT_URL")
+        self.user_agent = UserAgent(target_bot_url=target_bot_url)
         self.referee_agent = RefereeAgent()
+        
+        # referee 评估并发配置
+        self.referee_max_concurrent = excute_config.get("referee-concurrent", 5)
 
-    def run(self):
+    async def run_async(self):
+        """异步运行仿真"""
         # 根据输入参数 执行检索管道知识检索 检索结果形成知识子集
         knowledge_subset = self.search_knowledge()
 
         # 根据知识池 用户维度画像(1/7维) 用户意图场景(1/5维) 组合知识池 增量上下文 生产用户问题 + 预期答案 调用AI sales Agent 保持后续流程一致
-        session_results = self.generate_session_simulation(knowledge_subset)
+        session_results = await self.generate_session_simulation(knowledge_subset)
 
         # 保存仿真结果
         self._save_results(session_results)
 
         return session_results
 
+    def run(self):
+        """同步入口，内部调用异步方法"""
+        return asyncio.run(self.run_async())
+
     def _save_results(self, results: List[Dict[str, Any]]):
         """保存仿真结果到输出目录
-        - 每个session生成单独的JSON文件
         - 生成最终报告
         """
         output_dir = Path(self.excute_config.get("output-dir", "output"))
         output_dir.mkdir(parents=True, exist_ok=True)
-
-        # 为每个session生成单独的文件
-        for session_result in results:
-            self._save_session_file(session_result, output_dir)
 
         # 生成最终报告
         final_report = self._generate_final_report(results)
@@ -128,8 +139,7 @@ class SimulationMain:
                 expected_answers.append({
                     "turn": len(expected_answers) + 1,
                     "question": msg.get("content", ""),
-                    "expected_answer": msg.get("expected_answer", ""),
-                    "knowledge_used": msg.get("knowledge_used", [])
+                    "expected_answer": msg.get("expected_answer", "")
                 })
 
         # 构建session文件内容
@@ -301,6 +311,8 @@ class SimulationMain:
 
             for metric in all_metrics:
                 values = [avg.get(metric) for avg in all_session_averages if avg.get(metric) is not None]
+                # 过滤掉字典类型，只保留数字类型
+                values = [v for v in values if isinstance(v, (int, float))]
                 if values:
                     final_averages[metric] = {
                         "average": round(sum(values) / len(values), 4),
@@ -333,9 +345,9 @@ class SimulationMain:
         }
 
 
-    def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    async def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        单个session仿真
+        多个session仿真 - 支持session级别并发
         - 从七个人格中随机选择一个
         - 从五个场景中随机选择一个
         - 结合知识池与对话上下文与react_agent进行问答
@@ -347,38 +359,81 @@ class SimulationMain:
 
         Returns:
             仿真结果列表，包含每个session的对话记录和评估结果
-
-        # 保持单session
-        # 随机获取7维人格, 随机获取5维场景, 随机获取20个知识点
-        # 组合生成问题 -> 继续调用AI sales Agent -> 形成上下文
-        # 组合上下文 一起调用 referee Agent -> 保存到输出目录
         """
-        results = []
         session_count = self.excute_config.get("session_count", 1)
+        session_parallel = self.excute_config.get("session-parallel", 3)  # session级别并发数
 
         # 确保输出目录存在
         output_dir = Path(self.excute_config.get("output-dir", "output"))
         output_dir.mkdir(parents=True, exist_ok=True)
 
+        # 预生成所有session的配置
+        session_configs = []
         for session_idx in range(session_count):
             knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
-            # 随机选择人格和场景
             persona = random.choice(self.PERSONAS)
             scenario = random.choice(self.SCENARIOS)
+            session_configs.append({
+                "session_idx": session_idx,
+                "knowledge_pool": knowledge_pool,
+                "persona": persona,
+                "scenario": scenario
+            })
 
-            print(f"[Session {session_idx + 1}] 人格: {persona}, 场景: {scenario}")
+        print(f"[Simulation] 共 {session_count} 个session待执行，最大并发数: {session_parallel}")
 
-            # 运行单个session仿真
-            session_result = asyncio.run(
-                self._run_single_session(knowledge_pool, persona, scenario)
-            )
-            results.append(session_result)
+        # 使用信号量控制session级别并发
+        session_semaphore = asyncio.Semaphore(session_parallel)
 
-            # 每完成一个session立即保存文件
-            self._save_session_file(session_result, output_dir)
-            print(f"[Session {session_idx + 1}] 结果已保存")
+        async def run_single_session_with_semaphore(config: dict) -> Dict[str, Any]:
+            """使用信号量限制的session执行"""
+            async with session_semaphore:
+                session_idx = config["session_idx"]
+                knowledge_pool = config["knowledge_pool"]
+                persona = config["persona"]
+                scenario = config["scenario"]
 
-        return results
+                print(f"[Session {session_idx + 1}/{session_count}] 开始执行 - 人格: {persona}, 场景: {scenario}")
+
+                try:
+                    # 运行单个session仿真
+                    session_result = await self._run_single_session(knowledge_pool, persona, scenario)
+
+                    # 每完成一个session立即保存文件
+                    self._save_session_file(session_result, output_dir)
+                    print(f"[Session {session_idx + 1}/{session_count}] 完成并保存")
+
+                    return session_result
+                except Exception as e:
+                    print(f"[Session {session_idx + 1}/{session_count}] 执行失败: {e}")
+                    return {
+                        "session_id": f"error_{session_idx}",
+                        "persona": persona,
+                        "scenario": scenario,
+                        "error": str(e),
+                        "conversation": [],
+                        "assessments": [],
+                        "finish_reason": "error",
+                        "total_turns": 0,
+                        "metadata": {}
+                    }
+
+        # 并发执行所有session
+        results = await asyncio.gather(
+            *[run_single_session_with_semaphore(config) for config in session_configs],
+            return_exceptions=True
+        )
+
+        # 处理可能的异常
+        valid_results = []
+        for result in results:
+            if isinstance(result, Exception):
+                print(f"[Simulation] 某session发生异常: {result}")
+                continue
+            valid_results.append(result)
+
+        print(f"[Simulation] 所有session执行完成: 成功 {len(valid_results)}/{session_count}")
+        return valid_results
 
     async def _run_single_session(
         self,
@@ -402,7 +457,7 @@ class SimulationMain:
         session_data = await self.user_agent.start_simulation(
             persona=persona,
             scenario=f"VERTU手机{scenario}咨询",
-            max_turns=self.excute_config.get("max-turns", 10),
+            max_turns=self.excute_config.get("max-turns", 20),
             knowledge_pool=knowledge_pool
         )
 
@@ -410,10 +465,11 @@ class SimulationMain:
         conversation = session_data.get("conversation", [])
         session_id = session_data.get("session_id", "")
 
-        # 调用referee进行评估
+        # 调用referee进行评估（支持并发）
         assessments = await self._evaluate_conversation(
             session_id,
-            conversation
+            conversation,
+            max_concurrent=self.referee_max_concurrent
         )
 
         return {
@@ -438,59 +494,41 @@ class SimulationMain:
     async def _evaluate_conversation(
         self,
         session_id: str,
-        conversation: List[Dict[str, str]]
+        conversation: List[Dict[str, str]],
+        max_concurrent: int = 5
     ) -> List[Dict[str, Any]]:
         """
-        使用referee对对话进行逐轮评估
+        使用referee对对话进行逐轮评估 - 支持并发评估
 
         Args:
             session_id: 会话ID
             conversation: 对话记录列表
+            max_concurrent: 最大并发数，默认5
 
         Returns:
             每轮的评估结果列表
         """
-        assessments = []
-
-        # 构建对话历史
+        # 提取所有需要评估的对话轮次
+        turns_to_evaluate = []
         conversation_history = []
 
-        for turn in conversation:
+        for i, turn in enumerate(conversation):
             if turn.get("role") == "user_agent":
                 user_message = turn.get("content", "")
                 # 查找对应的agent回复
                 agent_response = ""
-                for next_turn in conversation[conversation.index(turn) + 1:]:
+                for next_turn in conversation[i + 1:]:
                     if next_turn.get("role") == "target_bot":
                         agent_response = next_turn.get("content", "")
                         break
 
                 if agent_response:
-                    # 构建评估请求
-                    request = RefereeRequest(
-                        session_id=session_id,
-                        user_message=user_message,
-                        agent_response=agent_response,
-                        conversation_history=conversation_history.copy()
-                    )
-
-                    try:
-                        # 调用referee评估
-                        response = await self.referee_agent.evaluate_turn(request)
-                        assessments.append({
-                            "turn_id": response.assessment.turn_id,
-                            "user_message": user_message,
-                            "agent_response": agent_response,
-                            "detailed_metrics": response.assessment.detailed_metrics.dict() if response.assessment.detailed_metrics else None,
-                            "feedback": response.assessment.feedback
-                        })
-                    except Exception as e:
-                        print(f"[Referee评估失败] {e}")
-                        assessments.append({
-                            "user_message": user_message,
-                            "agent_response": agent_response,
-                            "error": str(e)
-                        })
+                    turns_to_evaluate.append({
+                        "turn_number": len(turns_to_evaluate) + 1,
+                        "user_message": user_message,
+                        "agent_response": agent_response,
+                        "conversation_history": conversation_history.copy()
+                    })
 
                     # 更新对话历史
                     conversation_history.append({
@@ -502,8 +540,99 @@ class SimulationMain:
                         "content": agent_response
                     })
 
-        return assessments
-        pass
+        if not turns_to_evaluate:
+            return []
+
+        print(f"[Referee] 开始并发评估 {len(turns_to_evaluate)} 轮对话 (最大并发: {max_concurrent})")
+
+        # 使用信号量控制并发数
+        semaphore = asyncio.Semaphore(max_concurrent)
+
+        async def evaluate_turn_with_retry(turn_data: dict) -> Dict[str, Any]:
+            """带重试机制的评估"""
+            turn_number = turn_data["turn_number"]
+            user_message = turn_data["user_message"]
+            agent_response = turn_data["agent_response"]
+            history = turn_data["conversation_history"]
+
+            max_retries = 5
+            retry_delay = 10
+
+            for attempt in range(max_retries):
+                try:
+                    request = RefereeRequest(
+                        session_id=session_id,
+                        user_message=user_message,
+                        agent_response=agent_response,
+                        conversation_history=history
+                    )
+                    response = await self.referee_agent.evaluate_turn(request)
+                    
+                    # 检查响应是否有效
+                    is_invalid_response = (
+                        response.assessment.detailed_metrics is None or
+                        "评估响应无效" in response.assessment.feedback or
+                        "评估过程中发生错误" in response.assessment.feedback
+                    )
+                    
+                    if is_invalid_response:
+                        if attempt < max_retries - 1:
+                            print(f"[Referee] 第 {turn_number} 轮评估响应无效，{retry_delay}秒后重试 ({attempt + 1}/{max_retries})")
+                            await asyncio.sleep(retry_delay)
+                            retry_delay = min(retry_delay * 2, 60)
+                            continue
+                    
+                    print(f"[Referee] 第 {turn_number} 轮评估完成")
+                    return {
+                        "turn_number": turn_number,
+                        "turn_id": response.assessment.turn_id,
+                        "user_message": user_message,
+                        "agent_response": agent_response,
+                        "detailed_metrics": response.assessment.detailed_metrics.model_dump() if response.assessment.detailed_metrics else None,
+                        "feedback": response.assessment.feedback
+                    }
+                except Exception as e:
+                    is_timeout = "timeout" in str(e).lower()
+                    is_rate_limit = "rate limit" in str(e).lower()
+                    is_connection_error = "connection error" in str(e).lower()
+                    
+                    if attempt < max_retries - 1 and (is_timeout or is_rate_limit or is_connection_error):
+                        print(f"[Referee] 第 {turn_number} 轮评估失败，{retry_delay}秒后重试 ({attempt + 1}/{max_retries})")
+                        await asyncio.sleep(retry_delay)
+                        retry_delay = min(retry_delay * 2, 60)
+                    else:
+                        print(f"[Referee] 第 {turn_number} 轮评估失败: {e}")
+                        return {
+                            "turn_number": turn_number,
+                            "user_message": user_message,
+                            "agent_response": agent_response,
+                            "error": str(e)
+                        }
+
+        async def evaluate_turn_with_semaphore(turn_data: dict) -> Dict[str, Any]:
+            """使用信号量限制的轮次评估"""
+            async with semaphore:
+                return await evaluate_turn_with_retry(turn_data)
+
+        # 并发评估所有轮次
+        assessments = await asyncio.gather(
+            *[evaluate_turn_with_semaphore(turn) for turn in turns_to_evaluate],
+            return_exceptions=True
+        )
+
+        # 处理可能的异常
+        valid_assessments = []
+        for result in assessments:
+            if isinstance(result, Exception):
+                print(f"[Referee] 某轮评估发生异常: {result}")
+                continue
+            valid_assessments.append(result)
+
+        # 按轮次排序
+        valid_assessments.sort(key=lambda x: x.get("turn_number", 0))
+
+        print(f"[Referee] 并发评估完成: 成功 {len(valid_assessments)}/{len(turns_to_evaluate)} 轮")
+        return valid_assessments
 
     def search_knowledge(self):
         faq_results = self.search_util.search_faq()
@@ -543,10 +672,11 @@ if __name__ == "__main__":
         "max_path_len": 2,
     }
     excute_config = {
-        "max-turns": 10, # 每轮对话最大轮数
-        "output-dir": "output", # 输出文件夹路径
-        "parallel": 10, # 并行执行的对话数
-        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+        "max-turns": 20,          # 每轮对话最大轮数
+        "output-dir": "output",   # 输出文件夹路径
+        "session_count": 1,       # 总session数量
+        "session-parallel": 1,    # session级别并发数（同时执行3个session）
+        "referee-concurrent": 2,  # referee评估并发数（每个session内评估并发）
     }
     simulation_main = SimulationMain(config, excute_config)
     simulation_main.run()
