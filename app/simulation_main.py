@@ -22,11 +22,21 @@
 
 
 import sys
+import logging
 from pathlib import Path
 
 # 添加项目根目录到 Python 路径
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+
+# 配置日志 - 确保 agent 等模块的 INFO 日志输出到控制台
+# force=True：即使其他模块已配置过 root logger 也强制应用此配置
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+    handlers=[logging.StreamHandler()],
+    force=True,
+)
 
 import random
 import asyncio
@@ -66,7 +76,7 @@ class SimulationMain:
         self.excute_config = excute_config
         self.search_util = SearchUtil(config=self.config)
         
-        self.user_agent = UserAgent()
+        self.user_agent = UserAgent(target_bot_url="http://192.168.151.84:8020/api/v1/react/chat") # todo 获取env 中的值 /react/chat
         self.referee_agent = RefereeAgent()
 
     def run(self):
@@ -344,7 +354,7 @@ class SimulationMain:
         # 组合上下文 一起调用 referee Agent -> 保存到输出目录
         """
         results = []
-        session_count = self.config.get("session_count", 1)
+        session_count = self.excute_config.get("session_count", 1)
 
         for session_idx in range(session_count):
             knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
@@ -379,6 +389,7 @@ class SimulationMain:
         Returns:
             包含对话记录和评估结果的字典
         """
+        knowledge_pool = knowledge_pool[0] # hot fix
         # 使用UserAgent启动仿真
         session_data = await self.user_agent.start_simulation(
             persona=persona,
@@ -503,9 +514,10 @@ class SimulationMain:
         """
         knowledge_pool = []
         for _ in range(self.excute_config["session_count"]):
+            price = random.sample(knowledge_subset["price"], min(20, len(knowledge_subset["price"]))) if knowledge_subset["price"]["total_hits"] > 0 else []
             knowledge_pool.append({
                 "faq": random.sample(knowledge_subset["faq"], min(20, len(knowledge_subset["faq"]))),
-                "price": random.sample(knowledge_subset["price"], min(20, len(knowledge_subset["price"]))),
+                "price": price ,
                 "graph": random.sample(knowledge_subset["graph"], min(20, len(knowledge_subset["graph"]))),
             })
         return knowledge_pool
@@ -521,12 +533,12 @@ if __name__ == "__main__":
         "query_list": ["屏幕分辨率", "屏幕尺寸", "屏幕类型"],
         "product_names": ["VERTU AGENT Q"],
         "max_path_len": 2,
-        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
     }
     excute_config = {
         "max-turns": 10, # 每轮对话最大轮数
         "output-dir": "output", # 输出文件夹路径
         "parallel": 10, # 并行执行的对话数
+        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
     }
     simulation_main = SimulationMain(config, excute_config)
     simulation_main.run()
