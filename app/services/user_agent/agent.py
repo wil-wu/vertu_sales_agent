@@ -16,7 +16,7 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 
-from .shared import chat_model
+from .shared import chat_model as default_chat_model
 from .user_config import get_persona_config, PLATFORM_API_CONFIG
 
 logger = logging.getLogger(__name__)
@@ -63,7 +63,7 @@ class UserAgent:
         faq_url: str = "http://192.168.151.84:8888/query",
         price_url: str = "http://192.168.151.84:8030/api/v1/semantic/product/search"
     ):
-        self.chat_model = chat_model
+        self.chat_model = chat_model if chat_model is not None else default_chat_model
         self.system_prompt = system_prompt
         self.target_bot_url = target_bot_url
         self.faq_url = faq_url
@@ -391,7 +391,7 @@ class UserAgent:
                         "platform": platform,
                         "region": region
                     },
-                    timeout=30.0
+                    timeout=180
                 )
                 response.raise_for_status()
                 return response.json()
