@@ -162,13 +162,21 @@ class SimulationMain:
                 "total_duration": 0,
                 "total_turns_per_session": 0,
             }
-        total_turns = sum([session_result.get("total_turns") for session_result in statistic_data])
-        total_duration = sum([session_result.get("duration_seconds") for session_result in statistic_data])
-        total_turns_per_session = total_turns / total
+        # 过滤掉 None 值
+        total_turns_values = [session_result.get("total_turns") for session_result in statistic_data]
+        total_turns_values = [v for v in total_turns_values if v is not None]
+        total_turns = sum(total_turns_values) if total_turns_values else 0
+        
+        total_duration_values = [session_result.get("duration_seconds") for session_result in statistic_data]
+        total_duration_values = [v for v in total_duration_values if v is not None]
+        total_duration = sum(total_duration_values) if total_duration_values else 0
+        
+        total_turns_per_session = total_turns / total if total > 0 else 0
+        
         statistic_result = {
             "total_sessions": len(statistic_data),
-            "total_turns": sum([session_result.get("total_turns") for session_result in statistic_data]),
-            "total_duration": sum([session_result.get("duration_seconds") for session_result in statistic_data]),
+            "total_turns": total_turns,
+            "total_duration": total_duration,
         }
         return statistic_result
 
@@ -227,7 +235,7 @@ class SimulationMain:
             json.dump(session_data, f, ensure_ascii=False, indent=2)
 
     def _calculate_session_averages(self, assessments: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """计算session各指标的平均分 - 包含7大维度综合评分和详细子指标"""
+        """计算session各指标的平均分 - 包含8大维度综合评分和详细子指标"""
         if not assessments:
             return {}
 
@@ -480,7 +488,6 @@ class SimulationMain:
         
         # 计算 session 内所有轮次的平均值
         return round(sum(accuracy_scores) / len(accuracy_scores), 2)
-
 
     async def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -864,8 +871,8 @@ if __name__ == "__main__":
         "session-parallel": 5, # session级别并发数（同时执行2个session）
         "referee-concurrent": 20, # referee评估并发数（每个session内评估并发）
         "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
-        "statistic_scenarios": ["闲聊"],
-        "statistic_personas": ["business_elite"],
+        "statistic_scenarios": ["犹豫"],
+        "statistic_personas": ["price_comparer"],
     }
     simulation_main = SimulationMain(config, excute_config)
     simulation_main.run()

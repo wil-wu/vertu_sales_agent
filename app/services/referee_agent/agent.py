@@ -32,33 +32,33 @@ from .shared import session_manager, assessment_tracker
 from . import prompts
 
 
-def load_qa_csv(csv_path: str = None) -> Dict[str, str]:
-    """加载 QA CSV 文件，建立问题-答案映射"""
-    if csv_path is None:
-        # 默认在项目根目录查找
-        csv_path = Path(__file__).parent.parent.parent.parent / "jd_tm_qa_filtered.csv"
-    else:
-        csv_path = Path(csv_path)
+# def load_qa_csv(csv_path: str = None) -> Dict[str, str]:
+#     """加载 QA CSV 文件，建立问题-答案映射"""
+#     if csv_path is None:
+#         # 默认在项目根目录查找
+#         csv_path = Path(__file__).parent.parent.parent.parent / "jd_tm_qa_filtered.csv"
+#     else:
+#         csv_path = Path(csv_path)
     
-    qa_mapping = {}
-    if csv_path.exists():
-        try:
-            with open(csv_path, 'r', encoding='utf-8') as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    question = row.get('question') or ''
-                    answer = row.get('answer') or ''
-                    question = question.strip()
-                    answer = answer.strip()
-                    if question and answer:
-                        qa_mapping[question] = answer
-            print(f"[RefereeAgent] 已加载 {len(qa_mapping)} 条 QA 数据")
-        except Exception as e:
-            print(f"[RefereeAgent] 加载 QA CSV 失败: {e}")
-    else:
-        print(f"[RefereeAgent] QA CSV 文件不存在: {csv_path}")
+#     qa_mapping = {}
+#     if csv_path.exists():
+#         try:
+#             with open(csv_path, 'r', encoding='utf-8') as f:
+#                 reader = csv.DictReader(f)
+#                 for row in reader:
+#                     question = row.get('question') or ''
+#                     answer = row.get('answer') or ''
+#                     question = question.strip()
+#                     answer = answer.strip()
+#                     if question and answer:
+#                         qa_mapping[question] = answer
+#             print(f"[RefereeAgent] 已加载 {len(qa_mapping)} 条 QA 数据")
+#         except Exception as e:
+#             print(f"[RefereeAgent] 加载 QA CSV 失败: {e}")
+#     else:
+#         print(f"[RefereeAgent] QA CSV 文件不存在: {csv_path}")
     
-    return qa_mapping
+#     return qa_mapping
 
 
 class RefereeAgent:
@@ -101,7 +101,7 @@ class RefereeAgent:
                     temperature=0.3,
                     max_tokens=3000
                 ),
-                timeout=180  
+                timeout=180
             )
             
             evaluation = llm_response.choices[0].message.content
@@ -136,18 +136,18 @@ class RefereeAgent:
             assessment_tracker.add_score(request.session_id, assessment.overall_score)
             
             # 检查是否应终止会话
-            should_terminate, termination_reason = self._check_termination_conditions(
-                session,
-                request.session_id
-            )
+            # should_terminate, termination_reason = self._check_termination_conditions(
+            #     session,
+            #     request.session_id
+            # )
             
-            if should_terminate:
-                session_manager.close_session(request.session_id, termination_reason)
+            # if should_terminate:
+            #     session_manager.close_session(request.session_id, termination_reason)
             
             return RefereeResponse(
                 assessment=assessment,
-                should_terminate=should_terminate,
-                termination_reason=termination_reason
+                # should_terminate=should_terminate,
+                # termination_reason=termination_reason
             )
             
         except asyncio.TimeoutError:
@@ -537,77 +537,77 @@ class RefereeAgent:
         return scores
     
 
-    def _check_termination_conditions(
-        self,
-        session: SessionRecord,
-        session_id: str
-    ) -> tuple[bool, Optional[str]]:
-        """检查是否应该终止会话"""
+    # def _check_termination_conditions(
+    #     self,
+    #     session: SessionRecord,
+    #     session_id: str
+    # ) -> tuple[bool, Optional[str]]:
+    #     """检查是否应该终止会话"""
         
-        # 1. 检查最大回合数
-        if len(session.turns) >= referee_agent_settings.max_turns:
-            return True, "达到最大对话回合数限制"
+    #     # 1. 检查最大回合数
+    #     if len(session.turns) >= referee_agent_settings.max_turns:
+    #         return True, "达到最大对话回合数限制"
         
-        # 2. 检查连续低分
-        if assessment_tracker.check_consecutive_low_scores(session_id):
-            return True, "连续低分，服务质量不佳"
+    #     # 2. 检查连续低分
+    #     if assessment_tracker.check_consecutive_low_scores(session_id):
+    #         return True, "连续低分，服务质量不佳"
         
-        # 3. 检查对话历史
-        if session.turns:
-            recent_turns = session.turns[-3:] if len(session.turns) >= 3 else session.turns
+    #     # 3. 检查对话历史
+    #     if session.turns:
+    #         recent_turns = session.turns[-3:] if len(session.turns) >= 3 else session.turns
             
-            # 检查是否有明显的结束信号
-            last_turn = recent_turns[-1]
-            if self._is_completion_signal(last_turn.user_message):
-                return True, "用户明确表示问题解决"
+    #         # 检查是否有明显的结束信号
+    #         last_turn = recent_turns[-1]
+    #         if self._is_completion_signal(last_turn.user_message):
+    #             return True, "用户明确表示问题解决"
             
-            # 检查是否在重复同样的内容
-            if len(recent_turns) >= 2:
-                if self._is_repetitive_content(recent_turns):
-                    return True, "对话内容重复"
+    #         # 检查是否在重复同样的内容
+    #         if len(recent_turns) >= 2:
+    #             if self._is_repetitive_content(recent_turns):
+    #                 return True, "对话内容重复"
         
-        return False, None
+    #     return False, None
     
-    def _is_completion_signal(self, user_message: str) -> bool:
-        """检查是否为完成信号"""
-        patterns = [
-            r'谢[谢了]+',
-            r'知[道了]+',
-            r'明白[了]*',
-            r'好[的了]+',
-            r'行了',
-            r'可以[了]*',
-            r'没问[题了]+',
-            r'解决[了]*',
-            r'problem solved',
-            r'thanks?',  # 匹配thank, thanks
-            r'got it',
-            r'okay?'
-        ]
+    # def _is_completion_signal(self, user_message: str) -> bool:
+    #     """检查是否为完成信号"""
+    #     patterns = [
+    #         r'谢[谢了]+',
+    #         r'知[道了]+',
+    #         r'明白[了]*',
+    #         r'好[的了]+',
+    #         r'行了',
+    #         r'可以[了]*',
+    #         r'没问[题了]+',
+    #         r'解决[了]*',
+    #         r'problem solved',
+    #         r'thanks?',  # 匹配thank, thanks
+    #         r'got it',
+    #         r'okay?'
+    #     ]
         
-        message_lower = user_message.lower()
-        for pattern in patterns:
-            if re.search(pattern, message_lower, re.IGNORECASE):
-                return True
+    #     message_lower = user_message.lower()
+    #     for pattern in patterns:
+    #         if re.search(pattern, message_lower, re.IGNORECASE):
+    #             return True
         
-        return False
+    #     return False
     
-    def _is_repetitive_content(self, recent_turns: list[TurnAssessment]) -> bool:
-        """检查内容是否重复"""
-        if len(recent_turns) < 2:
-            return False
+    # def _is_repetitive_content(self, recent_turns: list[TurnAssessment]) -> bool:
+    #     """检查内容是否重复"""
+    #     if len(recent_turns) < 2:
+    #         return False
         
-        # 检查用户消息
-        user_messages = [turn.user_message for turn in recent_turns[-2:]]
-        if user_messages[0] == user_messages[1]:
-            return True
+    #     # 检查用户消息
+    #     user_messages = [turn.user_message for turn in recent_turns[-2:]]
+    #     if user_messages[0] == user_messages[1]:
+    #         return True
         
-        # 检查代理回复
-        agent_responses = [turn.agent_response for turn in recent_turns[-2:]]
-        if agent_responses[0] == agent_responses[1]:
-            return True
+    #     # 检查代理回复
+    #     agent_responses = [turn.agent_response for turn in recent_turns[-2:]]
+    #     if agent_responses[0] == agent_responses[1]:
+    #         return True
         
-        return False
+    #     return False
     
     def _create_error_response(self, error_message: str) -> RefereeResponse:
         """创建错误响应"""
@@ -629,163 +629,163 @@ class RefereeAgent:
             termination_reason=None
         )
 
-    async def assess_turn(
-        self,
-        turn_number: int,
-        question: str,
-        answer: str,
-        conversation_history: Optional[list[dict]] = None,
-    ) -> "AssessmentResult":
-        """评估单轮对话 - 包含6大维度37项详细指标 (供router使用)"""
+    # async def assess_turn(
+    #     self,
+    #     turn_number: int,
+    #     question: str,
+    #     answer: str,
+    #     conversation_history: Optional[list[dict]] = None,
+    # ) -> "AssessmentResult":
+    #     """评估单轮对话 - 包含8大维度37项详细指标 (供router使用)"""
 
-        class AssessmentResult:
-            def __init__(self):
-                self.turn_number = turn_number
+    #     class AssessmentResult:
+    #         def __init__(self):
+    #             self.turn_number = turn_number
                 
-                # 1. 拟人程度 - 分别评估客服和用户
-                self.agent_anthropomorphism_score = 0.75
-                self.user_anthropomorphism_score = 0.75
+    #             # 1. 拟人程度 - 分别评估客服和用户
+    #             self.agent_anthropomorphism_score = 0.75
+    #             self.user_anthropomorphism_score = 0.75
                 
-                # 2. 购买意愿变化
-                self.purchase_intent_change = "unchanged"
+    #             # 2. 购买意愿变化
+    #             self.purchase_intent_change = "unchanged"
                 
-                # 3. 问题解决
-                self.problem_resolved = True
+    #             # 3. 问题解决
+    #             self.problem_resolved = True
                 
-                # 4. 销售话术质量
-                self.sales_script_quality = "good"
+    #             # 4. 销售话术质量
+    #             self.sales_script_quality = "good"
                 
-                # 5. 用户体验
-                self.user_experience = "good"
+    #             # 5. 用户体验
+    #             self.user_experience = "good"
                 
-                # 6. 传统话术质量
-                self.traditional_script_quality = "good"
+    #             # 6. 传统话术质量
+    #             self.traditional_script_quality = "good"
                 
-                # 7. 语言一致性
-                self.language_consistency = "consistent"
+    #             # 7. 语言一致性
+    #             self.language_consistency = "consistent"
                 
-                # 8. 详细指标
-                self.detailed_metrics: Optional[DetailedMetrics] = None
+    #             # 8. 详细指标
+    #             self.detailed_metrics: Optional[DetailedMetrics] = None
                 
-                # 终止条件
-                self.should_terminate = False
-                self.termination_reason = None
-                self.feedback = "评估完成"
+    #             # 终止条件
+    #             self.should_terminate = False
+    #             self.termination_reason = None
+    #             self.feedback = "评估完成"
 
-        # 为首轮对话查找预期答案
-        expected_answer = None
-        is_first_turn = (turn_number == 1)
-        if is_first_turn and hasattr(self, 'qa_mapping'):
-            expected_answer = self.qa_mapping.get(question.strip())
-            if expected_answer:
-                print(f"[RefereeAgent] 首轮对话找到预期答案，问题: {question[:50]}...")
+    #     # 为首轮对话查找预期答案
+    #     expected_answer = None
+    #     is_first_turn = (turn_number == 1)
+    #     if is_first_turn and hasattr(self, 'qa_mapping'):
+    #         expected_answer = self.qa_mapping.get(question.strip())
+    #         if expected_answer:
+    #             print(f"[RefereeAgent] 首轮对话找到预期答案，问题: {question[:50]}...")
         
-        # 构建评估提示词并调用LLM（添加超时保护）
-        prompt = self._build_evaluation_prompt(question, answer, conversation_history, expected_answer, is_first_turn)
+    #     # 构建评估提示词并调用LLM（添加超时保护）
+    #     prompt = self._build_evaluation_prompt(question, answer, conversation_history, expected_answer, is_first_turn)
         
-        try:
-            llm_response = await asyncio.wait_for(
-                self.client.chat.completions.create(
-                    model=self.model,
-                    messages=[
-                        {"role": "system", "content": self._system_prompt()},
-                        {"role": "user", "content": prompt}
-                    ],
-                    temperature=0.3,
-                    max_tokens=2000
-                ),
-                timeout=120  # 2分钟超时
-            )
+    #     try:
+    #         llm_response = await asyncio.wait_for(
+    #             self.client.chat.completions.create(
+    #                 model=self.model,
+    #                 messages=[
+    #                     {"role": "system", "content": self._system_prompt()},
+    #                     {"role": "user", "content": prompt}
+    #                 ],
+    #                 temperature=0.3,
+    #                 max_tokens=2000
+    #             ),
+    #             timeout=120  # 2分钟超时
+    #         )
             
-            evaluation_text = llm_response.choices[0].message.content
+    #         evaluation_text = llm_response.choices[0].message.content
             
-            # 记录 token 使用情况
-            if llm_response.usage:
-                input_tokens = llm_response.usage.prompt_tokens
-                output_tokens = llm_response.usage.completion_tokens
-                logging.info(f"[RefereeAgent] Token 使用 - 输入: {input_tokens}, 输出: {output_tokens}, 总计: {input_tokens + output_tokens}")
+    #         # 记录 token 使用情况
+    #         if llm_response.usage:
+    #             input_tokens = llm_response.usage.prompt_tokens
+    #             output_tokens = llm_response.usage.completion_tokens
+    #             logging.info(f"[RefereeAgent] Token 使用 - 输入: {input_tokens}, 输出: {output_tokens}, 总计: {input_tokens + output_tokens}")
             
-            assessment_data = self._parse_evaluation_response(evaluation_text, question, answer)
+    #         assessment_data = self._parse_evaluation_response(evaluation_text, question, answer)
             
-            # 创建结果对象
-            result = AssessmentResult()
-            result.agent_anthropomorphism_score = assessment_data['agent_anthropomorphism_score']
-            result.user_anthropomorphism_score = assessment_data['user_anthropomorphism_score']
-            result.purchase_intent_change = assessment_data['purchase_intent_change']
-            result.problem_resolved = assessment_data['problem_resolved']
-            result.sales_script_quality = assessment_data['sales_script_quality']
-            result.user_experience = assessment_data['user_experience']
-            result.detailed_metrics = assessment_data.get('detailed_metrics')
-            result.feedback = assessment_data['feedback']
+    #         # 创建结果对象
+    #         result = AssessmentResult()
+    #         result.agent_anthropomorphism_score = assessment_data['agent_anthropomorphism_score']
+    #         result.user_anthropomorphism_score = assessment_data['user_anthropomorphism_score']
+    #         result.purchase_intent_change = assessment_data['purchase_intent_change']
+    #         result.problem_resolved = assessment_data['problem_resolved']
+    #         result.sales_script_quality = assessment_data['sales_script_quality']
+    #         result.user_experience = assessment_data['user_experience']
+    #         result.detailed_metrics = assessment_data.get('detailed_metrics')
+    #         result.feedback = assessment_data['feedback']
             
-        except asyncio.TimeoutError:
-            # LLM调用超时，使用默认值
-            logging.error(f"[RefereeAgent] 第{turn_number}轮评估超时（2分钟），使用默认评分")
-            result = AssessmentResult()
-            result.feedback = f"LLM评估超时（2分钟），使用默认评分"
+    #     except asyncio.TimeoutError:
+    #         # LLM调用超时，使用默认值
+    #         logging.error(f"[RefereeAgent] 第{turn_number}轮评估超时（2分钟），使用默认评分")
+    #         result = AssessmentResult()
+    #         result.feedback = f"LLM评估超时（2分钟），使用默认评分"
             
-        except Exception as e:
-            # LLM调用失败时使用默认值
-            logging.error(f"[RefereeAgent] 第{turn_number}轮评估失败: {str(e)}")
-            result = AssessmentResult()
-            result.feedback = f"LLM评估失败，使用默认评分: {str(e)}"
+    #     except Exception as e:
+    #         # LLM调用失败时使用默认值
+    #         logging.error(f"[RefereeAgent] 第{turn_number}轮评估失败: {str(e)}")
+    #         result = AssessmentResult()
+    #         result.feedback = f"LLM评估失败，使用默认评分: {str(e)}"
         
-        # 终止条件检测（基于详细指标增强）
-        await self._enhanced_termination_check(result, question, answer)
+    #     # 终止条件检测（基于详细指标增强）
+    #     await self._enhanced_termination_check(result, question, answer)
 
-        return result
+    #     return result
     
-    async def _enhanced_termination_check(self, result: "AssessmentResult", question: str, answer: str):
-        """基于详细指标的增强终止条件检测"""
+    # async def _enhanced_termination_check(self, result: "AssessmentResult", question: str, answer: str):
+    #     """基于详细指标的增强终止条件检测"""
         
-        # 1. 转人工关键词
-        human_keywords = ["转人工", "人工客服", "投诉", "人工"]
-        if any(kw in answer for kw in human_keywords):
-            result.should_terminate = True
-            result.termination_reason = "human_escalation"
-            return
+    #     # 1. 转人工关键词
+    #     human_keywords = ["转人工", "人工客服", "投诉", "人工"]
+    #     if any(kw in answer for kw in human_keywords):
+    #         result.should_terminate = True
+    #         result.termination_reason = "human_escalation"
+    #         return
         
-        # 2. 基于详细指标的智能终止检测
-        if result.detailed_metrics:
-            dm = result.detailed_metrics
+    #     # 2. 基于详细指标的智能终止检测
+    #     if result.detailed_metrics:
+    #         dm = result.detailed_metrics
             
-            # 2.1 用户体验极差（CSAT < 0.3 或 负面反馈触发）
-            if dm.user_experience.csat_score < 0.3 or dm.user_experience.negative_feedback_triggered:
-                result.should_terminate = True
-                result.termination_reason = "poor_user_experience"
-                return
+    #         # 2.1 用户体验极差（CSAT < 0.3 或 负面反馈触发）
+    #         if dm.user_experience.csat_score < 0.3 or dm.user_experience.negative_feedback_triggered:
+    #             result.should_terminate = True
+    #             result.termination_reason = "poor_user_experience"
+    #             return
             
-            # 2.2 购买意愿持续下降且问题解决率低
-            if (result.purchase_intent_change == "declined" and 
-                not dm.problem_solving.first_contact_resolution):
-                result.should_terminate = True
-                result.termination_reason = "purchase_intent_declined_and_unresolved"
-                return
+    #         # 2.2 购买意愿持续下降且问题解决率低
+    #         if (result.purchase_intent_change == "declined" and 
+    #             not dm.problem_solving.first_contact_resolution):
+    #             result.should_terminate = True
+    #             result.termination_reason = "purchase_intent_declined_and_unresolved"
+    #             return
             
-            # 2.3 无法解决问题且话术差且不合规
-            if (not result.problem_resolved and 
-                result.sales_script_quality == "poor" and 
-                dm.sales_script.script_compliance < 0.5):
-                result.should_terminate = True
-                result.termination_reason = "unresolved_poor_service_non_compliant"
-                return
+    #         # 2.3 无法解决问题且话术差且不合规
+    #         if (not result.problem_resolved and 
+    #             result.sales_script_quality == "poor" and 
+    #             dm.sales_script.script_compliance < 0.5):
+    #             result.should_terminate = True
+    #             result.termination_reason = "unresolved_poor_service_non_compliant"
+    #             return
             
-            # 2.4 兜底率过高（需要转人工）
-            if dm.problem_solving.fallback_rate > 0.7:
-                result.should_terminate = True
-                result.termination_reason = "high_fallback_rate"
-                return
+    #         # 2.4 兜底率过高（需要转人工）
+    #         if dm.problem_solving.fallback_rate > 0.7:
+    #             result.should_terminate = True
+    #             result.termination_reason = "high_fallback_rate"
+    #             return
         
-        # 3. 基础终止条件（兼容旧版）
-        if result.user_experience == "poor":
-            result.should_terminate = True
-            result.termination_reason = "poor_user_experience"
-        elif result.purchase_intent_change == "declined":
-            result.should_terminate = True
-            result.termination_reason = "purchase_intent_declined"
-        elif not result.problem_resolved and result.sales_script_quality == "poor":
-            result.should_terminate = True
-            result.termination_reason = "unresolved_and_poor_service"
+    #     # 3. 基础终止条件（兼容旧版）
+    #     if result.user_experience == "poor":
+    #         result.should_terminate = True
+    #         result.termination_reason = "poor_user_experience"
+    #     elif result.purchase_intent_change == "declined":
+    #         result.should_terminate = True
+    #         result.termination_reason = "purchase_intent_declined"
+    #     elif not result.problem_resolved and result.sales_script_quality == "poor":
+    #         result.should_terminate = True
+    #         result.termination_reason = "unresolved_and_poor_service"
 
     async def generate_session_summary(self, session_data: dict, max_concurrent: int = 5) -> dict:
         """生成会话摘要 - 包含6大维度37项详细指标汇总 (供router使用)

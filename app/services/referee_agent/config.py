@@ -46,7 +46,7 @@ class RefereeAgentSettings(BaseSettings):
         description="会话数据保存目录"
     )
     save_session_data: bool = Field(
-        default=True,
+        default=False,
         description="是否保存会话数据"
     )
     
