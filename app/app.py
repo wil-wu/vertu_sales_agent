@@ -23,6 +23,22 @@ from app.core.shared import (
 logger = logging.getLogger(__name__)
 
 
+async def _setup_checkpointer_with_distributed_lock() -> None:
+    """获取分布式锁并执行数据库迁移"""
+    async with postgres_async_pool.connection() as conn:
+        async with conn.cursor() as cur:
+            result = await cur.execute(
+                "SELECT pg_try_advisory_lock(%s)",
+                (settings.postgres_advisory_lock_key,),
+            )
+            row = await result.fetchone()
+            if row[0]:
+                logger.info("已获取 Postgres 分布式锁，开始执行数据库迁移")
+                await postgres_checkpointer.setup()
+            else:
+                logger.warning("未获取到 Postgres 分布式锁，跳过数据库迁移")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """应用生命周期管理"""
@@ -39,8 +55,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         scheduler.start()
 
     await postgres_async_pool.open()
-    await postgres_checkpointer.setup()
-
+    await _setup_checkpointer_with_distributed_lock()
+    
     logger.info("Application startup completed")
 
     yield

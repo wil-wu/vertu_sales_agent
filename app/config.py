@@ -50,6 +50,7 @@ class GlobalSettings(BaseSettings):
     postgres_password: str = Field(default="", description="PostgreSQL 密码")
     postgres_db: str = Field(default="postgres", description="PostgreSQL 数据库名")
     postgres_sslmode: str = Field(default="disable", description="PostgreSQL SSL 模式")
+    postgres_advisory_lock_key: int = Field(default=0x56_52_55_53, description="PostgreSQL 分布式锁")
 
     @property
     def postgres_url(self) -> str:
