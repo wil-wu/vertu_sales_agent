@@ -31,7 +31,10 @@ async def faq_query(collection_name: str, query: str):
     """
     logger.info(f"--- [TOOL] 查询 FAQ: {collection_name} {query} ---")
     try:
-        data = await ReactAgentService.faq_query([collection_name], query)
+        collection_names = [collection_name]
+        if collection_name == "domestic_e_commerce":
+            collection_names.append("domestic_general")
+        data = await ReactAgentService.faq_query(collection_names, query)
         return tool_result_ok(data)
     except Exception as e:
         exc_info = f"{e.__class__.__name__}: {e}"
@@ -89,7 +92,7 @@ async def get_product_price(index_name: str, query: str):
 
     Args:
         index_name: 平台索引名称，可选范围 [tm_product, jd_product, overseas_product]，中文用户选择 tm_product 或 jd_product，非中文用户选择 overseas_product。
-        query: 用户问题，可能包含产品名称、型号、类型、颜色、材质、价格范围等。
+        query: 完整的问题描述。
 
     Returns:
         产品价格查询结果。
