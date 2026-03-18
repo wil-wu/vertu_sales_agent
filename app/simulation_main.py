@@ -94,20 +94,34 @@ class SimulationMain:
 
     async def run_async(self):
         """异步运行仿真"""
+        import time
+        start_time = time.time()
+        
         # 根据输入参数 执行检索管道知识检索 检索结果形成知识子集
         knowledge_subset = self.search_knowledge()
 
         # 根据知识池 用户维度画像(1/7维) 用户意图场景(1/5维) 组合知识池 增量上下文 生产用户问题 + 预期答案 调用AI sales Agent 保持后续流程一致
-        # 使用 async_generate_session_simulation 并发执行，提升吞吐量
-        session_results = asyncio.run(self.async_generate_session_simulation(knowledge_subset))
+        # 使用 generate_session_simulation 并发执行，支持session级别和轮次级别并发
         session_results = await self.generate_session_simulation(knowledge_subset)
 
         # 保存仿真结果
-        # self._save_results(session_results)
+        self._save_results(session_results)
+        
+        # 统计特定场景和人格的session结果
         for scenario in self.excute_config.get("statistic_scenarios", []):
             for persona in self.excute_config.get("statistic_personas", []):
                 self.statistic_for_exist_sessions(scenario=scenario, persona=persona)
+        
+        # 计算并打印总耗时
+        end_time = time.time()
+        total_duration = end_time - start_time
+        print(f"\n{'='*60}")
+        print(f"[仿真总耗时] {total_duration:.2f} 秒")
+        print(f"{'='*60}\n")
 
+    def run(self):
+        """同步入口，内部调用异步方法"""
+        return asyncio.run(self.run_async())
 
     def statistic_for_exist_sessions(self, scenario: str=None, persona: str=None):
         """统计已存在的session结果"""
@@ -128,11 +142,12 @@ class SimulationMain:
                 if session_result.get("persona") == persona and session_result.get("scenario") == scenario:
                     statistic_data.append(session_result)
         # 统计
-        # statistic_result = self.statistic_main(statistic_data)
-        statistic_result = self._get_statistic_result(statistic_data)
+        statistic_result = self.statistic_main(statistic_data)
+        # statistic_result = self._get_statistic_result(statistic_data)
         # 写入output_dir/scenario_persona_statistic.json
-        statistic_file = "output_dir_final" / f"{scenario}_{persona}_statistic.json"
-        output_dir.mkdir(parents=True, exist_ok=True)
+        output_dir_final = Path("output_dir_final")
+        statistic_file = output_dir_final / f"{scenario}_{persona}_statistic.json"
+        output_dir_final.mkdir(parents=True, exist_ok=True)
         with open(statistic_file, "w", encoding="utf-8") as f:
             json.dump(statistic_result, f, ensure_ascii=False, indent=2)
         return statistic_result
@@ -140,6 +155,13 @@ class SimulationMain:
     def statistic_main(self, statistic_data: List[Dict[str, Any]]) -> Dict[str, Any]:
         """统计已存在的session结果"""
         total = len(statistic_data)
+        if total == 0:
+            return {
+                "total_sessions": 0,
+                "total_turns": 0,
+                "total_duration": 0,
+                "total_turns_per_session": 0,
+            }
         total_turns = sum([session_result.get("total_turns") for session_result in statistic_data])
         total_duration = sum([session_result.get("duration_seconds") for session_result in statistic_data])
         total_turns_per_session = total_turns / total
@@ -221,7 +243,7 @@ class SimulationMain:
 
         averages = {}
 
-        # 1. 计算7大维度综合评分
+        # 1. 计算8大维度综合评分
         dimension_scores = {
             "anthropomorphism_score": [],
             "purchase_intent_score": [],
@@ -229,7 +251,8 @@ class SimulationMain:
             "sales_script_score": [],
             "user_experience_score": [],
             "traditional_script_score": [],
-            "language_consistency_score": []
+            "language_consistency_score": [],
+            "answer_accuracy_score": []
         }
 
         for dm in detailed_metrics_all:
@@ -331,6 +354,17 @@ class SimulationMain:
         if lang_scores:
             averages["language_consistency"] = lang_scores
 
+        # answer_accuracy 子指标
+        accuracy_metrics = ["accuracy_score"]
+        accuracy_scores = {}
+        for metric in accuracy_metrics:
+            values = [dm.get("answer_accuracy", {}).get(metric) for dm in detailed_metrics_all if dm.get("answer_accuracy")]
+            values = [v for v in values if v is not None]
+            if values:
+                accuracy_scores[metric] = round(sum(values) / len(values), 4)
+        if accuracy_scores:
+            averages["answer_accuracy"] = accuracy_scores
+
         return averages
 
     def _generate_final_report(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -339,11 +373,22 @@ class SimulationMain:
 
         # 收集所有session的平均分
         all_session_averages = []
+        fcr_rates = []
+        accuracy_rates = []
+        
         for r in results:
             assessments = r.get("assessments", [])
             session_avg = self._calculate_session_averages(assessments)
             if session_avg:
                 all_session_averages.append(session_avg)
+            
+            # 计算首次问题解决率
+            fcr_rate = self._calculate_fcr_rate(assessments)
+            fcr_rates.append(fcr_rate)
+            
+            # 计算答案准确率
+            accuracy_rate = self._calculate_answer_accuracy_rate(assessments)
+            accuracy_rates.append(accuracy_rate)
 
         # 计算所有session各指标的总平均
         final_averages = {}
@@ -364,6 +409,12 @@ class SimulationMain:
                         "count": len(values)
                     }
 
+        # 计算平均首次问题解决率
+        avg_fcr_rate = round(sum(fcr_rates) / len(fcr_rates), 2) if fcr_rates else 0
+        
+        # 计算平均答案准确率
+        avg_accuracy_rate = round(sum(accuracy_rates) / len(accuracy_rates), 2) if accuracy_rates else 0
+
         # 人格分布
         persona_distribution = {}
         for r in results:
@@ -382,10 +433,53 @@ class SimulationMain:
             "config": self.config,
             "excute_config": self.excute_config,
             "metric_averages": final_averages,
+            "first_contact_resolution_rate": {
+                "average": avg_fcr_rate,
+                "details": "首次问题解决率：客服在第一轮回复中就完全解决用户问题的比例"
+            },
+            "answer_accuracy_rate": {
+                "average": avg_accuracy_rate,
+                "details": "答案准确率：先计算每个session内所有轮次的accuracy_score平均值，再计算所有session的平均"
+            },
             "persona_distribution": persona_distribution,
             "scenario_distribution": scenario_distribution,
             "session_files": [f"session_{r.get('session_id')}.json" for r in results]
         }
+    
+    def _calculate_fcr_rate(self, assessments: List[Dict[str, Any]]) -> float:
+        """计算首次问题解决率"""
+        if not assessments:
+            return 0.0
+        
+        fcr_count = 0
+        for a in assessments:
+            dm = a.get("detailed_metrics")
+            if dm and isinstance(dm, dict):
+                ps = dm.get("problem_solving", {})
+                if ps.get("first_contact_resolution"):
+                    fcr_count += 1
+        
+        return round(fcr_count / len(assessments) * 100, 2)
+    
+    def _calculate_answer_accuracy_rate(self, assessments: List[Dict[str, Any]]) -> float:
+        """计算答案准确率（session 内所有轮次 accuracy_score 的平均值）"""
+        if not assessments:
+            return 0.0
+        
+        accuracy_scores = []
+        for a in assessments:
+            dm = a.get("detailed_metrics")
+            if dm and isinstance(dm, dict):
+                aa = dm.get("answer_accuracy", {})
+                score = aa.get("accuracy_score")
+                if score is not None:
+                    accuracy_scores.append(score)
+        
+        if not accuracy_scores:
+            return 0.0
+        
+        # 计算 session 内所有轮次的平均值
+        return round(sum(accuracy_scores) / len(accuracy_scores), 2)
 
 
     async def generate_session_simulation(self, knowledge_subset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -416,15 +510,66 @@ class SimulationMain:
             knowledge_pool = self.generate_session_knowledge_pool(knowledge_subset)
             persona = random.choice(self.PERSONAS)
             scenario = random.choice(self.SCENARIOS)
+            session_configs.append({
+                "session_idx": session_idx,
+                "knowledge_pool": knowledge_pool,
+                "persona": persona,
+                "scenario": scenario
+            })
 
-            print(f"[Session {session_idx + 1}] 人格: {persona}, 场景: {scenario}")
-            # 运行单个session仿真
-            session_result = asyncio.run(
-                self._run_single_session(knowledge_pool, persona, scenario)
-            )
-            results.append(session_result)
+        print(f"[Simulation] 共 {session_count} 个session待执行，最大并发数: {session_parallel}")
 
-        return results
+        # 使用信号量控制session级别并发
+        session_semaphore = asyncio.Semaphore(session_parallel)
+
+        async def run_single_session_with_semaphore(config: dict) -> Dict[str, Any]:
+            """使用信号量限制的session执行"""
+            async with session_semaphore:
+                session_idx = config["session_idx"]
+                knowledge_pool = config["knowledge_pool"]
+                persona = config["persona"]
+                scenario = config["scenario"]
+
+                print(f"[Session {session_idx + 1}/{session_count}] 开始执行 - 人格: {persona}, 场景: {scenario}")
+
+                try:
+                    # 运行单个session仿真
+                    session_result = await self._run_single_session(knowledge_pool, persona, scenario)
+
+                    # 每完成一个session立即保存文件
+                    self._save_session_file(session_result, output_dir)
+                    print(f"[Session {session_idx + 1}/{session_count}] 完成并保存")
+
+                    return session_result
+                except Exception as e:
+                    print(f"[Session {session_idx + 1}/{session_count}] 执行失败: {e}")
+                    return {
+                        "session_id": f"error_{session_idx}",
+                        "persona": persona,
+                        "scenario": scenario,
+                        "error": str(e),
+                        "conversation": [],
+                        "assessments": [],
+                        "finish_reason": "error",
+                        "total_turns": 0,
+                        "metadata": {}
+                    }
+
+        # 并发执行所有session
+        results = await asyncio.gather(
+            *[run_single_session_with_semaphore(config) for config in session_configs],
+            return_exceptions=True
+        )
+
+        # 处理可能的异常
+        valid_results = []
+        for result in results:
+            if isinstance(result, Exception):
+                print(f"[Simulation] 某个session执行异常: {result}")
+            else:
+                valid_results.append(result)
+
+        return valid_results
 
     async def async_generate_session_simulation(
         self, knowledge_subset: List[Dict[str, Any]]
@@ -714,10 +859,11 @@ if __name__ == "__main__":
         "max_path_len": 2,
     }
     excute_config = {
-        "max-turns": 10, # 每轮对话最大轮数
-        "output-dir": "output", # 输出文件夹路径
-        "parallel": 2, # 并行执行的对话数
-        "session_count": 800, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+        "max-turns": 20, #对话最大轮数
+        "output-dir": "output_test", # 输出文件夹路径
+        "session-parallel": 5, # session级别并发数（同时执行2个session）
+        "referee-concurrent": 20, # referee评估并发数（每个session内评估并发）
+        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
         "statistic_scenarios": ["闲聊"],
         "statistic_personas": ["business_elite"],
     }

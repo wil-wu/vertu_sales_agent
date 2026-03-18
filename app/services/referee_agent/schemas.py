@@ -64,8 +64,13 @@ class LanguageConsistencyMetrics(BaseModel):
     language_match: bool = Field(True, description="语言一致性，评估客服回复语言是否与用户提问语言一致")
 
 
+class AnswerAccuracyMetrics(BaseModel):
+    """答案准确率指标 - 评估 target_bot 回复是否包含预期答案的所有内容"""
+    accuracy_score: int = Field(0, description="答案准确率 (0 或 100)，0=未包含所有预期内容，100=完整包含预期答案")
+
+
 class DetailedMetrics(BaseModel):
-    """详细评估指标汇总（7大维度，每个维度满分100分）"""
+    """详细评估指标汇总（8大维度，每个维度满分100分）"""
     # 维度综合评分（0-100分）
     anthropomorphism_score: int = Field(0, description="拟人化体验维度综合评分（0-100分），基于user和agent的拟人化表现")
     purchase_intent_score: int = Field(0, description="购买意愿驱动维度综合评分（0-100分）")
@@ -74,6 +79,7 @@ class DetailedMetrics(BaseModel):
     user_experience_score: int = Field(0, description="用户体验维度综合评分（0-100分）")
     traditional_script_score: int = Field(0, description="传统话术质量维度综合评分（0-100分），评估专业名词通俗化解释能力，等于 technical_term_simplification * 100")
     language_consistency_score: int = Field(0, description="语言一致性维度综合评分（0-100分），评估用户-sales_agent问答中的语言一致性")
+    answer_accuracy_score: int = Field(0, description="答案准确率维度综合评分（0-100分），评估target_bot回复是否包含预期答案的所有内容")
     
     # 各维度详细指标
     user_anthropomorphism: UserAnthropomorphismMetrics = Field(default_factory=UserAnthropomorphismMetrics, description="用户智能体拟人化体验指标")
@@ -84,6 +90,7 @@ class DetailedMetrics(BaseModel):
     user_experience: UserExperienceMetrics = Field(default_factory=UserExperienceMetrics, description="用户体验指标")
     traditional_script: TraditionalScriptMetrics = Field(default_factory=TraditionalScriptMetrics, description="传统话术质量指标")
     language_consistency: LanguageConsistencyMetrics = Field(default_factory=LanguageConsistencyMetrics, description="语言一致性指标")
+    answer_accuracy: AnswerAccuracyMetrics = Field(default_factory=AnswerAccuracyMetrics, description="答案准确率指标")
 
 
 class TurnAssessment(BaseModel):

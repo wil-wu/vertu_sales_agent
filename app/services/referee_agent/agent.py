@@ -26,6 +26,7 @@ from .schemas import (
     UserExperienceMetrics,
     TraditionalScriptMetrics,
     LanguageConsistencyMetrics,
+    AnswerAccuracyMetrics,
 )
 from .shared import session_manager, assessment_tracker
 from . import prompts
@@ -98,7 +99,7 @@ class RefereeAgent:
                         {"role": "user", "content": prompt}
                     ],
                     temperature=0.3,
-                    max_tokens=500
+                    max_tokens=3000
                 ),
                 timeout=180  
             )
@@ -275,6 +276,9 @@ class RefereeAgent:
                 language_consistency=LanguageConsistencyMetrics(
                     language_match=self._get_bool(detailed_metrics_data, ['language_consistency', 'language_match'], True),
                 ),
+                answer_accuracy=AnswerAccuracyMetrics(
+                    accuracy_score=self._get_int(detailed_metrics_data, ['answer_accuracy', 'accuracy_score'], 0),
+                ),
             )
             
             # 根据子指标自动计算维度综合评分（0-100分）
@@ -390,7 +394,7 @@ class RefereeAgent:
             return default
     
     def _calculate_dimension_scores(self, dm: DetailedMetrics):
-        """根据子指标自动计算7大维度综合评分（0-100分）
+        """根据子指标自动计算8大维度综合评分（0-100分）
         
         计算逻辑：
         1. 拟人化体验 = (user语言自然度 + user温度感 + user节奏感 + agent语言自然度 + agent温度感 + agent节奏感) / 6 * 100
@@ -413,6 +417,10 @@ class RefereeAgent:
         
         7. 语言一致性 = 语言一致性判断 × 100
            - 语言一致性: true=100分(一致), false=0分(不一致)
+           
+        8. 答案准确率 = accuracy_score（0 或 100）
+           - 评估target_bot回复是否完整包含预期答案的所有内容
+           - 100=完整包含，0=缺失关键信息
         """
         # 1. 拟人化体验维度（0-100分）
         user_anthro = dm.user_anthropomorphism
@@ -501,6 +509,12 @@ class RefereeAgent:
         language_score = 100.0 if language.language_match else 0.0
         
         dm.language_consistency_score = round(language_score)
+        
+        # 8. 答案准确率维度（0-100分）
+        accuracy = dm.answer_accuracy
+        
+        # 答案准确率：直接取 accuracy_score（0 或 100）
+        dm.answer_accuracy_score = accuracy.accuracy_score
     
     def _extract_scores_from_text(self, text: str) -> Dict[str, float]:
         """从文本中提取分数"""

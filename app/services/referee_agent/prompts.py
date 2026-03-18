@@ -178,7 +178,26 @@ VERTU是顶级奢侈品牌，客服应当像私人顾问一样专业、自然、
     - 评估客服回复语言是否与用户提问语言一致
     - 判断标准：用户中文问，客服中文答；用户英文问，客服英文答
     - true: 语言一致，客服回复语言与用户提问语言完全一致
-    - false: 语言不一致，用户中文问客服英文答，或反之
+
+========================================
+八、答案准确率指标 (Answer Accuracy)
+========================================
+
+25. answer_accuracy (答案准确率 0 或 100):
+    - 评估 target_bot 回复是否包含了【预期答案】的所有核心内容
+    - 评分标准：
+      * 100: target_bot 回复完整包含了预期答案的所有关键信息点，没有遗漏
+      * 0: target_bot 回复缺失了预期答案的关键信息，或信息与预期答案不符
+    - 判断方法：
+      * 将 target_bot 回复与【预期答案】逐点对比
+      * 检查预期答案中的每个关键信息点是否在 target_bot 回复中都有体现
+      * 如果预期答案提到多个产品特性或参数，target_bot 回复必须全部提及才算完整
+      * 如果 target_bot 回复缺少任何关键信息点，或添加了错误信息，评分为 0
+    - 示例：
+      * 预期答案: "VERTU AGENT Q 售价29800元，采用顶级材质手工打造，配备双卫星通话功能"
+      * target_bot 回复包含价格、材质、卫星通话 → 100分
+      * target_bot 回复只提到价格和材质，没提卫星通话 → 0分
+      * target_bot 回复提到价格但错误 → 0分
 
 ========================================
 对话内容
@@ -199,82 +218,66 @@ VERTU是顶级奢侈品牌，客服应当像私人顾问一样专业、自然、
 ========================================
 输出格式
 ========================================
-请以 JSON 格式返回评估结果，结构如下：
-
-注意：维度综合评分（0-100 分）将由系统根据子指标自动计算，无需在 JSON 中提供。
-只需提供各维度的详细子指标评分（0-1 分）。
+请以 JSON 格式返回评估结果，不要包含任何注释，格式如下：
 
 {{
     "agent_anthropomorphism_score": 0.85,
     "user_anthropomorphism_score": 0.80,
-    
     "detailed_metrics": {{
-        // ===== 各维度详细指标（0-1 分）- 系统将根据这些自动计算维度总分（0-100 分）=====
-        
-        // 【维度 1】拟人化体验 - 评估 user_agent 和 react_agent 的拟人化程度
         "user_anthropomorphism": {{
-            "language_naturalness": 0.85,      // 用户语言自然度
-            "personality_deviation_count": 0,   // 用户人设偏离次数
-            "humor_warmth": 0.75,              // 用户温度感
-            "rhythm_pacing": 0.80              // 用户节奏感
+            "language_naturalness": 0.85,
+            "personality_deviation_count": 0,
+            "humor_warmth": 0.75,
+            "rhythm_pacing": 0.80
         }},
         "agent_anthropomorphism": {{
-            "language_naturalness": 0.90,      // 客服语言自然度
-            "personality_deviation_count": 0,   // 客服人设偏离次数
-            "humor_warmth": 0.85,              // 客服温度感
-            "rhythm_pacing": 0.85              // 客服节奏感
+            "language_naturalness": 0.90,
+            "personality_deviation_count": 0,
+            "humor_warmth": 0.85,
+            "rhythm_pacing": 0.85
         }},
-        
-        // 【维度 2】购买意愿驱动 - 评估销售能力
         "purchase_intent": {{
-            "needs_discovery_rate": 0.80,      // 需求挖掘率
-            "product_recommendation_accuracy": 0.85  // 推荐精准度
+            "needs_discovery_rate": 0.80,
+            "product_recommendation_accuracy": 0.85
         }},
-        
-        // 【维度 3】问题解决能力 - 评估服务专业性
         "problem_solving": {{
-            "first_contact_resolution": true,   // 首次解决 - 仅首轮对话评估，对比预期答案判断
-            "intent_recognition_accuracy": 0.90, // 意图识别准确率
-            "fallback_rate": 0.0                // 兜底率 (0-1，0.0=必须转人工，1.0=完全解决)
+            "first_contact_resolution": true,
+            "intent_recognition_accuracy": 0.90,
+            "fallback_rate": 0.0
         }},
-        
-        // 【维度 4】销售话术质量 - 评估话术专业性
         "sales_script": {{
-            "fab_completeness": 0.90,          // FAB 结构完整度
-            "feature_mentioned": true,          // 特性提及
-            "advantage_mentioned": true,        // 优势提及
-            "objection_handling_success": null, // 异议处理成功
-            "objection_handling_score": 0.80,   // 异议处理能力
-            "cross_sell_triggered": true,       // 交叉销售触发
-            "script_compliance": 0.95,          // 话术合规率
-            "personalization_rate": 0.75        // 个性化表达率
+            "fab_completeness": 0.90,
+            "feature_mentioned": true,
+            "advantage_mentioned": true,
+            "objection_handling_success": null,
+            "objection_handling_score": 0.80,
+            "cross_sell_triggered": true,
+            "script_compliance": 0.95,
+            "personalization_rate": 0.75
         }},
-        
-        // 【维度 5】用户体验 - 评估主观感受
         "user_experience": {{
-            "csat_score": 0.90,                // 满意度评分
-            "negative_feedback_triggered": false // 负面反馈触发
+            "csat_score": 0.90,
+            "negative_feedback_triggered": false
         }},
-        
-        // 【维度 6】传统话术质量 - 评估专业名词通俗化解释能力
         "traditional_script": {{
-            "technical_term_simplification": 0.85  // 专业名词通俗化解释
+            "technical_term_simplification": 0.85
         }},
-        
-        // 【维度 7】语言一致性 - 评估用户-sales_agent问答中的语言一致性
         "language_consistency": {{
-            "language_match": true  // 语言一致性
+            "language_match": true
+        }},
+        "answer_accuracy": {{
+            "accuracy_score": 100
         }}
     }},
-    
     "feedback": "总体评价：客服回复专业自然，完整使用了 FAB 结构推荐产品..."
 }}
 
-注意:
-- 所有子指标评分(如language_naturalness等)为0-1之间的小数
-- 维度总分(0-100)将由系统根据子指标自动计算，无需提供
-- true/false/null 必须使用小写
-- feedback 提供具体的改进建议
+重要提示:
+1. 返回的 JSON 必须有效，不要包含任何注释（// 或 /* */）
+2. 所有子指标评分为0-1之间的小数
+3. true/false/null 必须使用小写
+4. 维度总分(0-100)将由系统根据子指标自动计算，无需提供
+5. feedback 提供具体的改进建议
 """
 
 # 对话历史模板
