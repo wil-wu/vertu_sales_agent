@@ -566,70 +566,12 @@ class UserAgent:
 
         # 图谱知识 - 适配实际格式 [{"data": {"result": [{"p": {...}, "n": {...}}]}}]
         graph_data = knowledge_pool.get("graph", [])
-        graph_lines = []
-        
-        if isinstance(graph_data, list):
-            for graph_entry in graph_data[:3]:  # 最多处理3个graph条目
-                if isinstance(graph_entry, dict) and "data" in graph_entry:
-                    data = graph_entry.get("data", {})
-                    results = data.get("result", [])
-                    
-                    for result in results[:5]:  # 每个graph最多5条结果
-                        if isinstance(result, dict):
-                            # 提取主节点(p)信息
-                            p_data = result.get("p", {})
-                            # 提取关系类型
-                            relation = result.get("关系类型", "")
-                            # 提取相邻节点(n)信息
-                            n_data = result.get("n", {})
-                            
-                            # 格式化输出
-                            if p_data:
-                                model_name = p_data.get("ModelName", "")
-                                if model_name:
-                                    line_parts = [f"- {model_name}"]
-                                    
-                                    # 添加关键属性
-                                    attrs = []
-                                    if "ScreenSize" in p_data:
-                                        attrs.append(f"屏幕:{p_data['ScreenSize']}")
-                                    if "ScreenType" in p_data:
-                                        attrs.append(f"屏幕类型:{p_data['ScreenType']}")
-                                    if "BatteryCapacity" in p_data:
-                                        attrs.append(f"电池:{p_data['BatteryCapacity']}")
-                                    if "OperatingSystem" in p_data:
-                                        attrs.append(f"系统:{p_data['OperatingSystem']}")
-                                    
-                                    if attrs:
-                                        line_parts.append(" | ".join(attrs))
-                                    
-                                    # 添加变体信息(n)
-                                    if n_data and isinstance(n_data, dict):
-                                        variant_parts = []
-                                        if "FrameColor" in n_data:
-                                            variant_parts.append(f"边框:{n_data['FrameColor']}")
-                                        if "CoverColor" in n_data:
-                                            variant_parts.append(f"背盖:{n_data['CoverColor']}")
-                                        if "Storage" in n_data:
-                                            variant_parts.append(f"存储:{n_data['Storage']}")
-                                        if "Ram" in n_data:
-                                            variant_parts.append(f"内存:{n_data['Ram']}")
-                                        if "SKU" in n_data:
-                                            sku = n_data['SKU']
-                                            if len(sku) > 30:
-                                                sku = sku[:30] + "..."
-                                            variant_parts.append(f"SKU:{sku}")
-                                        
-                                        if variant_parts:
-                                            line_parts.append(f"[变体: {' | '.join(variant_parts)}]")
-                                    
-                                    graph_lines.append(" ".join(line_parts))
-        
+        graph_lines = []    
         if graph_lines:
             # 去重并限制数量
             unique_lines = list(dict.fromkeys(graph_lines))[:10]
             graph_text = "\n".join(unique_lines)
-            sections.append(f"### 产品图谱\n{graph_text}")
+        sections.append(f"### 产品图谱\n{graph_data}")
 
         if not sections:
             return ""
@@ -706,7 +648,10 @@ class UserAgent:
 
         try:
             start_time = time.time()
-            response = await self.chat_model.ainvoke(messages)
+            response = await self.chat_model.ainvoke(
+                messages,
+                extra_body={"chat_template_kwargs": {"enable_thinking": False}}
+            )
             duration = time.time() - start_time
 
             self._record_llm_call(state, "initial_question_from_knowledge", duration, f"从知识池生成初始问题和预期答案")

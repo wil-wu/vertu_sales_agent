@@ -859,18 +859,20 @@ if __name__ == "__main__":
     #     "dimensions": ["维度1", "维度2", "维度3"],
     #     "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
     # }
+    oversea = ["oversea_private"]
+    domestic = ["domestic_e_commerce","domestic_general","preceding_questions"]
     config = {
-        "collection_names": ["domestic_e_commerce","domestic_general","oversea_private","preceding_questions"],
-        "query_list": ["屏幕分辨率", "屏幕尺寸", "屏幕类型"],
+        "collection_names":domestic,
+        "query_list": ["光圈", "等效焦距", "微距", "像素", "传感器", "防抖", "蓝牙", "NFC", "网络制式", "型号名称", "操作系统", "发布日期", "机型类型", "SKU编号", "电池容量", "后盖颜色", "边框颜色", "内存", "存储容量", "处理器名称", "加密芯片", "品牌"],
         "product_names": ["VERTU AGENT Q"],
         "max_path_len": 2,
     }
     excute_config = {
         "max-turns": 20, #对话最大轮数
         "output-dir": "output_test", # 输出文件夹路径
-        "session-parallel": 5, # session级别并发数（同时执行2个session）
-        "referee-concurrent": 20, # referee评估并发数（每个session内评估并发）
-        "session_count": 1, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
+        "session-parallel": 50, # session级别并发数（同时执行2个session）
+        "referee-concurrent": 5, # referee评估并发数（每个session内评估并发）
+        "session_count": 5000, # 3/32 ~= 10% then *8000  + 2000 = 10000 == 8000 单维度  + 2000 交叉维度
         "statistic_scenarios": ["犹豫"],
         "statistic_personas": ["price_comparer"],
     }
